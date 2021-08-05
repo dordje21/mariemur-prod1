@@ -35,8 +35,27 @@
                     </a>
                 </div>
                 <div class="product-list__box-body">
-                    <div class="product-list__box-title">
-                        <a href="{{ product.url }}">{{ product.title }}</a>
+                    <div class="product-list__box-title product-list__box-title-set">
+                        <div class="product-list__box-title-wrap">
+                            <a href="{{ product.url }}">{{ product.title }}</a>
+                        </div>
+                        {% if product.metafields.product.size-chart %}
+                        <div class="product-list__box-title-size-chart">
+                            <div id="id-{{ product.handle }}" class="size-chart-set" onclick="showSizeChart('size-chart-window-wrap-{{ product.handle }}')"><b style="font-weight: 600;">Size guide</b><img src="{{ 'size-chart-set.svg' | asset_url }}"></div>
+                            <div id="size-chart-window-wrap-{{ product.handle }}">
+                                <div class="size-chart-window" id="chart-{{ product.handle }}">
+                                    <div class="wrap-size-chart-text">
+                                        <div class="size-chart-header">
+                                            <span class="icon icon-i-close" data-open-accessibility-text-original="32px" style="font-size: 32px;" onclick="delSizeChart()"></span>
+                                        </div>
+
+                                        {{ product.metafields.product.size-chart }}
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        {% endif %}
                     </div>
                     <div class="product-list__box-option">
                         <div class="product-list__box-group">
@@ -46,7 +65,7 @@
                                     <div class="size-box__button">
                                         <span class="icon icon-i-drop-right"></span>
                                     </div>
-                                    <input type="hidden" class="size-count">
+                                    <input type="hidden" class="size-count size-count-value-checker">
                                 </div>
                                 <div class="size-box__modal">
                                     <div class="size-box__modal-title">SELECT SIZE</div>
@@ -106,11 +125,11 @@ red-button disabled
                     </div>
                     <div class="product-list__box-button js-btn-cart">
                     {% if pice_product.available %}
-                        <a href="javascript:void(0)" class="btn js-add" data-prod-id="{{ product.id }}"
+                        <a href="javascript:void(0)" class="btn js-add add-set-iteam" data-prod-id="{{ product.id }}"
                            data-value="{% if productCount > 0 %}{{ productCount | plus: 1 }}{% else %}1{% endif %}" onclick="pintrk('track', 'addtocart');"><span>Add to bag {% if productCount > 0 %} ({{ productCount }}){% endif %}</span></a>
                     {% else %}
                         <div class="btn btn-grey-nofill "><span>Sold out</span></div>
-                        <div data-wait-id="{{ forloop.index }}" class="btn red-button js-show-waitlist"><span>Join the waitlist </span></div>
+                        {% comment %}<div data-wait-id="{{ forloop.index }}" class="btn red-button js-show-waitlist"><span>Join the waitlist </span></div>{% endcomment %}
 
                     {% endif %}
                     </div>
@@ -146,4 +165,16 @@ red-button disabled
         updateCount();
 
     })
+
+    function showSizeChart(chart){
+        let getChart = document.getElementById(chart);
+        let setChart = document.getElementById('size-chart-set-block');
+
+        setChart.innerHTML = getChart.innerHTML;
+    }
+
+    function delSizeChart(){
+        let setChart = document.getElementById('size-chart-set-block');
+        setChart.innerHTML = "";
+    }
 </script>

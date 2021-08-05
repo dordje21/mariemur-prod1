@@ -9,7 +9,11 @@
 <div class="product-content single-product"  {% include 'product-get-attributes' %}>
   {% include 'product-get-page-gallery' %}
   {% form 'product', product, class:'product-sidebar',id:'product-sidebar', novalidate: 'novalidate', data-product-form: '' %}
-    <div class="product-title">
+    <div class="new-to-sale" style="display: none">
+      NEW TO SALE
+    </div>
+  <div class="row-title-price">
+    <div class="product-title ">
       <h1>{{ product.title }}</h1>
     </div>
 
@@ -24,11 +28,68 @@
         {% endif %}
       {% endif %}
     </div>
+  </div>
+    <div class="reviews-prod-title reviews-prod-title-desc">
+    </div>
+    {% comment %}<div class="desc-share-wrap">{% endcomment %}
     <div class="product-desc">
-      {% if product.metafields.global.short-desc %}
-        {{ product.metafields.global.short-desc }}
+      {% if product.metafields.product.short-desc %}
+        {{ product.metafields.product.short-desc }}
       {% endif %}
     </div>
+    {% comment %}<div class="share--product">{% endcomment %}
+      {% comment %}<button>SHARE<img src="{{ 'share-product.svg' | asset_url }}" alt="share-product"></button>{% endcomment %}
+      {% comment %}<div class="reviews-prod-title reviews-prod-title-mob">{% endcomment %}
+      {% comment %}</div>{% endcomment %}
+    {% comment %}</div>{% endcomment %}
+    {% comment %}</div>{% endcomment %}
+
+    <div class="block-color-and-share">
+      <div class="color-option-product">
+        {%- assign products_colors = product.metafields.product.colors-set | split: "|" -%}
+        {%- if products_colors -%}
+          {%- assign current_path = request.path | split: "/" -%}
+          {%- assign current_handle = current_path | last %}
+          {%- for color in products_colors -%}
+            {%- assign product_color = color | split: "," -%}
+            {%- assign product_handle_arr = product_color[1] | split: "/" -%}
+            {%- assign product_handle = product_handle_arr | last -%}
+            {% if  current_handle == product_handle %}
+              <div style="margin-bottom: 10px">
+                <b>Color:</b> <i style="text-transform: capitalize;">{{ product_color[0] }}</i>
+              </div>
+            {% endif %}
+          {% endfor %}
+          <div class="color-wrap-set">
+            {%- for color in products_colors -%}
+              {%- assign product_color = color | split: "," -%}
+              {%- assign product_handle_arr = product_color[1] | split: "/" -%}
+              {%- assign product_handle = product_handle_arr | last -%}
+
+              <a href="{{ product_color[1] }}">
+                <div class="color-box"
+                     style="background:{% if product_color[2] %}{% if product_color[2] contains '.'%}url({{ product_color[2] | asset_url }}){% else %}{{ product_color[2] }}{% endif %}{% else %}{{ product_color[0] }}{% endif %}">
+
+                  {% if current_handle == product_handle %}
+                    <div></div>
+                  {% endif %}
+
+                </div>
+              </a>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+
+      <div class="share--product share--product-mob">
+        <div class="reviews-prod-title reviews-prod-title-mob">
+        </div>
+        {% comment %}<button>SHARE<img src="{{ 'share-product.svg' | asset_url }}" alt="share-product"></button>{% endcomment %}
+        {% include 'share-icons' %}
+      </div>
+
+    </div>
+
     <div class="klarna-container mb-20" style="visibility:hidden; max-height: 1px;margin: 0 0 28px 0;">
       <klarna-placement data-key="credit-promotion-small" data-purchase-amount="{{ price }}" data-preloaded="true" data-locale="en-US"></klarna-placement>
     </div>
@@ -69,14 +130,20 @@
     {% capture product_tabs %}{% include 'product-info' %}{% endcapture %}
     {% include 'product-get-options' %}
 
-    <div class="product-buttons ">
+    <div class="product-buttons js-btn-cart">
       <button class="btn btn-nofill js-size-guide {% if product_size_guide_length < 100 %}d-none{% endif %}"><span>Size guide<span class="icon icon-i-plus"></span></span></button>
       <button class="btn btn-red-nofill d-none"><span>View in 3D<span class="icon icon-i-3D"></span></span></button>
       {% if product.available == false%}
       <button class="btn btn-grey-nofill "><span>Sold out</span></button>
-       <div class="btn red-button js-show-waitlist"><span>Join the waitlist </span></div>
+       {% comment %}<div class="btn red-button js-show-waitlist"><span>Join the waitlist </span></div>{% endcomment %}
       {% endif %}
-      <button class="btn btn-red js-btn-cart {% if product.available == false%}d-none{% endif %}" data-prod-id="{{ product.id }}" data-amount="{{ inCartAmount }}" onclick="pintrk('track', 'addtocart');"><span>Add to bag {% if inCartAmount > 0 %}({{ inCartAmount }}){% endif %}</span></button>
+      <button class="btn btn-red {% if product.available == false%}d-none{% endif %}" data-prod-id="{{ product.id }}" data-amount="{{ inCartAmount }}" onclick="pintrk('track', 'addtocart');"><span>Add to bag {% if inCartAmount > 0 %}({{ inCartAmount }}){% endif %}</span></button>
+    </div>
+    <div class="share--product share--product-descTop">
+      <div class="reviews-prod-title reviews-prod-title-mob">
+      </div>
+      {% comment %}<button>SHARE<img src="{{ 'share-product.svg' | asset_url }}" alt="share-product"></button>{% endcomment %}
+      {% include 'share-icons' %}
     </div>
     {{ product_tabs }}
     <div class="product-size-guide">
@@ -92,6 +159,7 @@
   {% endform %}
 
 </div>
+
 <div class="cart-info">
   <div class="cart-info__count">( {{ inCartAmount }} ) pieces</div>
   <div class="cart-info__button">
@@ -120,7 +188,7 @@
     <div class="waitlist-modal__body">
       <form action="" id="waitlistForm">
       <div class="waitlist-modal__options">
-      <div class="product-option ">
+      <div class="product-option" >
         {%- unless product.has_only_default_variant -%}
           {%- assign options_type_circle_color = settings.product_options_type_circle_color | escape | downcase | split: '|' -%}
           {%- assign options_type_circle_image = settings.product_options_type_circle_image | escape | downcase | split: '|' -%}
@@ -179,24 +247,7 @@
               <div class="product-option__group-list" data-option-name="{{ option.name | handle }}" data-size-guide="{{ option_with_size_gide }}">
                 <div class="checkbox-list js-checkbox-list" data-style="text" data-property="{{ option.name | handleize }}">
                   {%- for value in option.values -%}
-
-                    {%- assign active_value = false -%}
-                    {%- assign disabled_value = true -%}
-                    {%- for variant in product.variants -%}
-                      {%- if variant.option1 == value or variant.option2 == value or variant.option3 == value -%}
-                          {%- assign disabled_value = false -%}
-                          {%- break -%}
-                      {% endif %}
-                    {%- endfor -%}
-                    {%- unless disabled_value == true -%}
-                      {%- if product.options contains option.name -%}
-                        {%- if current_variant.option1 == value or current_variant.option2 == value or current_variant.option3 == value -%}
-                          {%- assign active_value = true -%}
-                        {%- endif -%}
-                      {%- endif -%}
-                    {%- endunless -%}
-                    {% capture trigger_attr %}{% if trigger %} data-js-trigger="{{ trigger }}-{{ clear_name }}-{{ value }}"{% elsif trigger_id %} data-js-trigger-id="{{ trigger_id }}-{{ clear_name }}-{{ value }}"{% endif %}{% endcapture %}
-
+                    {% include 'product-get-options-res-status' %}
                     {%- if hide_options_without_availability != true or disabled_value != true -%}
                       <div class="checkbox check-lg check-other  {% if active_value %} active{% endif %}"
                            data-js-option-value
@@ -221,7 +272,7 @@
       </div>
       <div class="waitlist-modal__form">
         <div class="form-group ">
-          <input type="email" name="customer[email]" id="email" placeholder="Email">
+          <input type="email" name="customer[email]" placeholder="Email">
           <div class="help-block">Please enter a valid email address.</div>
         </div>
         <div class="form-check">
@@ -230,7 +281,7 @@
             <label for="addEmail">Add me to your email list.</label>
           </div>
         </div>
-        <button type="submit" class="btn red-button js-klavio-btn"><span>Join the waitlist</span></button>
+        <button type="submit" class="btn red-button"><span>Join the waitlist</span></button>
         <div class="waitlist-modal__success d-none"><span class="successIcon"></span><p>You're in! We'll let you know when it's back! </p></div>
       </div>
       </form>
@@ -240,56 +291,11 @@
     </div>
   </div>
 </div>
-<style>
-  .klaviyo_modal.hide{
-    z-index: -5;
-  }
-</style>
-  <div class="klaviyo_modal hide" id="product_waitlist" style="display:none;">
-    <div class="klaviyo_inner">
-      <a href="#" class="klaviyo_close_modal klaviyo_header_close">×</a>
-      <form action="//manage.kmail-lists.com/subscriptions/subscribe" method="POST" novalidate="novalidate" class="klaviyo_subscription_form">
-        <input type="hidden" name="g" value="XqPC8J">
-        <div class="klaviyo_fieldset">
-          <p class="klaviyo_header">Interested in our Newsletter?</p>
-          <p class="klaviyo_subheader">Stay in the know with news and promotions.</p>
-        </div>
-        <div class="klaviyo_fieldset">
-          <div class="klaviyo_field_group">
-            <label for="k_id_modal_$email">Email Address</label>
-            <input type="email" id="k_id_modal_$email" name="email" class="klav_email">
-          </div>
-        </div>
-        <div class="klaviyo_fine_print"></div>
-        <div class="klaviyo_form_actions">
-          <button type="submit" class="klaviyo_submit_button">
-            <span>Subscribe</span>
-          </button>
-        </div>
-        <div class="klaviyo_below_submit" ></div>
-      </form>
-      <div class="error_message" ></div>
-      <div class="success_message" ></div>
-    </div>
-  </div>
-
-  <script type="text/javascript" src="//www.klaviyo.com/media/js/public/klaviyo_subscribe.js"></script>
 <script>
-    let id=0;
     $( document ).on( 'click', '.js-show-waitlist', function() {
       $( '.waitlist-modal' ).addClass( 'show' );
 
       $( 'html' ).addClass( 'wait-no-scroll' );
-
-      let json_str=$('.product-title').closest('[data-js-product]').attr('data-json-product');
-      let json=JSON.parse(json_str);
-      let size = $('[data-property=size] .checkbox.active')[0].innerText,
-              set = $('[data-property=set] .checkbox.active')[0].innerText;
-      $.each(json.variants, function () {
-        if (this.option1 === size && this.option2 ===set){
-          id=this.id;
-        }
-      });
     });
     $( document ).on( 'click', '.js-close-waitlist', function() {
         $( 'html' ).removeClass( 'wait-no-scroll' );
@@ -304,57 +310,6 @@
 
       e.stopPropagation();
     });
-
-    $(".waitlist-modal__options .checkbox").on('click',function (){
-      let attr =$(this).parent($('.checkbox-list')).attr('data-property');
-      $(`[data-property=${attr}] .checkbox`).removeClass('active');
-      $(this).addClass('active');
-      let json_str=$('.product-title').closest('[data-js-product]').attr('data-json-product');
-      let json=JSON.parse(json_str);
-      let size = $('[data-property=size] .checkbox.active')[0].innerText,
-              set = $('[data-property=set] .checkbox.active')[0].innerText;
-      $.each(json.variants, function () {
-        if (this.option1 === size && this.option2 ===set){
-          id=this.id;
-        }
-      });
-
-    });
-
-    $("#waitlistForm").submit(function (){
-      if($('#addEmail').prop('checked')) {
-        let email=$('.form-group #email').val();
-        $.ajax({
-          type:'POST',
-          url:'https://a.klaviyo.com/onsite/components/back-in-stock/subscribe',
-          data:{
-            a:'PAgcrr',
-            email: email,
-            variant:id,
-            platform:'shopify'
-          },
-          success:function (response){
-            console.log(response)
-          }
-
-        })
-        KlaviyoSubscribe.attachToModalForm('#product_waitlist',
-                {
-                  hide_form_on_success: false,
-                  ignore_cookie: true,
-                  success_message: false,
-
-                });
-
-        $(".klav_email").val(email);
-        setTimeout(function (){
-          $('.klaviyo_subscription_form').trigger('submit')
-          setTimeout(function () {
-            $('.klaviyo_subscription_form').trigger('reset')
-          }, 500)
-        }, 500)
-      }
-    })
 </script>
 {% endunless %}
 <script>
@@ -368,6 +323,15 @@
       window.KlarnaOnsiteService.push({eventName: 'refresh-placements'});
     }
   });
+  function newtosale() {
+    if(document.getElementById("disc_value-id").value > 0){
+      document.getElementsByClassName("new-to-sale")[0].style.display = "block"
+    } else {
+      document.getElementsByClassName("new-to-sale")[0].style.display = "none"
+    }
+  }
+
+  newtosale();
 </script>
 {% schema %}
 {

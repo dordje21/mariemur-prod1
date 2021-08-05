@@ -1,0 +1,33 @@
+{%- assign products_colors = product.metafields.product.colors-set | split: "|" -%}
+{%- if products_colors -%}
+    {%- assign current_path = request.path | split: "/" -%}
+    {%- assign current_handle = current_path | last %}
+    {%- for color in products_colors -%}
+        {%- assign product_color = color | split: "," -%}
+        {%- assign product_handle_arr = product_color[1] | split: "/" -%}
+        {%- assign product_handle = product_handle_arr | last -%}
+        {% if  current_handle == product_handle %}
+            <div style="margin-bottom: 10px">
+                <b>Color:</b> <i style="text-transform: capitalize;">{{ product_color[0] }}</i>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <div class="color-wrap-set">
+        {%- for color in products_colors -%}
+            {%- assign product_color = color | split: "," -%}
+            {%- assign product_handle_arr = product_color[1] | split: "/" -%}
+            {%- assign product_handle = product_handle_arr | last -%}
+
+            <a href="{{ product_color[1] }}">
+                <div class="color-box"
+                     style="background:{% if product_color[2] %}{% if product_color[2] contains '.'%}url({{ product_color[2] | asset_url }}){% else %}{{ product_color[2] }}{% endif %}{% else %}{{ product_color[0] }}{% endif %}">
+
+                    {% if current_handle == product_handle %}
+                        <div></div>
+                    {% endif %}
+
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endif %}

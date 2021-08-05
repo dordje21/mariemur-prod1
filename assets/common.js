@@ -42,6 +42,198 @@ class Cart {
 		}
 	}
 
+	static async addProduct2 (id, quantity, id2, quantity2) {
+		if (!document.querySelector('html').classList.contains('loading')) {
+
+			document.querySelector('html').classList.add('loading')
+			let formData = (document.querySelector('[name="properties[_with_discount]"]'))
+				? {
+					'items': [
+						{
+							'id': id,
+							'quantity': quantity,
+							'properties': {
+								'_with_discount': true
+							}
+						},
+						{
+							'id': id2,
+							'quantity': quantity2,
+							'properties': {
+								'_with_discount': true
+							}
+						}],
+				} : {
+					'items': [
+						{
+							'id': id,
+							'quantity': quantity
+						},
+						{
+							'id': id2,
+							'quantity': quantity2
+						}],
+				}
+			return fetch('/cart/add.js', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			}).then(response => {
+				if (!response.ok) { throw response }
+				this.updateProductCart()
+				document.querySelector('html').classList.remove('loading')
+				return response.json()
+			}).catch((error) => {
+				document.querySelector('html').classList.remove('loading')
+
+				alert('Maximum product quantity in cart items added.')
+				console.log('Error:', error)
+				return false
+			})
+		}
+	}
+
+	static async addProduct3 (id, quantity, id2, quantity2, id3, quantity3) {
+		if (!document.querySelector('html').classList.contains('loading')) {
+
+			document.querySelector('html').classList.add('loading')
+			let formData = (document.querySelector('[name="properties[_with_discount]"]'))
+				? {
+					'items': [
+						{
+							'id': id,
+							'quantity': quantity,
+							'properties': {
+								'_with_discount': true
+							}
+						},
+						{
+							'id': id2,
+							'quantity': quantity2,
+							'properties': {
+								'_with_discount': true
+							}
+						},
+						{
+							'id': id3,
+							'quantity': quantity3,
+							'properties': {
+								'_with_discount': true
+							}
+						}],
+				} : {
+					'items': [
+						{
+							'id': id,
+							'quantity': quantity
+						},
+						{
+							'id': id2,
+							'quantity': quantity2
+						},
+						{
+							'id': id3,
+							'quantity': quantity3
+						}],
+				}
+			return fetch('/cart/add.js', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			}).then(response => {
+				if (!response.ok) { throw response }
+				this.updateProductCart()
+				document.querySelector('html').classList.remove('loading')
+				return response.json()
+			}).catch((error) => {
+				document.querySelector('html').classList.remove('loading')
+
+				alert('Maximum product quantity in cart items added.')
+				console.log('Error:', error)
+				return false
+			})
+		}
+	}
+
+	static async addProduct4 (id, quantity, id2, quantity2, id3, quantity3, id4, quantity4) {
+		if (!document.querySelector('html').classList.contains('loading')) {
+
+			document.querySelector('html').classList.add('loading')
+			let formData = (document.querySelector('[name="properties[_with_discount]"]'))
+				? {
+					'items': [
+						{
+							'id': id,
+							'quantity': quantity,
+							'properties': {
+								'_with_discount': true
+							}
+						},
+						{
+							'id': id2,
+							'quantity': quantity2,
+							'properties': {
+								'_with_discount': true
+							}
+						},
+						{
+							'id': id3,
+							'quantity': quantity3,
+							'properties': {
+								'_with_discount': true
+							}
+						},
+						{
+							'id': id4,
+							'quantity': quantity4,
+							'properties': {
+								'_with_discount': true
+							}
+						}],
+				} : {
+					'items': [
+						{
+							'id': id,
+							'quantity': quantity
+						},
+						{
+							'id': id2,
+							'quantity': quantity2
+						},
+						{
+							'id': id3,
+							'quantity': quantity3
+						},
+						{
+							'id': id4,
+							'quantity': quantity4
+						}],
+				}
+			return fetch('/cart/add.js', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify(formData),
+			}).then(response => {
+				if (!response.ok) { throw response }
+				this.updateProductCart()
+				document.querySelector('html').classList.remove('loading')
+				return response.json()
+			}).catch((error) => {
+				document.querySelector('html').classList.remove('loading')
+
+				alert('Maximum product quantity in cart items added.')
+				console.log('Error:', error)
+				return false
+			})
+		}
+	}
+
 	static async addProductAndShowCart (id, quantity) {
 		let formData = {
 			'items': [
