@@ -1,0 +1,177 @@
+<div class="cart-modal">
+    <div class="cart-modal__inner" id="cartPopup">
+
+        <div class="cart-modal__head">
+            <div class="cart-modal__title">СART<b>({{ cart.item_count }})</b></div>
+        </div>
+
+        <div class="cart-modal__body">
+            {% if cart.item_count > 0 %}
+                <div class="cart-modal__content main_cart-modal__content">
+                    <div class="cart-modal__list">
+                        {%- for item in cart.items -%}
+                            {% assign productCount = 0 %}
+                            <div class="cart-modal__box" data-prod-id="{{ item.product_id }}" data-prod-quantity="{{ item.quantity }}" data-cart-product-variant-id="{{ item.variant_id }}">
+                                <div class="cart-modal__box-head">
+                                    <a href="{{ item.url }}" class="cart-modal__box-img">
+                                        <picture>
+                                            <source srcset="{{ item.image | img_url: '163x' }}">
+                                            <img src="{{ item.image | img_url: '163x' }}"  alt="">
+                                        </picture>
+                                    </a>
+                                </div>
+                                <div class="cart-modal__box-body">
+                                    <div class="cart-modal__box-title">
+                                        <a href="{{ item.url }}">{{ item.title }}</a>
+                                    </div>
+                                    <div class="cart-modal__box-option">
+                                        {% unless item.product.has_only_default_variant %}
+                                            {% for option in item.options_with_values %}
+                                                <div class="cart-modal__box-option-row">
+                                                    <span>{{ option.name }}</span>
+                                                    <b>{{ option.value }}</b>
+                                            </div>
+                                            {% endfor %}
+                                        {% endunless %}
+                                        <div class="cart-modal__box-option-row">
+                                            <span>Price</span>
+                                            <b><span class="money">   {{ item.final_line_price | money }}</span></b>
+                                        </div>
+                                    </div>
+                                    <div class="cart-modal__box-count">
+                                        <div class="count-box">
+                                            <div class="count-icon count-dec {% if  item.quantity == 1  %}
+                                            disabled
+                                            {% endif %}">
+                                                <span data-cart-decrease class="icon icon-i-minus"></span>
+                                            </div>
+                                            <div class="count-field">
+
+                                                <input type="text" class="count" data-cart-input  value="{{ item.quantity }}" data-min="1" data-max="100" data-postfix="" readonly>
+                                            </div>
+                                            <div class="count-icon count-inc ">
+                                                <span data-cart-increase class="icon icon-i-plus"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="cart-modal__box-delete">
+                                        <a href="javascript:void(0)" data-cart-remove >Remove</a>
+                                    </div>
+                                </div>
+                            </div>
+                        {%- endfor -%}
+
+                    </div>
+                </div>
+                {% assign set_recomendation_lists =''%}
+
+                {% for item in cart.items %}
+
+                    {% if item.product.metafields.parents_set.handle !=blank %}
+                        {% unless set_recomendation_lists contains all_products[item.product.metafields.parents_set.handle].metafields.products_set.handles %}
+                            {% if set_recomendation_lists != blank %}
+                                {% assign set_recomendation_lists = set_recomendation_lists| append: "," | append: all_products[item.product.metafields.parents_set.handle].metafields.products_set.handles %}
+                                {% else %}
+                                {% assign set_recomendation_lists = set_recomendation_lists | append: all_products[item.product.metafields.parents_set.handle].metafields.products_set.handles %}
+                            {% endif %}
+                        {% endunless %}
+                    {% endif %}
+                {% endfor %}
+
+                {% if set_recomendation_lists != blank %}
+
+                    <style>
+                        .cart_liner-gradient-wraper {
+                            position: relative
+                        }
+
+                        .cart_liner-gradient {
+                            position: absolute;
+                            top: -80px;
+                            z-index: 5;
+                            background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 10%, #ffff 80%);
+                            height: 80px;
+                            width: 100%;
+                            pointer-events: none;
+                            user-select: none;
+                        }
+                    </style>
+
+                    <div class="recomendation_title">BUY MORE FROM THE SET</div>
+
+                    <div class="cart-modal__content recomendation-modal__content">
+
+                        <div class="cart-modal__list">
+                            <div class="cart-modal__box cart-recomendation-modal__box" style="flex-direction: column">
+                                {% assign pieces = 0 %}
+                                {% assign recomend = 0 %}
+                                {% include 'cart_product-sets', pieces: pieces, products: set_recomendation_lists %}
+                            </div>
+                        </div>
+
+                    </div>
+                {% endif %}
+
+                {% if set_recomendation_lists != blank %}
+                    <div class="cart_liner-gradient-wraper">
+                        <div class="cart_liner-gradient"></div>
+                    </div>
+                {% endif %}
+
+                <div class="cart-modal__foot">
+                    {% assign cartNoteLen = cart.note | size %}
+                    <div class="cart-modal__link js-cart-note-toggle {% if cartNoteLen > 1 %}hide{% endif %}">Add
+                        special instructions for your order<span class="icon icon-i-chevron-right"></span>
+                    </div>
+
+                    <div class="cart-modal__note {% if cartNoteLen > 1 %}js-cart-note-toggle  show{% endif %}">
+                        <div class="cart-modal__note-title">Your note</div>
+                        <div class="cart-modal__note-text">{{ cart.note }}</div>
+                        <div class="cart-modal__note-delete cursor-pointer js-cart-delete-note">
+                            <span class="icon icon-i-delete"></span>
+                        </div>
+                    </div>
+
+                    <div class="cart-modal__total">
+                        <div class="cart-modal__total-title">SUBTOTAL</div>
+                        <div class="cart-modal__total-price"><span class="money"> {{ cart.total_price | money }}</span>
+                        </div>
+                    </div>
+
+<!--                     <div class="cart-modal__button js-cart-modal-close  cart_modal-close__button">
+                        <div href="" class="btn btn-nofill"><span>Continue shopping</span></div>
+                    </div> -->
+
+                    <div class="cart-modal__button">
+                        <a href="/checkout" class="btn btn-red"><span>PROCEED  TO CHECKOUT</span></a>
+                    </div>
+
+                </div>
+
+                <div class="cart-modal__form">
+                    <div class="form-title">Add special instructions for your order</div>
+                    <div class="form-group">
+                        <textarea name="mess" placeholder="some text">{{ cart.note }}</textarea>
+                    </div>
+                    <div class="form-button">
+                        <a href="" class="btn btn-nofill js-cart-note-toggle"><span>cancel</span></a>
+                        <a href="" class="btn btn-red js-cart-note-save"><span>Save</span></a>
+                    </div>
+                    <div class="form-delete cursor-point js-cart-delete-note">
+                        <span class="icon icon-i-delete"></span>
+                    </div>
+                </div>
+
+            {% else %}
+                <div class="cart-modal__empty">Your cart is empty</div>
+            {% endif %}
+        </div>
+
+        <div class="cart-modal__close js-cart-modal-close">
+            <span class="icon icon-i-close"></span>
+        </div>
+
+    </div>
+</div>
+<script>
+</script>

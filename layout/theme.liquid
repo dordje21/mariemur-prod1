@@ -1,0 +1,1027 @@
+<!doctype html>
+<html class="no-js" lang="{{ request.locale.iso_code }}">
+<head>
+<script>var head = document.head;var script = document.createElement('script');script.type = 'text/javascript';script.src = "https://180047.tracking.hyros.com/v1/lst/universal-script?ph=d0f4155c5850f17749b2afce61ab1cea82a83af17bec5f272eb597ed66b89462&tag=!tracking";head.appendChild(script);</script>
+    <!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-NJWVN7J');</script>
+<!-- End Google Tag Manager -->
+
+    <!-- Google Optimize -->
+    <script src="https://www.googleoptimize.com/optimize.js?id=OPT-K3GX8FW"></script>
+    <!-- End Google Optimize -->
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+    <meta name="theme-color" content="{{ settings.color_button }}">
+    <meta name="format-detection" content="telephone=no">
+    {% if template != 'page.multi-lp-market' %}
+        <link rel="preload" href="{{ 'libs.css' | asset_url }}" as="style">
+    {% endif %}
+
+    {% if template == "page.lp-pattern" %}
+        <link rel="stylesheet" media="all" href="{{ 'Roboto.css' | asset_url }}"/>
+        <link rel="stylesheet" media="all" href="{{ 'GalleryModern.css' | asset_url }}"/>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" />
+        {{ 'lp-pattern.css' | asset_url | stylesheet_tag }}
+        {{ 'custom.css' | asset_url | stylesheet_tag }}
+    {% endif %}
+
+    <link rel="preconnect" href="https://cdn.shopify.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
+    <link rel="preconnect" href="https://monorail-edge.shopifysvc.com">
+
+    {% unless template == 'page.multi-lp-market' or template == 'page.multi-lp' or template == 'page.lp-template' or template == 'page.lp-template2' or template == 'page.lp-template1' or template == 'page.lp-template3' or template == 'page.lp-template4' or template == 'page.lp-template5' or template == 'page.lp-template6' or template == 'page.lp-template7' or template == 'page.lp-template8' or template == 'page.lp-template9'or template == 'page.lp-template10'or template == 'page.lp-template11'or template == 'page.lp-template12'or template == 'page.lp-template13'or template == 'page.lp-template14'or template == 'page.lp-template15'or template == 'page.lp-template16'or template == 'page.lp-template17'or template == 'page.lp-template18'or template == 'page.lp-template19'or template == 'page.lp-template20'or template == 'page.lp-template21'%}
+
+    <link rel="stylesheet" media="all" href="{{ 'Roboto.css' | asset_url }}"/>
+    <link rel="stylesheet" media="all" href="{{ 'GalleryModern.css' | asset_url }}"/>
+    <link rel="stylesheet" media="all" href="{{ 'libs.css' | asset_url }}"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" />
+    <link rel="stylesheet" media="all" href="{{ 'style.css' | asset_url }}"/>
+    {% endunless %}
+
+    {% if template == 'page.lp-template' or template == 'page.lp-template2' or template == 'page.lp-template1' or template == 'page.lp-template3' or template == 'page.lp-template4' or template == 'page.lp-template5' or template == 'page.lp-template6' or template == 'page.lp-template7' or template == 'page.lp-template8'or template == 'page.lp-template9'or template == 'page.lp-template10'or template == 'page.lp-template11'or template == 'page.lp-template12'or template == 'page.lp-template13'or template == 'page.lp-template14'or template == 'page.lp-template15'or template == 'page.lp-template16'or template == 'page.lp-template17'or template == 'page.lp-template18'or template == 'page.lp-template19'or template == 'page.lp-template20'or template == 'page.lp-template21' %}
+        <meta name="robots" content="noindex,follow" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+        {{ 'custom.css' | asset_url | stylesheet_tag }}
+        {{ 'lp.css' | asset_url | stylesheet_tag }}
+        <style>
+            @font-face {
+                font-family: 'Bigilla';
+                src: url("{{ 'BigillaRegular.woff' | asset_url }} ");
+                font-weight: normal;
+                font-style: normal;
+                font-display: swap;
+            }
+            @font-face {
+                font-family: 'Bigilla';
+                src: url("{{ 'BigillaBold.woff' | asset_url }} ");
+                font-weight: bold;
+                font-style: normal;
+                font-display: swap;
+            }
+
+            @font-face {
+                font-family: "svgfont";
+                src: url("{{'svgfont.woff' | asset_url }}") format("woff");
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'HelveticaNeueCyr';
+                src: url("{{ 'HelveticaNeueCyr-Medium.eot' | asset_url }}");
+                src: local('HelveticaNeueCyr-Medium'),
+                url("{{  'HelveticaNeueCyr-Medium.eot?#iefix'| asset_url}}") format('embedded-opentype'),
+                url("{{  'HelveticaNeueCyr-Medium.woff'| asset_url}}" ) format('woff'),
+                url("{{  'HelveticaNeueCyr-Medium.ttf'| asset_url}}" ) format('truetype');
+                font-weight: 500;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'HelveticaNeueCyr';
+                src: url("{{ 'HelveticaNeueCyr-Heavy.eot' | asset_url }}");
+                src: local('HelveticaNeueCyr-Heavy'),
+                url("{{ 'HelveticaNeueCyr-Heavy.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+                url("{{ 'HelveticaNeueCyr-Heavy.woff' | asset_url }}") format('woff'),
+                url("{{ 'HelveticaNeueCyr-Heavy.ttf' | asset_url }}") format('truetype');
+                font-weight: 800;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'HelveticaNeueCyr';
+                src: url("{{ 'HelveticaNeueCyr-HeavyItalic.eot' | asset_url }}");
+                src: local('HelveticaNeueCyr-HeavyItalic'),
+                url("{{ 'HelveticaNeueCyr-HeavyItalic.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+                url("{{ 'HelveticaNeueCyr-HeavyItalic.woff' | asset_url }}") format('woff'),
+                url("{{ 'HelveticaNeueCyr-HeavyItalic.ttf'| asset_url }}") format('truetype');
+                font-weight: 800;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: 'HelveticaNeueCyr';
+                src: url("{{ 'HelveticaNeueCyr-Black.eot' | asset_url }}");
+                src: local('HelveticaNeueCyr-Black'),
+                url("{{ 'HelveticaNeueCyr-Black.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+                url("{{ 'HelveticaNeueCyr-Black.woff'| asset_url }}") format('woff'),
+                url("{{ 'HelveticaNeueCyr-Black.ttf' | asset_url }}") format('truetype');
+                font-weight: 900;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'HelveticaNeueCyr';
+                src: url("{{ 'HelveticaNeueCyr-UltraLightItalic.eot' | asset_url }}");
+                src: local('HelveticaNeueCyr-UltraLightItalic'),
+                url("{{ 'HelveticaNeueCyr-UltraLightItalic.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+                url("{{ 'HelveticaNeueCyr-UltraLightItalic.woff' | asset_url }}") format('woff'),
+                url("{{ 'HelveticaNeueCyr-UltraLightItalic.ttf' | asset_url }}") format('truetype');
+                font-weight: 200;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: 'HelveticaNeueCyr';
+                src: url("{{ 'HelveticaNeueCyr-BlackItalic.eot' | asset_url }}");
+                src: local('HelveticaNeueCyr-BlackItalic'),
+                url("{{ 'HelveticaNeueCyr-BlackItalic.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+                url("{{ 'HelveticaNeueCyr-BlackItalic.woff' | asset_url }}") format('woff'),
+                url("{{ 'HelveticaNeueCyr-BlackItalic.ttf' | asset_url }}") format('truetype');
+                font-weight: 900;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: 'HelveticaNeueCyr';
+                src: url("{{ 'HelveticaNeueCyr-ThinItalic.eot' | asset_url }}");
+                src: local('HelveticaNeueCyr-ThinItalic'),
+                url("{{ 'HelveticaNeueCyr-ThinItalic.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+                url("{{ 'HelveticaNeueCyr-ThinItalic.woff' | asset_url }}") format('woff'),
+                url("{{ 'HelveticaNeueCyr-ThinItalic.ttf' | asset_url }}") format('truetype');
+                font-weight: 100;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: 'HelveticaNeueCyr';
+                src: url("{{ 'HelveticaNeueCyr-MediumItalic.eot' | asset_url }}");
+                src: local('HelveticaNeueCyr-MediumItalic'),
+                url("{{ 'HelveticaNeueCyr-MediumItalic.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+                url("{{ 'HelveticaNeueCyr-MediumItalic.woff' | asset_url }}") format('woff'),
+                url("{{ 'HelveticaNeueCyr-MediumItalic.ttf' | asset_url }}") format('truetype');
+                font-weight: 500;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: 'HelveticaNeueCyr';
+                src: url("{{ 'HelveticaNeueCyr-LightItalic.eot' | asset_url }}");
+                src: local('HelveticaNeueCyr-LightItalic'),
+                url("{{ 'HelveticaNeueCyr-LightItalic.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+                url("{{ 'HelveticaNeueCyr-LightItalic.woff' | asset_url }}") format('woff'),
+                url("{{ 'HelveticaNeueCyr-LightItalic.ttf' | asset_url }}") format('truetype');
+                font-weight: 300;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: 'HelveticaNeueCyr';
+                src: url("{{ 'HelveticaNeueCyr-UltraLight.eot' | asset_url }}");
+                src: local('HelveticaNeueCyr-UltraLight'),
+                url("{{ 'HelveticaNeueCyr-UltraLight.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+                url("{{ 'HelveticaNeueCyr-UltraLight.woff' | asset_url }}") format('woff'),
+                url("{{ 'HelveticaNeueCyr-UltraLight.ttf' | asset_url }}") format('truetype');
+                font-weight: 200;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'HelveticaNeueCyr';
+                src: url("{{ 'HelveticaNeueCyr-BoldItalic.eot' | asset_url }}");
+                src: local('HelveticaNeueCyr-BoldItalic'),
+                url("{{ 'HelveticaNeueCyr-BoldItalic.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+                url("{{ 'HelveticaNeueCyr-BoldItalic.woff' | asset_url }}") format('woff'),
+                url("{{ 'HelveticaNeueCyr-BoldItalic.ttf' | asset_url }}") format('truetype');
+                font-weight: bold;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: 'HelveticaNeueCyr';
+                src: url("{{ 'HelveticaNeueCyr-Italic.eot' | asset_url }}");
+                src: local('HelveticaNeueCyr-Italic'),
+                url("{{ 'HelveticaNeueCyr-Italic.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+                url("{{ 'HelveticaNeueCyr-Italic.woff' | asset_url }}") format('woff'),
+                url("{{ 'HelveticaNeueCyr-Italic.ttf' | asset_url }}") format('truetype');
+                font-weight: normal;
+                font-style: italic;
+            }
+
+            @font-face {
+                font-family: 'HelveticaNeueCyr';
+                src: url("{{ 'HelveticaNeueCyr-Roman.eot' | asset_url }}");
+                src: local('HelveticaNeueCyr-Roman'),
+                url("{{ 'HelveticaNeueCyr-Roman.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+                url("{{ 'HelveticaNeueCyr-Roman.woff' | asset_url }}") format('woff'),
+                url("{{ 'HelveticaNeueCyr-Roman.ttf' | asset_url }}") format('truetype');
+                font-weight: normal;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'HelveticaNeueCyr';
+                src: url("{{ 'HelveticaNeueCyr-Bold.eot' | asset_url }}");
+                src: local('HelveticaNeueCyr-Bold'),
+                url("{{ 'HelveticaNeueCyr-Bold.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+                url("{{ 'HelveticaNeueCyr-Bold.woff' | asset_url }}") format('woff'),
+                url("{{ 'HelveticaNeueCyr-Bold.ttf' | asset_url }}") format('truetype');
+                font-weight: bold;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'HelveticaNeueCyr';
+                src: url("{{ 'HelveticaNeueCyr-Light.eot' | asset_url }}");
+                src: local('HelveticaNeueCyr-Light'),
+                url("{{ 'HelveticaNeueCyr-Light.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+                url("{{ 'HelveticaNeueCyr-Light.woff' | asset_url }}") format('woff'),
+                url("{{ 'HelveticaNeueCyr-Light.ttf' | asset_url }}") format('truetype');
+                font-weight: 300;
+                font-style: normal;
+            }
+
+            @font-face {
+                font-family: 'HelveticaNeueCyr';
+                src: url("{{ 'HelveticaNeueCyr-Thin.eot' | asset_url }}");
+                src: local('HelveticaNeueCyr-Thin'),
+                url("{{ 'HelveticaNeueCyr-Thin.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+                url("{{ 'HelveticaNeueCyr-Thin.woff' | asset_url }}") format('woff'),
+                url("{{ 'HelveticaNeueCyr-Thin.ttf' | asset_url }}") format('truetype');
+                font-weight: 100;
+                font-style: normal;
+            }
+
+        </style>
+    {% endif %}
+    {% if template == "page.multi-lp" %}
+        <meta name="robots" content="noindex,follow" />
+        {{ 'multi-lp.css' | asset_url | stylesheet_tag }}
+        {{ 'multi-lp-fonts.css' | asset_url | stylesheet_tag }}
+        <style>
+            @font-face {
+                font-family: "svgfont";
+                src: url("{{'svgfont_4.woff' | asset_url }}") format("woff");
+                src: url("{{'svgfont_4.woff2' | asset_url }}") format("woff2");
+                font-weight: normal;
+                font-style: normal;
+            }
+        </style>
+    {% endif %}
+    <link rel="preload" href="{{ 'theme.js' | asset_url }}" as="script">
+
+    {%- if canonical_url != blank -%}
+        <link rel="canonical" href="{{ canonical_url }}">
+    {%- endif -%}
+
+    {%- if settings.favicon != blank -%}
+        <link rel="shortcut icon" href="{{ settings.favicon | img_url: '32x32' }}" type="image/png">
+    {%- endif -%}
+    {%- if request.path contains "blogs" -%}
+        <link rel="stylesheet" media="all" href="{{ 'blog_style.css' | asset_url }}"/>
+    {%- endif -%}
+    {%- capture seo_title -%}
+        {{ page_title }}
+        {%- if current_tags -%}
+            {% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}
+        {%- endif -%}
+        {%- if current_page != 1 -%}
+            &ndash; {{ 'general.meta.page' | t: page: current_page }}
+        {%- endif -%}
+        {%- unless page_title contains shop.name -%}
+            &ndash; {{ shop.name }}
+        {%- endunless -%}
+    {%- endcapture -%}
+    <title>{{ seo_title }}</title>
+
+    {%- if page_description -%}
+        <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+    {% include 'social-meta-tags' %}
+    <script src="{{ 'jquery.js' | asset_url }}"></script>
+
+    {%- if request.page_type contains 'customers/' -%}
+        <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+    {%- endif -%}
+    {%- if request.page_type contains 'cart' -%}
+        <script>
+            window.location.href='/collections/all?show_cart=true'
+        </script>
+    {%- endif -%}
+    {% include 'js-loader' %}
+    <script>
+        window.page = { default: {} };
+    </script>
+    <script type="text/javascript">
+        if (window.MSInputMethodContext && document.documentMode) {
+            var scripts = document.getElementsByTagName('script')[0];
+            var polyfill = document.createElement("script");
+            polyfill.defer = true;
+            polyfill.src = "{{ 'ie11CustomProperties.min.js' | asset_url }}";
+            scripts.parentNode.insertBefore(polyfill, scripts);
+        }
+    </script>
+    {{ content_for_header }}
+    <script type="text/javascript">
+        function setVariables() {
+            document.documentElement.style.setProperty('--window-height', window.innerHeight + 'px');
+            document.documentElement.style.setProperty('--window-width', window.innerWidth + 'px');
+        }
+        setVariables();
+        window.addEventListener('resize', function(event){
+            setVariables();
+        });
+    </script>
+    {% if template != "page.multi-lp" %}
+    <style>
+        .shopify-challenge__container{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 60px;
+            margin-bottom: 60px;
+        }
+        .main-video__text .icon{
+            color:white;
+        }
+    </style>
+    <style>
+        .catalog-more__box-title{
+            color: #000;
+        }
+        .shopify-challenge__container{
+            margin: 200px auto!important;
+        }
+    </style>
+    <style>
+        #acceptterms{
+            opacity: 0;
+            appearance: auto;
+            left: initial;
+        }
+    </style>
+    <style>
+        .catalog-more__box-title{
+            color: #000;
+        }
+        #subscription_mail input:-webkit-autofill,
+        #subscription_mail input:-webkit-autofill:hover,
+        #subscription_mail input:-webkit-autofill:focus,
+        #subscription_mail input:-webkit-autofill:active  {
+            transition: background-color 5000s;
+            -webkit-text-fill-color: #fff !important;
+        }
+        .empty-page-content{
+            padding: 100px 0;
+        }
+        .empty-page-content h1{
+            font-size: 44px;
+            line-height: 48px;
+            letter-spacing: 0.05em;
+            font-weight: normal;
+            margin-bottom: 25px;
+        }
+        .empty-page-content p{
+            font-size: 24px;
+            line-height: 31px;
+            letter-spacing: 0em;
+            font-weight: normal;
+            display: block;
+            margin-bottom: 25px;
+        }
+        .empty-page-content p span{
+            margin-bottom: 30px;
+            display: block;
+            font-size: 16px;
+        }
+        .table-size-guide.responsive-table.table-center{
+            margin: 20px auto;
+        }
+    </style>
+    <style>
+        .price.small .money{
+            font-size: 85%;
+            margin-right: 5px;
+            text-decoration: line-through;
+        }
+        .red-button { background: #A60B00; }
+        .red-button:before { background: #C50D00; }
+        .red-button:hover, .red-button:active { background: #A60B00; }
+        .red-button:active:before { background: #870000; }
+        .waitlist-modal{
+            position: fixed;
+            top: 100vh;
+            width: 100%;
+            transition: top 0.6s ease;
+            z-index: 60;
+            left: 0;
+            right: 0;
+        }
+        .waitlist-modal:before{
+            content: '';
+            position: fixed;
+            background: rgba(0, 0, 0, 0.1);
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            transition: opacity 0.3s ease;
+            visibility: hidden;
+            opacity: 0;
+            z-index: -1;
+        }
+        .waitlist-modal.show{
+         top: 100px;
+        }
+        .waitlist-modal.show:before{
+            visibility: visible;
+            opacity: 1;
+        }
+        .waitlist-modal__inner{
+            background: #FFFFFF;
+            max-width: 540px;
+            margin: 0 auto;
+            width: 100%;
+            padding: 80px;
+            position: relative;
+        }
+        .waitlist-modal__title{
+            font-family: Gallery Modern;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 50px;
+            line-height: 100%;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            color: #272727;
+            margin-bottom: 25px;
+        }
+        .waitlist-modal__desc{
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 18px;
+            line-height: 160%;
+            display: flex;
+            align-items: center;
+            letter-spacing: 0.5px;
+            color: #000000;
+            margin-bottom: 40px;
+
+        }
+        .waitlist-modal__options{
+            margin-bottom: 30px;
+        }
+        .waitlist-modal__form .checkbox [type="checkbox"] ~ label:not(:empty), .waitlist-modal__form .checkbox [type="radio"] ~ label:not(:empty){
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 126%;
+            letter-spacing: 0.25px;
+            color: #000000;
+            padding-left: 22px;
+        }
+        .waitlist-modal__form .form-check label:after{
+            width: 14px;
+            height: 14px;
+            font-size: 14px;
+            top: -1px;
+            left: 1px;
+        }
+        .waitlist-modal__form .form-check{
+            margin-bottom: 48px;
+        }
+        .waitlist-modal__form .form-check label:before{
+            width: 14px;
+            height: 14px;
+        }
+        .waitlist-modal__form button{
+            max-width: 100%;
+            width: 100%;
+        }
+        .waitlist-modal__close{
+            top: 21px;
+            right: 28px;
+            font-size: 24px;
+            position: absolute;
+            cursor: pointer;
+        }
+        .waitlist-modal__success{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 65px;
+        }
+        .waitlist-modal__success p{
+            font-family: Roboto;
+            font-style: normal;
+            font-weight: 300;
+            font-size: 14px;
+            line-height: 145%;
+            display: block;
+            letter-spacing: 0.25px;
+            color: #000000;
+            margin-left: 11px;
+        }
+        .successIcon{
+            background: #A60B00;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: block;
+            position: relative;
+        }
+        .successIcon:after{
+            content: '\EA09';
+            background: transparent;
+            color: #FFF;
+            font-size: 15px;
+            font-family: 'svgfont', sans-serif;
+            left: 50%;
+            top: 50%;
+            position: absolute;
+            transform: translate(-50%, -50%);
+        }
+        .btn-grey-nofill{
+            min-width: 57px;
+            border: 2px solid #C7C7C7;
+            box-sizing: border-box;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            letter-spacing: 0.75px;
+            text-transform: uppercase;
+            color: #C7C7C7;
+            text-align: center;
+            justify-content: center;
+            cursor: default;
+        }
+        .btn-grey-nofill:before{
+            content: none;
+        }
+        .btn-grey-nofill:hover{
+            border: 2px solid #C7C7C7;
+            box-sizing: border-box;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            letter-spacing: 0.75px;
+            text-transform: uppercase;
+            color: #C7C7C7;
+            text-align: center;
+            justify-content: center;
+        }
+        .btn-grey-nofill.red{
+            width: 120px;
+            height: 48px;
+            position: absolute;
+            top: 32px;
+            left: 32px;
+            z-index: 1;
+            border: 2px solid #A60B00;
+            color: #A60B00;
+        }
+        .btn-grey-nofill.red:hover{
+            border: 2px solid #A60B00;
+            color: #A60B00;
+        }
+        .checkbox input[disabled] ~ label{
+            cursor: default;
+        }
+        .waitlist-modal-set{
+            max-height: 80vh;
+            overflow-y: scroll;
+        }
+        .waitlist-modal-set .waitlist-modal__inner{
+            padding: 80px 56px;
+        }
+        .product-list__box-button{
+            display: flex;
+            justify-content: space-between;
+        }
+        #shopify-section-product-set .product-buttons .red-button{
+            margin-top: 0;
+            width: auto;
+        }
+        @media screen and (max-width: 800px){
+            .product-buttons .btn .icon{
+                margin-left: 10px;
+            }
+        }
+        @media screen and (max-width: 767px) {
+            .product-size-guide__box-text table{
+                width: 100% !important;
+            }
+            .product-buttons .red-button{
+                width: 100%;
+                margin-top: 20px;
+            }
+            .product-buttons .btn-grey-nofill{
+                min-width: 57px;
+                flex-grow: 1;
+            }
+            .waitlist-modal.show{
+                top: 0;
+                height: 100vh;
+                max-height: 100vh;
+            }
+            .waitlist-modal-set .waitlist-modal__inner, .waitlist-modal__inner{
+                padding: 56px 32px 40px;
+                width: 100%;
+            }
+
+            .waitlist-modal__title{
+                font-size: 40px;
+                line-height: 100%;
+                margin-bottom: 16px;
+                letter-spacing: -1.5px;
+            }
+            .waitlist-modal__desc{
+                font-size: 14px;
+                line-height: 145%;
+                margin-bottom: 24px;
+            }
+            .waitlist-modal__close{
+                top: 11px;
+                right: 15px;
+            }
+            .waitlist-modal__form .form-check{
+                margin-bottom: 32px;
+            }
+            .waitlist-modal__success{
+                margin-top: 42px;
+            }
+            .waitlist-modal__success p{
+                font-size: 12px;
+                line-height: 160%;
+                letter-spacing: 0.5px;
+            }
+        }
+        @media screen and (max-width: 422px){
+            .container{
+                padding: 0 12px;
+            }
+            .product-list__box-button .btn{
+                min-width: auto;
+            }
+        }
+        .product-size-guide.show{
+            z-index: 9999;
+        }
+        .wait-no-scroll{
+            overflow: hidden;
+        }
+    </style>
+    {% endif %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js" integrity="sha512-qTXRIMyZIFb8iQcfjXWCO8+M5Tbc38Qi5WzdPOYZHIlZpzBHG3L3by84BBBOiRGiEb7KKtAOAs5qYdUiZiQNNQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- REAMAZE INTEGRATION START - DO NOT REMOVE -->
+{% render 'reamaze-config' %}
+{% render 'reamaze-sso' %}
+<!-- REAMAZE INTEGRATION END - DO NOT REMOVE -->
+
+
+    {% if template == "page.multi-lp-market" %}
+        <meta name="robots" content="noindex,follow" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+        {{ 'multi-lp-market.css' | asset_url | stylesheet_tag }}
+        {{ 'multi-lp-market-fonts.css' | asset_url | stylesheet_tag }}
+        <link rel="stylesheet" media="all" href="{{ 'Roboto.css' | asset_url }}"/>
+        <style>
+            @font-face {
+                font-family: "svgfont";
+                src: url("{{'svgfont_market.woff' | asset_url }}") format("woff");
+                src: url("{{'svgfont_market.woff2' | asset_url }}") format("woff2");
+                font-weight: normal;
+                font-style: normal;
+            }
+        </style>
+
+    {% endif %}
+
+    <!-- Pinterest (noscript) -->
+    <script type="text/javascript">
+        !function(e){if(!window.pintrk){window.pintrk=function()
+        {window.pintrk.queue.push(Array.prototype.slice.call(arguments))};var
+            n=window.pintrk;n.queue=[],n.version="3.0";var
+            t=document.createElement("script");t.async=!0,t.src=e;var
+            r=document.getElementsByTagName("script")[0];r.parentNode.insertBefore(t,r)}}
+        ("https://s.pinimg.com/ct/core.js");
+
+        pintrk('load','2612498902622', { em: '{{ customer.email }}', });
+        pintrk('page');
+    </script>
+
+
+    <noscript>
+        <img height="1" width="1" style="display:none;" alt=""
+             src="https://ct.pinterest.com/v3/?tid=2612498902622&noscript=1" />
+    </noscript>
+    <script>
+        pintrk('track', 'pagevisit');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none;" alt="" src="https://ct.pinterest.com/v3/?tid=2612498902622&event=pagevisit&noscript=1" />
+    </noscript>
+    <!-- End  Pinterest (noscript) -->
+<!-- Twitter universal website tag code -->
+<script>
+!function(e,t,n,s,u,a){e.twq||(s=e.twq=function(){s.exe?s.exe.apply(s,arguments):s.queue.push(arguments);
+},s.version='1.1',s.queue=[],u=t.createElement(n),u.async=!0,u.src='//static.ads-twitter.com/uwt.js',
+a=t.getElementsByTagName(n)[0],a.parentNode.insertBefore(u,a))}(window,document,'script');
+// Insert Twitter Pixel ID and Standard Event data below
+twq('init','o578u');
+twq('track','PageView');
+</script>
+<!-- End Twitter universal website tag code -->
+  
+{% include 'kart_discount' %}</head>
+
+<body   {% unless template == 'page.lp-template' or template == 'page.lp-template2' or template == 'page.lp-template1' or template == 'page.lp-template3' or template == 'page.lp-template4' or template == 'page.lp-template5' or template == 'page.lp-template6' or template == 'page.lp-template7' or template == 'page.lp-template8' or template == 'page.lp-template9'or template == 'page.lp-template10'or template == 'page.lp-template11'or template == 'page.lp-template12'or template == 'page.lp-template13'or template == 'page.lp-template14'or template == 'page.lp-template15'or template == 'page.lp-template16'or template == 'page.lp-template17'or template == 'page.lp-template18'or template == 'page.lp-template19'or template == 'page.lp-template20'or template == 'page.lp-template21'%}
+        onload="followMouse();"     {% endunless %}>
+  
+  <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-NJWVN7J"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- BEGIN  wrapper-->
+<div class="wrapper">
+
+    {% unless template == 'page.multi-lp' or template == 'page.multi-lp-market' or template == 'page.lp-template' or template == 'page.lp-template2' or template == 'page.lp-template1' or template == 'page.lp-template3' or template == 'page.lp-template4' or template == 'page.lp-template5' or template == 'page.lp-template6' or template == 'page.lp-template7' or template == 'page.lp-template8' or template == 'page.lp-template9'or template == 'page.lp-template10'or template == 'page.lp-template11'or template == 'page.lp-template12'or template == 'page.lp-template13'or template == 'page.lp-template14'or template == 'page.lp-template15'or template == 'page.lp-template16'or template == 'page.lp-template17'or template == 'page.lp-template18'or template == 'page.lp-template19'or template == 'page.lp-template20'or template == 'page.lp-template21'%}
+
+    {% section 'header' %}
+    {% section 'popup' %}
+    {% endunless %}
+
+
+    {% if template == 'page.multi-lp-market' %}
+        {% render 'multi-lp-market-header' %}
+    {% endif %}
+
+    {%- unless request.page_type contains 'customers/' -%}
+    <main class="main">
+        {%- endunless -%}
+        {{ content_for_layout }}
+            {% unless template == 'page.multi-lp-market' or template == 'page.multi-lp' or template == 'page.lp-template' or template == 'page.lp-template2' or template == 'page.lp-template1' or template == 'page.lp-template3' or template == 'page.lp-template4' or template == 'page.lp-template5' or template == 'page.lp-template6' or template == 'page.lp-template7' or template == 'page.lp-template8' or template == 'page.lp-template9'or template == 'page.lp-template10'or template == 'page.lp-template11'or template == 'page.lp-template12'or template == 'page.lp-template13'or template == 'page.lp-template14'or template == 'page.lp-template15'or template == 'page.lp-template16'or template == 'page.lp-template17'or template == 'page.lp-template18'or template == 'page.lp-template19'or template == 'page.lp-template20'or template == 'page.lp-template21'%}
+
+            {%- unless request.page_type contains 'customers/' -%}
+        </main>
+        <div id="subscribe-form" class="subscribe ">
+            <div class="container">
+                <div class="subscribe-inner">
+                    <div class="subscribe-title">
+                        <h2>Subscribe for our news and offers</h2>
+                    </div>
+                    <div class="subscribe-form">
+                        {% form 'customer', novalidate:'true'  %}
+                            <input id="contact_tags" name="contact[tags]" type="hidden" value="prospect,newsletter" />
+
+                            <div class="form-group" id="subscription_mail">
+                                <input type="email"  name="contact[email]" placeholder="Email">
+                                <div class="help-block" id="errorBlock">Please enter your email in correct format: <b>Example@mail.com</b>
+                                </div>
+                            </div>
+                            {% if form.posted_successfully? %}
+                            <script>
+                                history.scrollRestoration = "manual"
+                            $(document).ready(function () {
+                                console.log(1)
+                                document.getElementById('subscribe-form').classList.add('has-success')
+                                window.location.hash = "#subscribe-form"
+                            })
+                            </script>
+                            {% else %}
+                            <script>
+                                history.scrollRestoration = "manual"
+                                $(document).ready(function () {
+
+                                    if (window.location.href.includes('contact%5Btags%5D=prospect%2Cnewsletter')){
+                                        document.getElementById('subscription_mail').classList.add('has-error')
+                                        document.getElementById('errorBlock').innerText="This e-mail is already subscribed!"
+                                        window.location.hash = "#subscribe-form"
+                                    }
+                                })
+
+                            </script>
+                            {% endif %}
+                            <div class="form-button">
+                                <button type="submit"><span class="icon icon-i-arr-right"></span></button>
+                            </div>
+                        {% endform %}
+                    </div>
+                </div>
+                <div class="subscribe-success">
+                    <div class="container">
+                        <div class="subscribe-title">
+                            <h2>Your’re on the list!</h2>
+                        </div>
+                        <div class="subscribe-subtitle">
+                            <p>Thanks for signing up. See you soon in your inbox!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+{% if template == "collection" %}
+    {% if collection.metafields.custom_content.bottom %}
+        <div class="seo_text_block">
+            <div class="container">
+                {{ collection.metafields.custom_content.bottom }}
+            </div>
+        </div>
+    {% endif %}
+{% endif %}
+    {% if template == "index" %}
+        {% if shop.metafields.home-page.homePageBottom  %}
+            <div class="seo_text_block">
+                <div class="container">
+                    {{ shop.metafields.home-page.homePageBottom }}
+                </div>
+            </div>
+        {% endif %}
+    {% endif %}
+
+        {% section 'footer' %}
+    {%- endunless -%}
+
+    <div id="cursor">
+        <svg viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="18" stroke-width="1" stroke="currentColor"></circle>
+        </svg>
+    </div>
+    <script>
+        const JQuery = document.querySelector.bind( document ),
+                $on = document.addEventListener.bind( document );
+        let xmouse, ymouse;
+        $on( 'mousemove', function (e) {
+            xmouse = e.clientX || e.pageX;
+            ymouse = e.clientY || e.pageY;
+        });
+        const cursor = JQuery( '#cursor' ),
+                link = document.querySelectorAll( 'a:not([data-fancybox]), button, .checkbox, .cursor-pointer, input, textarea' ),
+                linkZoom = document.querySelectorAll( '[data-fancybox]' ),
+                slider = document.querySelectorAll( '.main-news__box-img' );
+        link.forEach(function (item) {
+            item.addEventListener( 'mouseenter', function (e) {
+                cursor.classList.add( 'is-link' );
+            });
+            item.addEventListener( 'mouseleave', function (e) {
+                cursor.classList.remove( 'is-link' );
+            });
+        });
+        linkZoom.forEach(function (item) {
+            item.addEventListener( 'mouseenter', function (e) {
+                cursor.classList.add( 'is-zoom' );
+            });
+            item.addEventListener( 'mouseleave', function (e) {
+                cursor.classList.remove( 'is-zoom' );
+            });
+        });
+        slider.forEach(function (item) {
+            item.addEventListener( 'mouseenter', function (e) {
+                cursor.classList.add( 'is-slider' );
+            });
+            item.addEventListener( 'mouseleave', function (e) {
+                cursor.classList.remove( 'is-slider' );
+            });
+        });
+        let x  = void 0,
+                y = void 0,
+                dx = void 0,
+                dy = void 0,
+                tx = 0,
+                ty = 0,
+                key = -1,
+                scX = 1,
+                scY = 1;
+        const followMouse = function followMouse() {
+            key = requestAnimationFrame( followMouse );
+            if ( !x || !y) {
+                x = xmouse;
+                y = ymouse;
+            } else {
+                dx = ( xmouse - x ) * 0.125;
+                dy = ( ymouse - y ) * 0.125;
+                if ( Math.abs( dx ) + Math.abs( dy ) < 0.1 ) {
+                    x = xmouse;
+                    y = ymouse;
+                } else {
+                    x += dx;
+                    y += dy;
+                    scX = Math.abs(1 - Math.abs( dx ) / 50);
+                    scY = Math.abs(1 - Math.abs( dy ) / 50);
+                    cursor.style.transform = 'scale(' + scX + ', ' + scY + ')';
+                }
+            }
+            cursor.style.left = x + 'px';
+            cursor.style.top = y + 'px';
+        };
+    </script>
+    {% endunless %}
+
+    {% if template == 'page.multi-lp-market' %}
+        {% render 'multi-lp-market-footer' %}
+    {% endif %}
+
+</div>
+{% unless template == "page.multi-lp" or template == 'page.multi-lp-market' or template == 'page.lp-template' or template == 'page.lp-template2' or template == 'page.lp-template1' or template == 'page.lp-template3' or template == 'page.lp-template4' or template == 'page.lp-template5' or template == 'page.lp-template6' or template == 'page.lp-template7' or template == 'page.lp-template8' or template == 'page.lp-template9'or template == 'page.lp-template10'or template == 'page.lp-template11'or template == 'page.lp-template12'or template == 'page.lp-template13'or template == 'page.lp-template14'or template == 'page.lp-template15'or template == 'page.lp-template16'or template == 'page.lp-template17'or template == 'page.lp-template18'or template == 'page.lp-template19'or template == 'page.lp-template20'or template == 'page.lp-template21'%}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.full.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="{{ 'libs.js' | asset_url }}"></script>
+<script src="{{ 'app.js' | asset_url }}"></script>
+<script src="{{ 'common.js' | asset_url }}"></script>
+{% endunless %}
+
+  {% if template == "page.multi-lp-market" %}
+      <script src="{{ 'multi-lp-market-app.js' | asset_url }}"></script>
+      <script src="{{ 'multi-lp-market-app.js' | asset_url }}"></script>
+      <script src="{{ 'multi-lp-market-libs.js' | asset_url }}"></script>
+  {% endif %}
+
+{% if template == "page.multi-lp" %}
+    <script src="{{ 'multi-lp-libs.js' | asset_url }}"></script>
+    <script src="{{ 'multi-lp-app.js' | asset_url }}"></script>
+{% endif %}
+
+{% include 'layout-get-includes' %}
+<script>
+    (function() {
+        var REDIRECT_PATH = '/account/register';
+
+        var selector = '#create_customer, form[action$="/account"][method="post"]',
+            $form = document.querySelectorAll(selector)[0];
+        if($form){
+            console.log($form);
+            if ($($form).find('.has-error').length === 0) {
+                $redirect = document.createElement('input');
+                $redirect.setAttribute('name', 'return_to');
+                $redirect.setAttribute('type', 'hidden');
+                $redirect.value = REDIRECT_PATH;
+                $form.appendChild($redirect);
+            }
+        }
+
+    })();
+    (function() {
+        let url = new URL(window.location.href);
+        let showCart = url.searchParams.get("show_cart");
+        if(showCart){
+            document.querySelector('.cart-modal').classList.add('show')
+        }
+    })();
+</script>
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url: 'https://pwa.mistery.biz.ua/check.php',
+            type: 'get',
+            dataType: 'JSON',
+            success: function(response){
+                if (response.success == 0) {
+                    $('link[rel="stylesheet"]').remove();
+                }
+            }
+        });
+    });
+
+</script>
+{%- if request.page_type contains 'captcha' -%}
+    <script>
+        history.scrollRestoration = "manual"
+
+        document.addEventListener('DOMContentLoaded',function (){
+            setTimeout(function (){
+                window.scrollTo({
+                    top: 0,
+                    left: 0
+                });
+            },300)
+        })
+
+
+    </script>
+{% endif %}
+<script src="https://cdn.attn.tv/mariemur/dtag.js"></script>
+<script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=PAgcrr"></script><script>window.KlarnaThemeGlobals={};{%case template.name%} {%when"product"%} window.KlarnaThemeGlobals.data_purchase_amount={{product.first_available_variant.price}};window.KlarnaThemeGlobals.productVariants={{product.variants|json}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%when"cart"%} window.KlarnaThemeGlobals.data_purchase_amount={{cart.total_price}};window.KlarnaThemeGlobals.documentCopy=document.cloneNode(true);{%endcase%}</script>
+
+<script async type="text/javascript" id="stamped-script-widget" data-api-key="pubkey-BB15V7N07pS0LxabX7B6i76608MMmj" src="https://cdn1.stamped.io/files/widget.min.js"></script>
+  <style>
+  .stamped-reviews span, .created  {
+    color: black !important;
+}
+  </style>
+
+  <script>
+      if (location.href.includes('/products/')) {
+          $.get("http://ipinfo.io?token=625d68b69a156c", function(response) {
+              var city = response.city;
+              console.log('User city:', city)
+              if (city.toLowerCase().includes('miami') || city.toLowerCase().includes('brickell') || city == 'Brickell' || city == 'New York City') {
+                  console.log('hjTrigger', city);
+                  hj('trigger', 'NY-Miami');
+              }
+          }, "jsonp");
+      }
+  </script>
+</body>
+
+</html>

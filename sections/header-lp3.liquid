@@ -1,0 +1,139 @@
+<style>
+    .lp-wrapper .header.fixed {
+        background: {% if section.settings.lp_header_bg == 'rgba(0,0,0,0)' %}'#3F0606'{% else %}{{ section.settings.lp_header_bg }}{% endif %};
+    }
+</style>
+<header class="header header_bg_color">
+    <div class="container">
+        <div class="header-inner">
+            <div class="logo">
+                <a href="{{ shop.url }}">
+                    {% if template == "page.lp-template" or template == "page.lp-template3" %}
+
+                        {% if section.settings.lp_footer_logo.size > 0 %}
+                            <img src=" {{ section.settings.lp_footer_logo | img_url: "master" }}" alt="{{ shop.name }}">
+                        {% else %}
+                            <img src="{{ 'lp_logo_white.png'  | asset_url }}" alt="{{ shop.name }}">
+                        {% endif %}
+
+                    {% else %}
+
+                    {% endif %}
+                </a>
+            </div>
+
+            <div class="menu-toggle js-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+
+            <div class="top-menu">
+                <ul>
+                    {%- for block in section.blocks -%}
+                        <li>
+                            <a href="{% if block.settings.link_type == 'anchor' %}#{{ block.settings.lp_header_item_anchor_href | downcase }}{% else %}{{ block.settings.lp_header_item_href }}{% endif %}" class="{% if block.settings.link_type == 'anchor' %}js-scroll-to{% else %}custom-link-style{% endif %}">
+                                {{ block.settings.lp_header_item_title }}
+                            </a>
+                        </li>
+                    {%- endfor -%}
+                    <li class="d-mobile" >
+                        <a href="#modal-faq" data-fancybox>FAQ</a>
+                    </li>
+                </ul>
+                <div class="top-menu__circle">
+                    <svg viewBox="0 0 582 582" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="291" cy="291" r="290" stroke="#A2A2A2" stroke-opacity="0.3" stroke-width="1" stroke-dashoffset="1800" stroke-dasharray="1800" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+{% schema %}
+    {
+        "name": "Header LP",
+            "blocks": [
+                {
+                "type": "slide",
+                "name": "Header LP Navigation",
+                "settings": [
+                    {
+                        "type": "header",
+                        "content": "How to set anchor link"
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "On page you have few sections: "
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "• Home •"
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "• About •"
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "• Shop •"
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "• Catalog •"
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "• Subscribe •"
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "You can copy item ( without bullet) and insert into anchor field"
+                    },
+                    {
+                        "type": "text",
+                        "id": "lp_header_item_title",
+                        "label": "Header Item Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "lp_header_item_href",
+                        "label": "Header Item Href"
+                    },
+                    {
+                        "type": "text",
+                        "id": "lp_header_item_anchor_href",
+                        "label": "Header Item Anchor Href"
+                    },
+                    {
+                        "type": "radio",
+                        "id": "link_type",
+                            "options": [
+                                { "value": "anchor", "label": "Anchor"},
+                                { "value": "custom", "label": "Custom"}
+                            ],
+                        "label": "Choose link type:",
+                        "default": "anchor"
+                    }
+                ]
+                }
+            ],
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "lp_footer_logo",
+                "label": "Header logo"
+            },
+            {
+                "type": "color",
+                "id": "lp_header_bg",
+                "label": "Background Color",
+                "default": "#3f0606"
+            }
+        ]
+    }
+{% endschema %}

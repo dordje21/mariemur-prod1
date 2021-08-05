@@ -1,0 +1,197 @@
+{% if false %}
+
+
+<div class="page-width">
+  <header class="section-header text-center">
+    <h1>{{ page_title }}</h1>
+  </header>
+
+  {%- assign blocks = section.blocks | sort: 'collection.all_products_count' -%}
+
+  {% case section.settings.grid %}
+    {% when 2 %}
+      {%- assign grid_item_width = 'medium-up--one-half' -%}
+      {%- assign image_size = '530x' -%}
+    {% when 3 %}
+      {%- assign grid_item_width = 'small--one-half medium-up--one-third' -%}
+      {%- assign image_size = '350x' -%}
+    {% when 4 %}
+      {%- assign grid_item_width = 'small--one-half medium-up--one-quarter' -%}
+      {%- assign image_size = '250x' -%}
+    {% when 5 %}
+      {%- assign grid_item_width = 'small--one-half medium-up--one-fifth' -%}
+      {%- assign image_size = '225x' -%}
+  {% endcase %}
+
+  <ul class="grid grid--uniform">
+    {% if section.settings.display_type == 'all' %}
+      {% case section.settings.sort %}
+        {% when 'products_high' or 'products_low' %}
+          {%- assign collections = collections | sort: 'all_products_count' -%}
+        {% when 'date' or 'date_reversed' %}
+          {%- assign collections = collections | sort: 'published_at' -%}
+      {% endcase %}
+      {% if section.settings.sort == 'products_low' or section.settings.sort == 'date' or section.settings.sort == 'alphabetical' %}
+        {% for collection in collections %}
+          <li class="grid__item {{ grid_item_width }}">
+            {% include 'collection-grid-item', collection: collection %}
+          </li>
+        {% endfor %}
+      {% else %}
+        {% for collection in collections reversed %}
+          <li class="grid__item {{ grid_item_width }}">
+            {% include 'collection-grid-item', collection: collection %}
+          </li>
+        {% endfor %}
+      {% endif %}
+    {% else %}
+      {% for block in section.blocks %}
+        <li class="grid__item {{ grid_item_width }}">
+          {%- assign collection = collections[block.settings.collection] -%}
+          {% include 'collection-grid-item', collection: collection %}
+        </li>
+      {% endfor %}
+    {% endif %}
+  </ul>
+</div>
+{% endif %}
+<div class="main-head align-item-end">
+  <div class="container">
+    <div class="main-head__box wow fadeIn" data-wow-delay="0.1s">
+      <picture>
+        <source data-srcset="{{ section.settings.ac-image | img_url: 'master' }}" srcset="{{ section.settings.ac-image | img_url: 'small' }}" media="(min-width: 1200px)">
+        <source data-srcset="{{ section.settings.ac-image | img_url:'large' }}" srcset="{{ section.settings.ac-image | img_url: 'small' }}" media="(min-width: 768px)">
+        <source data-srcset="{{ section.settings.ac-image | img_url:'large' }}" srcset="{{ section.settings.ac-image | img_url: 'small' }}">
+        <img data-src="{{ section.settings.ac-image | img_url:'large' }}" src="{{ section.settings.ac-image | img_url: 'small' }}" class="lazyload" alt="Collections">
+      </picture>
+      <!--					<video autoplay playsinline muted loop="loop">-->
+      <!--						<source src="img/product-other-video-1.mp4" type="video/mp4">-->
+      <!--					</video>-->
+    </div>
+    <div class="main-head__title wow fadeInUp" data-wow-delay="0.6s">
+      <h1>{{ section.settings.ac-title }}</h1>
+    </div>
+    <div class="main-head__plus wow fadeIn" data-wow-delay="1.5s"><span class="icon icon-i-plus-big"></span></div>
+    <div class="main-head__ellipse ellipse-sm wow fadeIn" data-wow-delay="1s"><svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                                                   viewBox="0 0 1455.6 467" style="enable-background:new 0 0 1455.6 467;" xml:space="preserve">
+	<style type="text/css">
+        .line {
+            fill: none;
+            stroke: #FFFFFF;
+            stroke-width: 1;
+        }
+    </style>
+            <path class="line" d="M1452.9,235.1c0,30.9-20.2,60.5-56.8,87.5c-36.6,27-89.7,51.3-155.4,71.7c-95.7,29.8-146,37.4-236.9,49.2
+			c-35.2,4.5-138,17-275.9,16.9c-129,0.1-225.5-10.7-257.7-14.6c-99.4-11.9-154.6-25.9-255.1-51.5c-49-12.4-100.5-31.3-155.3-71.6
+			C23.1,295.8,3,266.2,3,235.3c0-30.9,20.2-60.5,56.9-87.6c36.6-26.9,89.7-51.3,155.3-71.7C315.9,44.6,369.3,36.7,466,25
+			C576,11.7,659.5,10.5,727.9,9.8c102.8-1.1,175.2-1.9,274.4,11.4c65.9,8.8,123.4,24.2,238.4,54.7c53.8,14.4,102.5,32.8,155.4,71.7
+			C1432.7,174.6,1452.9,204.2,1452.9,235.1z"></path>
+            <path class="line line-animate">
+                <animate
+                        attributeName="d"
+                        dur="3000ms"
+                        repeatCount="indefinite"
+                        values="M1452.9,235.1c0,30.9-20.2,60.5-56.8,87.5c-36.6,27-89.7,51.3-155.4,71.7c-95.7,29.8-146,37.4-236.9,49.2
+			c-35.2,4.5-138,17-275.9,16.9c-129,0.1-225.5-10.7-257.7-14.6c-99.4-11.9-154.6-25.9-255.1-51.5c-49-12.4-100.5-31.3-155.3-71.6
+			C23.1,295.8,3,266.2,3,235.3c0-30.9,20.2-60.5,56.9-87.6c36.6-26.9,89.7-51.3,155.3-71.7C315.9,44.6,369.3,36.7,466,25
+			C576,11.7,659.5,10.5,727.9,9.8c102.8-1.1,175.2-1.9,274.4,11.4c65.9,8.8,123.4,24.2,238.4,54.7c53.8,14.4,102.5,32.8,155.4,71.7
+			C1432.7,174.6,1452.9,204.2,1452.9,235.1z;
+
+			M1452.9,235.1c12.5,28.4-32.5,54.7-56.8,87.5c-27.1,36.6-95.8,37.6-155.4,71.7c-87,49.8-148.2,15.7-236.9,49.2
+			c-92,34.9-134.2-8.7-275.9,16.9c-126.9,23-148.2-28.2-257.7-14.6c-99.3,12.2-130.6-48-255.1-51.5c-83.8-2.2-90.8-51.9-155.3-71.6
+			C16.3,309.4,15.3,267.8,3,235.3c-13.4-35.5,31.1-48.9,56.9-87.6c25.3-37.8,93.2-36,155.4-71.7c91.5-52.6,153.4-17.8,250.9-51
+			C570.9-10.7,654.2,31,728,9.8c98.8-28.5,163.5,32,274.4,11.4c70.7-13.1,115.9,59,238.4,54.7c55.7-2,89.9,48.2,155.4,71.7
+			C1439,163,1441.9,210.3,1452.9,235.1z;
+
+			M1452.9,235.1c0,30.9-20.2,60.5-56.8,87.5c-36.6,27-89.7,51.3-155.4,71.7c-95.7,29.8-146,37.4-236.9,49.2
+			c-35.2,4.5-138,17-275.9,16.9c-129,0.1-225.5-10.7-257.7-14.6c-99.4-11.9-154.6-25.9-255.1-51.5c-49-12.4-100.5-31.3-155.3-71.6
+			C23.1,295.8,3,266.2,3,235.3c0-30.9,20.2-60.5,56.9-87.6c36.6-26.9,89.7-51.3,155.3-71.7C315.9,44.6,369.3,36.7,466,25
+			C576,11.7,659.5,10.5,727.9,9.8c102.8-1.1,175.2-1.9,274.4,11.4c65.9,8.8,123.4,24.2,238.4,54.7c53.8,14.4,102.5,32.8,155.4,71.7
+			C1432.7,174.6,1452.9,204.2,1452.9,235.1z;
+
+			M1452.9,235.1c-8.6,29.7-6.2,65.5-56.8,87.5c-41.7,18.1-86.6,65.4-155.4,71.7c-99.8,9.1-150.5,63.6-236.9,49.2
+			c-70.5-11.7-171.8,39.8-275.9,16.9c-126-27.6-181.4,20.7-257.7-14.6c-90.8-42.1-163.1,8.3-255.1-51.5
+			c-55.9-36.3-113.9-15.3-155.4-71.7c-28-38-67-53.5-56.8-87.4c9-29.7,17.3-71.2,56.8-87.5c42.2-17.4,96.9-71.5,155.4-71.7
+			C320.6,75.5,358.8,9.3,466,25C575.6,41,649.5-16.9,727.9,9.8c97.4,33.1,169-44,274.4,11.4c58.9,30.9,143.5-7.9,238.4,54.7
+			c46.5,30.6,112.5,11.4,155.4,71.7C1422.4,184.7,1464.7,194.3,1452.9,235.1z;
+
+			M1452.9,235.1c0,30.9-20.2,60.5-56.8,87.5c-36.6,27-89.7,51.3-155.4,71.7c-95.7,29.8-146,37.4-236.9,49.2
+			c-35.2,4.5-138,17-275.9,16.9c-129,0.1-225.5-10.7-257.7-14.6c-99.4-11.9-154.6-25.9-255.1-51.5c-49-12.4-100.5-31.3-155.3-71.6
+			C23.1,295.8,3,266.2,3,235.3c0-30.9,20.2-60.5,56.9-87.6c36.6-26.9,89.7-51.3,155.3-71.7C315.9,44.6,369.3,36.7,466,25
+			C576,11.7,659.5,10.5,727.9,9.8c102.8-1.1,175.2-1.9,274.4,11.4c65.9,8.8,123.4,24.2,238.4,54.7c53.8,14.4,102.5,32.8,155.4,71.7
+			C1432.7,174.6,1452.9,204.2,1452.9,235.1z">
+                </animate>
+            </path>
+</svg>
+    </div>
+  </div>
+</div>
+<div class="collection">
+  <div class="container">
+    <div class="collection-title wow fadeIn" data-wow-delay="0.2s">Collection</div>
+    <div class="collection-list">
+        {% assign colection_array = shop.metafields.global.collection-list | split: ','| sort%}
+      {% for handel in colection_array %}
+          {% if collections[handel]!= blank %}
+          {% assign collection = collections[handel] %}
+        <a href="{{ collection.url }}?view=landing" class="collection-list__box collection-list__box-js wow fadeInUp {% if forloop.index > 4  %}d-none{% endif %}" data-wow-delay="0.2s">
+          <div class="collection-list__box-title">{{ collection.title }}</div>
+          <div class="collection-list__box-arr">
+            <span class="icon icon-i-arr-up-right"></span>
+          </div>
+          {% if collection.image %}
+            <div class="collection-list__box-img">
+              <picture>
+                <source data-srcset="{{ collection.image | img_url: 'master' }}" srcset="{{ collection.image | img_url: 'small' }}">
+                <img data-src="{{ collection.image | img_url: 'master' }}" src="{{ collection.image | img_url: 'small' }}" class="lazyload" alt="{{ collection.title }}">
+              </picture>
+            </div>
+          {% else %}
+              <div class="collection-list__box-img">
+                  <picture>
+                      <source data-srcset="{{ section.settings.ac-coll-image | img_url: 'master' }}" srcset="{{ section.settings.ac-coll-image | img_url: 'small' }}">
+                      <img data-src="{{ section.settings.ac-coll-image | img_url: 'master' }}" src="{{ section.settings.ac-coll-image | img_url: 'small' }}" class="lazyload" alt="{{ collection.title }}">
+                  </picture>
+              </div>
+
+          {% endif %}
+        </a>
+        {% endif %}
+      {% endfor %}
+   </div>
+    <div class="catalog-more">
+      <div class="catalog-more__box cursor-pointer js-load-more-coll ">
+        <svg viewBox="0 0 226 226" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle class="line-first" cx="113" cy="113" r="112" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-dashoffset="0" stroke-dasharray="710" />
+          <circle class="line-last" cx="113" cy="113" r="112" stroke="#A60B00" stroke-opacity="1" stroke-width="1" stroke-dashoffset="710" stroke-dasharray="710" />
+        </svg>
+        <div class="catalog-more__box-title">MORE COLLECTIONS</div>
+        <div class="catalog-more__box-loading">loading...</div>
+        <div class="catalog-more__box-loaded"><span class="icon icon-i-check"></span></div>
+        <div class="catalog-more__box-disable">NO MORE COLLECTIONS</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+"name": "All collections" ,
+"settings": [
+{
+"type": "image_picker" ,
+"id": "ac-image" ,
+"label": "Main image"
+},{
+"type": "image_picker" ,
+"id": "ac-coll-image" ,
+"label": "Default collection image"
+},
+{
+"type": "text" ,
+"id": "ac-title" ,
+"label": "Title"
+}
+]
+}
+{% endschema %}

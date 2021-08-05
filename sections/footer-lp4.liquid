@@ -1,0 +1,202 @@
+<footer class="footer footer_bg_color {{settings.preloader_image_custom }}">
+    <div class="footer-top">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="logo">
+                    <a href="/">
+                      {% if template == "page.lp-template4" %}
+
+                        {% if section.settings.lp_foot_logo.size > 0 %}
+                            <img src=" {{ section.settings.lp_foot_logo | img_url: "master" }}" alt="{{ shop.name }}">
+                        {% else %}
+                            <img src="{{ 'lp_logo_white.png'  | asset_url }}" alt="{{ shop.name }}">
+                        {% endif %}
+
+                    {% else %}
+                     
+                    {% endif %}
+                  
+                    </a>
+                </div>
+                <div class="footer-menu">
+                    <ul>
+                        {%- for block in section.blocks -%}
+                            <li>
+                                <a href="{% if block.settings.footer_link_type == 'anchor' %}#{{ block.settings.lp_footer_item_anchor_href | downcase }}{% else %}{{ block.settings.lp_footer_item_href }}{% endif %}" class="{% if block.settings.footer_link_type == 'anchor' %}js-scroll-to{% else %}custom-link-style{% endif %}">
+                                    {{ block.settings.lp_footer_item_title }}
+                                </a>
+                            </li>
+                        {%- endfor -%}
+                    </ul>
+                    <ul>
+                        <li><a href="#modal-shipping-policy" data-fancybox>Shipping Policy</a></li>
+                        <li><a href="#modal-policy" data-fancybox>Return Policy</a></li>
+                        <li><a href="#modal-faq" data-fancybox>FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="socials">
+                    <ul>
+                        <li><a href="{{ section.settings.lp_social_inst }}" target="_blank">Instagram +</a></li>
+                        <li><a href="{{ section.settings.lp_social_fb }}" target="_blank">Facebook +</a></li>
+                        <li><a href="{{ section.settings.lp_social_pinter }}" target="_blank">Pinterest +</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="copyright"> {{ section.settings.lp_copyright }}</div>
+        </div>
+    </div>
+</footer>
+
+<div id="modal-policy" class="modal sd_modal">
+    <div class="modal-box">
+        {{ pages["lp-return-policy"].content }}
+    </div>
+    <button class="modal-close" data-fancybox-close>
+        <span class="icon-i-close"></span>
+    </button>
+</div>
+
+<div id="modal-faq" class="modal sd_modal">
+    <div class="modal-box">
+        {{ pages["faq"].content }}
+    </div>
+    <button class="modal-close" data-fancybox-close>
+        <span class="icon-i-close"></span>
+    </button>
+</div>
+
+<div id="modal-shipping-policy" class="modal sd_modal">
+    <div class="modal-box">
+        {{ pages["shipping-policy-lp"].content }}
+    </div>
+    <button class="modal-close" data-fancybox-close>
+        <span class="icon-i-close"></span>
+    </button>
+</div>
+
+<style>
+    .lp-wrapper .footer_bg_color {
+        background-color: {{ section.settings.lp_footer_bg }}
+    }
+</style>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script async type="text/javascript" src="https://static.klaviyo.com/onsite/js/klaviyo.js?company_id=PAgcrr"></script>
+
+<script>
+    Loader.require({type: "script", name: "libs"});
+    Loader.require({type: "script", name: "lp"});
+</script>
+
+
+{% schema %}
+{
+    "name": "Footer LP",
+        "blocks": [
+            {
+                "type": "slide",
+                "name": "Footer LP Navigation",
+                "settings": [
+                    {
+                        "type": "header",
+                        "content": "How to set anchor link"
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "On page you have few sections: "
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "• Home •"
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "• About •"
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "• Shop •"
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "• Catalog •"
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "• Subscribe •"
+                    },
+                    {
+                        "type": "paragraph",
+                        "content": "You can copy item ( without bullet) and insert into anchor field"
+                    },
+                    {
+                        "type": "text",
+                        "id": "lp_footer_item_title",
+                        "label": "Footer Item Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "lp_footer_item_href",
+                        "label": "Footer Item Href"
+                    },
+                    {
+                        "type": "text",
+                        "id": "lp_footer_item_anchor_href",
+                        "label": "Footer Item Anchor Href"
+                    },
+                    {
+                        "type": "radio",
+                        "id": "footer_link_type",
+                            "options": [
+                                { "value": "anchor", "label": "Anchor"},
+                                { "value": "custom", "label": "Custom"}
+                            ],
+                        "label": "Choose link type:",
+                        "default": "anchor"
+                    }
+            ]
+        }
+    ],
+    "settings": [
+		{
+          "type": "image_picker",
+          "id": "lp_foot_logo",
+          "label": "Footer logo"
+		},
+        {
+            "type": "paragraph",
+            "content": "Social links"
+        },
+        {
+            "type": "text",
+            "id": "lp_social_inst",
+            "label": "Instagram"
+        },
+        {
+            "type": "text",
+            "id": "lp_social_fb",
+            "label": "Facebook"
+        },
+        {
+            "type": "text",
+            "id": "lp_social_pinter",
+            "label": "Pinterest"
+        },
+        {
+            "type": "textarea",
+            "id": "lp_copyright",
+            "label": "Copyright"
+        },
+        {
+            "type": "color",
+            "id": "lp_footer_bg",
+            "label": "Background Color",
+			"default": "#FFFFFF"
+        }
+    ]
+}
+{% endschema %}

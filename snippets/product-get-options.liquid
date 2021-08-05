@@ -1,0 +1,103 @@
+
+<div class="product-option{% unless trigger %} js-product-options{% endunless %}" data-js-product-options{% if options_type == 1 and settings.product_variant_change_on_hover %} data-js-options-onhover{% endif %} data-js-change-history>
+{%- unless product.has_only_default_variant -%}
+    {%- assign options_type_circle_color = settings.product_options_type_circle_color | escape | downcase | split: '|' -%}
+    {%- assign options_type_circle_image = settings.product_options_type_circle_image | escape | downcase | split: '|' -%}
+    {%- assign options_type_square_image = settings.product_options_type_square_image | escape | downcase | split: '|' -%}
+    {%- assign options_type_square_color = settings.product_options_type_square_color | escape | downcase | split: '|' -%}
+    {%- assign options_type_select = settings.product_options_type_select | escape | downcase | split: '|' -%}
+    {%- assign options_type_large_text = settings.product_options_type_large_text | escape | downcase | split: '|' -%}
+    {%- assign options_show_title = options_show_title | default: false -%}
+    {%- assign options_type = options_type | default: 1 -%}
+    {% capture options_type_class %}
+        {%- case options_type -%}
+        {%- when 1 %}product-options--type-collection
+        {%- when 2 %}product-options--type-page
+        {%- when 3 %}product-options--type-footbar
+        {%- endcase -%}
+    {% endcapture %}
+        {%- assign options_limit = 3 -%}
+        {%- for option in product.options_with_values -%}
+
+            {% assign option_with_size_gide = false %}
+            {% capture size_guide_link %}
+                {% unless product.handle == 'gift-card' %}
+                    {% if settings.hide_size_guide_types != blank %}
+                        {% assign hide_for_types = settings.hide_size_guide_types | split: ',' %}
+                        {% for type in hide_for_types %}
+                            {% assign type_str = type | strip %}
+                            {% if product.type == type_str %}
+                                {% assign show_size_guide = false %}
+                                {% break %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
+                    {%- if show_size_guide -%}
+                        {% assign option_name_handle = option.name | handle %}
+                        {% assign one_size = false %}
+                        {% assign option_first_value_handle = option.values.first | handle %}
+                        {% if option.values.size == 1 and option_first_value_handle == 'one-size' %}
+                            {% assign one_size = true %}
+                        {% endif %}
+                        {% if option_name_handle == 'size' and one_size == false %}
+                            {% assign option_with_size_gide = true %}
+                            <span class="btn-link h6 js-popup-button size-guide-link" data-js-popup-button="size-guide">{{ 'products.product.size_guide' | t }}</span>
+                        {% elsif product.type == 'complect' or product.type == 'complectt' %}
+                            {% if option_name_handle == 'bra' or  option_name_handle == 'panties' or  option_name_handle == 'skirt' %}
+                                {% if option.values.size > 1 %}
+                                    {% assign option_with_size_gide = true %}
+                                    <span class="btn-link h6 js-popup-button size-guide-link" data-js-popup-button="size-guide-{{ option_name_handle }}">{{ 'products.product.size_guide' | t }}</span>
+                                {% endif %}
+                            {% endif %}
+                        {% endif %}
+                    {%- endif -%}
+                {% endunless %}
+            {% endcapture %}
+            <div class="product-option__group" >
+                <div class="product-option__group-title" >{{ option.name  }}:</div>
+                <div class="product-option__group-list" data-option-name="{{ option.name | handle }}" data-size-guide="{{ option_with_size_gide }}">
+                    <div class="checkbox-list js-checkbox-list" data-style="text" data-property="{{ option.name | handleize }}">
+                        {%- for value in option.values -%}
+                            {% include 'product-get-options-res-status' %}
+                            {%- if hide_options_without_availability != true or disabled_value != true -%}
+                                <div class="checkbox check-lg check-other {% if disabled_value %} disabled{% endif %} {% if active_value %} active{% endif %}"
+                                     data-js-option-value
+                                     data-value="{{ value | handleize }}"
+                                        {{ trigger_attr }}
+                                     data-bg="none"
+                                     data-scale="2" >
+                                    <input type="radio" {% if disabled_value %} disabled{% endif %} {% if active_value %} checked{% endif %} id="{{ option.name | handle }}{{ value }}" name="{{ option.name | handle }}" >
+                                    <label for="{{ option.name | handle }}{{ value }}"
+                                    >{{ value }}</label>
+                                </div>
+                            {%- endif -%}
+
+                        {%- endfor -%}
+                    </div>
+                </div>
+            </div>
+
+        {%- endfor -%}
+{%- endunless -%}
+  {% if product.available %}
+  <div class="product-option__group" >
+        <div class="product-option__group-title">Quantity:</div>
+        <div class="product-option__group-list">
+            <div class="count-box">
+                <div class="count-icon count-dec disabled">
+                    <span class="icon icon-i-minus"></span>
+                </div>
+                <div class="count-field">
+                    <input type="text" class="count" value="1" data-min="1" data-max="100" data-postfix="" readonly>
+                </div>
+                <div class="count-icon count-inc disabled">
+                    <span class="icon icon-i-plus"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+  {% endif %}
+
+</div>
+
+

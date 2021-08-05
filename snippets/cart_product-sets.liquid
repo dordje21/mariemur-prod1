@@ -1,0 +1,212 @@
+{% comment %}{%- assign products_pices = products.metafields.products_set.handles -%}{% endcomment %}
+{% comment %}{% assign  products_pices = products_pices | append: ',marilyn-leather-legs-garters,vanessa-bra,vanessa-panties' %}{% endcomment %}
+{% assign  products_pices = products | split: "," %}
+{% comment %}{%- assign products_pices = products.metafields.products_set.handles | split: "," -%}{% endcomment %}
+{%- if products_pices -%}
+    {%- for products_pice in products_pices -%}
+        {% assign handle_key = products_pice | strip %}
+        {% assign pice_product = all_products[handle_key] %}
+
+        {% unless pice_product.id.size > 0 %}
+            {% continue %}
+        {% endunless %}
+
+        {% assign product = pice_product %}
+        {% include 'product-res-variables' %}
+
+        {% assign productCount = 0 %}
+        {% assign cartItemsHandels = '' %}
+        {% for item in cart.items %}
+            {% if item.product.id == product.id %}
+                {% assign productCount = productCount | plus: item.quantity %}
+            {% endif %}
+        {% assign  cartItemsHandels = cartItemsHandels | append: item.product.handle %}
+        {% endfor %}
+        {% for item in cart.items %}
+            {% if cartItemsHandels contains product.handle%}
+                {% assign t = 'false' %}
+                {% else %}
+                {% assign t = 'true' %}
+                {% break %}
+            {% endif %}
+        {% endfor %}
+
+        {% unless cartItemsHandels contains product.handle  %}
+            {%- form "product", product, class: 'product-list__box', id: product.id, data-js-product-form: '' -%}
+                <input type="hidden" name="variant_id" value="{{ current_variant.id }}" data-js-product-variant-input>
+
+                <div class="cart-modal__box-head">
+                    <a href="{{ product.url }}" class="cart-modal__box-img">
+                        <picture>
+                            <source data-srcset="{{ product.featured_image.src | product_img_url: 'large' }} "
+                                    data-image-id="{{ product.featured_image.id }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ product.featured_image.src | product_img_url: 'large' }} "
+                                    data-image-id="{{ product.featured_image.id }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ product.featured_image.src | product_img_url: 'large' }} "
+                                    data-image-id="{{ product.featured_image.id }}">
+                            <img data-src="{{ product.featured_image.src | product_img_url: 'large' }} "
+                                 data-image-id="{{ product.featured_image.id }}" class="lazyload" alt="">
+                        </picture>
+                    </a>
+                </div>
+
+                <div class="cart-modal__box-body">
+                    <div class="cart-modal__box-title">
+                        <a href="{{ product.url }}">{{ product.title }}</a>
+                    </div>
+
+                    <div class="product-list__box-option">
+                        <div class="product-list__box-group">
+                            <div class="size-box size-box-cart">
+                                <select class="js-select" data-placeholder="Select size" data-allow-clear="true">
+                                    {%- for variant in product.variants -%}
+                                        <option></option>
+                                            <option data-val="{{ variant.id }}" data-price="{{ variant.price | price }}" value="{{ variant.id }}"
+                                                    {% unless variant.available %} disabled="disabled"{% endunless %}>
+                                                {{ variant.title | replace: 'Default Title', default_title }}
+                                            </option>
+                                    {%- endfor -%}
+                                </select>
+                                <input type="hidden" class="size-count" value="0">
+
+                                {% comment %}
+                                <div class="size-box__title js-size">
+                                    <div class="size-box__count">SElect size</div>
+                                    <div class="size-box__button">
+                                        <span class="icon icon-i-drop-right"></span>
+                                    </div>
+                                    <input type="hidden" class="size-count">
+                                </div>
+
+                                <div class="size-box__modal">
+                                    <div class="size-box__modal-title">SELECT SIZE</div>
+
+                                    {% comment %}<div class="size-box__modal-text hide">{% endcomment %}
+                                        {% comment %}<p>Different to <b>136$?</b> <a href="">Find out why</a></p>{% endcomment %}
+                                    {% comment %}</div>{% endcomment %}
+
+                                    <div class="size-box__modal-list js-size-list">
+                                        <ul>
+                                            {%- for variant in product.variants -%}
+                                                    <li data-val="{{ variant.id }}" data-price="{{ variant.price | price }}" {% unless variant.available %} disabled="disabled"{% endunless %}>
+                                                        <div class="size-title">{{ variant.title | replace: 'Default Title', default_title }}</div>
+                                                    </li>
+                                            {%- endfor -%}
+                                        </ul>
+                                    </div>
+
+                                    <div class="size-box__modal-link js-size-guide">
+                                        <a href="javascript:void(0)">VIEWSIZE GUIDE<span
+                                                    class="icon icon-i-drop-right"></span>
+                                        </a>
+                                    </div>
+
+                                    <div class="size-box__modal-button">
+                                        <a href="javascript:void(0)" class="btn
+                                            {% if pice_product.available %} btn-red
+                                            {% else %} red-button disabled
+                                            {% endif %}"
+                                           data-value="1" data-prod-id="{{ product.id }}">
+                                            <span>
+                                                {% if pice_product.available %}
+                                                    Add to bag
+                                                {% else %}
+                                                    Select
+                                                {% endif %}
+                                                {% if productCount > 0 %} ({{ productCount }}){% endif %}
+                                            </span>
+                                        </a>
+                                    </div>
+
+                                    <div class="size-box__modal-close js-size-close">
+                                        <span class="icon icon-i-close"></span>
+                                    </div>
+
+                                </div>
+                                {% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="cart-modal__box-option">
+                        <div class="cart-modal__box-option-row">
+                            <span>Price</span>
+                            {% assign discount_value1 = settings.site_discount | times: 1 %}
+
+                            {% assign discount_ammount1 = product.selected_or_first_available_variant.price | times: discount_value1 | divided_by: 100.00 %}
+                            {% assign compare_at_price1 = product.selected_or_first_available_variant.price %}
+                            {% assign price1 = price | minus: discount_ammount1 %}
+
+                            {% comment %}
+                            <b><span class="money" data-price="{{ price1 | money}}"> {{ product.price | money }}</span></b>
+                            {% endcomment %}
+                            <b>{{ price1 | money}}</b>
+                        </div>
+                    </div>
+
+                    <div class="product-list__box-button product-list__box-cart-button">
+                    {% if pice_product.available %}
+                        <a href="javascript:void(0)" class="btn js-add js-recomendation" data-prod-id="{{ product.id }}"
+                           data-value="{% if productCount > 0 %}{{ productCount | plus: 1 }}{% else %}1{% endif %} "onclick="pintrk('track', 'addtocart');"><span>Add to bag {% if productCount > 0 %} ({{ productCount }}){% endif %}</span></a>
+                    {% else %}
+                        <div class="btn btn-grey-nofill "><span>Sold out</span></div>
+                        <div data-wait-id="{{ forloop.index }}" class="btn red-button js-show-waitlist"><span>Join the waitlist </span></div>
+
+                    {% endif %}
+                    </div>
+                </div>
+            {%- endform -%}
+        {% endunless %}
+    {%- endfor -%}
+{%- endif -%}
+
+<script>
+    function hide_recomendation (){
+
+        if ( $(".cart-recomendation-modal__box").find("div").length ) {
+            $(".recomendation_title").css("display","block");
+            $(".recomendation-modal__content").css("display","block");
+        } else {
+            $(".recomendation_title").css("display","none");
+            $(".recomendation-modal__content").css("display","none");
+        }
+    }
+
+    $(document).ready(function () {
+
+
+        if ($('.product-buttons .js-size-guide.d-none').length) {
+            $('.size-box__modal-link.js-size-guide').css('display', 'none');
+        }
+
+        function updateCount(){
+            let count = 0;
+            $('.btn.js-add[data-value]').each(function (el) {
+                count += parseInt($(this).attr('data-value')) - 1 ;
+            })
+            if (count > 0) {
+                var $btnPieces = $('.cart-info__count');
+                var $btnAddToBag = $('.cart-info__button-add');
+                var $btnGoToCart = $('.cart-info__button-go');
+                $btnPieces.html(`<span data-amount="${count}">( ${count} ) pieces</span>`);
+                $btnAddToBag.hide();
+                $btnGoToCart.css('display', 'flex');
+            }
+        }
+        updateCount();
+
+        hide_recomendation()
+
+    })
+    $(document).on('click', '.cart-modal__inner', function() {
+        hide_recomendation()
+    })
+
+    $(document).on('click', '.js-recomendation', function() {
+        setTimeout(hide_recomendation,1200);
+
+
+    })
+
+
+</script>

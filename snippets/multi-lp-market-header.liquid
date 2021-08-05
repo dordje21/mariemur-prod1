@@ -1,0 +1,61 @@
+{% comment %} Header {% endcomment %}
+
+<!-- Head: Menu -->
+    {% assign head_menu_first_title = page.metafields.market.mf_header_first_title %}
+    {% assign head_menu_first_url = page.metafields.market.mf_header_first_link %}
+    {% assign head_menu_second_title = page.metafields.market.mf_header_second_title %}
+    {% assign head_menu_second_url = page.metafields.market.mf_header_second_link %}
+    {% assign head_menu_third_title = page.metafields.market.mf_header_third_title %}
+    {% assign head_menu_third_url = page.metafields.market.mf_header_third_link%}
+<!-- End Head: Menu -->
+
+<!-- Head: Social -->
+    {% assign soc_fb_title = page.metafields.market.mf_header_fb_title %}
+    {% assign soc_fb_url = page.metafields.market.mf_header_fb_url %}
+    {% assign soc_inst_title = page.metafields.market.mf_header_inst_title %}
+    {% assign soc_inst_url = page.metafields.market.mf_header_inst_url %}
+    {% assign soc_pinter_title = page.metafields.market.mf_header_pinter_title %}
+    {% assign soc_pinter_url = page.metafields.market.mf_header_pinter_url %}
+    {% assign soc_twit_title = page.metafields.market.mf_header_twit_title %}
+    {% assign soc_twit_url = page.metafields.market.mf_header_twit_url %}
+    {% assign soc_tiktok_title = page.metafields.market.mf_header_tiktok_title %}
+    {% assign soc_tiktok_url = page.metafields.market.mf_header_tiktok_url %}
+<!-- End Head: Social -->
+
+<header class="header">
+    <div class="container">
+        <div class="header-inner">
+            <div class="logo">
+                <a href="{{ shop.url }}">
+                    <img src="{{ 'multi-market-logo.svg' | asset_url }}" alt="{{ shop.name }}">
+                </a>
+            </div>
+            <div class="menu-toggle js-menu-open">
+                <span class="icon icon-i-menu"></span>
+            </div>
+            <div class="top-menu">
+                <ul>
+                    <li>
+                        <a href="{{ head_menu_first_url }}">{{ head_menu_first_title }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ head_menu_second_url }}">{{ head_menu_second_title }}</a>
+                    </li>
+                    <li>
+                        <a href="{{ head_menu_third_url }}">{{ head_menu_third_title }}</a>
+                    </li>
+                </ul>
+                <div class="header-socials">
+                    <ul>
+                        <li><a href="{{ soc_fb_url }}" target="_blank">{{ soc_fb_title }}<b> +</b></a></li>
+                        <li><a href="{{ soc_inst_url }}" target="_blank">{{ soc_inst_title }}<b> +</b></a></li>
+                        <li><a href="{{ soc_pinter_url }}" target="_blank">{{ soc_pinter_title }}<b> +</b></a></li>
+                        <li><a href="{{ soc_twit_url }}" target="_blank">{{ soc_twit_title }}<b> +</b></a></li>
+                        <li><a href="{{ soc_tiktok_url }}" target="_blank">{{ soc_tiktok_title }}<b> +</b></a></li>
+                    </ul>
+                </div>
+                <div class="header-close js-menu-close"><span class="icon icon-i-close"></span></div>
+            </div>
+        </div>
+    </div>
+</header>

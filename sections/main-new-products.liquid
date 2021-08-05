@@ -1,0 +1,52 @@
+<div class="main-product">
+    <div class="container">
+        <div class="product-other">
+            <div class="product-other__title wow fadeInUp" data-wow-delay="0.2s">
+                <h2>{{ section.settings.bp-title }}</h2>
+            </div>
+            <div class="product-other__content">
+                <div class="product-other__list">
+                    {% for block in section.blocks %}
+                        {% assign product = all_products[block.settings.bp-article] %}
+                        {% include 'product-collection', product:product %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+"name": "New products" ,
+"settings": [
+{
+"type": "text" ,
+"id": "bp-title" ,
+"label": "Title"
+}
+] ,
+"blocks": [
+{
+"type": "bp-item" ,
+"name": "New product items" ,
+"limit": 3,
+"settings": [
+{
+"type": "product" ,
+"id": "bp-article" ,
+"label": "Product"
+}
+]
+}
+] ,
+"presets": [
+{
+"name": "New products" ,
+"category": "Products"
+}
+]
+}
+
+{% endschema %}

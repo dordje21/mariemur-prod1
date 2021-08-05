@@ -1,0 +1,58 @@
+<div class="faq-content">
+    <h2 class="faq-title">faq</h2>
+    <div class="faq-info">
+        {% for block in section.blocks %}
+            {% if block.settings.faq_category != prevCat %}
+                <h3 class="faq-section-title">{{ block.settings.faq_category }}</h3>
+            {% endif %}
+            <div class="faq-info__box">
+                <div class="faq-info__box-title js-faq-info">
+                    <p>{{ block.settings.faq_question }}</p>
+                </div>
+                <div class="faq-info__box-text">
+                    {{ block.settings.faq_answer }}
+                </div>
+            </div>
+            {% assign prevCat = block.settings.faq_category %}
+        {% endfor %}
+
+        <h3 class="faq-section-title faq-section-title_last">other questions?</h3>
+
+        <div class="faq-info__other">
+            If you have any other questions, please email us at
+            <a class="faq-info__other-link" href="mailto:care@mariemur.com">care@mariemur.com</a>.
+            with your questions, and we will do our best to reply as quickly as we can!
+        </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+"name": "Faq page",
+
+"blocks": [
+{
+"type": "faq_block",
+"name": "Faq block",
+"settings": [
+{
+"type": "text",
+"id": "faq_category",
+"label": "Category"
+},
+{
+"type": "text",
+"id": "faq_question",
+"label": "Question"
+},
+{
+"type": "richtext",
+"id": "faq_answer",
+"label": "Answer"
+}
+]
+}
+]
+}
+{% endschema %}

@@ -1,0 +1,89 @@
+
+<div class="head">
+    <div class="container">
+        <div class="head-img">
+            <div class="head-img__list">
+                <div class="head-img__list-box js-move-1">
+                    <picture>
+                        <source srcset="{{ section.settings.home_img_first | img_url: "master" }}">
+                        <img src="{{ section.settings.home_img_first | img_url: "master" }}" alt="{{ section.settings.home_img_alt1 }}" loading="lazy">
+                    </picture>
+                </div>
+                <div class="head-img__list-box js-move-2">
+                    <picture>
+                        <source srcset="{{ section.settings.home_img_second | img_url: "master" }}">
+                        <img src="{{ section.settings.home_img_second | img_url: "master" }}" alt="{{ section.settings.home_img_alt2 }}" loading="lazy">
+                    </picture>
+                </div>
+                <div class="head-img__list-box js-move-3">
+                    <picture>
+                        <source srcset="{{ section.settings.home_img_third| img_url: "master" }}">
+                        <img src="{{ section.settings.home_img_third| img_url: "master" }}" alt="{{ section.settings.home_img_alt3 }}" loading="lazy">
+                    </picture>
+                </div>
+            </div>
+            <div class="head-img__circle">
+                <svg viewBox="0 0 802 802" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="401" cy="401" r="400" stroke="#A2A2A2" stroke-opacity="0.3" stroke-width="1" stroke-dashoffset="2600" stroke-dasharray="2600" />
+                </svg>
+            </div>
+        </div>
+        <div class="head-title">
+            <h1 style="color: #ffffff">{{ section.settings.home_title }}</h1>
+        </div>
+        <div class="head-text">{{ section.settings.home_text }}</div> <!--Meet the new enticing collection by Marie Mur-->
+    </div>
+</div>
+
+<script>
+    Loader.require({type: "script", name: "plugin_jquery"});
+</script>
+
+
+{% schema %}
+    {
+        "name": "MarieMur: Home",
+        "settings": [
+            {
+                "type": "html",
+                "id": "home_title",
+                "label": "Home title"
+            },
+            {
+                "type": "html",
+                "id": "home_text",
+                "label": "Home main text"
+            },
+            {
+                "type": "image_picker",
+                "id": "home_img_first",
+                "label": "Gallery Item First"
+            },
+            {
+                "type": "text",
+                "id": "home_img_alt1",
+                "label": "Image First Alt"
+            },
+            {
+                "type": "image_picker",
+                "id": "home_img_second",
+                "label": "Gallery Item Second"
+            },
+            {
+                "type": "text",
+                "id": "home_img_alt2",
+                "label": "Image Second Alt"
+            },
+            {
+                "type": "image_picker",
+                "id": "home_img_third",
+                "label": "Gallery Item Third"
+            },
+            {
+                "type": "text",
+                "id": "home_img_alt3",
+                "label": "Image Third Alt"
+            }
+    ]
+    }
+{% endschema %}

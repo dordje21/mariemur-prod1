@@ -1,0 +1,356 @@
+<div class="main-head head-blog">
+    {%- comment -%} Home Section {%- endcomment -%}
+    {%- assign home_img_desk = page.metafields.pattern.mf_home_img_desk -%}
+    {%- assign home_img_tablet = page.metafields.pattern.mf_home_img_tablet -%}
+    {%- assign home_img = page.metafields.pattern.mf_home_img -%}
+    {%- assign home_title = page.metafields.pattern.mf_home_title -%}
+    {%- assign home_text = page.metafields.pattern.mf_home_text -%}
+    {%- assign home_btn_title = page.metafields.pattern.mf_home_btn_title | default: "Get a discount" | strip -%}
+    {%- assign home_btn_url = page.metafields.pattern.mf_home_btn_url -%}
+
+    <div class="container">
+        <div class="main-head__box wow fadeIn" data-wow-delay="0.2s">
+            <picture>
+                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ home_img_desk }}" media="(min-width: 1200px)">
+                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ home_img_tablet }}" media="(min-width: 768px)">
+                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ home_img }}">
+                <img src="{{ 'pic.jpg' | asset_url }}" data-src="{{ home_img }}" class="lazyload" alt="{{ shop.title }}">
+            </picture>
+        </div>
+
+        {%- if home_title != blank -%}
+            <div class="main-head__title wow fadeInUp" data-wow-delay="0.6s">
+                {{ home_title }}
+            </div>
+        {%- endif -%}
+
+        {%- if home_text != blank -%}
+            <div class="main-head__text wow fadeInUp" data-wow-delay="0.8s">
+                {{ home_text }}
+            </div>
+        {%- endif -%}
+
+
+        <div class="main-head__button wow fadeInUp" data-wow-delay="1s">
+            <button class="btn btn-nofill lp-pater_popup_open" {%- if home_btn_url != blank -%}onclick="{{ home_btn_url }}"{%- endif -%}>
+                <span>{{ home_btn_title }}</span>
+            </button>
+        </div>
+
+    </div>
+</div>
+
+<div class="blog">
+    <div class="container">
+        {%- comment -%} About Section {%- endcomment -%}
+        {%- assign about_img_first_desk = page.metafields.pattern.mf_about_img_first_desk -%}
+        {%- assign about_img_first_tablet = page.metafields.pattern.mf_about_img_first_tablet -%}
+        {%- assign about_img_first = page.metafields.pattern.mf_about_img_first -%}
+
+        {%- assign about_img_second_desk = page.metafields.pattern.mf_about_img_second_desk-%}
+        {%- assign about_img_second_tablet = page.metafields.pattern.mf_about_img_second_tablet -%}
+        {%- assign about_img_second = page.metafields.pattern.mf_about_img_second -%}
+
+        {%- assign about_title = page.metafields.pattern.mf_about_title -%}
+        {%- assign about_text = page.metafields.pattern.mf_about_text -%}
+        {%- assign about_btn_title = page.metafields.pattern.mf_about_btn_title | default: "Get a discount" | strip -%}
+        {%- assign about_btn_url = page.metafields.pattern.mf_about_btn_url -%}
+
+        <div class="blog-box">
+            <div class="blog-box__head wow fadeInUp" data-wow-delay="0.2s">
+                <div class="blog-box__img">
+                    <picture>
+                        <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ about_img_first_desk }}" media="(min-width: 1200px)">
+                        <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ about_img_first_tablet }}" media="(min-width: 768px)">
+                        <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ about_img_first }}">
+                        <img class="lazyload" src="{{ 'pic.jpg' | asset_url }}" data-src="{{ about_img_first }}" alt="{{ shop.title }}">
+                    </picture>
+
+                    <picture>
+                        <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ about_img_second_desk }}" media="(min-width: 1200px)">
+                        <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ about_img_second_tablet }}" media="(min-width: 768px)">
+                        <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ about_img_second }}">
+                        <img class="lazyload" src="{{ 'pic.jpg' | asset_url }}" data-src="{{ about_img_second }}" alt="{{ shop.title }}">
+                    </picture>
+
+                </div>
+            </div>
+
+            <div class="blog-box__body wow fadeInUp" data-wow-delay="0.4s">
+                <div class="blog-box__text">
+                    {{ about_text }}
+                </div>
+
+                <div class="blog-box__button">
+                    <button class="btn btn-nofill lp-pater_popup_open" {%- if about_btn_url != blank -%}onclick="{{ about_btn_url }}"{%- endif -%}>
+                        <span>{{ about_btn_title }}</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="collection-content__heading">
+            {%- comment -%} Info Section {%- endcomment -%}
+            {%- assign info_title = page.metafields.pattern.mf_info_title -%}
+            {%- assign info_img_desk = page.metafields.pattern.mf_info_img_desk -%}
+            {%- assign info_img_tablet = page.metafields.pattern.mf_info_img_tablet -%}
+            {%- assign info_img = page.metafields.pattern.mf_info_img -%}
+
+            {%- if info_title != blank -%}
+                <div class="collection-content__heading-title wow fadeInUp" data-wow-delay="0.2s">
+                    {{ info_title }}
+                </div>
+            {% endif %}
+
+            <div class="collection-content__heading-img wow fadeInUp" data-wow-delay="0.4s">
+                <picture>
+                    <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ info_img_desk }}" media="(min-width: 1200px)">
+                    <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ info_img_tablet }}" media="(min-width: 768px)">
+                    <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ info_img }}">
+                    <img src="{{ 'pic.jpg' | asset_url }}" data-src="{{ info_img }}" class="lazyload" alt="{{ shop.title }}">
+                </picture>
+            </div>
+        </div>
+
+        <div class="blog-catalog">
+            {%- comment -%} Catalog Section {%- endcomment -%}
+            {%- assign catalog_title = page.metafields.pattern.mf_catalog_title -%}
+            {%- assign catalog_prod =  page.metafields.pattern.mf_catalog_prod -%}
+            {%- assign catalog_prod_handle = catalog_prod | split: "|" -%}
+            {%- assign catalog_quant = page.metafields.pattern.mf_catalog_quant -%}
+            {%- assign catalog_show_all = page.metafields.pattern.mf_catalog_show_all -%}
+            {%- assign catalog_show_title = page.metafields.pattern.mf_related_title_show -%}
+
+            {%- if catalog_title != blank and catalog_show_title != blank -%}
+                <div class="product-other__title wow fadeInUp" data-wow-delay="0.2s" style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                    {{ catalog_title }}
+                </div>
+            {%- endif -%}
+
+            <div class="catalog-list">
+                {%- if catalog_prod.size > 0 -%}
+                    {%- if catalog_show_all != blank -%}
+
+                        {%- for handle in catalog_prod_handle -%}
+                            {%- assign prod_item = all_products[handle] -%}
+
+                            <div class="catalog-box">
+                                <div class="catalog-box__head">
+                                    <a href="{{ prod_item.url }}" class="catalog-box__img">
+                                        <picture>
+                                            <img src="img/pic.jpg"  class="lazyload" data-src="{{ prod_item.featured_image  | img_url: "grande" }}" alt="{{ prod_item }}">
+                                        </picture>
+                                        {% for media in prod_item.media %}
+                                            {% case media.media_type %}
+                                            {% when 'video' %}
+                                                <video autoplay playsinline muted loop="loop">
+                                                    <source src="{{ media.sources[1].url }}" type="video/mp4">
+                                                </video>
+                                                <span class="icon icon-i-play"></span>
+                                            {% endcase %}
+                                        {% endfor %}
+                                    </a>
+                                </div>
+                                <div class="catalog-box__body">
+                                    <div class="catalog-box__title">
+                                        <a href="{{ prod_item.url }}">{{ prod_item.title }}<span class="icon icon-i-arr-right"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {%- endfor -%}
+
+                    {%- else -%}
+
+                        {%- for handle in catalog_prod_handle limit:catalog_quant -%}
+                            {%- assign prod_item = all_products[handle] -%}
+
+                            <div class="catalog-box">
+                                <div class="catalog-box__head">
+                                    <a href="{{ prod_item.url }}" class="catalog-box__img">
+                                        <picture>
+                                            <img src="{{ 'pic.jpg' | asset_url }}"  class="lazyload" data-src="{{ prod_item.featured_image  | img_url: "grande" }}" alt="{{ prod_item }}">
+                                        </picture>
+                                        {% for media in prod_item.media %}
+                                            {% case media.media_type %}
+                                            {% when 'video' %}
+                                                <video autoplay playsinline muted loop="loop">
+                                                    <source src="{{ media.sources[1].url }}" type="video/mp4">
+                                                </video>
+                                                <span class="icon icon-i-play"></span>
+                                            {% endcase %}
+                                        {% endfor %}
+                                    </a>
+                                </div>
+                                <div class="catalog-box__body">
+                                    <div class="catalog-box__title">
+                                        <a href="{{ prod_item.url }}">{{ prod_item.title }}<span class="icon icon-i-arr-right"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        {%- endfor -%}
+
+                    {%- endif -%}
+                {%- endif -%}
+            </div>
+        </div>
+
+
+        <div class="blog-catalog">
+            {%- assign related_title = page.metafields.pattern.mf_related_title -%}
+            {%- assign related_prod = page.metafields.pattern.mf_related_products -%}
+            {%- assign related_peod_quant = page.metafields.pattern.mf_related_quant -%}
+            {%- assign related_prod_show_all = page.metafields.pattern.mf_related_show_all %}
+            {%- assign related_prod_handle = related_prod | split: "|" -%}
+
+            {%- if related_title != blank -%}
+                <div class="product-other__title wow fadeInUp" data-wow-delay="0.2s">
+                    {{ related_title }}
+                </div>
+            {%- endif -%}
+
+            <div class="catalog-list">
+                {%- if related_prod.size > 0 -%}
+                    {%- if related_prod_show_all != blank -%}
+
+                        {%- for handle in related_prod_handle -%}
+                            {%- assign prod_item = all_products[handle] -%}
+
+                            <div class="catalog-box">
+                                <div class="catalog-box__head">
+                                    <a href="{{ prod_item.url }}" class="catalog-box__img">
+                                        <picture>
+                                            <img src="img/pic.jpg"  class="lazyload" data-src="{{ prod_item.featured_image  | img_url: "grande" }}" alt="{{ prod_item }}">
+                                        </picture>
+                                        {% for media in prod_item.media %}
+                                            {% case media.media_type %}
+                                                {% when 'video' %}
+                                                    <video autoplay playsinline muted loop="loop">
+                                                        <source src="{{ media.sources[1].url }}" type="video/mp4">
+                                                    </video>
+                                                    <span class="icon icon-i-play"></span>
+                                            {% endcase %}
+                                        {% endfor %}
+                                    </a>
+                                </div>
+                                <div class="catalog-box__body">
+                                    <div class="catalog-box__title">
+                                        <a href="{{ prod_item.url }}">{{ prod_item.title }}<span class="icon icon-i-arr-right"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {%- endfor -%}
+
+                    {%- else -%}
+
+                        {%- for handle in related_prod_handle limit: related_peod_quant -%}
+                            {%- assign prod_item = all_products[handle] -%}
+
+                            <div class="catalog-box">
+                                <div class="catalog-box__head">
+                                    <a href="{{ prod_item.url }}" class="catalog-box__img">
+                                        <picture>
+                                            <img src="{{ 'pic.jpg' | asset_url }}"  class="lazyload" data-src="{{ prod_item.featured_image  | img_url: "grande" }}" alt="{{ prod_item }}">
+                                        </picture>
+                                        {% for media in prod_item.media %}
+                                            {% case media.media_type %}
+                                                {% when 'video' %}
+                                                    <video autoplay playsinline muted loop="loop">
+                                                        <source src="{{ media.sources[1].url }}" type="video/mp4">
+                                                    </video>
+                                                    <span class="icon icon-i-play"></span>
+                                            {% endcase %}
+                                        {% endfor %}
+                                    </a>
+                                </div>
+                                <div class="catalog-box__body">
+                                    <div class="catalog-box__title">
+                                        <a href="{{ prod_item.url }}">{{ prod_item.title }}<span class="icon icon-i-arr-right"></span></a>
+                                    </div>
+                                </div>
+                            </div>
+                        {%- endfor -%}
+
+                    {%- endif -%}
+                {%- endif -%}
+            </div>
+        </div>
+    </div>
+
+</div>
+<style>
+    .lp-pater_popup-item{
+        background-image: url("{{page.metafields.popup.bg_img}}");
+    }
+    {% if page.metafields.popup.block_style == "oval" %}
+    .lp-pater_popup_close{
+        top: 16px;
+        right: 16px;
+    }
+    {% endif %}
+</style>
+<div class=" lp-pater_popup" id="k_id_modal" style="display:none;">
+    <div class="lp-pater_popup-item" {% if page.metafields.popup.block_style == "oval" %} style="padding:16px" {% endif %}>
+        <div class=" popup-item_inner" {% if  page.metafields.popup.block_style == "line"%} style="border-bottom: none;border-top: none;" {% elsif page.metafields.popup.block_style == "oval" %} style="border-radius: 50%" {% endif %}>
+            <a href="#" class="klaviyo_close_modal klaviyo_header_close lp-pater_popup_close"><span class="icon icon-i-close"></span></a>
+            <form action="//manage.kmail-lists.com/subscriptions/subscribe" method="POST" novalidate="novalidate" class="klaviyo_subscription_form">
+                <input type="hidden" name="g" value="{{page.metafields.popup.list_id}}">
+                <div class="klaviyo_fieldset popup-item_text-group">
+                    <div class="popup-item_titel">{{page.metafields.popup.title}}</div>
+                    <div class="popup-item_discount">{{page.metafields.popup.discount}}</div>
+                    <div class="popup-item_description">{{page.metafields.popup.text}}</div>
+                </div>
+                <div class="klaviyo_fieldset popup-item_sucsses hide">
+                    <div class="popup-item_discount popup-item_sucsses_title">{{page.metafields.popup.sucs_title}}</div>
+                    <div class="popup-item_titel popup-item_sucsses_text">{{page.metafields.popup.sucs_text}}</div>
+
+                </div>
+                <div class="klaviyo_fieldset">
+                    <div class="klaviyo_field_group popup-item_input">
+                        {% comment %}<label for="k_id_modal_$email" >Email Address</label>{% endcomment %}
+                        <input type="email" id="k_id_modal_$email" name="email">
+                    </div>
+                </div>
+                <div class="klaviyo_fine_print"></div>
+                <div class="klaviyo_form_actions">
+                    <button type="submit" class="klaviyo_submit_button popup-item_button">
+                        <span>{{page.metafields.popup.btn_txt}}</span>
+                    </button>
+                </div>
+                <div class="klaviyo_below_submit" ></div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="//www.klaviyo.com/media/js/public/klaviyo_subscribe.js"></script>
+<script>
+    $('.lp-pater_popup_open').on('click',function (){
+        KlaviyoSubscribe.attachToModalForm('#k_id_modal',
+            {
+                delay_seconds: 0.01,
+                hide_form_on_success: true,
+                ignore_cookie: true,
+                success_message: false,
+                success: function () {
+                    $('.popup-item_text-group')[0].classList.add('hide');
+                    $('.popup-item_sucsses')[0].classList.remove('hide');
+                },
+
+            });
+        $('body').css('overflow', 'hidden');
+    });
+    $('.lp-pater_popup_close').on('click',function (){
+        $('body').removeAttr('style');
+        $('.lp-pater_popup_open')[0].classList.add('hide');
+    })
+    $('.lp-pater_popup').on('click',function (){
+        if($('.lp-pater_popup').attr("style")!=undefined){
+            $('body').removeAttr('style');
+        }
+    })
+
+</script>

@@ -1,0 +1,1098 @@
+{% include 'product-res-variables' %}
+
+<div class="product-content" data-section-type="product-page">
+    {% include 'product-get-page-gallery' %}
+    <div id="product-sidebar" class="product-sidebar">
+        <div class="product-title">
+            <h1>{{ product.title }}</h1>
+        </div>
+        {%- assign products_pices_wish_list = product.metafields.products_set.handles | split: "," -%}
+
+        {%- capture product_tabs -%}{% include 'product-info' %}{%- endcapture -%}
+        {% capture product_size_guide %}
+            {%- assign products_pices = product.metafields.products_set.handles | split: "," -%}
+            {%- if products_pices -%}
+                {% assign includedTypes = '' %}
+                {%- for products_pice in products_pices -%}
+                    {% assign handle_key = products_pice | strip %}
+                    {% assign pice_product = all_products[handle_key] %}
+
+                        {%- if pice_product.metafields.sizeguide.html -%}
+                            {{ pice_product.metafields.sizeguide.html }}
+                        {%- elsif pice_product.type == 'bra' or for_option == 'bra' -%}
+
+                            {% unless includedTypes contains 'bra' %}
+                                {% include 'content-load-template' content: pages['international-size-converter'].content %}
+                            {% endunless %}
+                        {%- elsif pice_product.type == 'panties' or pice_product.type == 'garterbelt' or for_option == 'panties' or for_option == 'skirt' -%}
+                            {% unless includedTypes contains 'panties' or includedTypes contains 'garterbelt' or includedTypes contains 'skirt' %}
+                                {% include 'content-load-template' content: pages['panties-sizechart'].content %}
+                            {% endunless %}
+                        {%- elsif pice_product.type == 'harness' -%}
+                            {% unless includedTypes contains 'harness' %}
+                                {% include 'content-load-template' content: pages['sizechart-harness'].content %}
+                            {% endunless %}
+                        {%- elsif pice_product.type == 'garter' -%}
+
+                            {% unless includedTypes contains 'garter' %}
+                                {% include 'content-load-template' content: pages['sizechart-garters'].content %}
+                            {% endunless %}
+                        {%- elsif pice_product.type == 'cuffs' -%}
+                            {% unless includedTypes contains 'cuffs' %}
+
+                                {% include 'content-load-template' content: pages['sizechart-cuffs'].content %}
+                            {% endunless %}
+                        {%- elsif pice_product.type == 'acuffs' -%}
+                            {% unless includedTypes contains 'acuffs' %}
+
+                                {% include 'content-load-template' content: pages['sizechart-cuffs-leg'].content %}
+                            {% endunless %}
+                        {%- elsif pice_product.type == 'choker' -%}
+                            {% unless includedTypes contains 'choker' %}
+
+                                {% include 'content-load-template' content: pages['sizechart-collar'].content %}
+                            {% endunless %}
+                        {%- elsif pice_product.type == 'belt' -%}
+                            {% unless includedTypes contains 'belt' %}
+
+                                {% include 'content-load-template' content: pages['sizechart-belts'].content %}
+                            {% endunless %}
+                        {%- elsif pice_product.type == 'lbelt' -%}
+                            {% unless includedTypes contains 'lbelt' %}
+
+                                {% include 'content-load-template' content: pages['sizechart-leg-belts'].content %}
+                            {% endunless %}
+                        {%- elsif pice_product.type == 'gown' or pice_product.type == 'bodysuit' or pice_product.type == 'bolero' -%}
+                            {% unless includedTypes contains 'gown' or includedTypes contains 'bodysuit' %}
+                                {% include 'content-load-template' content: pages['sizechart-bodysuits'].content %}
+                            {% endunless %}
+                        {%- elsif pice_product.type == 'fullbody' -%}
+                            {% unless includedTypes contains 'fullbody' %}
+                                {% include 'content-load-template' content: pages['sizechart-fullbody-1'].content %}
+                            {% endunless %}
+                        {%- else -%}
+
+                            {%- if section.settings.size_guide_page_content != blank -%}
+                                {% include 'content-load-template' content: pages[section.settings.size_guide_page_content].content %}
+                            {%- else -%}
+                                {% include 'content-load-template' content: section.settings.size_guide_content %}
+                            {%- endif -%}
+                        {%- endif -%}
+
+                        {% assign includedTypes = includedTypes | append: pice_product.type | append:' ' %}
+                {%- endfor -%}
+            {%- endif -%}
+        {% endcapture %}
+        <div class="product-price">
+            {% if settings.enable_global_upsell contains 'all' %}
+                {% include 'product-get-price-discount' with min_price: false %}
+            {% else %}
+                {% if settings.site_discount != blank and collection.url contains settings.cart_upsell_collection and product.tags contains 'enable_discount' %}
+                    {% include 'product-get-price-discount' with min_price: false %}
+                {% else %}
+                    <span class="price"><span class="money">{{ product.selected_or_first_available_variant.price | money }}</span></span>
+                {% endif %}
+            {% endif %}
+        </div>
+
+        <div class="product-desc">
+            {% if product.metafields.global.short-desc %}
+                {{ product.metafields.global.short-desc }}
+            {% endif %}
+        </div>
+        <div class="product-buttons">
+            {% assign models = product.media | where: "media_type", "model" %}
+            {% assign modelsSize = models | size %}
+            {% assign active_pieces = 0 %}
+
+            {%- if products_pices_wish_list -%}
+                {%- for products_pice in products_pices_wish_list -%}
+                    {% assign handle_key = products_pice | strip %}
+                    {% assign pice_product = all_products[handle_key] %}
+                    {% if pice_product.available %}
+                        {% assign active_pieces = true %}
+                    {% endif %}
+                {%- endfor -%}
+            {%- endif -%}
+            <button class="btn btn-nofill js-size-guide {% if product_size_guide ==empty %}d-none{% endif %}"><span>Size guide<span class="icon icon-i-plus"></span></span></button>
+            {% if active_pieces == 0 %}
+                <button class="btn red-button js-show-waitlist " data-wait-id="main"><span>Join the waitlist</span></button>
+            {% endif %}
+
+            {% if modelsSize > 0 %}
+                <button class="btn btn-red-nofill d-lg-none d-none js-model"><span>View in 3D<span class="icon icon-i-3D"></span></span></button>
+            {% endif %}
+        </div>
+<div class="d-lg-none" style="position: absolute; z-index: -1" >
+        {% for model in models %}
+            <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+            <model-viewer src="{{ model.sources[0].url }}" id="model-viewer" ar-status="false" ar ar-modes="webxr scene-viewer quick-look" ar-scale="auto" camera-controls   ios-src="{{ model.sources[1].url }}"></model-viewer>
+            <script>
+                document.querySelector("#model-viewer").addEventListener('load', (event) => {
+                    console.log(event)
+                    if(document.querySelector("#model-viewer").canActivateAR){
+                        document.querySelector(".js-model").classList.remove('d-none')
+                        document.querySelector(".js-model").addEventListener('click',function (){
+                            document.querySelector("#model-viewer").activateAR()
+                        })
+                    }
+
+
+                });
+                document.querySelector("#model-viewer").addEventListener('ar-status', (event) => {
+                    if(event.detail.status === 'failed'){
+                        document.querySelector(".js-model").classList.add('d-none')
+                    }
+                });
+            </script>
+        {% endfor %}
+</div>
+        <div class="klarna-set-container klarna-container mb-20" style="visibility:hidden; max-height: 1px;margin: 0 0 28px 0;">
+            <klarna-placement data-key="credit-promotion-small" data-purchase-amount="{{ price }}" data-preloaded="true" data-locale="en-US"></klarna-placement>
+        </div>
+        <div class="product-list">
+            <div class="product-list__title">Customise your set</div>
+            <div class="product-list__content">
+                {% assign pieces = 0 %}
+                {% include 'product-sets',pieces:pieces %}
+            </div>
+        </div>
+         {{ product_tabs }}
+        <div class="product-size-guide">
+            <div class="product-size-guide__box">
+                <div class="product-size-guide__box-text">
+                    {{ product_size_guide }}
+                </div>
+                <div class="product-size-guide__box-close js-size-guide-close">
+                    <span class="icon icon-i-close"></span>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+<div class="cart-info">
+    <div class="cart-info__count" data-amount="0">( 0 ) pieces</div>
+    <div class="cart-info__button">
+        <a href="#product-sidebar" class="cart-info__button-add js-scroll-to-info"><span class="icon icon-i-bag"></span>Add to Bag</a>
+        <a href="javascript:void(0)" class="cart-info__button-go js-header-cart"><span class="icon icon-i-bag"></span>Go to Bag</a>
+    </div>
+</div>
+{% assign pieces = 0 %}
+{% assign active_pieces = 0 %}
+
+{%- if products_pices_wish_list -%}
+    {%- for products_pice in products_pices_wish_list -%}
+        {% assign handle_key = products_pice | strip %}
+        {% assign pice_product = all_products[handle_key] %}
+        {% if pice_product.available %}
+            {% assign active_pieces = true %}
+        {% endif %}
+        {% unless pice_product.id.size > 0 %}
+            {% continue %}
+        {% endunless %}
+
+        {% assign product = pice_product %}
+        {% assign productCount = 0 %}
+
+        {% for item in cart.items %}
+            {% if item.product.id == product.id %}
+                {% assign productCount = productCount | plus: item.quantity %}
+            {% endif %}
+        {% endfor %}
+        <div class="waitlist-modal waitlist-modal-set" data-wait="{{ forloop.index }}">
+            <div class="waitlist-modal__inner">
+                <div class="waitlist-modal__head">
+                    <div class="waitlist-modal__title">
+                        Join the waitlist
+                    </div>
+                    <div class="waitlist-modal__desc">
+                        Please enter your email and we will let you know when your item becomes available.
+                    </div>
+                </div>
+                <div class="waitlist-modal__body">
+                    <form action="" data-id="waitlistForm">
+                        <div class="product-list__box">
+                            <div class="product-list__box-head">
+                                <a href="{{ product.url }}" class="product-list__box-img">
+                                    <picture>
+                                        <source data-srcset="{{ product.featured_image.src | product_img_url: 'large' }} "
+                                                data-image-id="{{ product.featured_image.id }}" media="(min-width: 1200px)">
+                                        <source data-srcset="{{ product.featured_image.src | product_img_url: 'large' }} "
+                                                data-image-id="{{ product.featured_image.id }}" media="(min-width: 768px)">
+                                        <source data-srcset="{{ product.featured_image.src | product_img_url: 'large' }} "
+                                                data-image-id="{{ product.featured_image.id }}">
+                                        <img data-src="{{ product.featured_image.src | product_img_url: 'large' }} "
+                                             data-image-id="{{ product.featured_image.id }}" class="lazyload" alt="">
+                                    </picture>
+                                </a>
+                            </div>
+                            <div class="product-list__box-body" {% include 'product-get-attributes' %}>
+                                <div class="product-list__box-title">
+                                    <a href="{{ product.url }}">{{ product.title }}</a>
+                                </div>
+                                <div class="product-list__box-option">
+                                    <div class="product-list__box-group">
+                                        <div class="size-box">
+                                            <div class="size-box__title js-size">
+                                                <div class="size-box__count">SElect size</div>
+                                                <div class="size-box__button">
+                                                    <span class="icon icon-i-drop-right"></span>
+                                                </div>
+                                                <input type="hidden" class="size-count">
+                                            </div>
+                                            <div class="size-box__modal">
+                                                <div class="size-box__modal-title">SELECT SIZE</div>
+                                                {% comment %}<div class="size-box__modal-text hide">{% endcomment %}
+                                                {% comment %}<p>Different to <b>136$?</b> <a href="">Find out why</a></p>{% endcomment %}
+                                                {% comment %}</div>{% endcomment %}
+                                                <div class="size-box__modal-list js-size-list">
+                                                    <ul>
+                                                        {%- for variant in product.variants -%}
+                                                                <li  {% unless variant.available %} {% endunless %}>
+                                                                    <div class="size-title">{{ variant.title | replace: 'Default Title', default_title }}</div>
+                                                                </li>
+
+                                                        {%- endfor -%}
+                                                    </ul>
+                                                </div>
+                                                <div class="size-box__modal-link js-size-guide">
+                                                    <a href="javascript:void(0)">VIEWSIZE GUIDE<span
+                                                                class="icon icon-i-drop-right"></span></a>
+                                                </div>
+                                                <div class="size-box__modal-button">
+                                                    <a href="javascript:void(0)" class="btn red-button"
+                                                       data-value="1" data-prod-id="{{ product.id }}"><span>Select</span></a>
+                                                </div>
+                                                <div class="size-box__modal-close js-size-close">
+                                                    <span class="icon icon-i-close"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="product-list__box-price">
+                                    <div class="price-title">Price</div>
+                                    <span class="price"><span class="money">  {{ product.price | money }}</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="waitlist-modal__form">
+                            <div class="form-group ">
+                                <input type="email" name="customer[email]" id="email" placeholder="Email">
+                                <div class="help-block">Please enter a valid email address.</div>
+                            </div>
+                            <div class="form-check">
+                                <div class="checkbox">
+                                    <input type="checkbox" name="addEmail" id="addEmail-{{ forloop.index }}">
+                                    <label for="addEmail-{{ forloop.index }}">Add me to your email list.</label>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn red-button"><span>Join the waitlist</span></button>
+                            <div class="waitlist-modal__success d-none"><span class="successIcon"></span><p>You're in! We'll let you know when it's back! </p></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="waitlist-modal__close js-close-waitlist">
+                    <span class="icon icon-i-close"></span>
+                </div>
+            </div>
+        </div>
+    {%- endfor -%}
+    <style>
+        .klaviyo_modal.hide{
+            z-index: -5;
+        }
+    </style>
+    <div class="klaviyo_modal hide" id="product_waitlist" style="display:none;">
+        <div class="klaviyo_inner">
+            <a href="#" class="klaviyo_close_modal klaviyo_header_close">×</a>
+            <form action="//manage.kmail-lists.com/subscriptions/subscribe" method="POST" novalidate="novalidate" class="klaviyo_subscription_form">
+                <input type="hidden" name="g" value="XqPC8J">
+                <div class="klaviyo_fieldset">
+                    <p class="klaviyo_header">Interested in our Newsletter?</p>
+                    <p class="klaviyo_subheader">Stay in the know with news and promotions.</p>
+                </div>
+                <div class="klaviyo_fieldset">
+                    <div class="klaviyo_field_group">
+                        <label for="k_id_modal_$email">Email Address</label>
+                        <input type="email" id="k_id_modal_$email" name="email" class="klav_email">
+                    </div>
+                </div>
+                <div class="klaviyo_fine_print"></div>
+                <div class="klaviyo_form_actions">
+                    <button type="submit" class="klaviyo_submit_button">
+                        <span>Subscribe</span>
+                    </button>
+                </div>
+                <div class="klaviyo_below_submit" ></div>
+            </form>
+            <div class="error_message" ></div>
+            <div class="success_message" ></div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="//www.klaviyo.com/media/js/public/klaviyo_subscribe.js"></script>
+{%- endif -%}
+{% if active_pieces == 0 %}
+    {%- if products_pices_wish_list -%}
+        <div class="waitlist-modal waitlist-modal-set" data-wait="main">
+            <div class="waitlist-modal__inner">
+                <div class="waitlist-modal__head">
+                    <div class="waitlist-modal__title">
+                        Join the waitlist
+                    </div>
+                    <div class="waitlist-modal__desc">
+                        Please enter your email and we will let you know when your item becomes available.
+                    </div>
+                </div>
+                <div class="waitlist-modal__body">
+                    <form action="" id="waitlistForm-main">
+        {%- for products_pice in products_pices_wish_list -%}
+            {% assign handle_key = products_pice | strip %}
+            {% assign pice_product = all_products[handle_key] %}
+            {% if pice_product.available %}
+                {% assign active_pieces = true %}
+            {% endif %}
+            {% unless pice_product.id.size > 0 %}
+                {% continue %}
+            {% endunless %}
+
+            {% assign product = pice_product %}
+            {% assign productCount = 0 %}
+
+            {% for item in cart.items %}
+                {% if item.product.id == product.id %}
+                    {% assign productCount = productCount | plus: item.quantity %}
+                {% endif %}
+            {% endfor %}
+
+                            <div class="product-list__box {% include 'product-get-attributes' %}">
+                                <div class="product-list__box-head">
+                                    <a href="{{ product.url }}" class="product-list__box-img">
+                                        <picture>
+                                            <source data-srcset="{{ product.featured_image.src | product_img_url: 'large' }} "
+                                                    data-image-id="{{ product.featured_image.id }}" media="(min-width: 1200px)">
+                                            <source data-srcset="{{ product.featured_image.src | product_img_url: 'large' }} "
+                                                    data-image-id="{{ product.featured_image.id }}" media="(min-width: 768px)">
+                                            <source data-srcset="{{ product.featured_image.src | product_img_url: 'large' }} "
+                                                    data-image-id="{{ product.featured_image.id }}">
+                                            <img data-src="{{ product.featured_image.src | product_img_url: 'large' }} "
+                                                 data-image-id="{{ product.featured_image.id }}" class="lazyload" alt="">
+                                        </picture>
+                                    </a>
+                                </div>
+                                <div class="product-list__box-body">
+                                    <div class="product-list__box-title">
+                                        <a href="{{ product.url }}">{{ product.title }}</a>
+                                    </div>
+                                    <div class="product-list__box-option">
+                                        <div class="product-list__box-group">
+                                            <div class="size-box">
+                                                <div class="size-box__title js-size">
+                                                    <div class="size-box__count">SElect size</div>
+                                                    <div class="size-box__button">
+                                                        <span class="icon icon-i-drop-right"></span>
+                                                    </div>
+                                                    <input type="hidden" class="size-count">
+                                                </div>
+                                                <div class="size-box__modal">
+                                                    <div class="size-box__modal-title">SELECT SIZE</div>
+                                                    {% comment %}<div class="size-box__modal-text hide">{% endcomment %}
+                                                    {% comment %}<p>Different to <b>136$?</b> <a href="">Find out why</a></p>{% endcomment %}
+                                                    {% comment %}</div>{% endcomment %}
+                                                    <div class="size-box__modal-list js-size-list">
+                                                        <ul>
+                                                            {%- for variant in product.variants -%}
+                                                                <li  {% unless variant.available %} {% endunless %}>
+                                                                    <div class="size-title">{{ variant.title | replace: 'Default Title', default_title }}</div>
+                                                                </li>
+
+                                                            {%- endfor -%}
+                                                        </ul>
+                                                    </div>
+                                                    <div class="size-box__modal-link js-size-guide">
+                                                        <a href="javascript:void(0)">VIEWSIZE GUIDE<span
+                                                                    class="icon icon-i-drop-right"></span></a>
+                                                    </div>
+                                                    <div class="size-box__modal-button">
+                                                        <a href="javascript:void(0)" class="btn red-button"
+                                                           data-value="1" data-prod-id="{{ product.id }}"><span>Select</span></a>
+                                                    </div>
+                                                    <div class="size-box__modal-close js-size-close">
+                                                        <span class="icon icon-i-close"></span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="product-list__box-price">
+                                        <div class="price-title">Price</div>
+                                        <div class="price"><span class="money">  {{ product.price | money }}</span></div>
+                                    </div>
+                                </div>
+                            </div>
+
+        {%- endfor -%}
+        <div class="waitlist-modal__form">
+            <div class="form-group ">
+                <input type="email" name="customer[email]" id="email" placeholder="Email">
+                <div class="help-block">Please enter a valid email address.</div>
+            </div>
+            <div class="form-check">
+                <div class="checkbox">
+                    <input type="checkbox" name="addEmail" id="addEmail-item{{ forloop.index }}">
+                    <label for="addEmail-item{{ forloop.index }}">Add me to your email list.</label>
+                </div>
+            </div>
+            <button type="submit" class="btn red-button"><span>Join the waitlist</span></button>
+            <div class="waitlist-modal__success d-none"><span class="successIcon"></span><p>You're in! We'll let you know when it's back! </p></div>
+        </div>
+        </form>
+        </div>
+        <div class="waitlist-modal__close js-close-waitlist">
+            <span class="icon icon-i-close"></span>
+        </div>
+        </div>
+        </div>
+    {%- endif -%}
+<script>
+    let products=[];
+    $('[data-wait="main"] .js-size-list li ').on('click',function (){
+        let json_str=$(this).closest('.data-js-product').attr('data-json-product');
+        let json=JSON.parse(json_str);
+        let _this=$(this);
+        let  product_obj;
+        setTimeout(function (){
+            let size=_this.find($('.size-title'))[0].innerHTML;
+            console.log(size);
+            if( products.length !=0 ){
+                product_obj=products.find(product=> product.name === json.handle);
+            }
+            if(product_obj == undefined){
+                $.each(json.variants, function () {
+                    if (this.option1 === size) {
+                        products.push({name: json.handle,option:this.option1, product_id: this.id})
+
+                    }
+                });
+            }
+            else {
+                $.each(json.variants, function () {
+                    if (this.option1 === size) {
+                        product_obj.product_id=this.id;
+                        product_obj.option=this.option1;
+
+                    }
+                });
+            }
+            console.log(products);
+            console.log(json.variants);
+        },200)
+        console.log($('[data-wait="main"]  .product-list__box ').length)
+    });
+
+    setTimeout(function (){
+
+        $('#waitlistForm-main').submit(function (){
+
+            var product_list_lenght = $(this).find('.product-list__box').length,
+                arr_lenght = products.length;
+            if ($(this).find($('[name="addEmail"]')).prop('checked') && product_list_lenght==arr_lenght ) {
+                let email = $(this).find($('.form-group #email')).val();
+                console.log(email)
+                var count = 0;
+                var timer = setInterval(function(){
+                    if(count != arr_lenght){
+                        BackInStock(products[count]);
+                        count++;
+                    }
+                    else{
+                        clearInterval(timer);
+                    }
+                }, 1000);
+                function BackInStock(product){
+                    $.ajax({
+                        type: 'POST',
+                        url: 'https://a.klaviyo.com/onsite/components/back-in-stock/subscribe',
+                        data: {
+                            a: 'PAgcrr',
+                            email: email,
+                            variant: product.product_id,
+                            platform: 'shopify'
+                        },
+                        success: function (response) {
+                            console.log(response)
+                        }
+
+                    })
+                }
+
+
+                KlaviyoSubscribe.attachToModalForm('#product_waitlist',
+                    {
+                        hide_form_on_success: false,
+                        ignore_cookie: true,
+                        success_message: false,
+
+                    });
+
+                $(".klav_email").val(email);
+                setTimeout(function () {
+                    $('.klaviyo_subscription_form').trigger('submit')
+                    setTimeout(function () {
+                        $('.klaviyo_subscription_form').trigger('reset')
+                    }, 500)
+                }, 500)
+
+
+
+            }
+        })
+
+    },200)
+
+</script>
+{% endif %}
+<script>
+    $( document ).on( 'click', '.js-show-waitlist', function() {
+        $( `.waitlist-modal[data-wait="${$(this).attr('data-wait-id')}"]` ).addClass( 'show' );
+        $( 'html' ).addClass( 'wait-no-scroll' );
+
+    });
+    $( document ).on( 'click', '.js-close-waitlist', function() {
+        $( 'html' ).removeClass( 'wait-no-scroll' );
+        $( '.waitlist-modal' ).removeClass( 'show' );
+    });
+    $( document ).click( function( e ) {
+        if ( $( e.target ).closest( '.js-show-waitlist, .waitlist-modal__inner' ).length )
+            return;
+        $( '.waitlist-modal' ).removeClass( 'show' );
+        $( 'html' ).removeClass( 'wait-no-scroll' );
+
+        e.stopPropagation();
+    });
+
+    let id=0;
+
+    $(".waitlist-modal-set .js-size-list li").on('click',function (){
+
+        if($(this).closest('.waitlist-modal-set').attr('data-wait') != "main") {
+            let json_str = $(this).closest('[data-js-product]').attr('data-json-product');
+            let json = JSON.parse(json_str);
+            let _this = $(this);
+            setTimeout(function () {
+                let size = _this.find($('.size-title'))[0].innerHTML;
+                console.log(size);
+                $.each(json.variants, function () {
+                    if (this.option1 === size) {
+                        id = this.id;
+                    }
+
+                });
+                console.log(id)
+
+            }, 200)
+        }
+    });
+
+    setTimeout(function (){
+
+            $('[data-id="waitlistForm"]').submit(function (){
+                if($(this).closest('.waitlist-modal-set').attr('data-wait') != "main") {
+                    var $parent = $(this).find('.product-list__box'),
+                        $sizeCount = $parent.find('.size-box__count')[0].innerText;
+                    if ($(this).find($('[name="addEmail"]')).prop('checked') && !($sizeCount === 'SELECT SIZE' || $sizeCount === '')) {
+                        let email = $(this).find($('.form-group #email')).val();
+                        console.log(email)
+                        $.ajax({
+                            type: 'POST',
+                            url: 'https://a.klaviyo.com/onsite/components/back-in-stock/subscribe',
+                            data: {
+                                a: 'PAgcrr',
+                                email: email,
+                                variant: id,
+                                platform: 'shopify'
+                            },
+                            success: function (response) {
+                                console.log(response)
+                            }
+
+                        })
+                        KlaviyoSubscribe.attachToModalForm('#product_waitlist',
+                            {
+                                hide_form_on_success: false,
+                                ignore_cookie: true,
+                                success_message: false,
+
+                            });
+
+                        $(".klav_email").val(email);
+                        setTimeout(function () {
+                            $('.klaviyo_subscription_form').trigger('submit')
+                            setTimeout(function () {
+                                $('.klaviyo_subscription_form').trigger('reset')
+                            }, 500)
+                        }, 500)
+
+
+                    }
+                }
+            })
+
+        },200)
+
+
+
+
+</script>
+
+{% schema %}
+    {
+    "name": "Product page set",
+    "settings": [
+    {
+    "type": "header",
+    "content": "General"
+    },
+    {
+    "type": "select",
+    "id": "layout",
+    "label": "Layout",
+    "default": "1",
+    "options": [
+    {
+    "value": "1",
+    "label": "1"
+    }
+    ]
+    },
+    {
+    "type": "select",
+    "id": "sidebar",
+    "label": "Sidebar",
+    "default": "off",
+    "options": [
+    {
+    "value": "off",
+    "label": "Off"
+    },
+    {
+    "value": "left",
+    "label": "Left"
+    },
+    {
+    "value": "right",
+    "label": "Right"
+    }
+    ]
+    },
+    {
+    "type": "checkbox",
+    "id": "enable_sticky_gallery",
+    "label": "Enable sticky gallery",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "enable_sticky_sidebar",
+    "label": "Enable sticky sidebar",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "enable_sticky_add_to_cart",
+    "label": "Enable sticky 'Add to cart' bar",
+    "default": true
+    },
+    {
+    "type": "header",
+    "content": "Gallery"
+    },
+    {
+    "type": "checkbox",
+    "id": "show_arrows",
+    "label": "Arrows",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_btn_fullscreen",
+    "label": "Show button 'Fullscreen'",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "video_autoplay",
+    "label": "Enable autoplay video",
+    "default": false
+    },
+    {
+    "type": "checkbox",
+    "id": "enable_zoom",
+    "label": "Zoom",
+    "default": true
+    },
+    {
+    "type": "header",
+    "content": "Information"
+    },
+    {
+    "type": "checkbox",
+    "id": "show_label_in_stock",
+    "label": "Show label 'In stock'",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_label_out_stock",
+    "label": "Show label 'Out stock'",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_label_sale",
+    "label": "Show label 'Sale'",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_label_new",
+    "label": "Show label 'New'",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_label_hot",
+    "label": "Show label 'Hot'",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_collections",
+    "label": "Show collections",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_title",
+    "label": "Show title",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_price",
+    "label": "Show price",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_sale_price_separator",
+    "label": "Show sale price separator",
+    "default": false
+    },
+    {
+    "type": "checkbox",
+    "id": "show_sale_details",
+    "label": "Show sale price details",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_sku",
+    "label": "Show SKU",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_barcode",
+    "label": "Show barcode",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_availability",
+    "label": "Show availability",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_type",
+    "label": "Show type",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_vendor",
+    "label": "Show vendor",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_reviews",
+    "label": "Show reviews",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "hide_empty_reviews",
+    "label": "Hide empty reviews",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "hide_reviews_counter",
+    "label": "Hide reviews counter",
+    "default": false
+    },
+    {
+    "type": "checkbox",
+    "id": "show_countdown",
+    "label": "Show countdown",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_stock_countdown",
+    "label": "Show stock countdown",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_stock_countdown_range",
+    "label": "Show range of stock countdown",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_text_countdown",
+    "label": "Show text countdown",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_visitors",
+    "label": "Show real time visitors",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_options",
+    "label": "Show options (variants)",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_quantity",
+    "label": "Show quantity",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_size_guide",
+    "label": "Show button 'Size guide'",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_delivery_return",
+    "label": "Show button 'Delivery return",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_button_add_to_cart",
+    "label": "Show button 'Add to cart'",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_button_add_to_wishlist",
+    "label": "Show button 'Add to wish list'",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_button_add_to_compare",
+    "label": "Show button 'Add to compare'",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_button_dynamic_checkout",
+    "label": "Show dynamic checkout button",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_dynamic_checkout_confirmation",
+    "label": "Show dynamic checkout confirmation",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "styled_dynamic_checkout",
+    "label": "Custom style for dynamic checkout button",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_free_shipping",
+    "label": "Show free shipping",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_payments",
+    "label": "Show payments",
+    "default": true
+    },
+    {
+    "type": "select",
+    "id": "payments_type",
+    "label": "Type",
+    "default": "dark",
+    "options": [
+    {
+    "value": "dark",
+    "label": "Dark"
+    },
+    {
+    "value": "light",
+    "label": "Light"
+    }
+    ]
+    },
+    {
+    "type": "checkbox",
+    "id": "show_addthis",
+    "label": "Show addthis",
+    "default": true
+    },
+    {
+    "type": "header",
+    "content": "Tabs"
+    },
+    {
+    "type": "checkbox",
+    "id": "show_tabs",
+    "label": "Show tabs",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_tab_description",
+    "label": "Show tab 'Description'",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_tab_reviews",
+    "label": "Show tab 'Reviews'",
+    "default": true
+    }
+    ],
+    "blocks": [
+    {
+    "type": "tab_custom_html",
+    "name": "Custom html tab",
+    "settings": [
+    {
+    "type": "text",
+    "id": "title",
+    "label": "Title",
+    "default": "Custom HTML"
+    },
+    {
+    "type": "page",
+    "id": "page_content",
+    "label": "Page content"
+    },
+    {
+    "type": "html",
+    "id": "content",
+    "label": "Content"
+    }
+    ]
+    },
+    {
+    "type": "tab_custom_text",
+    "name": "Custom text tab",
+    "settings": [
+    {
+    "type": "text",
+    "id": "title",
+    "label": "Title",
+    "default": "Custom text"
+    },
+    {
+    "type": "richtext",
+    "id": "content",
+    "label": "Content",
+    "default": "<p>Text content of Tab goes here!</p><p>You can make&nbsp;text <strong>bold</strong>, <em>italic</em> or add <a href=\"\/blogs\/news\" title=\"News\">link</a> using rich text editor.</p><p></p>"
+    }
+    ]
+    },
+    {
+    "type": "custom_html",
+    "name": "Custom HTML",
+    "settings": [
+    {
+    "type": "page",
+    "id": "page_content",
+    "label": "Page content"
+    },
+    {
+    "type": "textarea",
+    "id": "content",
+    "label": "Content"
+    }
+    ]
+    },
+    {
+    "type": "products",
+    "name": "Products",
+    "settings": [
+    {
+    "type": "text",
+    "id": "title",
+    "label": "Title",
+    "default": "FEATURED PRODUCTS"
+    },
+    {
+    "type": "collection",
+    "id": "collection",
+    "label": "Collection"
+    },
+    {
+    "type": "range",
+    "id": "max_count",
+    "min": 0,
+    "max": 10,
+    "step": 1,
+    "unit": "pds",
+    "label": "Max count",
+    "info": "0 is infinite",
+    "default": 3
+    },
+    {
+    "type": "select",
+    "id": "product_type",
+    "label": "Products type",
+    "default": "short",
+    "options": [
+    {
+    "value": "short",
+    "label": "Short"
+    },
+    {
+    "value": "full",
+    "label": "Full"
+    }
+    ]
+    }
+    ]
+    }
+    ]
+    }
+{% endschema %}

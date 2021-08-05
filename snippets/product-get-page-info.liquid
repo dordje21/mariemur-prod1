@@ -1,0 +1,1636 @@
+{%- if layout == '6' -%}
+    {%- assign centered = true -%}
+{%- else -%}
+    {%- assign centered = false -%}
+{%- endif -%}
+{% capture button_cart_type %}{% if settings.color_product_page_button_cart_type == '2' %} btn--invert{% elsif settings.color_product_page_button_cart_type == '3' %} btn--secondary{% endif %}{% endcapture %}
+{% capture button_wishlist_type %}{% if settings.color_product_page_button_wishlist_type == '2' %} btn--invert{% elsif settings.color_product_page_button_wishlist_type == '3' %} btn--secondary{% endif %}{% endcapture %}
+{% capture button_compare_type %}{% if settings.color_product_page_button_compare_type == '2' %} btn--invert{% elsif settings.color_product_page_button_compare_type == '3' %} btn--secondary{% endif %}{% endcapture %}
+{% capture countdown_html %}
+    {%- if show_countdown -%}
+        <div class="product-page-info__countdown mb-20">
+            {% capture countdown_title %}{{ 'products.product.countdown.title' | t }}{% endcapture %}
+            {% include 'product-get-countdown' with date: countdown_date, countdown_type: 2, countdown_title: countdown_title, centered: centered %}
+        </div>
+    {%- endif -%}
+{% endcapture %}
+{% capture stock_countdown_html %}
+    {%- if show_stock_countdown -%}
+        <div class="product-page-info__stock-countdown mb-20">
+            <div class="stock-countdown{% unless quantity > 0 and quantity <= stock_countdown_min %} d-none-important{% endunless %}" data-js-product-stock-countdown data-min="{{ stock_countdown_min }}">
+                {% capture quantity_html %}<span class="stock-countdown__counter">{{ quantity }}</span>{% endcapture %}
+                <p class="stock-countdown__title h5 ls-0 mb-5 text-center{% if layout != '6' %} text-lg-left{% endif %}" data-js-product-stock-countdown-title>{{ 'products.product.stock_countdown_html' | t: quantity: quantity_html }}</p>
+                {%- if show_stock_countdown_range -%}
+                    <div class="stock-countdown__range">
+                        {%- assign countdown_range_quotient = stock_countdown_min | times: 1.0 | divided_by: 100 -%}
+                        {%- assign countdown_range_procent = quantity | divided_by: countdown_range_quotient -%}
+                        <div class="stock-countdown__progress" data-js-product-stock-countdown-progress style="width: {{ countdown_range_procent }}%;"></div>
+                    </div>
+                {%- endif -%}
+            </div>
+        </div>
+    {%- endif -%}
+{% endcapture %}
+{% capture text_countdown_html %}
+    {%- if show_text_countdown -%}
+        <div class="product-page-info__text-countdown mt-35 mb-25">
+            <div class="text-countdown px-8 py-3 text-center{% if layout != '6' %} text-lg-left{% endif %} js-text-countdown" data-reset-time="{{ settings.product_text_countdown_reset_time }}" data-delivery-time="{{ settings.product_text_countdown_delivery_time }}" data-delivery-format="{{ settings.product_text_countdown_delivery_format }}" data-delivery-excludes="{{ settings.product_text_countdown_delivery_excludes }}">
+                {% capture text_countdown_counter_html %}<span class="text-countdown__counter" data-js-text-countdown-counter></span>{% endcapture %}
+                {% capture text_countdown_delivery_html %}<span class="text-underline" data-js-text-countdown-delivery></span>{% endcapture %}
+                <i class="mr-4">{% include 'icon-theme-116' %}</i> {{ 'products.product.text_countdown_html' | t: counter: text_countdown_counter_html, delivery: text_countdown_delivery_html }}
+            </div>
+        </div>
+    {%- endif -%}
+{% endcapture %}
+{% capture visitors_html %}
+    {%- if show_visitors -%}
+        <div class="product-page-info__visitors mt-25 mb-25">
+            <div class="visitors ls-0 text-center{% if layout != '6' %} text-lg-left{% endif %} js-visitors" data-min="{{ settings.product_visitors_min }}" data-max="{{ settings.product_visitors_max }}" data-interval-min="{{ settings.product_visitors_interval_min }}" data-interval-max="{{ settings.product_visitors_interval_max }}" data-stroke="{{ settings.product_visitors_stroke }}">
+                {%- assign visitors_random_diff = settings.product_visitors_max | minus: settings.product_visitors_min -%}
+                {%- assign visitors_random = "now" | date: "%N" | modulo: visitors_random_diff | plus: settings.product_visitors_min -%}
+                {% capture visitors_counter_html %}<span class="visitors__counter d-inline-block px-8" data-js-counter>{{ visitors_random }}</span>{% endcapture %}
+                {{ 'products.product.visitors_html' | t: counter: visitors_counter_html }}
+            </div>
+        </div>
+    {%- endif -%}
+{% endcapture %}
+{% capture free_shipping_html %}
+    {%- if show_free_shipping and settings.show_free_shipping -%}
+        <div class="product-page-info__free-shipping mt-10 mb-15">
+            {% include 'free-shipping' with mobile_centered: true centered: centered %}
+        </div>
+    {%- endif -%}
+{% endcapture %}
+{%- case layout -%}
+{%- when '1' -%}
+    <div class="product-page-info">
+        {%- if show_label_in_stock or show_label_out_stock or show_label_sale or show_label_new or show_label_hot -%}
+            <div class="product-page-info__labels d-flex justify-content-center justify-content-lg-start mb-15">
+                {%- if show_label_hot -%}
+                    {% include 'product-get-label-hot' %}
+                {%- endif -%}
+                {%- if show_label_new -%}
+                    {% include 'product-get-label-new' %}
+                {%- endif -%}
+                {%- if show_label_sale -%}
+                    {% include 'product-get-label-sale' %}
+                {%- endif -%}
+                {%- if show_label_in_stock -%}
+                    {% include 'product-get-label-in-stock' %}
+                {%- endif -%}
+                {%- if show_label_out_stock -%}
+                    {% include 'product-get-label-out-stock' %}
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        {%- if show_collections and product.collections.size > 0 -%}
+            <div class="product-page-info__collections mb-3 text-center text-lg-left">
+                {% include 'product-get-collections' %}
+            </div>
+        {%- endif -%}
+        <div class="product-page-info__title mb-15 text-center text-lg-left{% if settings.font_alternative_product_page_title %} ff-alternative{% endif %}">
+            {%- if is_quick_view -%}
+                <a href="{{ url }}" class="h3 m-0">{{ title }}</a>
+            {%- else -%}
+                <h1 class="h3 m-0">{{ title }}</h1>
+            {%- endif -%}
+        </div>
+        {%- if show_reviews -%}
+            <div class="product-page-info__reviews text-center text-lg-left">
+                {% include 'product-get-review' with hide_empty: hide_empty_reviews hide_counter: hide_reviews_counter hide_mobile_counter: hide_reviews_mobile_counter %}
+            </div>
+        {%- endif -%}
+        {%- if show_sku or show_barcode or show_availability or show_type or show_vendor -%}
+            <div class="product-page-info__details mb-25 text-center text-lg-left">
+                {%- if show_sku -%}
+                    <div class="product-page-info__sku{% if sku == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-sku>{{ 'products.product.sku' | t }}: <span>{{ sku }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_barcode -%}
+                    <div class="product-page-info__barcode{% if barcode == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-barcode>{{ 'products.product.barcode' | t }}: <span>{{ barcode }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_availability -%}
+                    <div class="product-page-info__availability mb-5">
+                        {%- if quantity == 1 -%}
+                            {%- capture item -%}{{ 'layout.cart.items_count.one' | t }}{%- endcapture -%}
+                        {%- else -%}
+                            {%- capture item -%}{{ 'layout.cart.items_count.other' | t }}{%- endcapture -%}
+                        {%- endif -%}
+                        <p class="m-0" data-js-product-availability data-availability="{% if available %}true{% else %}false{% endif %}">{{ 'products.product.availability' | t }}: <span>{% if available %}{{ 'products.product.availability_value_in_stock' | t: count: quantity, item: item }}{% else %}{{ 'products.product.availability_value_out_stock' | t }}{% endif %}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_type -%}
+                    <div class="product-page-info__type{% if type == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-type>{{ 'products.product.type' | t }}: <span>{{ type }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_vendor -%}
+                    <div class="product-page-info__vendor{% if vendor == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-vendor>{{ 'products.product.vendor' | t }}: <span>{{ vendor }}</span></p>
+                    </div>
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        {%- if show_price -%}
+            <div class="mb-25">
+                <div class="one-product-info__price text-center text-lg-left">
+                    {% if settings.site_discount != blank and collection.template_suffix == 'discounted' and product.tags contains 'enable_discount' %}
+                        {% include 'product-get-price-discount' with min_price: false %}
+                    {% else %}
+                        {% include 'product-get-price' with min_price: false %}
+                        {%- if show_sale_details -%}
+                            <p class="one-product-info__price-sale-details mt-5 mt-lg-10 text-center text-lg-left{% unless compare_at_price > price %} d-none-important{% endunless %}"
+                               data-js-product-price-sale-details>
+                                {%- if compare_at_price > price -%}
+                                    {%- assign price_save = compare_at_price | minus: price -%}
+                                    {%- assign price_save_money = price_save | money -%}
+                                    {%- assign price_save_procent = price | times: 100 | divided_by: compare_at_price | minus: 100 | times: -1 -%}
+                                    {{ 'products.product.price_sale_details_html' | t: price: price_save_money, procent: price_save_procent }}
+                                {%- endif -%}
+                            </p>
+                        {%- endif -%}
+                    {% endif %}
+                </div>
+
+                <!-- Placement v1 -->
+                <div class="klarna-container" style="visibility:hidden; max-height: 1px;">
+                <klarna-placement
+                        data-id="7f56227f-6e77-4ace-915e-0e44e5e4b9b3"
+                        data-purchase_amount="{{ price }}"
+                ></klarna-placement>
+                </div>
+                <!-- end Placement -->
+
+            </div>
+        {%- endif -%}
+        {{ countdown_html }}
+        {{ stock_countdown_html }}
+        {{ text_countdown_html }}
+        {{ visitors_html }}
+        <div class="border-top my-25"></div>
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+            <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+            <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
+            {% form "product", product, id: null, class: "d-flex flex-column w-100 m-0", data-js-product-form: '' %}
+                <input type="hidden" name="variant_id" value="{{ current_variant.id }}" data-js-product-variant-input>
+                {%- if show_options and show_custom_options -%}
+                    {%- unless product.has_only_default_variant -%}
+                        <div class="product-page-info__options mb-15">
+                            {%- unless is_quick_view -%}
+                                {%- assign trigger_id = 'footbar' -%}
+                            {%- endunless -%}
+                            {% include 'product-get-options' with options_type: 2 hide_options_without_availability: hide_options_without_availability options_show_title: true change_history: true %}
+                        </div>
+                    {%- endunless -%}
+                {%- endif -%}
+
+                {% if settings.site_discount != blank and collection.template_suffix == 'discounted' and product.tags contains 'enable_discount' %}
+                    <input type="hidden" name="properties[_with_discount]" value="true">
+                {% endif %}
+
+                {%- if show_button_add_to_cart or show_options -%}
+                    <div class="product-page-info__variants mb-15{% if show_options == false or show_custom_options %} d-none{% endif %}">
+                        {% include 'product-get-variants' %}
+                    </div>
+                {%- endif -%}
+                {% unless product.handle == 'gift-card' %}
+                    {%- if show_delivery_return -%}
+                        <div class="product-page-info__details-buttons mb-30 mb-lg-15 d-flex flex-wrap justify-content-center justify-content-lg-start">
+                            <div class="btn-link h6 mb-10 px-15 px-lg-10 js-popup-button" data-js-popup-button="delivery-return">{{ 'products.product.delivery_return' | t }}</div>
+                        </div>
+                    {%- endif -%}
+                {% endunless %}
+                {%- if show_quantity -%}
+                    <div class="product-page-info__quantity mb-20">
+                        {%- unless is_quick_view -%}
+                            {%- assign quantity_connect = 'footbar' -%}
+                        {%- endunless -%}
+                        {% include 'product-get-quantity' with quantity_show_title: true %}
+                    </div>
+                {%- endif -%}
+                {%- if show_button_add_to_cart or show_button_add_to_wishlist or show_button_add_to_compare or show_button_dynamic_checkout -%}
+                    <div data-js-footbar-product-limit>
+                        {%- if show_button_add_to_cart -%}
+                            <div class="product-page-info__button-add-to-cart mb-10">
+                                <button id="AddToCart" type="submit" class="btn js_custom_add{{ button_cart_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %}{% if settings.product_ajax_cart %} js-product-button-add-to-cart{% endif %}" name="add"{% unless is_quick_view %} data-js-trigger-id="add-to-cart" data-js-button-add-to-cart-clone-id="footbar"{% endunless %} data-js-product-button-add-to-cart{% unless current_variant.available %} disabled="disabled" data-button-status="sold-out"{% endunless %}>
+                                    <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-4">{% include 'icon-theme-109' %}</i><span class="btn__text">{{ 'products.product.add_to_cart.title' | t }}</span></span>
+                                    <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-4">{% include 'icon-theme-110' %}</i>{{ 'products.product.add_to_cart.added' | t }}</span>
+                                    <span class="d-flex flex-center" data-button-content="sold-out">{{ 'products.product.add_to_cart.sold_out' | t }}</span>
+                                </button>
+                            </div>
+                        {%- endif -%}
+                        {%- if show_button_add_to_wishlist -%}
+                            {% capture button_add_to_wishlist_html %}
+                            <div class="product-page-info__button-add-to-wishlist mb-10">
+                                {%- if customer and customer.metafields.wishlist -%}
+                                    {%- for item in customer.metafields.wishlist -%}
+                                        {%- assign wishlist_id = item[0] | abs -%}
+                                        {%- assign wishlist_handle = item[1] -%}
+                                        {%- if current_variant_id == wishlist_id and product.handle == wishlist_handle -%}
+                                            {%- assign present_in_wishlist = true -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                {%- endif -%}
+                                <a href="/account" onclick="dataLayer.push({'event':'UserFunnel','eventCategory':'Wishlist', 'eventAction': 'Add'});" class="btn{{ button_wishlist_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %} js-store-lists-add-wishlist"{% if present_in_wishlist %} data-button-status="added"{% endif %}>
+                                    <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-2">{% include 'icon-theme-180' %}</i><span class="btn__text">{{ 'products.product.add_to_widhlist.title' | t }}</span></span>
+                                    <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-2">{% include 'icon-theme-181' %}</i>{{ 'products.product.add_to_widhlist.added' | t }}</span>
+                                </a>
+                                {%- assign present_in_wishlist = false -%}
+                            </div>
+                            {% endcapture %}
+                        {%- endif -%}
+                        {%- if show_button_add_to_compare -%}
+                            {% capture button_add_to_compare_html %}
+                            <div class="product-page-info__button-add-to-compare mb-10">
+                                {%- if customer and customer.metafields.compare -%}
+                                    {%- for item in customer.metafields.compare -%}
+                                        {%- assign compare_id = item[0] | abs -%}
+                                        {%- assign compare_handle = item[1] -%}
+                                        {%- if current_variant_id == compare_id and product.handle == compare_handle -%}
+                                            {%- assign present_in_compare = true -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                {%- endif -%}
+                                <a href="/account" class="btn{{ button_compare_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %} js-store-lists-add-compare"{% if present_in_compare %} data-button-status="added"{% endif %}>
+                                    <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-6">{% include 'icon-theme-039' %}</i><span class="btn__text">{{ 'products.product.add_to_compare.title' | t }}</span></span>
+                                    <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-6">{% include 'icon-theme-235' %}</i>{{ 'products.product.add_to_compare.added' | t }}</span>
+                                </a>
+                                {%- assign present_in_compare = false -%}
+                            </div>
+                            {% endcapture %}
+                        {%- endif -%}
+                        {%- if button_add_to_wishlist_html or button_add_to_compare_html -%}
+                            <div class="buttons-group-grid-px-5 row">
+                                {%- if button_add_to_wishlist_html -%}
+                                    <div class="col-12{% if button_add_to_compare_html %} col-md-6{% endif %}">
+                                        {{ button_add_to_wishlist_html }}
+                                    </div>
+                                {%- endif -%}
+                                {%- if button_add_to_compare_html -%}
+                                    <div class="col-12{% if button_add_to_wishlist_html %} col-md-6{% endif %}">
+                                        {{ button_add_to_compare_html }}
+                                    </div>
+                                {%- endif -%}
+                            </div>
+                        {%- endif -%}
+                        {%- if show_button_dynamic_checkout -%}
+                            <div class="product-page-info__dynamic-checkout mt-20 mb-20">
+                                <div class="dynamic-checkout js-dynamic-checkout">
+                                    {%- if show_dynamic_checkout_confirmation -%}
+                                        <div class="dynamic-checkout__confirmation text-center text-lg-left">
+                                            <label class="input-checkbox position-relative d-inline-flex align-items-center mx-auto cursor-pointer">
+                                                <input type="checkbox" class="d-none" name="dynamic_checkout" data-js-dynamic-checkout-confirmation>
+                                                <span class="position-relative d-block mr-10 border"><i class="d-none">{% include 'icon-theme-146' %}</i></span>
+                                                <span>{{ 'products.product.dynamic_checkout.confirmation' | t }}</span>
+                                            </label>
+                                        </div>
+                                    {%- endif -%}
+                                    <div class="dynamic-checkout__button{% if styled_dynamic_checkout %} dynamic-checkout__button--styled{% endif %} mt-25{% if show_dynamic_checkout_confirmation %} disabled{% endif %}" data-js-dynamic-checkout-button-wrapper>
+                                        {{ form | payment_button }}
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                Loader.require({type: "script", name: "dynamic_checkout"});
+                            </script>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+                {{ free_shipping_html }}
+                {%- if show_payments -%}
+                    <div class="product-page-info__payments position-relative d-flex flex-wrap flex-center py-10 px-15 mt-20 mb-25 border">
+                        <label class="position-absolute top-0 px-20 m-0 text-nowrap text-center">{{ 'products.product.payments' | t }}</label>
+                        {%- assign payments_types = 'power_by_stripe,shopify_secure,aes_256bit,paypal,visa,mastercard,discover_network,american_express,mcafee_secure' | split: ',' -%}
+                        {%- for type in payments_types -%}
+                            {% capture show_prop %}product_show_{{ type }}{% endcapture %}
+                            {% capture url_prop %}product_{{ type }}_url{% endcapture %}
+                            {% capture tooltip_name %}payments.tooltip.{{ type }}{% endcapture %}
+                            {%- if settings[show_prop] -%}
+                                {%- assign icon_name = type | prepend: 'icon-payment-' | replace: '_', '-' -%}
+                                {%- if payments_type == 'light' -%}
+                                    {%- assign icon_name = icon_name | append: '-light' -%}
+                                {%- endif -%}
+                                {% capture payment %}{% include icon_name %}<span class="d-none">{{ type | capitalize | replace: '_', ' ' }}</span>{% endcapture %}
+                                {% capture tooltip_attrs %}
+                                    {%- if settings.product_enable_tooltips and settings.product_enable_payment_tooltips -%}
+                                        data-js-tooltip
+                                        data-tippy-content="{{ tooltip_name | t }}"
+                                        data-tippy-placement="bottom"
+                                        data-tippy-distance="8"
+                                    {%- endif -%}
+                                {% endcapture %}
+                                {%- if settings[url_prop] != blank -%}
+                                    <a href="{{ settings[url_prop] }}" class="px-5"{{ tooltip_attrs }}>{{ payment }}</a>
+                                {%- else -%}
+                                    <span class="d-flex align-items-center px-5"{{ tooltip_attrs }}>{{ payment }}</span>
+                                {%- endif -%}
+                            {%- endif -%}
+                        {%- endfor -%}
+                    </div>
+                {%- endif -%}
+                {%- if show_addthis -%}
+                    {% capture addthis_html %}{% include 'addthis' %}{% endcapture %}
+                    {%- if addthis_html.size > 0 -%}
+                        <div class="product-page-info__share mb-20">
+                            <label>{{ 'products.product.share' | t }}</label>
+                            {{ addthis_html }}
+                        </div>
+                    {%- endif -%}
+                {%- endif -%}
+            {% endform %}
+        </div>
+    </div>
+{%- when '2' -%}
+    <div class="product-page-info">
+        {%- if show_label_in_stock or show_label_out_stock or show_label_sale or show_label_new or show_label_hot -%}
+            <div class="product-page-info__labels d-flex justify-content-center justify-content-lg-start mb-15">
+                {%- if show_label_hot -%}
+                    {% include 'product-get-label-hot' %}
+                {%- endif -%}
+                {%- if show_label_new -%}
+                    {% include 'product-get-label-new' %}
+                {%- endif -%}
+                {%- if show_label_sale -%}
+                    {% include 'product-get-label-sale' %}
+                {%- endif -%}
+                {%- if show_label_in_stock -%}
+                    {% include 'product-get-label-in-stock' %}
+                {%- endif -%}
+                {%- if show_label_out_stock -%}
+                    {% include 'product-get-label-out-stock' %}
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        {%- if show_collections and product.collections.size > 0 -%}
+            <div class="product-page-info__collections mb-3 text-center text-lg-left">
+                {% include 'product-get-collections' %}
+            </div>
+        {%- endif -%}
+        <div class="product-page-info__title mb-15 text-center text-lg-left{% if settings.font_alternative_product_page_title %} ff-alternative{% endif %}">
+            {%- if is_quick_view -%}
+                <a href="{{ url }}" class="h3 m-0">{{ title }}</a>
+            {%- else -%}
+                <h1 class="h3 m-0">{{ title }}</h1>
+            {%- endif -%}
+        </div>
+        {%- if show_reviews -%}
+            <div class="product-page-info__reviews text-center text-lg-left">
+                {% include 'product-get-review' with hide_empty: hide_empty_reviews hide_counter: hide_reviews_counter hide_mobile_counter: hide_reviews_mobile_counter %}
+            </div>
+        {%- endif -%}
+        {%- if show_sku or show_barcode or show_availability or show_type or show_vendor -%}
+            <div class="product-page-info__details mb-25 text-center text-lg-left">
+                {%- if show_sku -%}
+                    <div class="product-page-info__sku{% if sku == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-sku>{{ 'products.product.sku' | t }}: <span>{{ sku }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_barcode -%}
+                    <div class="product-page-info__barcode{% if barcode == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-barcode>{{ 'products.product.barcode' | t }}: <span>{{ barcode }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_availability -%}
+                    <div class="product-page-info__availability mb-5">
+                        {%- if quantity == 1 -%}
+                            {%- capture item -%}{{ 'layout.cart.items_count.one' | t }}{%- endcapture -%}
+                        {%- else -%}
+                            {%- capture item -%}{{ 'layout.cart.items_count.other' | t }}{%- endcapture -%}
+                        {%- endif -%}
+                        <p class="m-0" data-js-product-availability data-availability="{% if available %}true{% else %}false{% endif %}">{{ 'products.product.availability' | t }}: <span>{% if available %}{{ 'products.product.availability_value_in_stock' | t: count: quantity, item: item }}{% else %}{{ 'products.product.availability_value_out_stock' | t }}{% endif %}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_type -%}
+                    <div class="product-page-info__type{% if type == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-type>{{ 'products.product.type' | t }}: <span>{{ type }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_vendor -%}
+                    <div class="product-page-info__vendor{% if vendor == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-vendor>{{ 'products.product.vendor' | t }}: <span>{{ vendor }}</span></p>
+                    </div>
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        {%- if show_price -%}
+            <div class="mb-25">
+                <div class="one-product-info__price text-center text-lg-left">
+                    {% include 'product-get-price' with min_price: false %}
+                </div>
+                {%- if show_sale_details -%}
+                    <p class="one-product-info__price-sale-details mt-5 mt-lg-10 text-center text-lg-left{% unless compare_at_price > price %} d-none-important{% endunless %}"
+                       data-js-product-price-sale-details>
+                        {%- if compare_at_price > price -%}
+                            {%- assign price_save = compare_at_price | minus: price -%}
+                            {%- assign price_save_money = price_save | money -%}
+                            {%- assign price_save_procent = price | times: 100 | divided_by: compare_at_price | minus: 100 | times: -1 -%}
+                            {{ 'products.product.price_sale_details_html' | t: price: price_save_money, procent: price_save_procent }}
+                        {%- endif -%}
+                    </p>
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        {{ countdown_html }}
+        {{ stock_countdown_html }}
+        {{ text_countdown_html }}
+        {{ visitors_html }}
+        <div class="border-top border--dashed my-25"></div>
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+            <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+            <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
+            {% form "product", product, id: null, class: "d-flex flex-column w-100 m-0", data-js-product-form: '' %}
+                <input type="hidden" name="variant_id" value="{{ current_variant.id }}" data-js-product-variant-input>
+                {%- if show_options and show_custom_options -%}
+                    {%- unless product.has_only_default_variant -%}
+                        <div class="product-page-info__options mb-15">
+                            {%- unless is_quick_view -%}
+                                {%- assign trigger_id = 'footbar' -%}
+                            {%- endunless -%}
+                            {% include 'product-get-options' with options_type: 2 hide_options_without_availability: hide_options_without_availability options_show_title: true change_history: true %}
+                        </div>
+                    {%- endunless -%}
+                {%- endif -%}
+                {%- if show_button_add_to_cart or show_options -%}
+                    <div class="product-page-info__variants mb-15{% if show_options == false or show_custom_options %} d-none{% endif %}">
+                        {% include 'product-get-variants' %}
+                    </div>
+                {%- endif -%}
+                {%- if show_size_guide or show_delivery_return -%}
+                    <div class="product-page-info__details-buttons mb-30 mb-lg-15 d-flex flex-wrap justify-content-center justify-content-lg-start">
+                        {%- if show_size_guide -%}
+                            <div class="btn-link h6 mb-10 px-15 px-lg-10 js-popup-button" data-js-popup-button="size-guide">{{ 'products.product.size_guide' | t }}</div>
+                        {%- endif -%}
+                        {%- if show_delivery_return -%}
+                            <div class="btn-link h6 mb-10 px-15 px-lg-10 js-popup-button" data-js-popup-button="delivery-return">{{ 'products.product.delivery_return' | t }}</div>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+                {%- if show_quantity -%}
+                    <div class="product-page-info__quantity mb-20">
+                        {%- unless is_quick_view -%}
+                            {%- assign quantity_connect = 'footbar' -%}
+                        {%- endunless -%}
+                        {% include 'product-get-quantity' with quantity_show_title: true %}
+                    </div>
+                {%- endif -%}
+                {%- if show_button_add_to_cart or show_button_add_to_wishlist or show_button_add_to_compare or show_button_dynamic_checkout -%}
+                    <div data-js-footbar-product-limit>
+                        {%- if show_button_add_to_cart -%}
+                            <div class="product-page-info__button-add-to-cart mb-10">
+                                <button type="submit" class="btn{{ button_cart_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %}{% if settings.product_ajax_cart %} js-product-button-add-to-cart{% endif %}" name="add"{% unless is_quick_view %} data-js-trigger-id="add-to-cart" data-js-button-add-to-cart-clone-id="footbar"{% endunless %} data-js-product-button-add-to-cart{% unless current_variant.available %} disabled="disabled" data-button-status="sold-out"{% endunless %}>
+                                    <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-4">{% include 'icon-theme-109' %}</i><span class="btn__text">{{ 'products.product.add_to_cart.title' | t }}</span></span>
+                                    <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-4">{% include 'icon-theme-110' %}</i>{{ 'products.product.add_to_cart.added' | t }}</span>
+                                    <span class="d-flex flex-center" data-button-content="sold-out">{{ 'products.product.add_to_cart.sold_out' | t }}</span>
+                                </button>
+                            </div>
+                        {%- endif -%}
+                        {%- if show_button_add_to_wishlist -%}
+                            {% capture button_add_to_wishlist_html %}
+                            <div class="product-page-info__button-add-to-wishlist mb-10">
+                                {%- if customer and customer.metafields.wishlist -%}
+                                    {%- for item in customer.metafields.wishlist -%}
+                                        {%- assign wishlist_id = item[0] | abs -%}
+                                        {%- assign wishlist_handle = item[1] -%}
+                                        {%- if current_variant_id == wishlist_id and product.handle == wishlist_handle -%}
+                                            {%- assign present_in_wishlist = true -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                {%- endif -%}
+                                <a href="/account" onclick="dataLayer.push({'event':'UserFunnel','eventCategory':'Wishlist', 'eventAction': 'Add'});" class="btn{{ button_wishlist_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %} js-store-lists-add-wishlist"{% if present_in_wishlist %} data-button-status="added"{% endif %}>
+                                    <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-2">{% include 'icon-theme-180' %}</i><span class="btn__text">{{ 'products.product.add_to_widhlist.title' | t }}</span></span>
+                                    <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-2">{% include 'icon-theme-181' %}</i>{{ 'products.product.add_to_widhlist.added' | t }}</span>
+                                </a>
+                                {%- assign present_in_wishlist = false -%}
+                            </div>
+                            {% endcapture %}
+                        {%- endif -%}
+                        {%- if show_button_add_to_compare -%}
+                            {% capture button_add_to_compare_html %}
+                            <div class="product-page-info__button-add-to-compare mb-10">
+                                {%- if customer and customer.metafields.compare -%}
+                                    {%- for item in customer.metafields.compare -%}
+                                        {%- assign compare_id = item[0] | abs -%}
+                                        {%- assign compare_handle = item[1] -%}
+                                        {%- if current_variant_id == compare_id and product.handle == compare_handle -%}
+                                            {%- assign present_in_compare = true -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                {%- endif -%}
+                                <a href="/account" class="btn{{ button_compare_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %} js-store-lists-add-compare"{% if present_in_compare %} data-button-status="added"{% endif %}>
+                                    <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-6">{% include 'icon-theme-039' %}</i><span class="btn__text">{{ 'products.product.add_to_compare.title' | t }}</span></span>
+                                    <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-6">{% include 'icon-theme-235' %}</i>{{ 'products.product.add_to_compare.added' | t }}</span>
+                                </a>
+                                {%- assign present_in_compare = false -%}
+                            </div>
+                            {% endcapture %}
+                        {%- endif -%}
+                        {%- if button_add_to_wishlist_html or button_add_to_compare_html -%}
+                            <div class="buttons-group-grid-px-5 row">
+                                {%- if button_add_to_wishlist_html -%}
+                                    <div class="col-12{% if button_add_to_compare_html %} col-md-6{% endif %}">
+                                        {{ button_add_to_wishlist_html }}
+                                    </div>
+                                {%- endif -%}
+                                {%- if button_add_to_compare_html -%}
+                                    <div class="col-12{% if button_add_to_wishlist_html %} col-md-6{% endif %}">
+                                        {{ button_add_to_compare_html }}
+                                    </div>
+                                {%- endif -%}
+                            </div>
+                        {%- endif -%}
+                        {%- if show_button_dynamic_checkout -%}
+                            <div class="product-page-info__dynamic-checkout mt-20 mb-20">
+                                <div class="dynamic-checkout js-dynamic-checkout">
+                                    {%- if show_dynamic_checkout_confirmation -%}
+                                        <div class="dynamic-checkout__confirmation text-center text-lg-left">
+                                            <label class="input-checkbox position-relative d-inline-flex align-items-center mx-auto cursor-pointer">
+                                                <input type="checkbox" class="d-none" name="dynamic_checkout" data-js-dynamic-checkout-confirmation>
+                                                <span class="position-relative d-block mr-10 border"><i class="d-none">{% include 'icon-theme-146' %}</i></span>
+                                                <span>{{ 'products.product.dynamic_checkout.confirmation' | t }}</span>
+                                            </label>
+                                        </div>
+                                    {%- endif -%}
+                                    <div class="dynamic-checkout__button{% if styled_dynamic_checkout %} dynamic-checkout__button--styled{% endif %} mt-25{% if show_dynamic_checkout_confirmation %} disabled{% endif %}" data-js-dynamic-checkout-button-wrapper>
+                                        {{ form | payment_button }}
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                Loader.require({type: "script", name: "dynamic_checkout"});
+                            </script>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+                {{ free_shipping_html }}
+                {%- if show_payments -%}
+                    <div class="product-page-info__payments position-relative d-flex flex-wrap flex-center py-10 px-15 mt-20 mb-25 border">
+                        <label class="position-absolute top-0 px-20 m-0 text-nowrap text-center">{{ 'products.product.payments' | t }}</label>
+                        {%- assign payments_types = 'power_by_stripe,shopify_secure,aes_256bit,paypal,visa,mastercard,discover_network,american_express,mcafee_secure' | split: ',' -%}
+                        {%- for type in payments_types -%}
+                            {% capture show_prop %}product_show_{{ type }}{% endcapture %}
+                            {% capture url_prop %}product_{{ type }}_url{% endcapture %}
+                            {% capture tooltip_name %}payments.tooltip.{{ type }}{% endcapture %}
+                            {%- if settings[show_prop] -%}
+                                {%- assign icon_name = type | prepend: 'icon-payment-' | replace: '_', '-' -%}
+                                {%- if payments_type == 'light' -%}
+                                    {%- assign icon_name = icon_name | append: '-light' -%}
+                                {%- endif -%}
+                                {% capture payment %}{% include icon_name %}<span class="d-none">{{ type | capitalize | replace: '_', ' ' }}</span>{% endcapture %}
+                                {% capture tooltip_attrs %}
+                                {%- if settings.product_enable_tooltips and settings.product_enable_payment_tooltips -%}
+                                    data-js-tooltip
+                                    data-tippy-content="{{ tooltip_name | t }}"
+                                    data-tippy-placement="bottom"
+                                    data-tippy-distance="8"
+                                {%- endif -%}
+                                {% endcapture %}
+                                {%- if settings[url_prop] != blank -%}
+                                    <a href="{{ settings[url_prop] }}" class="px-5"{{ tooltip_attrs }}>{{ payment }}</a>
+                                {%- else -%}
+                                    <span class="d-flex align-items-center px-5"{{ tooltip_attrs }}>{{ payment }}</span>
+                                {%- endif -%}
+                            {%- endif -%}
+                        {%- endfor -%}
+                    </div>
+                {%- endif -%}
+                {%- if show_addthis -%}
+                    {% capture addthis_html %}{% include 'addthis' %}{% endcapture %}
+                    {%- if addthis_html.size > 0 -%}
+                        <div class="product-page-info__share mb-20">
+                            <label>{{ 'products.product.share' | t }}</label>
+                            {{ addthis_html }}
+                        </div>
+                    {%- endif -%}
+                {%- endif -%}
+            {% endform %}
+        </div>
+    </div>
+{%- when '3' -%}
+    <div class="product-page-info">
+        {%- if show_label_in_stock or show_label_out_stock or show_label_sale or show_label_new or show_label_hot -%}
+            <div class="product-page-info__labels d-flex justify-content-center justify-content-lg-start mb-15">
+                {%- if show_label_hot -%}
+                    {% include 'product-get-label-hot' %}
+                {%- endif -%}
+                {%- if show_label_new -%}
+                    {% include 'product-get-label-new' %}
+                {%- endif -%}
+                {%- if show_label_sale -%}
+                    {% include 'product-get-label-sale' %}
+                {%- endif -%}
+                {%- if show_label_in_stock -%}
+                    {% include 'product-get-label-in-stock' %}
+                {%- endif -%}
+                {%- if show_label_out_stock -%}
+                    {% include 'product-get-label-out-stock' %}
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        {%- if show_collections and product.collections.size > 0 -%}
+            <div class="product-page-info__collections mb-3 text-center text-lg-left">
+                {% include 'product-get-collections' %}
+            </div>
+        {%- endif -%}
+        <div class="product-page-info__title mb-15 text-center text-lg-left{% if settings.font_alternative_product_page_title %} ff-alternative{% endif %}">
+            {%- if is_quick_view -%}
+                <a href="{{ url }}" class="h3 m-0">{{ title }}</a>
+            {%- else -%}
+                <h1 class="h3 m-0">{{ title }}</h1>
+            {%- endif -%}
+        </div>
+        {%- if show_reviews -%}
+            <div class="product-page-info__reviews text-center text-lg-left">
+                {% include 'product-get-review' with hide_empty: hide_empty_reviews hide_counter: hide_reviews_counter hide_mobile_counter: hide_reviews_mobile_counter %}
+            </div>
+        {%- endif -%}
+        {%- if show_sku or show_barcode or show_availability or show_type or show_vendor -%}
+            <div class="product-page-info__details mb-25 text-center text-lg-left">
+                {%- if show_sku -%}
+                    <div class="product-page-info__sku{% if sku == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-sku>{{ 'products.product.sku' | t }}: <span>{{ sku }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_barcode -%}
+                    <div class="product-page-info__barcode{% if barcode == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-barcode>{{ 'products.product.barcode' | t }}: <span>{{ barcode }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_availability -%}
+                    <div class="product-page-info__availability mb-5">
+                        {%- if quantity == 1 -%}
+                            {%- capture item -%}{{ 'layout.cart.items_count.one' | t }}{%- endcapture -%}
+                        {%- else -%}
+                            {%- capture item -%}{{ 'layout.cart.items_count.other' | t }}{%- endcapture -%}
+                        {%- endif -%}
+                        <p class="m-0" data-js-product-availability data-availability="{% if available %}true{% else %}false{% endif %}">{{ 'products.product.availability' | t }}: <span>{% if available %}{{ 'products.product.availability_value_in_stock' | t: count: quantity, item: item }}{% else %}{{ 'products.product.availability_value_out_stock' | t }}{% endif %}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_type -%}
+                    <div class="product-page-info__type{% if type == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-type>{{ 'products.product.type' | t }}: <span>{{ type }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_vendor -%}
+                    <div class="product-page-info__vendor{% if vendor == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-vendor>{{ 'products.product.vendor' | t }}: <span>{{ vendor }}</span></p>
+                    </div>
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        {%- if show_price -%}
+            <div class="mb-25">
+                <div class="one-product-info__price text-center text-lg-left">
+                    {% include 'product-get-price' with min_price: false %}
+                </div>
+                {%- if show_sale_details -%}
+                    <p class="one-product-info__price-sale-details mt-5 mt-lg-10 text-center text-lg-left{% unless compare_at_price > price %} d-none-important{% endunless %}"
+                       data-js-product-price-sale-details>
+                        {%- if compare_at_price > price -%}
+                            {%- assign price_save = compare_at_price | minus: price -%}
+                            {%- assign price_save_money = price_save | money -%}
+                            {%- assign price_save_procent = price | times: 100 | divided_by: compare_at_price | minus: 100 | times: -1 -%}
+                            {{ 'products.product.price_sale_details_html' | t: price: price_save_money, procent: price_save_procent }}
+                        {%- endif -%}
+                    </p>
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        {{ countdown_html }}
+        {{ stock_countdown_html }}
+        {{ text_countdown_html }}
+        {{ visitors_html }}
+        <div class="border-top border--dashed my-25"></div>
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+            <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+            <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
+            {% form "product", product, id: null, class: "d-flex flex-column w-100 m-0", data-js-product-form: '' %}
+                <input type="hidden" name="variant_id" value="{{ current_variant.id }}" data-js-product-variant-input>
+                {%- if show_options and show_custom_options -%}
+                    {%- unless product.has_only_default_variant -%}
+                        <div class="product-page-info__options mb-15">
+                            {%- unless is_quick_view -%}
+                                {%- assign trigger_id = 'footbar' -%}
+                            {%- endunless -%}
+                            {% include 'product-get-options' with options_type: 2 hide_options_without_availability: hide_options_without_availability options_show_title: true change_history: true %}
+                        </div>
+                    {%- endunless -%}
+                {%- endif -%}
+                {%- if show_button_add_to_cart or show_options -%}
+                    <div class="product-page-info__variants mb-15{% if show_options == false or show_custom_options %} d-none{% endif %}">
+                        {% include 'product-get-variants' %}
+                    </div>
+                {%- endif -%}
+                {%- if show_size_guide or show_delivery_return -%}
+                    <div class="product-page-info__details-buttons mb-30 mb-lg-15 d-flex flex-wrap justify-content-center justify-content-lg-start">
+                        {%- if show_size_guide -%}
+                            <div class="btn-link h6 mb-10 px-15 px-lg-10 js-popup-button" data-js-popup-button="size-guide">{{ 'products.product.size_guide' | t }}</div>
+                        {%- endif -%}
+                        {%- if show_delivery_return -%}
+                            <div class="btn-link h6 mb-10 px-15 px-lg-10 js-popup-button" data-js-popup-button="delivery-return">{{ 'products.product.delivery_return' | t }}</div>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+                {%- if show_quantity -%}
+                    <div class="product-page-info__quantity mb-20">
+                        {%- unless is_quick_view -%}
+                            {%- assign quantity_connect = 'footbar' -%}
+                        {%- endunless -%}
+                        {% include 'product-get-quantity' with quantity_show_title: true %}
+                    </div>
+                {%- endif -%}
+                {%- if show_button_add_to_cart or show_button_add_to_wishlist or show_button_add_to_compare or show_button_dynamic_checkout -%}
+                    <div data-js-footbar-product-limit>
+                        {%- if show_button_add_to_cart -%}
+                            <div class="product-page-info__button-add-to-cart mb-10">
+                                <button type="submit" class="btn{{ button_cart_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %}{% if settings.product_ajax_cart %} js-product-button-add-to-cart{% endif %}" name="add"{% unless is_quick_view %} data-js-trigger-id="add-to-cart" data-js-button-add-to-cart-clone-id="footbar"{% endunless %} data-js-product-button-add-to-cart{% unless current_variant.available %} disabled="disabled" data-button-status="sold-out"{% endunless %}>
+                                    <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-4">{% include 'icon-theme-109' %}</i><span class="btn__text">{{ 'products.product.add_to_cart.title' | t }}</span></span>
+                                    <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-4">{% include 'icon-theme-110' %}</i>{{ 'products.product.add_to_cart.added' | t }}</span>
+                                    <span class="d-flex flex-center" data-button-content="sold-out">{{ 'products.product.add_to_cart.sold_out' | t }}</span>
+                                </button>
+                            </div>
+                        {%- endif -%}
+                        {%- if show_button_add_to_wishlist -%}
+                            <div class="product-page-info__button-add-to-wishlist mb-10">
+                                {%- if customer and customer.metafields.wishlist -%}
+                                    {%- for item in customer.metafields.wishlist -%}
+                                        {%- assign wishlist_id = item[0] | abs -%}
+                                        {%- assign wishlist_handle = item[1] -%}
+                                        {%- if current_variant_id == wishlist_id and product.handle == wishlist_handle -%}
+                                            {%- assign present_in_wishlist = true -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                {%- endif -%}
+                                <a href="/account" onclick="dataLayer.push({'event':'UserFunnel','eventCategory':'Wishlist', 'eventAction': 'Add'});" class="btn{{ button_wishlist_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %} js-store-lists-add-wishlist"{% if present_in_wishlist %} data-button-status="added"{% endif %}>
+                                    <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-2">{% include 'icon-theme-180' %}</i><span class="btn__text">{{ 'products.product.add_to_widhlist.title' | t }}</span></span>
+                                    <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-2">{% include 'icon-theme-181' %}</i>{{ 'products.product.add_to_widhlist.added' | t }}</span>
+                                </a>
+                                {%- assign present_in_wishlist = false -%}
+                            </div>
+                        {%- endif -%}
+                        {%- if show_button_add_to_compare -%}
+                            <div class="product-page-info__button-add-to-compare mb-10">
+                                {%- if customer and customer.metafields.compare -%}
+                                    {%- for item in customer.metafields.compare -%}
+                                        {%- assign compare_id = item[0] | abs -%}
+                                        {%- assign compare_handle = item[1] -%}
+                                        {%- if current_variant_id == compare_id and product.handle == compare_handle -%}
+                                            {%- assign present_in_compare = true -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                {%- endif -%}
+                                <a href="/account" class="btn{{ button_compare_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %} js-store-lists-add-compare"{% if present_in_compare %} data-button-status="added"{% endif %}>
+                                    <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-6">{% include 'icon-theme-039' %}</i><span class="btn__text">{{ 'products.product.add_to_compare.title' | t }}</span></span>
+                                    <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-6">{% include 'icon-theme-235' %}</i>{{ 'products.product.add_to_compare.added' | t }}</span>
+                                </a>
+                                {%- assign present_in_compare = false -%}
+                            </div>
+                        {%- endif -%}
+                        {%- if show_button_dynamic_checkout -%}
+                            <div class="product-page-info__dynamic-checkout mt-30 mb-20">
+                                <div class="dynamic-checkout js-dynamic-checkout">
+                                    {%- if show_dynamic_checkout_confirmation -%}
+                                        <div class="dynamic-checkout__confirmation text-center text-lg-left">
+                                            <label class="input-checkbox position-relative d-inline-flex align-items-center mx-auto cursor-pointer">
+                                                <input type="checkbox" class="d-none" name="dynamic_checkout" data-js-dynamic-checkout-confirmation>
+                                                <span class="position-relative d-block mr-10 border"><i class="d-none">{% include 'icon-theme-146' %}</i></span>
+                                                <span>{{ 'products.product.dynamic_checkout.confirmation' | t }}</span>
+                                            </label>
+                                        </div>
+                                    {%- endif -%}
+                                    <div class="dynamic-checkout__button{% if styled_dynamic_checkout %} dynamic-checkout__button--styled{% endif %} mt-25{% if show_dynamic_checkout_confirmation %} disabled{% endif %}" data-js-dynamic-checkout-button-wrapper>
+                                        {{ form | payment_button }}
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                Loader.require({type: "script", name: "dynamic_checkout"});
+                            </script>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+                {{ free_shipping_html }}
+                {%- if show_payments -%}
+                    <div class="product-page-info__payments position-relative d-flex flex-wrap flex-center py-10 px-15 mt-20 mb-25 border">
+                        <label class="position-absolute top-0 px-20 m-0 text-nowrap text-center">{{ 'products.product.payments' | t }}</label>
+                        {%- assign payments_types = 'power_by_stripe,shopify_secure,aes_256bit,paypal,visa,mastercard,discover_network,american_express,mcafee_secure' | split: ',' -%}
+                        {%- for type in payments_types -%}
+                            {% capture show_prop %}product_show_{{ type }}{% endcapture %}
+                            {% capture url_prop %}product_{{ type }}_url{% endcapture %}
+                            {% capture tooltip_name %}payments.tooltip.{{ type }}{% endcapture %}
+                            {%- if settings[show_prop] -%}
+                                {%- assign icon_name = type | prepend: 'icon-payment-' | replace: '_', '-' -%}
+                                {%- if payments_type == 'light' -%}
+                                    {%- assign icon_name = icon_name | append: '-light' -%}
+                                {%- endif -%}
+                                {% capture payment %}{% include icon_name %}<span class="d-none">{{ type | capitalize | replace: '_', ' ' }}</span>{% endcapture %}
+                                {% capture tooltip_attrs %}
+                                {%- if settings.product_enable_tooltips and settings.product_enable_payment_tooltips -%}
+                                    data-js-tooltip
+                                    data-tippy-content="{{ tooltip_name | t }}"
+                                    data-tippy-placement="bottom"
+                                    data-tippy-distance="8"
+                                {%- endif -%}
+                                {% endcapture %}
+                                {%- if settings[url_prop] != blank -%}
+                                    <a href="{{ settings[url_prop] }}" class="px-5"{{ tooltip_attrs }}>{{ payment }}</a>
+                                {%- else -%}
+                                    <span class="d-flex align-items-center px-5"{{ tooltip_attrs }}>{{ payment }}</span>
+                                {%- endif -%}
+                            {%- endif -%}
+                        {%- endfor -%}
+                    </div>
+                {%- endif -%}
+                {%- if show_addthis -%}
+                    {% capture addthis_html %}{% include 'addthis' %}{% endcapture %}
+                    {%- if addthis_html.size > 0 -%}
+                        <div class="product-page-info__share mb-20">
+                            <label>{{ 'products.product.share' | t }}</label>
+                            {{ addthis_html }}
+                        </div>
+                    {%- endif -%}
+                {%- endif -%}
+            {% endform %}
+        </div>
+    </div>
+{%- when '4' -%}
+    <div class="product-page-info">
+        {%- if show_label_in_stock or show_label_out_stock or show_label_sale or show_label_new or show_label_hot -%}
+            <div class="product-page-info__labels d-flex justify-content-center justify-content-lg-start mb-15">
+                {%- if show_label_hot -%}
+                    {% include 'product-get-label-hot' %}
+                {%- endif -%}
+                {%- if show_label_new -%}
+                    {% include 'product-get-label-new' %}
+                {%- endif -%}
+                {%- if show_label_sale -%}
+                    {% include 'product-get-label-sale' %}
+                {%- endif -%}
+                {%- if show_label_in_stock -%}
+                    {% include 'product-get-label-in-stock' %}
+                {%- endif -%}
+                {%- if show_label_out_stock -%}
+                    {% include 'product-get-label-out-stock' %}
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        {%- if show_collections and product.collections.size > 0 -%}
+            <div class="product-page-info__collections mb-3 text-center text-lg-left">
+                {% include 'product-get-collections' %}
+            </div>
+        {%- endif -%}
+        <div class="product-page-info__title mb-15 text-center text-lg-left{% if settings.font_alternative_product_page_title %} ff-alternative{% endif %}">
+            {%- if is_quick_view -%}
+                <a href="{{ url }}" class="h3 m-0">{{ title }}</a>
+            {%- else -%}
+                <h1 class="h3 m-0">{{ title }}</h1>
+            {%- endif -%}
+        </div>
+        {%- if show_reviews -%}
+            <div class="product-page-info__reviews text-center text-lg-left">
+                {% include 'product-get-review' with hide_empty: hide_empty_reviews hide_counter: hide_reviews_counter hide_mobile_counter: hide_reviews_mobile_counter %}
+            </div>
+        {%- endif -%}
+        {%- if show_sku or show_barcode or show_availability or show_type or show_vendor -%}
+            <div class="product-page-info__details mb-25 text-center text-lg-left">
+                {%- if show_sku -%}
+                    <div class="product-page-info__sku{% if sku == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-sku>{{ 'products.product.sku' | t }}: <span>{{ sku }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_barcode -%}
+                    <div class="product-page-info__barcode{% if barcode == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-barcode>{{ 'products.product.barcode' | t }}: <span>{{ barcode }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_availability -%}
+                    <div class="product-page-info__availability mb-5">
+                        {%- if quantity == 1 -%}
+                            {%- capture item -%}{{ 'layout.cart.items_count.one' | t }}{%- endcapture -%}
+                        {%- else -%}
+                            {%- capture item -%}{{ 'layout.cart.items_count.other' | t }}{%- endcapture -%}
+                        {%- endif -%}
+                        <p class="m-0" data-js-product-availability data-availability="{% if available %}true{% else %}false{% endif %}">{{ 'products.product.availability' | t }}: <span>{% if available %}{{ 'products.product.availability_value_in_stock' | t: count: quantity, item: item }}{% else %}{{ 'products.product.availability_value_out_stock' | t }}{% endif %}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_type -%}
+                    <div class="product-page-info__type{% if type == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-type>{{ 'products.product.type' | t }}: <span>{{ type }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_vendor -%}
+                    <div class="product-page-info__vendor{% if vendor == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-vendor>{{ 'products.product.vendor' | t }}: <span>{{ vendor }}</span></p>
+                    </div>
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        {%- if show_price -%}
+            <div class="mb-25">
+                <div class="one-product-info__price text-center text-lg-left">
+                    {% include 'product-get-price' with min_price: false %}
+                </div>
+                {%- if show_sale_details -%}
+                    <p class="one-product-info__price-sale-details mt-5 mt-lg-10 text-center text-lg-left{% unless compare_at_price > price %} d-none-important{% endunless %}"
+                       data-js-product-price-sale-details>
+                        {%- if compare_at_price > price -%}
+                            {%- assign price_save = compare_at_price | minus: price -%}
+                            {%- assign price_save_money = price_save | money -%}
+                            {%- assign price_save_procent = price | times: 100 | divided_by: compare_at_price | minus: 100 | times: -1 -%}
+                            {{ 'products.product.price_sale_details_html' | t: price: price_save_money, procent: price_save_procent }}
+                        {%- endif -%}
+                    </p>
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        {{ countdown_html }}
+        {{ stock_countdown_html }}
+        {{ text_countdown_html }}
+        {{ visitors_html }}
+        <div class="border-top border--dashed my-25"></div>
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+            <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+            <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
+            {% form "product", product, id: null, class: "d-flex flex-column w-100 m-0", data-js-product-form: '' %}
+                <input type="hidden" name="variant_id" value="{{ current_variant.id }}" data-js-product-variant-input>
+                {%- if show_options and show_custom_options -%}
+                    {%- unless product.has_only_default_variant -%}
+                        <div class="product-page-info__options mb-15">
+                            {%- unless is_quick_view -%}
+                                {%- assign trigger_id = 'footbar' -%}
+                            {%- endunless -%}
+                            {% include 'product-get-options' with options_type: 2 hide_options_without_availability: hide_options_without_availability options_show_title: true change_history: true %}
+                        </div>
+                    {%- endunless -%}
+                {%- endif -%}
+                {%- if show_button_add_to_cart or show_options -%}
+                    <div class="product-page-info__variants mb-15{% if show_options == false or show_custom_options %} d-none{% endif %}">
+                        {% include 'product-get-variants' %}
+                    </div>
+                {%- endif -%}
+                {%- if show_size_guide or show_delivery_return -%}
+                    <div class="product-page-info__details-buttons mb-30 mb-lg-15 d-flex flex-wrap justify-content-center justify-content-lg-start">
+                        {%- if show_size_guide -%}
+                            <div class="btn-link h6 mb-10 px-15 px-lg-10 js-popup-button" data-js-popup-button="size-guide">{{ 'products.product.size_guide' | t }}</div>
+                        {%- endif -%}
+                        {%- if show_delivery_return -%}
+                            <div class="btn-link h6 mb-10 px-15 px-lg-10 js-popup-button" data-js-popup-button="delivery-return">{{ 'products.product.delivery_return' | t }}</div>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+                {%- if show_quantity -%}
+                    <div class="product-page-info__quantity mb-20">
+                        {%- unless is_quick_view -%}
+                            {%- assign quantity_connect = 'footbar' -%}
+                        {%- endunless -%}
+                        {% include 'product-get-quantity' with quantity_show_title: true %}
+                    </div>
+                {%- endif -%}
+                {%- if show_button_add_to_cart or show_button_add_to_wishlist or show_button_add_to_compare or show_button_dynamic_checkout -%}
+                    <div data-js-footbar-product-limit>
+                        {%- if show_button_add_to_cart -%}
+                            <div class="product-page-info__button-add-to-cart mb-10">
+                                <button type="submit" class="btn{{ button_cart_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %}{% if settings.product_ajax_cart %} js-product-button-add-to-cart{% endif %}" name="add"{% unless is_quick_view %} data-js-trigger-id="add-to-cart" data-js-button-add-to-cart-clone-id="footbar"{% endunless %} data-js-product-button-add-to-cart{% unless current_variant.available %} disabled="disabled" data-button-status="sold-out"{% endunless %}>
+                                    <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-4">{% include 'icon-theme-109' %}</i><span class="btn__text">{{ 'products.product.add_to_cart.title' | t }}</span></span>
+                                    <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-4">{% include 'icon-theme-110' %}</i>{{ 'products.product.add_to_cart.added' | t }}</span>
+                                    <span class="d-flex flex-center" data-button-content="sold-out">{{ 'products.product.add_to_cart.sold_out' | t }}</span>
+                                </button>
+                            </div>
+                        {%- endif -%}
+                        {%- if show_button_add_to_wishlist -%}
+                            {% capture button_add_to_wishlist_html %}
+                            <div class="product-page-info__button-add-to-wishlist mb-10">
+                                {%- if customer and customer.metafields.wishlist -%}
+                                    {%- for item in customer.metafields.wishlist -%}
+                                        {%- assign wishlist_id = item[0] | abs -%}
+                                        {%- assign wishlist_handle = item[1] -%}
+                                        {%- if current_variant_id == wishlist_id and product.handle == wishlist_handle -%}
+                                            {%- assign present_in_wishlist = true -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                {%- endif -%}
+                                <a href="/account" onclick="dataLayer.push({'event':'UserFunnel','eventCategory':'Wishlist', 'eventAction': 'Add'});" class="btn{{ button_wishlist_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %} js-store-lists-add-wishlist"{% if present_in_wishlist %} data-button-status="added"{% endif %}>
+                                    <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-2">{% include 'icon-theme-180' %}</i><span class="btn__text">{{ 'products.product.add_to_widhlist.title' | t }}</span></span>
+                                    <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-2">{% include 'icon-theme-181' %}</i>{{ 'products.product.add_to_widhlist.added' | t }}</span>
+                                </a>
+                                {%- assign present_in_wishlist = false -%}
+                            </div>
+                            {% endcapture %}
+                        {%- endif -%}
+                        {%- if show_button_add_to_compare -%}
+                            {% capture button_add_to_compare_html %}
+                            <div class="product-page-info__button-add-to-compare mb-10">
+                                {%- if customer and customer.metafields.compare -%}
+                                    {%- for item in customer.metafields.compare -%}
+                                        {%- assign compare_id = item[0] | abs -%}
+                                        {%- assign compare_handle = item[1] -%}
+                                        {%- if current_variant_id == compare_id and product.handle == compare_handle -%}
+                                            {%- assign present_in_compare = true -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                {%- endif -%}
+                                <a href="/account" class="btn{{ button_compare_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %} js-store-lists-add-compare"{% if present_in_compare %} data-button-status="added"{% endif %}>
+                                    <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-6">{% include 'icon-theme-039' %}</i><span class="btn__text">{{ 'products.product.add_to_compare.title' | t }}</span></span>
+                                    <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-6">{% include 'icon-theme-235' %}</i>{{ 'products.product.add_to_compare.added' | t }}</span>
+                                </a>
+                                {%- assign present_in_compare = false -%}
+                            </div>
+                            {% endcapture %}
+                        {%- endif -%}
+                        {%- if button_add_to_wishlist_html or button_add_to_compare_html -%}
+                            <div class="buttons-group-grid-px-5 row">
+                                {%- if button_add_to_wishlist_html -%}
+                                    <div class="col-12{% if button_add_to_compare_html %} col-md-6{% endif %}">
+                                        {{ button_add_to_wishlist_html }}
+                                    </div>
+                                {%- endif -%}
+                                {%- if button_add_to_compare_html -%}
+                                    <div class="col-12{% if button_add_to_wishlist_html %} col-md-6{% endif %}">
+                                        {{ button_add_to_compare_html }}
+                                    </div>
+                                {%- endif -%}
+                            </div>
+                        {%- endif -%}
+                        {%- if show_button_dynamic_checkout -%}
+                            <div class="product-page-info__dynamic-checkout mt-20 mb-20">
+                                <div class="dynamic-checkout js-dynamic-checkout">
+                                    {%- if show_dynamic_checkout_confirmation -%}
+                                        <div class="dynamic-checkout__confirmation text-center text-lg-left">
+                                            <label class="input-checkbox position-relative d-inline-flex align-items-center mx-auto cursor-pointer">
+                                                <input type="checkbox" class="d-none" name="dynamic_checkout" data-js-dynamic-checkout-confirmation>
+                                                <span class="position-relative d-block mr-10 border"><i class="d-none">{% include 'icon-theme-146' %}</i></span>
+                                                <span>{{ 'products.product.dynamic_checkout.confirmation' | t }}</span>
+                                            </label>
+                                        </div>
+                                    {%- endif -%}
+                                    <div class="dynamic-checkout__button{% if styled_dynamic_checkout %} dynamic-checkout__button--styled{% endif %} mt-25{% if show_dynamic_checkout_confirmation %} disabled{% endif %}" data-js-dynamic-checkout-button-wrapper>
+                                        {{ form | payment_button }}
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                Loader.require({type: "script", name: "dynamic_checkout"});
+                            </script>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+                {{ free_shipping_html }}
+                {%- if show_payments -%}
+                    <div class="product-page-info__payments position-relative d-flex flex-wrap flex-center py-10 px-15 mt-20 mb-25 border">
+                        <label class="position-absolute top-0 px-20 m-0 text-nowrap text-center">{{ 'products.product.payments' | t }}</label>
+                        {%- assign payments_types = 'power_by_stripe,shopify_secure,aes_256bit,paypal,visa,mastercard,discover_network,american_express,mcafee_secure' | split: ',' -%}
+                        {%- for type in payments_types -%}
+                            {% capture show_prop %}product_show_{{ type }}{% endcapture %}
+                            {% capture url_prop %}product_{{ type }}_url{% endcapture %}
+                            {% capture tooltip_name %}payments.tooltip.{{ type }}{% endcapture %}
+                            {%- if settings[show_prop] -%}
+                                {%- assign icon_name = type | prepend: 'icon-payment-' | replace: '_', '-' -%}
+                                {%- if payments_type == 'light' -%}
+                                    {%- assign icon_name = icon_name | append: '-light' -%}
+                                {%- endif -%}
+                                {% capture payment %}{% include icon_name %}<span class="d-none">{{ type | capitalize | replace: '_', ' ' }}</span>{% endcapture %}
+                                {% capture tooltip_attrs %}
+                                {%- if settings.product_enable_tooltips and settings.product_enable_payment_tooltips -%}
+                                    data-js-tooltip
+                                    data-tippy-content="{{ tooltip_name | t }}"
+                                    data-tippy-placement="bottom"
+                                    data-tippy-distance="8"
+                                {%- endif -%}
+                                {% endcapture %}
+                                {%- if settings[url_prop] != blank -%}
+                                    <a href="{{ settings[url_prop] }}" class="px-5"{{ tooltip_attrs }}>{{ payment }}</a>
+                                {%- else -%}
+                                    <span class="d-flex align-items-center px-5"{{ tooltip_attrs }}>{{ payment }}</span>
+                                {%- endif -%}
+                            {%- endif -%}
+                        {%- endfor -%}
+                    </div>
+                {%- endif -%}
+                {%- if show_addthis -%}
+                    {% capture addthis_html %}{% include 'addthis' %}{% endcapture %}
+                    {%- if addthis_html.size > 0 -%}
+                        <div class="product-page-info__share mb-20">
+                            <label>{{ 'products.product.share' | t }}</label>
+                            {{ addthis_html }}
+                        </div>
+                    {%- endif -%}
+                {%- endif -%}
+            {% endform %}
+        </div>
+    </div>
+{%- when '5' -%}
+    <div class="product-page-info">
+        {%- if show_label_in_stock or show_label_out_stock or show_label_sale or show_label_new or show_label_hot -%}
+            <div class="product-page-info__labels d-flex justify-content-center justify-content-lg-start mb-15">
+                {%- if show_label_hot -%}
+                    {% include 'product-get-label-hot' %}
+                {%- endif -%}
+                {%- if show_label_new -%}
+                    {% include 'product-get-label-new' %}
+                {%- endif -%}
+                {%- if show_label_sale -%}
+                    {% include 'product-get-label-sale' %}
+                {%- endif -%}
+                {%- if show_label_in_stock -%}
+                    {% include 'product-get-label-in-stock' %}
+                {%- endif -%}
+                {%- if show_label_out_stock -%}
+                    {% include 'product-get-label-out-stock' %}
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        {%- if show_collections and product.collections.size > 0 -%}
+            <div class="product-page-info__collections mb-3 text-center text-lg-left">
+                {% include 'product-get-collections' %}
+            </div>
+        {%- endif -%}
+        <div class="product-page-info__title mb-15 text-center text-lg-left{% if settings.font_alternative_product_page_title %} ff-alternative{% endif %}">
+            {%- if is_quick_view -%}
+                <a href="{{ url }}" class="h3 m-0">{{ title }}</a>
+            {%- else -%}
+                <h1 class="h3 m-0">{{ title }}</h1>
+            {%- endif -%}
+        </div>
+        {%- if show_reviews -%}
+            <div class="product-page-info__reviews text-center text-lg-left">
+                {% include 'product-get-review' with hide_empty: hide_empty_reviews hide_counter: hide_reviews_counter hide_mobile_counter: hide_reviews_mobile_counter %}
+            </div>
+        {%- endif -%}
+        {%- if show_sku or show_barcode or show_availability or show_type or show_vendor -%}
+            <div class="product-page-info__details mb-25 text-center text-lg-left">
+                {%- if show_sku -%}
+                    <div class="product-page-info__sku{% if sku == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-sku>{{ 'products.product.sku' | t }}: <span>{{ sku }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_barcode -%}
+                    <div class="product-page-info__barcode{% if barcode == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-barcode>{{ 'products.product.barcode' | t }}: <span>{{ barcode }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_availability -%}
+                    <div class="product-page-info__availability mb-5">
+                        {%- if quantity == 1 -%}
+                            {%- capture item -%}{{ 'layout.cart.items_count.one' | t }}{%- endcapture -%}
+                        {%- else -%}
+                            {%- capture item -%}{{ 'layout.cart.items_count.other' | t }}{%- endcapture -%}
+                        {%- endif -%}
+                        <p class="m-0" data-js-product-availability data-availability="{% if available %}true{% else %}false{% endif %}">{{ 'products.product.availability' | t }}: <span>{% if available %}{{ 'products.product.availability_value_in_stock' | t: count: quantity, item: item }}{% else %}{{ 'products.product.availability_value_out_stock' | t }}{% endif %}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_type -%}
+                    <div class="product-page-info__type{% if type == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-type>{{ 'products.product.type' | t }}: <span>{{ type }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_vendor -%}
+                    <div class="product-page-info__vendor{% if vendor == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-vendor>{{ 'products.product.vendor' | t }}: <span>{{ vendor }}</span></p>
+                    </div>
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        {%- if show_price -%}
+            <div class="mb-25">
+                <div class="one-product-info__price text-center text-lg-left">
+                    {% include 'product-get-price' with min_price: false %}
+                </div>
+                {%- if show_sale_details -%}
+                    <p class="one-product-info__price-sale-details mt-5 mt-lg-10 text-center text-lg-left{% unless compare_at_price > price %} d-none-important{% endunless %}"
+                       data-js-product-price-sale-details>
+                        {%- if compare_at_price > price -%}
+                            {%- assign price_save = compare_at_price | minus: price -%}
+                            {%- assign price_save_money = price_save | money -%}
+                            {%- assign price_save_procent = price | times: 100 | divided_by: compare_at_price | minus: 100 | times: -1 -%}
+                            {{ 'products.product.price_sale_details_html' | t: price: price_save_money, procent: price_save_procent }}
+                        {%- endif -%}
+                    </p>
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        {{ countdown_html }}
+        {{ stock_countdown_html }}
+        {{ text_countdown_html }}
+        {{ visitors_html }}
+        <div class="border-top border--dashed my-25"></div>
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+            <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+            <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
+            {% form "product", product, id: null, class: "d-flex flex-column w-100 m-0", data-js-product-form: '' %}
+            <input type="hidden" name="variant_id" value="{{ current_variant.id }}" data-js-product-variant-input>
+            {%- if show_options and show_custom_options -%}
+                {%- unless product.has_only_default_variant -%}
+                <div class="product-page-info__options mb-15">
+                    {%- unless is_quick_view -%}
+                    {%- assign trigger_id = 'footbar' -%}
+                    {%- endunless -%}
+                    {% include 'product-get-options' with options_type: 2 hide_options_without_availability: hide_options_without_availability options_show_title: true change_history: true %}
+                </div>
+                {%- endunless -%}
+            {%- endif -%}
+            {%- if show_button_add_to_cart or show_options -%}
+                <div class="product-page-info__variants mb-15{% if show_options == false or show_custom_options %} d-none{% endif %}">
+                    {% include 'product-get-variants' %}
+                </div>
+            {%- endif -%}
+            {%- if show_size_guide or show_delivery_return -%}
+                <div class="product-page-info__details-buttons mb-30 mb-lg-15 d-flex flex-wrap justify-content-center justify-content-lg-start">
+                    {%- if show_size_guide -%}
+                        <div class="btn-link h6 mb-10 px-15 px-lg-10 js-popup-button" data-js-popup-button="size-guide">{{ 'products.product.size_guide' | t }}</div>
+                    {%- endif -%}
+                    {%- if show_delivery_return -%}
+                        <div class="btn-link h6 mb-10 px-15 px-lg-10 js-popup-button" data-js-popup-button="delivery-return">{{ 'products.product.delivery_return' | t }}</div>
+                    {%- endif -%}
+                </div>
+            {%- endif -%}
+            {%- if show_quantity -%}
+                <div class="product-page-info__quantity mb-20">
+                    {%- unless is_quick_view -%}
+                    {%- assign quantity_connect = 'footbar' -%}
+                    {%- endunless -%}
+                    {% include 'product-get-quantity' with quantity_show_title: true %}
+                </div>
+            {%- endif -%}
+            {%- if show_button_add_to_cart or show_button_add_to_wishlist or show_button_add_to_compare or show_button_dynamic_checkout -%}
+                <div data-js-footbar-product-limit>
+                    {%- if show_button_add_to_cart -%}
+                        <div class="product-page-info__button-add-to-cart mb-10">
+                            <button type="submit" class="btn{{ button_cart_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %}{% if settings.product_ajax_cart %} js-product-button-add-to-cart{% endif %}" name="add"{% unless is_quick_view %} data-js-trigger-id="add-to-cart" data-js-button-add-to-cart-clone-id="footbar"{% endunless %} data-js-product-button-add-to-cart{% unless current_variant.available %} disabled="disabled" data-button-status="sold-out"{% endunless %}>
+                                <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-4">{% include 'icon-theme-109' %}</i><span class="btn__text">{{ 'products.product.add_to_cart.title' | t }}</span></span>
+                                <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-4">{% include 'icon-theme-110' %}</i>{{ 'products.product.add_to_cart.added' | t }}</span>
+                                <span class="d-flex flex-center" data-button-content="sold-out">{{ 'products.product.add_to_cart.sold_out' | t }}</span>
+                            </button>
+                        </div>
+                    {%- endif -%}
+                    {%- if show_button_add_to_wishlist -%}
+                        {% capture button_add_to_wishlist_html %}
+                        <div class="product-page-info__button-add-to-wishlist mb-10">
+                            {%- if customer and customer.metafields.wishlist -%}
+                                {%- for item in customer.metafields.wishlist -%}
+                                    {%- assign wishlist_id = item[0] | abs -%}
+                                    {%- assign wishlist_handle = item[1] -%}
+                                    {%- if current_variant_id == wishlist_id and product.handle == wishlist_handle -%}
+                                        {%- assign present_in_wishlist = true -%}
+                                    {%- endif -%}
+                                {%- endfor -%}
+                            {%- endif -%}
+                            <a href="/account" onclick="dataLayer.push({'event':'UserFunnel','eventCategory':'Wishlist', 'eventAction': 'Add'});" class="btn{{ button_wishlist_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %} js-store-lists-add-wishlist"{% if present_in_wishlist %} data-button-status="added"{% endif %}>
+                                <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-2">{% include 'icon-theme-180' %}</i><span class="btn__text">{{ 'products.product.add_to_widhlist.title' | t }}</span></span>
+                                <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-2">{% include 'icon-theme-181' %}</i>{{ 'products.product.add_to_widhlist.added' | t }}</span>
+                            </a>
+                            {%- assign present_in_wishlist = false -%}
+                        </div>
+                        {% endcapture %}
+                    {%- endif -%}
+                    {%- if show_button_add_to_compare -%}
+                        {% capture button_add_to_compare_html %}
+                        <div class="product-page-info__button-add-to-compare mb-10">
+                            {%- if customer and customer.metafields.compare -%}
+                                {%- for item in customer.metafields.compare -%}
+                                    {%- assign compare_id = item[0] | abs -%}
+                                    {%- assign compare_handle = item[1] -%}
+                                    {%- if current_variant_id == compare_id and product.handle == compare_handle -%}
+                                        {%- assign present_in_compare = true -%}
+                                    {%- endif -%}
+                                {%- endfor -%}
+                            {%- endif -%}
+                            <a href="/account" class="btn{{ button_compare_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %} js-store-lists-add-compare"{% if present_in_compare %} data-button-status="added"{% endif %}>
+                                <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-6">{% include 'icon-theme-039' %}</i><span class="btn__text">{{ 'products.product.add_to_compare.title' | t }}</span></span>
+                                <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-6">{% include 'icon-theme-235' %}</i>{{ 'products.product.add_to_compare.added' | t }}</span>
+                            </a>
+                            {%- assign present_in_compare = false -%}
+                        </div>
+                        {% endcapture %}
+                    {%- endif -%}
+                    {%- if button_add_to_wishlist_html or button_add_to_compare_html -%}
+                        <div class="buttons-group-grid-px-5 row">
+                            {%- if button_add_to_wishlist_html -%}
+                                <div class="col-12{% if button_add_to_compare_html %} col-md-6{% endif %}">
+                                    {{ button_add_to_wishlist_html }}
+                                </div>
+                            {%- endif -%}
+                            {%- if button_add_to_compare_html -%}
+                                <div class="col-12{% if button_add_to_wishlist_html %} col-md-6{% endif %}">
+                                    {{ button_add_to_compare_html }}
+                                </div>
+                            {%- endif -%}
+                        </div>
+                    {%- endif -%}
+                    {%- if show_button_dynamic_checkout -%}
+                        <div class="product-page-info__dynamic-checkout mt-20 mb-20">
+                            <div class="dynamic-checkout js-dynamic-checkout">
+                                {%- if show_dynamic_checkout_confirmation -%}
+                                    <div class="dynamic-checkout__confirmation text-center text-lg-left">
+                                        <label class="input-checkbox position-relative d-inline-flex align-items-center mx-auto cursor-pointer">
+                                            <input type="checkbox" class="d-none" name="dynamic_checkout" data-js-dynamic-checkout-confirmation>
+                                            <span class="position-relative d-block mr-10 border"><i class="d-none">{% include 'icon-theme-146' %}</i></span>
+                                            <span>{{ 'products.product.dynamic_checkout.confirmation' | t }}</span>
+                                        </label>
+                                    </div>
+                                {%- endif -%}
+                                <div class="dynamic-checkout__button{% if styled_dynamic_checkout %} dynamic-checkout__button--styled{% endif %} mt-25{% if show_dynamic_checkout_confirmation %} disabled{% endif %}" data-js-dynamic-checkout-button-wrapper>
+                                    {{ form | payment_button }}
+                                </div>
+                            </div>
+                        </div>
+                        <script>
+                            Loader.require({type: "script", name: "dynamic_checkout"});
+                        </script>
+                    {%- endif -%}
+                </div>
+            {%- endif -%}
+            {{ free_shipping_html }}
+            {%- if show_payments -%}
+                <div class="product-page-info__payments position-relative d-flex flex-wrap flex-center py-10 px-15 mt-20 mb-25 border">
+                    <label class="position-absolute top-0 px-20 m-0 text-nowrap text-center">{{ 'products.product.payments' | t }}</label>
+                    {%- assign payments_types = 'power_by_stripe,shopify_secure,aes_256bit,paypal,visa,mastercard,discover_network,american_express,mcafee_secure' | split: ',' -%}
+                    {%- for type in payments_types -%}
+                        {% capture show_prop %}product_show_{{ type }}{% endcapture %}
+                        {% capture url_prop %}product_{{ type }}_url{% endcapture %}
+                        {% capture tooltip_name %}payments.tooltip.{{ type }}{% endcapture %}
+                        {%- if settings[show_prop] -%}
+                            {%- assign icon_name = type | prepend: 'icon-payment-' | replace: '_', '-' -%}
+                            {%- if payments_type == 'light' -%}
+                                {%- assign icon_name = icon_name | append: '-light' -%}
+                            {%- endif -%}
+                            {% capture payment %}{% include icon_name %}<span class="d-none">{{ type | capitalize | replace: '_', ' ' }}</span>{% endcapture %}
+                            {% capture tooltip_attrs %}
+                            {%- if settings.product_enable_tooltips and settings.product_enable_payment_tooltips -%}
+                                data-js-tooltip
+                                data-tippy-content="{{ tooltip_name | t }}"
+                                data-tippy-placement="bottom"
+                                data-tippy-distance="8"
+                            {%- endif -%}
+                            {% endcapture %}
+                            {%- if settings[url_prop] != blank -%}
+                                <a href="{{ settings[url_prop] }}" class="px-5"{{ tooltip_attrs }}>{{ payment }}</a>
+                            {%- else -%}
+                                <span class="d-flex align-items-center px-5"{{ tooltip_attrs }}>{{ payment }}</span>
+                            {%- endif -%}
+                        {%- endif -%}
+                    {%- endfor -%}
+                </div>
+            {%- endif -%}
+            {%- if show_addthis -%}
+                {% capture addthis_html %}{% include 'addthis' %}{% endcapture %}
+                {%- if addthis_html.size > 0 -%}
+                    <div class="product-page-info__share mb-20">
+                        <label>{{ 'products.product.share' | t }}</label>
+                        {{ addthis_html }}
+                    </div>
+                {%- endif -%}
+            {%- endif -%}
+            {% endform %}
+        </div>
+    </div>
+{%- when '6' -%}
+    <div class="product-page-info product-page-info--max-width mx-auto">
+        {%- if show_label_in_stock or show_label_out_stock or show_label_sale or show_label_new or show_label_hot -%}
+            <div class="product-page-info__labels d-flex justify-content-center mb-15">
+                {%- if show_label_hot -%}
+                    {% include 'product-get-label-hot' %}
+                {%- endif -%}
+                {%- if show_label_new -%}
+                    {% include 'product-get-label-new' %}
+                {%- endif -%}
+                {%- if show_label_sale -%}
+                    {% include 'product-get-label-sale' %}
+                {%- endif -%}
+                {%- if show_label_in_stock -%}
+                    {% include 'product-get-label-in-stock' %}
+                {%- endif -%}
+                {%- if show_label_out_stock -%}
+                    {% include 'product-get-label-out-stock' %}
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        {%- if show_collections and product.collections.size > 0 -%}
+            <div class="product-page-info__collections mb-3 text-center">
+                {% include 'product-get-collections' %}
+            </div>
+        {%- endif -%}
+        <div class="product-page-info__title mb-15 text-center{% if settings.font_alternative_product_page_title %} ff-alternative{% endif %}">
+            {%- if is_quick_view -%}
+                <a href="{{ url }}" class="h3 m-0">{{ title }}</a>
+            {%- else -%}
+                <h1 class="h3 m-0">{{ title }}</h1>
+            {%- endif -%}
+        </div>
+        {%- if show_reviews -%}
+            <div class="product-page-info__reviews product-page-info__reviews--center text-center">
+                {% include 'product-get-review' with hide_empty: hide_empty_reviews hide_counter: hide_reviews_counter hide_mobile_counter: hide_reviews_mobile_counter %}
+            </div>
+        {%- endif -%}
+        {%- if show_sku or show_barcode or show_availability or show_type or show_vendor -%}
+            <div class="product-page-info__details mb-25 text-center">
+                {%- if show_sku -%}
+                    <div class="product-page-info__sku{% if sku == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-sku>{{ 'products.product.sku' | t }}: <span>{{ sku }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_barcode -%}
+                    <div class="product-page-info__barcode{% if barcode == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-barcode>{{ 'products.product.barcode' | t }}: <span>{{ barcode }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_availability -%}
+                    <div class="product-page-info__availability mb-5">
+                        {%- if quantity == 1 -%}
+                            {%- capture item -%}{{ 'layout.cart.items_count.one' | t }}{%- endcapture -%}
+                        {%- else -%}
+                            {%- capture item -%}{{ 'layout.cart.items_count.other' | t }}{%- endcapture -%}
+                        {%- endif -%}
+                        <p class="m-0" data-js-product-availability data-availability="{% if available %}true{% else %}false{% endif %}">{{ 'products.product.availability' | t }}: <span>{% if available %}{{ 'products.product.availability_value_in_stock' | t: count: quantity, item: item }}{% else %}{{ 'products.product.availability_value_out_stock' | t }}{% endif %}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_type -%}
+                    <div class="product-page-info__type{% if type == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-type>{{ 'products.product.type' | t }}: <span>{{ type }}</span></p>
+                    </div>
+                {%- endif -%}
+                {%- if show_vendor -%}
+                    <div class="product-page-info__vendor{% if vendor == blank %} d-none-important{% endif %} mb-5">
+                        <p class="m-0" data-js-product-vendor>{{ 'products.product.vendor' | t }}: <span>{{ vendor }}</span></p>
+                    </div>
+                {%- endif -%}
+            </div>
+        {%- endif -%}
+        <div class="mb-25">
+            <div class="product-page-info__price text-center">
+                {% include 'product-get-price' with min_price: false %}
+            </div>
+            <p class="product-page-info__price-sale-details mt-5 mt-lg-10 text-center{% unless compare_at_price > price %} d-none-important{% endunless %}" data-js-product-price-sale-details>
+                {%- if compare_at_price > price -%}
+                    {%- assign price_save = compare_at_price | minus: price -%}
+                    {%- assign price_save_money = price_save | money -%}
+                    {%- assign price_save_procent = price | times: 100 | divided_by: compare_at_price | minus: 100 | times: -1 -%}
+                    {{ 'products.product.price_sale_details_html' | t: price: price_save_money, procent: price_save_procent }}
+                {%- endif -%}
+            </p>
+        </div>
+        {{ countdown_html }}
+        {{ stock_countdown_html }}
+        {{ text_countdown_html }}
+        {{ visitors_html }}
+        <div class="border-top border--dashed my-25"></div>
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+            <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+            <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+            <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
+            {% form "product", product, id: null, class: "d-flex flex-column w-100 m-0", data-js-product-form: '' %}
+                <input type="hidden" name="variant_id" value="{{ current_variant.id }}" data-js-product-variant-input>
+                {%- if show_options and show_custom_options -%}
+                    {%- unless product.has_only_default_variant -%}
+                        <div class="product-page-info__options mb-15">
+                            {%- unless is_quick_view -%}
+                                {%- assign trigger_id = 'footbar' -%}
+                            {%- endunless -%}
+                            {% include 'product-get-options' with options_type: 2 centered: true hide_options_without_availability: hide_options_without_availability options_show_title: true change_history: true %}
+                        </div>
+                    {%- endunless -%}
+                {%- endif -%}
+                {%- if show_button_add_to_cart or show_options -%}
+                    <div class="product-page-info__variants mb-15{% if show_options == false or show_custom_options %} d-none{% endif %}">
+                        {% include 'product-get-variants' %}
+                    </div>
+                {%- endif -%}
+                {%- if show_size_guide or show_delivery_return -%}
+                    <div class="product-page-info__details-buttons mb-30 mb-lg-15 d-flex flex-wrap justify-content-center">
+                        {%- if show_size_guide -%}
+                            <div class="btn-link h6 mb-10 px-15 px-lg-10 js-popup-button" data-js-popup-button="size-guide">{{ 'products.product.size_guide' | t }}</div>
+                        {%- endif -%}
+                        {%- if show_delivery_return -%}
+                            <div class="btn-link h6 mb-10 px-15 px-lg-10 js-popup-button" data-js-popup-button="delivery-return">{{ 'products.product.delivery_return' | t }}</div>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+                {%- if show_quantity -%}
+                    <div class="product-page-info__quantity product-page-info__section--max-width mx-lg-auto mb-20">
+                        {%- unless is_quick_view -%}
+                            {%- assign quantity_connect = 'footbar' -%}
+                        {%- endunless -%}
+                        {% include 'product-get-quantity' with quantity_show_title: true %}
+                    </div>
+                {%- endif -%}
+                {%- if show_button_add_to_cart or show_button_add_to_wishlist or show_button_add_to_compare or show_button_dynamic_checkout -%}
+                    <div class="product-page-info__section--max-width mx-lg-auto mb-25">
+                        {%- if show_button_add_to_cart -%}
+                            <div class="product-page-info__button-add-to-cart mb-10">
+                                <button type="submit" class="btn{{ button_cart_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %}{% if settings.product_ajax_cart %} js-product-button-add-to-cart{% endif %}" name="add"{% unless is_quick_view %} data-js-trigger-id="add-to-cart" data-js-button-add-to-cart-clone-id="footbar"{% endunless %} data-js-product-button-add-to-cart{% unless current_variant.available %} disabled="disabled" data-button-status="sold-out"{% endunless %}>
+                                    <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-4">{% include 'icon-theme-109' %}</i><span class="btn__text">{{ 'products.product.add_to_cart.title' | t }}</span></span>
+                                    <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-4">{% include 'icon-theme-110' %}</i>{{ 'products.product.add_to_cart.added' | t }}</span>
+                                    <span class="d-flex flex-center" data-button-content="sold-out">{{ 'products.product.add_to_cart.sold_out' | t }}</span>
+                                </button>
+                            </div>
+                        {%- endif -%}
+                        {%- if show_button_add_to_wishlist -%}
+                            <div class="product-page-info__button-add-to-wishlist mb-10">
+                                {%- if customer and customer.metafields.wishlist -%}
+                                    {%- for item in customer.metafields.wishlist -%}
+                                        {%- assign wishlist_id = item[0] | abs -%}
+                                        {%- assign wishlist_handle = item[1] -%}
+                                        {%- if current_variant_id == wishlist_id and product.handle == wishlist_handle -%}
+                                            {%- assign present_in_wishlist = true -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                {%- endif -%}
+                                <a href="/account" onclick="dataLayer.push({'event':'UserFunnel','eventCategory':'Wishlist', 'eventAction': 'Add'});" class="btn{{ button_wishlist_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %} js-store-lists-add-wishlist"{% if present_in_wishlist %} data-button-status="added"{% endif %}>
+                                    <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-2">{% include 'icon-theme-180' %}</i><span class="btn__text">{{ 'products.product.add_to_widhlist.title' | t }}</span></span>
+                                    <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-2">{% include 'icon-theme-181' %}</i>{{ 'products.product.add_to_widhlist.added' | t }}</span>
+                                </a>
+                                {%- assign present_in_wishlist = false -%}
+                            </div>
+                        {%- endif -%}
+                        {%- if show_button_add_to_compare -%}
+                            <div class="product-page-info__button-add-to-compare mb-10">
+                                {%- if customer and customer.metafields.compare -%}
+                                    {%- for item in customer.metafields.compare -%}
+                                        {%- assign compare_id = item[0] | abs -%}
+                                        {%- assign compare_handle = item[1] -%}
+                                        {%- if current_variant_id == compare_id and product.handle == compare_handle -%}
+                                            {%- assign present_in_compare = true -%}
+                                        {%- endif -%}
+                                    {%- endfor -%}
+                                {%- endif -%}
+                                <a href="/account" class="btn{{ button_compare_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %} js-store-lists-add-compare"{% if present_in_compare %} data-button-status="added"{% endif %}>
+                                    <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-6">{% include 'icon-theme-039' %}</i><span class="btn__text">{{ 'products.product.add_to_compare.title' | t }}</span></span>
+                                    <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-6">{% include 'icon-theme-235' %}</i>{{ 'products.product.add_to_compare.added' | t }}</span>
+                                </a>
+                                {%- assign present_in_compare = false -%}
+                            </div>
+                        {%- endif -%}
+                        {%- if show_button_dynamic_checkout -%}
+                            <div class="product-page-info__dynamic-checkout mt-30 mb-20">
+                                <div class="dynamic-checkout js-dynamic-checkout">
+                                    {%- if show_dynamic_checkout_confirmation -%}
+                                        <div class="dynamic-checkout__confirmation text-center">
+                                            <label class="input-checkbox position-relative d-inline-flex align-items-center mx-auto cursor-pointer">
+                                                <input type="checkbox" class="d-none" name="dynamic_checkout" data-js-dynamic-checkout-confirmation>
+                                                <span class="position-relative d-block mr-10 border"><i class="d-none">{% include 'icon-theme-146' %}</i></span>
+                                                <span>{{ 'products.product.dynamic_checkout.confirmation' | t }}</span>
+                                            </label>
+                                        </div>
+                                    {%- endif -%}
+                                    <div class="dynamic-checkout__button{% if styled_dynamic_checkout %} dynamic-checkout__button--styled{% endif %} mt-25{% if show_dynamic_checkout_confirmation %} disabled{% endif %}" data-js-dynamic-checkout-button-wrapper>
+                                        {{ form | payment_button }}
+                                    </div>
+                                </div>
+                            </div>
+                            <script>
+                                Loader.require({type: "script", name: "dynamic_checkout"});
+                            </script>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+                {{ free_shipping_html }}
+                {%- if show_payments -%}
+                    <div class="product-page-info__payments product-page-info__section--max-width mx-lg-auto position-relative d-flex flex-wrap flex-center py-10 px-15 mt-20 mb-25 border">
+                        <label class="position-absolute top-0 px-20 m-0 text-nowrap">{{ 'products.product.payments' | t }}</label>
+                        {%- assign payments_types = 'power_by_stripe,shopify_secure,aes_256bit,paypal,visa,mastercard,discover_network,american_express,mcafee_secure' | split: ',' -%}
+                        {%- for type in payments_types -%}
+                            {% capture show_prop %}product_show_{{ type }}{% endcapture %}
+                            {% capture url_prop %}product_{{ type }}_url{% endcapture %}
+                            {% capture tooltip_name %}payments.tooltip.{{ type }}{% endcapture %}
+                            {%- if settings[show_prop] -%}
+                                {%- assign icon_name = type | prepend: 'icon-payment-' | replace: '_', '-' -%}
+                                {%- if payments_type == 'light' -%}
+                                    {%- assign icon_name = icon_name | append: '-light' -%}
+                                {%- endif -%}
+                                {% capture payment %}{% include icon_name %}<span class="d-none">{{ type | capitalize | replace: '_', ' ' }}</span>{% endcapture %}
+                                {% capture tooltip_attrs %}
+                                {%- if settings.product_enable_tooltips and settings.product_enable_payment_tooltips -%}
+                                    data-js-tooltip
+                                    data-tippy-content="{{ tooltip_name | t }}"
+                                    data-tippy-placement="bottom"
+                                    data-tippy-distance="8"
+                                {%- endif -%}
+                                {% endcapture %}
+                                {%- if settings[url_prop] != blank -%}
+                                    <a href="{{ settings[url_prop] }}" class="px-5"{{ tooltip_attrs }}>{{ payment }}</a>
+                                {%- else -%}
+                                    <span class="d-flex align-items-center px-5"{{ tooltip_attrs }}>{{ payment }}</span>
+                                {%- endif -%}
+                            {%- endif -%}
+                        {%- endfor -%}
+                    </div>
+                {%- endif -%}
+                {%- if show_addthis -%}
+                    {% capture addthis_html %}{% include 'addthis' %}{% endcapture %}
+                    {%- if addthis_html.size > 0 -%}
+                        <div class="product-page-info__share mb-20">
+                            <label>{{ 'products.product.share' | t }}</label>
+                            {{ addthis_html }}
+                        </div>
+                    {%- endif -%}
+                {%- endif -%}
+            {% endform %}
+        </div>
+    </div>
+{%- endcase -%}

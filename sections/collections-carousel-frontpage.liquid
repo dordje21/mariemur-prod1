@@ -1,0 +1,85 @@
+<div class="category-list-wrapper custom-list-wrapper">
+    <ul class="category-list">
+        {% for collection in section.blocks %}
+
+            {% case section.settings.carousel-slide-show %}
+            {% when 2 %}
+            {%- assign item_width = 'width--one-half' -%}
+            {% when 3 %}
+            {%- assign item_width = 'width--one-third' -%}
+            {% when 4 %}
+            {%- assign item_width = 'width--one-quarter' -%}
+            {% endcase %}
+
+            <li class="category-list-item">
+                {% if collection.settings.collection-link.size > 0 %}
+
+                    <a class="category-list-item__link" href="{{ collection.settings.collection-link }}">
+                        <div class="category-list-item__img-wrapper {{ item_width }}">
+                            <img class="category-list-item__img" src="{{ collection.settings.collection-image | img_url : 'original' }}" alt="" />
+                        </div>
+                        {% if collection.settings.collection-name.size > 0 %}
+                            <span class="category-list-item__title">{{ collection.settings.collection-name }}</span>
+                        {% else %}
+                            <span class="category-list-item__title">{{ collections[collection.settings.collection-item].title }}</span>
+                        {% endif %}
+                    </a>
+                {% else %}
+                    <a class="category-list-item__link" href="{{ collections[collection.settings.collection-item].url }}">
+                        <div class="category-list-item__img-wrapper {{ item_width }}">
+                            <img class="category-list-item__img" src="{{ collection.settings.collection-image | img_url : 'original' }}" alt="" />
+                        </div>
+                        {% if collection.settings.collection-name.size > 0 %}
+                            <span class="category-list-item__title">{{ collection.settings.collection-name }}</span>
+                        {% else %}
+                            <span class="category-list-item__title">{{ collections[collection.settings.collection-item].title }}</span>
+                        {% endif %}
+                    </a>
+                {% endif %}
+            </li>
+
+        {% endfor %}
+
+    </ul>
+</div>
+
+{% schema %}
+    {
+    "name": "Category Carousel Front",
+    "settings": [],
+    "blocks": [
+    {
+        "type": "slide",
+        "name": "Collection",
+        "settings": [
+            {
+            "type": "text",
+            "id": "collection-name",
+            "label": "Collection name"
+            },
+            {
+            "type": "text",
+            "id": "collection-link",
+            "label": "Collection link"
+            },
+            {
+            "type": "collection",
+            "id": "collection-item",
+            "label": "Collection"
+            },
+            {
+            "type": "image_picker",
+            "id": "collection-image",
+            "label": "Collection image"
+            }
+            ]
+    }
+    ],
+    "presets": [
+        {
+        "name": "Category Carousel Front",
+        "category": "Image"
+        }
+    ]
+    }
+{% endschema %}

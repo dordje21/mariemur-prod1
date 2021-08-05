@@ -1,0 +1,92 @@
+<style>
+  .about p, .about .title  {
+    color: {{ section.settings.lp_color_text }}
+  }
+
+  .lp-wrapper .about-img:before {
+    background: {% if section.settings.section_bg_color == 'rgba(0,0,0,0)' %}'#3F0606'{% else %}{{ section.settings.section_bg_color }}{% endif %};
+  }
+</style>
+
+<div id="about" class="about">
+  <div class="container">
+    <div class="about-box">
+      <div class="about-box__title">
+        <div class="title">
+          <h2> {{ section.settings.lp_about_title }}</h2>
+        </div>
+      </div>
+      <div class="about-box__text">
+        <p>{{ section.settings.lp_about_text}}</p>
+        <a href="{{ section.settings.lp_custom_coll }}" class="about-box__link" target="_blank"><span class="icon icon-i-arr-down-right"></span></a>
+      </div>
+    </div>
+    <div class="about-img">
+      {% if section.settings.lp_video_block.size>0 %}
+        <div class="about-img__video js-youtube" data-src="{{ section.settings.lp_video_block }}" style="background-image: url('{{ section.settings.lp_video_block_bg | img_url : "master"}}');"></div>
+      {% else %}
+        <picture>
+          <source srcset="{{ section.settings.lp_about_img_mob | img_url: "1260x1200",  crop: 'center' }}" media="(max-width: 767px)">
+          <source srcset="{{ section.settings.lp_about_img | img_url: "4720x1980",  crop: 'center' }}">
+          <img src="{{ section.settings.lp_about_img | img_url: "4720x1980",  crop: 'center' }}" alt="{{ shop.name }}">
+        </picture>
+      {% endif %}
+    </div>
+  </div>
+</div>
+
+
+{% schema %}
+  {
+  "name": "MarieMur: About",
+  "settings": [
+  {
+  "type": "html",
+  "id": "lp_about_title",
+  "label": "About title"
+  },
+  {
+  "type": "textarea",
+  "id": "lp_about_text",
+  "label": "About main text"
+  },
+  {
+  "type": "url",
+  "id": "lp_custom_coll",
+  "label": "Collection link"
+  },
+  {
+  "type": "image_picker",
+  "id": "lp_about_img",
+  "label": "About image"
+  },
+  {
+  "type": "image_picker",
+  "id": "lp_about_img_mob",
+  "label": "About image mobile"
+  },
+  {
+  "type": "html",
+  "id": "lp_video_block",
+  "label": "Block for YouTube video"
+  },
+  {
+  "type": "image_picker",
+  "id": "lp_video_block_bg",
+  "label": "Video block image"
+  },
+  {
+  "type": "color",
+  "id": "lp_color_text",
+  "label": "Text color",
+  "default": "#000000"
+  },
+  {
+  "type": "color",
+  "id": "section_bg_color",
+  "label": "Select color for section background",
+  "default": "#3F0606"
+  }
+  ]
+  }
+{% endschema %}

@@ -1,0 +1,51 @@
+<div class="main-video">
+    <div class="container">
+        <div class="main-video__inner">
+            <div class="main-video__source wow fadeIn" data-wow-delay="0.2s">
+                <video autoplay playsinline muted loop="loop">
+                    <source src="{{ section.settings.video_id }}" type="video/mp4">
+                </video>
+            </div>
+            <div class="main-video__text wow fadeInLeft" data-wow-delay="0.5s">
+                {{ section.settings.desc }}
+                <a href="{{ section.settings.link }}" class="icon icon-i-plus-big"></a>
+            </div>
+            <a href="{{ section.settings.video_id }}" class="main-video__play wow fadeIn" data-wow-delay="0.8s" data-width="100vw" data-height="100vh" data-fancybox-video>
+                <svg viewBox="0 0 108 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle class="line-first" cx="54" cy="54" r="52" stroke="white" stroke-opacity="0.5" stroke-width="1px" stroke-dashoffset="0" stroke-dasharray="340"/>
+                    <circle class="line-last" cx="54" cy="54" r="52" stroke="white" stroke-opacity="1" stroke-width="1px" stroke-dashoffset="0" stroke-dasharray="340" />
+                    <path d="M49.75 48.0048L61 54.5L49.75 60.9952L49.75 48.0048Z" stroke="white"/>
+                </svg>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+"name": "Main video banner",
+"settings":[
+{
+"type":"url",
+"label":"Video link",
+"id":"video_id"
+},
+{
+"type":"textarea",
+"label":"description",
+"id":"desc"
+},{
+"type":"url",
+"label":"Link",
+"id":"link"
+}
+],
+"presets": [
+{
+"name":"Main video banner" ,
+"category": "Main page"
+}
+]
+}
+{% endschema %}

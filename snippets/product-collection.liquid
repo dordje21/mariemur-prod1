@@ -1,0 +1,23 @@
+<a href="{{ product.url }}" class="product-box wow fadeInUp" data-wow-delay="0.2s">
+    <div class="product-box__img">
+        <picture>
+            <source data-srcset="{{ product | img_url : '848x' }}" srcset="{{ product | img_url : 'small' }}" media="(min-width: 1200px)">
+            <source data-srcset="{{ product | img_url : '768x' }}" srcset="{{ product | img_url : 'small' }}" media="(min-width: 768px)">
+            <source data-srcset="{{ product | img_url : '768x' }}" srcset="{{ product | img_url : 'small' }}">
+            <img data-src="{{ product | img_url : '768x' }}" src="{{ product | img_url : 'small' }}" class="lazyload" alt="">
+        </picture>
+        {% for media in product.mediacatalog-more__box  %}
+            {% case media.media_type %}
+                {% when 'video' %}
+                    <video autoplay playsinline muted loop="loop">
+                        <source src="{{ media.sources[1].url }}" type="video/mp4">
+                    </video>
+                    <span class="icon icon-i-play"></span>
+            {% endcase %}
+        {% endfor %}
+
+    </div>
+    <div class="product-box__title">{{ product.title }}</div>
+</a>
+
+

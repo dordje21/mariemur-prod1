@@ -1,0 +1,140 @@
+{% if false %}
+    <div class="page-width">
+        <div class="grid">
+            <div class="grid__item medium-up--one-half medium-up--push-one-quarter">
+
+                <div class="form-vertical">
+
+                    <h1 class="text-center">{{ 'customer.register.title' | t }}</h1>
+
+                    {%- assign formId = 'RegisterForm' -%}
+                    {% form 'create_customer', id: formId, novalidate: 'novalidate' %}
+                        {% include 'form-status', form: form, form_id: formId %}
+
+                        <label for="{{ formId }}-FirstName">{{ 'customer.register.first_name' | t }}</label>
+                        <input type="text" name="customer[first_name]" id="{{ formId }}-FirstName"
+                               {% if form.first_name %}value="{{ form.first_name }}"{% endif %}
+                               autocomplete="given-name">
+
+                        <label for="{{ formId }}-LastName">{{ 'customer.register.last_name' | t }}</label>
+                        <input type="text" name="customer[last_name]" id="{{ formId }}-LastName"
+                               {% if form.last_name %}value="{{ form.last_name }}"{% endif %}
+                               autocomplete="family-name">
+
+                        <label for="{{ formId }}-email">{{ 'customer.register.email' | t }}</label>
+                        <input
+                                type="email"
+                                name="customer[email]"
+                                id="{{ formId }}-email"
+                                class="{% if form.errors contains 'email' %} input--error{% endif %}"
+                                {% if form.email %} value="{{ form.email }}"{% endif %}
+                                autocorrect="off"
+                                autocapitalize="off"
+                                autocomplete="email"
+                                aria-required="true"
+                                {%- if form.errors contains 'email' -%}
+                                    class="input--error"
+                                    aria-invalid="true"
+                                    aria-describedby="{{ formId }}-email-error"
+                                {%- endif -%}
+                        >
+                        {%- if form.errors contains 'email' -%}
+                            <span id="{{ formId }}-email-error" class="input-error-message">
+              <span class="visually-hidden">{{ 'general.accessibility.error' | t }} </span>
+              {% include 'icon-error' %}
+              <span>{{ form.errors.translated_fields['email'] | capitalize }} {{ form.errors.messages['email'] }}.</span>
+            </span>
+                        {%- endif -%}
+
+                        <label for="{{ formId }}-password">{{ 'customer.register.password' | t }}</label>
+                        <input
+                                type="password"
+                                name="customer[password]"
+                                id="{{ formId }}-password"
+                                class="{% if form.errors contains 'password' %} input--error{% endif %}"
+                                aria-required="true"
+                                {%- if form.errors contains 'password' -%}
+                                    class="input--error"
+                                    aria-invalid="true"
+                                    aria-describedby="{{ formId }}-password-error"
+                                {%- endif -%}
+                        >
+                        {%- if form.errors contains 'password' -%}
+                            <span id="{{ formId }}-password-error" class="input-error-message">
+              {% include 'icon-error' %}
+              <span>{{ form.errors.translated_fields['password'] | capitalize }} {{ form.errors.messages['password'] }}.</span>
+            </span>
+                        {%- endif -%}
+
+                        <p class="text-center">
+                            <input type="submit" value="{{ 'customer.register.submit' | t }}" class="btn">
+                        </p>
+
+                    {% endform %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif %}
+{% if customer %} <script>
+    window.location.href='/account/login#success';
+</script>{% endif %}
+<div class="login">
+    <div class="login-bg" style="background-image: url('{{ 'login-bg.jpg' | asset_img_url: 'master' }}')"></div>
+    <div class="login-content">
+        <div class="container">
+            <div class="login-box">
+                {% form 'create_customer', novalidate:'true' %}
+
+
+
+                    <div class="form-title">Register</div>
+                    <div class="form-group">
+                        <input type="text" name="customer[first_name]" placeholder="First name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="customer[last_name]" placeholder="Last name">
+                    </div>
+                    <div class="form-group {% if form.errors %}has-error{% endif %}">
+                        <input type="email" name="customer[email]" placeholder="Email">
+                        <div class="help-block">{% if form.errors contains 'email' %} Please enter a valid email address. {% else %} {{ form.errors | default_errors }} {%- endif -%}</div>
+
+                    </div>
+                    <div class="form-group {% if form.errors contains 'password' %}has-error{% endif %}">
+                        <input type="password" name="customer[password]" id="regPass" placeholder="Password">
+                        <span class="toggle-pass js-toggle-pass"><span class="icon icon-i-view-on"></span></span>
+                        <div class="help-block">{%- if form.errors -%} {{ form.errors.messages['password'] }} {%- endif -%}</div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <input type="password" name="confirmpass" id="confRegPass" placeholder="Confirm password">
+                        <span class="toggle-pass js-toggle-pass"><span class="icon icon-i-view-on"></span></span>
+                      <div class="help-block">Password mismatch.</div>
+                    </div>
+
+
+                    <div class="form-link">
+                        <p>By registering, you agree with our <a href="/pages/terms-conditions">Terms & Conditions</a>,
+                            <a href="/pages/privacy-policy">Privaсy</a> and and <a href="/pages/privacy-policy">Cookie
+                                Policy.</a></p>
+                    </div>
+                    <div class="form-check">
+                        <div class="checkbox">
+                            <input type="checkbox" name="customer[accepts_marketing]" id="savelogin">
+                            <label for="savelogin">Sign Up To Newsletters. By ticking this box, you’re accepting our
+                                privacy policy and are confirming that you are 18 or over.</label>
+                        </div>
+                    </div>
+                    <div class="form-button">
+                        <button type="submit" class="btn btn-red"><span>Create my account</span></button>
+                    </div>
+                {% endform %}
+
+
+            </div>
+        </div>
+    </div>
+</div>
+

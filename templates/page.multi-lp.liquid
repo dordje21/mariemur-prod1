@@ -1,0 +1,656 @@
+{% assign info_hub_home_type = page.metafields.general.mf_home_type %}
+{% assign global_bg_color = page.metafields.general.mf_multi_color_bg %}
+
+<style>
+    .bg-not, .bg-not .about-tabs ul li, .bg-not .header.fixed, .custom-bg-color, .custom-bg-color .about-tabs ul li, .custom-bg-color .header.fixed{
+        background: {{ global_bg_color }};
+    }
+</style>
+
+<div class="wrapper {% if info_hub_home_type contains 'Without Image' %}bg-not{% else %}custom-bg-color{% endif %}">
+
+    {% assign header_logo = page.metafields.general.header_logo %}
+    {% assign header_menu_title = page.metafields.general.header_menu_title %}
+
+    {% assign head_menu_title = page.metafields.general.head_menu_title %}
+    {% assign head_menu_url = page.metafields.general.head_menu_url %}
+
+    {% assign header_soc_inst_title = page.metafields.general.header_soc_inst_title %}
+    {% assign header_soc_inst_url = page.metafields.general.header_soc_inst_url %}
+
+    {% assign header_soc_fb_title = page.metafields.general.header_soc_fb_title %}
+    {% assign header_soc_fb_url = page.metafields.general.header_soc_fb_url %}
+
+    {% assign header_soc_pint_title = page.metafields.general.header_soc_pint_title %}
+    {% assign header_soc_pint_url = page.metafields.general.header_soc_pint_url %}
+
+    <header class="header">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="{{ shop.url }}">
+                        <img src="{{ 'multi-lp-logo.svg' | asset_url }}" alt="{{ shop.name }}">
+                    </a>
+                </div>
+                <div class="menu-toggle js-menu-open">{{ header_menu_title }}</div>
+                <div class="top-menu">
+                    <ul>
+                        {% for item in head_menu_title %}
+                            {% assign index = forloop.index | minus: 1 %}
+                            <li>
+                                <a href="{{ head_menu_url[index] }}" class="js-scroll-to">{{ item }}</a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                    <div class="header-socials">
+                        <ul>
+                            <li><a href="{{ header_soc_inst_url }}" target="_blank">{{ header_soc_inst_title }}</a></li>
+                            <li><a href="{{ header_soc_fb_url }}" target="_blank">{{ header_soc_fb_title }}</a></li>
+                            <li><a href="{{ header_soc_pint_url }}" target="_blank">{{ header_soc_pint_title }}</a></li>
+                        </ul>
+                    </div>
+                    <div class="header-close js-menu-close"><span class="icon icon-i-close"></span></div>
+                </div>
+                <div class="header-overlay"></div>
+            </div>
+        </div>
+    </header>
+
+    {% comment %}   Banner   {% endcomment %}
+
+    {% assign banner_img_desktop = page.metafields.general.banner_img_desktop %}
+    {% assign banner_img_notebook = page.metafields.general.banner_img_notebook %}
+    {% assign banner_img_tablet = page.metafields.general.banner_img_tablet %}
+    {% assign banner_img = page.metafields.general.banner_img %}
+    {% assign banner_title = page.metafields.general.banner_title %}
+    {% assign banner_subtitle = page.metafields.general.banner_subtitle %}
+
+    <div class="head">
+        <div class="container">
+            <div class="head-img">
+                <picture>
+                    <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ banner_img_desktop }}"  media="(min-width: 1200px)">
+                    <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ banner_img_notebook }}" media="(min-width: 992px)">
+                    <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ banner_img_tablet }}" media="(min-width: 768px)">
+                    <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ banner_img  }}" >
+                    <img src="{{ 'pic.jpg' | asset_url }}" data-src="{{ banner_img  }}" class="lazyload" alt="{{  banner_title }}">
+                </picture>
+            </div>
+            <div class="head-title">
+                <div class="box-translate">
+                    <h1>{{ banner_title }}</h1>
+                </div>
+            </div>
+            <div class="head-text">
+                <div class="box-translate">
+                    <p>{{ banner_subtitle }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% comment %}   Info    {% endcomment %}
+    {% assign about_nav = page.metafields.general.about_nav %}
+    {% assign about_head_title = page.metafields.general.about_head_title %}
+    {% assign about_img = page.metafields.general.about_img %}
+    {% assign about_body_title = page.metafields.general.about_body_title %}
+    {% assign about_body_content = page.metafields.general.about_body_content %}
+
+    {% assign about_bl_first_img = page.metafields.general.about_bl_first_img %}
+    {% assign about_bl_first_title = page.metafields.general.about_bl_first_title %}
+    {% assign about_bl_first_info_title = page.metafields.general.about_bl_first_info_title %}
+    {% assign about_bl_first_info_text = page.metafields.general.about_bl_first_info_text %}
+
+    {% assign about_bl_second_img = page.metafields.general.about_bl_second_img %}
+    {% assign about_bl_second_title = page.metafields.general.about_bl_second_title %}
+    {% assign about_bl_second_info_title = page.metafields.general.about_bl_second_info_title %}
+    {% assign about_bl_second_info_text = page.metafields.general.about_bl_second_info_text %}
+
+    {% assign about_bl_third_img = page.metafields.general.about_bl_third_img %}
+    {% assign about_bl_third_title = page.metafields.general.about_bl_third_title %}
+    {% assign about_bl_third_info_title = page.metafields.general.about_bl_third_info_title %}
+    {% assign about_bl_third_info_text = page.metafields.general.about_bl_third_info_text %}
+
+    {% assign about_bl_fourth_img = page.metafields.general.about_bl_fourth_img %}
+    {% assign about_bl_fourth_title = page.metafields.general.about_bl_fourth_title %}
+    {% assign about_bl_fourth_info_title = page.metafields.general.about_bl_fourth_info_title %}
+    {% assign about_bl_fourth_info_text = page.metafields.general.about_bl_fourth_info_text %}
+
+    {% assign about_mail_title = page.metafields.general.about_mail_title %}
+    {% assign about_mail_url = page.metafields.general.about_mail_url %}
+    {% assign about_message_title = page.metafields.general.about_message_title %}
+    {% assign about_message_url = page.metafields.general.about_message_url %}
+    {% assign about_chat_title = page.metafields.general.about_chat_title %}
+    {% assign about_chat_url = page.metafields.general.about_chat_url %}
+
+    <div class="about">
+        <div class="container">
+            <div class="about-tabs js-about-tabs">
+                <ul>
+                    {% for item in about_nav %}
+                        <li class="cursor-pointer {% if forloop.first == true %}active{% endif %}" data-tab="{{ forloop.index | prepend: "tab-" }}">
+                            <span>{{ item }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="about-content">
+
+                <div class="about-box show" data-tab="tab-1">
+                    <div class="about-box__heading">
+                        <div class="box-translate">{{ about_bl_fourth_title }}</div>
+                    </div>
+                    <div class="about-box__head">
+                        <div class="about-box__img">
+                            <picture>
+                                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ about_bl_fourth_img }}">
+                                <img src="{{ 'pic.jpg' | asset_url }}" data-src="{{ about_bl_fourth_img }}" class="lazyload" alt="{{ about_bl_fourth_info_title }}">
+                            </picture>
+                        </div>
+                    </div>
+                    <div class="about-box__body">
+                        <div class="about-box__title">
+                            <span>{{ about_bl_fourth_info_title }}</span>
+                        </div>
+                        <div class="about-box__text">
+                            <div class="box-translate">
+                                <div class="about-box__text-box">
+                                    {{ about_bl_fourth_info_text }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="about-box__link">
+                            <a href="mailto:{{ about_mail_url }}">{{ about_mail_title }}</a>
+                            <a href="{{ about_message_url }}" target="_blank">{{ about_message_title }}</a>
+                            <a href="{{ about_chat_url }}" target="_blank">{{ about_chat_title }}</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-box" data-tab="tab-2">
+                    <div class="about-box__heading">
+                        <div class="box-translate">
+                            {{ about_bl_second_title }}
+                        </div>
+                    </div>
+                    <div class="about-box__head">
+                        <div class="about-box__img">
+                            <picture>
+                                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ about_bl_second_img }}">
+                                <img src="{{ 'pic.jpg' | asset_url }}" data-src="{{ about_bl_second_img }}" class="lazyload" alt="{{ about_bl_second_info_title }}">
+                            </picture>
+                        </div>
+                    </div>
+                    <div class="about-box__body">
+                        <div class="about-box__title">
+                            <span>{{ about_bl_second_info_title }}</span>
+                        </div>
+                        <div class="about-box__text">
+                            <div class="box-translate">
+                                <div class="about-box__text-box columns">
+                                    {{ about_bl_second_info_text }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-box" data-tab="tab-3">
+                    <div class="about-box__heading">
+                        <div class="box-translate">{{ about_bl_third_title }}</div>
+                    </div>
+                    <div class="about-box__head">
+                        <div class="about-box__img">
+                            <picture>
+                                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ about_bl_third_img }}">
+                                <img src="{{ 'pic.jpg' | asset_url }}" data-src="{{ about_bl_third_img }}" class="lazyload" alt="{{ about_bl_third_info_title }}">
+                            </picture>
+                        </div>
+                    </div>
+                    <div class="about-box__body">
+                        <div class="about-box__title">
+                            <span>{{ about_bl_third_info_title }}</span>
+                        </div>
+                        <div class="about-box__text">
+                            <div class="box-translate">
+                                <div class="about-box__text-box columns">
+                                    {{ about_bl_third_info_text }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="about-box" data-tab="tab-4">
+                    <div class="about-box__heading">
+                        <div class="box-translate">{{ about_bl_first_title }}</div>
+                    </div>
+                    <div class="about-box__head">
+                        <div class="about-box__img">
+                            <picture>
+                                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ about_bl_first_img }}">
+                                <img src="{{ 'pic.jpg' | asset_url }}" data-src="{{ about_bl_first_img }}" class="lazyload" alt="{{ about_bl_first_title }}">
+                            </picture>
+                        </div>
+                    </div>
+                    <div class="about-box__body">
+                        <div class="about-box__title">
+                                <span>
+                                    {{ about_bl_first_info_title }}
+                                </span>
+                        </div>
+                        <div class="about-box__text">
+                            <div class="box-translate">
+                                <div class="about-box__text-box columns">
+                                    {{ about_bl_first_info_text }}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% comment %}   Catalog    {% endcomment %}
+
+    {% assign catalog_title = page.metafields.general.catalog_title %}
+    {% assign catalog_subtitle = page.metafields.general.catalog_subtitle %}
+    {% assign catalog_prod = page.metafields.general.catalog_prod %}
+    {% assign catalog_prod_img = page.metafields.general.catalog_prod_img %}
+
+    <div class="catalog">
+        <div class="container">
+            <div class="title">
+                <div class="box-translate">
+                    <h2>{{ catalog_title }}</h2>
+                </div>
+            </div>
+            <div class="subtitle">
+                <div class="box-translate">
+                    <p>{{ catalog_subtitle }}</p>
+                </div>
+            </div>
+
+            {% assign array_pr_handle = catalog_prod | split: "|" %}
+
+            <div class="catalog-list">
+
+                {% for pr in array_pr_handle %}
+                    {% assign pr_item = all_products[pr] %}
+
+                    <a href="" class="catalog-box">
+                        <div class="catalog-box__img">
+                            <picture>
+                                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ pr_item | img_url: "master" }}" media="(min-width: 768px)">
+                                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ pr_item | img_url: "master" }}">
+                                <img src="{{ 'pic.jpg' | asset_url }}" data-src="{{ pr_item | img_url: "master" }}" class="lazyload" alt="{{ pr_item.title }}">
+                            </picture>
+                        </div>
+                        <div class="catalog-box__body">
+                            <div class="catalog-box__title">{{ pr_item.title }}</div>
+                            <div class="catalog-box__price">{{ pr_item.first_available_variant.price | money }}</div>
+                        </div>
+                    </a>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    {% comment %}   Membership    {% endcomment %}
+
+    {% assign member_title = page.metafields.general.member_title %}
+    {% assign member_subtitle = page.metafields.general.member_subtitle %}
+    {% assign member_show_section = page.metafields.general.member_show_section %}
+
+    {% if member_show_section != blank %}
+        <div class="membership">
+        <div class="container">
+            <div class="membership-inner">
+                <div class="title">
+                    <div class="box-translate">
+                        <h2>{{ member_title }}</h2>
+                    </div>
+                </div>
+                <div class="subtitle">
+                    <div class="box-translate">
+                        <p>{{ member_subtitle }}</p>
+                    </div>
+                </div>
+
+                <div class="membership-list">
+
+                    {% assign member_link_title = page.metafields.general.member_link_title %}
+                    {% assign member_link_url =  page.metafields.general.member_link_url %}
+                    {% assign member_bl_first_img = page.metafields.general.member_bl_first_img %}
+                    {% assign member_bl_first_img_tablet = page.metafields.general.member_bl_first_img_tablet %}
+                    {% assign member_bl_first_img_desk = page.metafields.general.member_bl_first_img_desk %}
+                    {% assign member_bl_first_title = page.metafields.general.member_bl_first_title %}
+                    {% assign member_bl_first_text = page.metafields.general.member_bl_first_text %}
+
+                    {% assign member_bl_second_img = page.metafields.general.member_bl_second_img %}
+                    {% assign member_bl_second_img_tablet = page.metafields.general.member_bl_second_img_tablet %}
+                    {% assign member_bl_second_img_desk = page.metafields.general.member_bl_second_img_desk %}
+                    {% assign member_bl_second_title = page.metafields.general.member_bl_second_title %}
+                    {% assign member_bl_second_text = page.metafields.general.member_bl_second_text %}
+
+                    {% assign member_bl_third_img = page.metafields.general.member_bl_third_img %}
+                    {% assign member_bl_third_img_tablet = page.metafields.general.member_bl_third_img_tablet %}
+                    {% assign member_bl_third_img_desk = page.metafields.general.member_bl_third_img_desk %}
+                    {% assign member_bl_third_title = page.metafields.general.member_bl_third_title %}
+                    {% assign member_bl_third_text = page.metafields.general.member_bl_third_text %}
+
+                    {% assign member_bl_fourth_img = page.metafields.general.member_bl_fourth_img %}
+                    {% assign member_bl_fourth_img_tablet = page.metafields.general.member_bl_fourth_img_tablet %}
+                    {% assign member_bl_fourth_img_desk = page.metafields.general.member_bl_fourth_img_desk %}
+                    {% assign member_bl_fourth_title = page.metafields.general.member_bl_fourth_title %}
+                    {% assign member_bl_fourth_text = page.metafields.general.member_bl_fourth_text %}
+
+                    <div class="membership-box">
+                        <div class="membership-box__img">
+                            <picture>
+                                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ member_bl_first_img_tablet }}" media="(min-width: 768px)">
+                                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ member_bl_first_img }}">
+                                <img src="{{ 'pic.jpg' | asset_url }}" data-src="{{ member_bl_first_img_desk }}" class="lazyload" alt="{{ member_bl_first_title }}">
+                            </picture>
+                        </div>
+                        <div class="membership-box__body">
+                            <div class="membership-box__title">
+                                <div class="box-translate">{{ member_bl_first_title }}</div>
+                            </div>
+                            <div class="membership-box__text">
+                                <div class="box-translate">{{ member_bl_first_text }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="membership-box">
+                        <div class="membership-box__img">
+                            <picture>
+                                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ member_bl_second_img_tablet }}" media="(min-width: 768px)">
+                                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ member_bl_second_img }}">
+                                <img src="{{ 'pic.jpg' | asset_url }}" data-src="{{ member_bl_second_img_desk }}" class="lazyload" alt="{{ member_bl_second_title }}">
+                            </picture>
+                        </div>
+                        <div class="membership-box__body">
+                            <div class="membership-box__title">
+                                <div class="box-translate">{{ member_bl_second_title }}</div>
+                            </div>
+                            <div class="membership-box__text">
+                                <div class="box-translate">{{ member_bl_second_text }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="membership-box">
+                        <div class="membership-box__img">
+                            <picture>
+                                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ member_bl_third_img_tablet }}" media="(min-width: 768px)">
+                                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ member_bl_third_img }}">
+                                <img src="{{ 'pic.jpg' | asset_url }}" data-src="{{ member_bl_third_img_desk }}" class="lazyload" alt="{{ member_bl_third_title }}">
+                            </picture>
+                        </div>
+                        <div class="membership-box__body">
+                            <div class="membership-box__title">
+                                <div class="box-translate">{{ member_bl_third_title }}</div>
+                            </div>
+                            <div class="membership-box__text">
+                                <div class="box-translate">{{ member_bl_third_text }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="membership-box">
+                        <div class="membership-box__img">
+                            <picture>
+                                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ member_bl_fourth_img_tablet }}" media="(min-width: 768px)">
+                                <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ member_bl_fourth_img }}">
+                                <img src="{{ 'pic.jpg' | asset_url }}" data-src="{{ member_bl_fourth_img_desk }}" class="lazyload" alt="{{ member_bl_fourth_title }}">
+                            </picture>
+                        </div>
+                        <div class="membership-box__body">
+                            <div class="membership-box__title">
+                                <div class="box-translate">{{ member_bl_fourth_title }}</div>
+                            </div>
+                            <div class="membership-box__text">
+                                <div class="box-translate">{{ member_bl_fourth_text }}</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="membership-button">
+                    <a href="{{ member_link_url }}">{{ member_link_title }}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+
+    {% comment %}   Subcribe   {% endcomment%}
+
+    {% assign subscribe_img = page.metafields.general.subscribe_img %}
+    {% assign subscribe_img_tablet = page.metafields.general.subscribe_img_tablet %}
+    {% assign subscribe_img_desk = page.metafields.general.subscribe_img_desk %}
+    {% assign subscribe_img_notebook = page.metafields.general.subscribe_img_notebook %}
+    {% assign subscribe_title = page.metafields.general.subscribe_title %}
+    {% assign subscribe_email = page.metafields.general.subscribe_email %}
+
+    <style>
+        .subscribe .subscribe-success {display: none;visibility: hidden;opacity: 0;}
+        .subscribe.has-success .subscribe-success{display:flex;visibility:visible;opacity:1}
+        .subscribe.has-success .subscribe-form {display: none;}
+    </style>
+
+    <div id="subscribe-form-lp" class="subscribe" style="background-image: url({{ subscribe_img }})">
+        <div class="container">
+            <div class="subscribe-img">
+                <picture>
+                    <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ subscribe_img_desk }}" media="(min-width: 1440px)">
+                    <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ subscribe_img_notebook }}" media="(min-width: 992px)">
+                    <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ subscribe_img_tablet }}" media="(min-width: 768px)">
+                    <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ subscribe_img }}">
+                    <img src="{{ 'pic.jpg' | asset_url }}" data-src="{{ subscribe_img_desk }}" class="lazyload" alt="{{ subscribe_title }}">
+                </picture>
+            </div>
+            <div class="subscribe-inner">
+                <div class="subscribe-title">
+                    <div class="box-translate">
+                        <p>{{ subscribe_title }}</p>
+                    </div>
+                </div>
+                <div class="subscribe-form">
+                    {% form 'customer', novalidate:'true' %}
+                        <input id="contact_tags" name="contact[tags]" type="hidden" value="prospect,newsletter" />
+
+                        <div class="form-group" id="subscription_mail">
+                            <input type="email"  name="contact[email]" placeholder="">
+                            <div class="help-block" id="errorBlock">Please enter your email in correct format: <b>Example@mail.com</b>
+                            </div>
+                        </div>
+
+                        <div class="form-button">
+                            <button type="submit"><span class="icon icon-i-arr-long-right"></span></button>
+                        </div>
+
+                        {% if form.posted_successfully? %}
+                        <script>
+                            history.scrollRestoration = "manual"
+                            $(document).ready(function () {
+                                document.getElementById('subscribe-form-lp').classList.add('has-success')
+                                window.location.hash = "#subscribe-form"
+                            })
+                        </script>
+                        {% else %}
+                        <script>
+                            history.scrollRestoration = "manual"
+                            $(document).ready(function () {
+
+                                if (window.location.href.includes('contact%5Btags%5D=prospect%2Cnewsletter')){
+                                    document.getElementById('subscription_mail').classList.add('has-error')
+                                    document.getElementById('errorBlock').innerText="This e-mail is already subscribed!"
+                                    window.location.hash = "#subscribe-form-lp"
+                                }
+                            })
+
+                        </script>
+                        {% endif %}
+                        <div class="form-button">
+                            <button type="submit"><span class="icon icon-i-arr-right"></span></button>
+                        </div>
+                    {% endform %}
+
+                </div>
+            </div>
+            <div class="subscribe-success">
+                <div class="subscribe-title">
+                    <p>Thanks for signing up. See you soon in your inbox!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {% comment %}
+        <div id="subscribe-form" class="subscribe ">
+            <div class="container">
+                <div class="subscribe-inner">
+                    <div class="subscribe-title">
+                        <h2>Subscribe for our news and offers</h2>
+                    </div>
+                    <div class="subscribe-form">
+                        {% form 'customer', novalidate:'true'  %}
+                            <input id="contact_tags" name="contact[tags]" type="hidden" value="prospect,newsletter" />
+
+                            <div class="form-group" id="subscription_mail">
+                                <input type="email"  name="contact[email]" placeholder="Email">
+                                <div class="help-block" id="errorBlock">Please enter your email in correct format: <b>Example@mail.com</b>
+                                </div>
+                            </div>
+                            {% if form.posted_successfully? %}
+                            <script>
+                                history.scrollRestoration = "manual"
+                                $(document).ready(function () {
+                                    console.log(1)
+                                    document.getElementById('subscribe-form').classList.add('has-success')
+                                    window.location.hash = "#subscribe-form"
+                                })
+                            </script>
+                            {% else %}
+                            <script>
+                                history.scrollRestoration = "manual"
+                                $(document).ready(function () {
+
+                                    if (window.location.href.includes('contact%5Btags%5D=prospect%2Cnewsletter')){
+                                        document.getElementById('subscription_mail').classList.add('has-error')
+                                        document.getElementById('errorBlock').innerText="This e-mail is already subscribed!"
+                                        window.location.hash = "#subscribe-form"
+                                    }
+                                })
+
+                            </script>
+                            {% endif %}
+                            <div class="form-button">
+                                <button type="submit"><span class="icon icon-i-arr-right"></span></button>
+                            </div>
+                        {% endform %}
+                    </div>
+                </div>
+                <div class="subscribe-success">
+                    <div class="container">
+                        <div class="subscribe-title">
+                            <h2>Your’re on the list!</h2>
+                        </div>
+                        <div class="subscribe-subtitle">
+                            <p>Thanks for signing up. See you soon in your inbox!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endcomment %}
+
+    {% comment %}
+        <form action="#" autocomplete="off">
+            <div class="form-group">
+                <input type="email" name="Email" placeholder="">
+                <div class="help-block">Please enter your email in correct format: <b>Example@mail.com</b></div>
+            </div>
+            <div class="form-button">
+                <button type="submit"><span class="icon icon-i-arr-long-right"></span></button>
+            </div>
+        </form>
+    {% endcomment %}
+
+
+    {% section 'multi-lp-footer' %}
+
+    <div class="overlay"></div>
+
+    <div id="cursor">
+        <svg viewBox="0 0 40 40">
+            <circle cx="20" cy="20" r="18" stroke-width="1" stroke="currentColor"></circle>
+        </svg>
+    </div>
+
+    <script>
+        const JQuery = document.querySelector.bind( document ),
+            $on = document.addEventListener.bind( document );
+        let xmouse, ymouse;
+        $on( 'mousemove', function (e) {
+            xmouse = e.clientX || e.pageX;
+            ymouse = e.clientY || e.pageY;
+        });
+        const cursor = JQuery( '#cursor' ),
+            link = document.querySelectorAll( 'a:not([data-fancybox]), button, .checkbox, .cursor-pointer, input, textarea' ),
+            linkZoom = document.querySelectorAll( '[data-fancybox]' );
+        link.forEach(function (item) {
+            item.addEventListener( 'mouseenter', function (e) {
+                cursor.classList.add( 'is-link' );
+            });
+            item.addEventListener( 'mouseleave', function (e) {
+                cursor.classList.remove( 'is-link' );
+            });
+        });
+        linkZoom.forEach(function (item) {
+            item.addEventListener( 'mouseenter', function (e) {
+                cursor.classList.add( 'is-zoom' );
+            });
+            item.addEventListener( 'mouseleave', function (e) {
+                cursor.classList.remove( 'is-zoom' );
+            });
+        });
+        let x  = void 0,
+            y = void 0,
+            dx = void 0,
+            dy = void 0,
+            tx = 0,
+            ty = 0,
+            key = -1,
+            scX = 1,
+            scY = 1;
+        const followMouse = function followMouse() {
+            key = requestAnimationFrame( followMouse );
+            if ( !x || !y) {
+                x = xmouse;
+                y = ymouse;
+            } else {
+                dx = ( xmouse - x ) * 0.125;
+                dy = ( ymouse - y ) * 0.125;
+                if ( Math.abs( dx ) + Math.abs( dy ) < 0.1 ) {
+                    x = xmouse;
+                    y = ymouse;
+                } else {
+                    x += dx;
+                    y += dy;
+                    scX = Math.abs(1 - Math.abs( dx ) / 50);
+                    scY = Math.abs(1 - Math.abs( dy ) / 50);
+                    cursor.style.transform = 'scale(' + scX + ', ' + scY + ')';
+                }
+            }
+            cursor.style.left = x + 'px';
+            cursor.style.top = y + 'px';
+        };
+    </script>
+
+</div>

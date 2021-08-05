@@ -1,0 +1,127 @@
+{% comment %}
+    Timer section
+    Tags: timer | section | js | time | date | time
+{% endcomment %}
+
+{% if section.settings.show_sec_timer == true %}
+    {% assign start_timer_year = section.settings.start_timer_year %}
+    {% assign start_timer_month = section.settings.start_timer_month %}
+    {% assign start_timer_day = section.settings.start_timer_day %}
+    {% assign start_timer_hours = section.settings.start_timer_hours %}
+    {% assign start_timer_minutes = section.settings.start_timer_minutes %}
+    {% assign start_timer_time = start_timer_hours | append: ":" | append: start_timer_minutes | append: ":00" %}
+    {% assign start_timer_date = start_timer_month | append: " " | append: start_timer_day | append: ", " | append: start_timer_year | append: ' ' %}
+
+    {% assign start_main_timer = start_timer_date | append: start_timer_time %}
+
+    {% assign end_timer_year = section.settings.end_timer_year %}
+    {% assign end_timer_month = section.settings.end_timer_month %}
+    {% assign end_timer_day = section.settings.end_timer_day %}
+    {% assign end_timer_hours = section.settings.end_timer_hours %}
+    {% assign end_timer_minutes = section.settings.end_timer_minutes %}
+    {% assign end_timer_time = end_timer_hours | append: ":" | append: end_timer_minutes | append: ":00" %}
+    {% assign end_timer_date = end_timer_month | append: " " | append: end_timer_day | append: ", " | append: end_timer_year | append: ' ' %}
+
+    {% assign end_main_timer = end_timer_date | append: end_timer_time %}
+
+    {% assign repeatable = section.settings.repeat_sec_timer %}
+
+    {% include 'shopify-countdown-timer',
+        title: "Special Offer End In",
+        start_main_timer: start_main_timer,
+        end_main_timer: end_main_timer,
+        repeatable: repeatable
+    %}
+
+{% endif %}
+
+{% schema %}
+    {
+    "name": "Timer",
+    "settings": [
+    {
+    "type": "header",
+    "content": "Start date timer"
+    },
+    {
+    "type": "text",
+    "id": "start_timer_month",
+    "label": "Write month",
+    "info": "Example: Jun, Sep, May etc."
+    },
+    {
+    "type": "text",
+    "id": "start_timer_day",
+    "label": "Enter day",
+    "info": "It must be in range from 1 to 31"
+    },
+    {
+    "type": "text",
+    "id": "start_timer_year",
+    "label": "Enter year"
+    },
+    {
+    "type": "text",
+    "id": "start_timer_hours",
+    "label": "Enter hours",
+    "info": "In range 00 - 23"
+    },
+    {
+    "type": "text",
+    "id": "start_timer_minutes",
+    "label": "Enter minutes",
+    "info": "In range 00 - 59"
+    },
+    {
+    "type": "header",
+    "content": "End date timer"
+    },
+    {
+    "type": "text",
+    "id": "end_timer_month",
+    "label": "Write month",
+    "info": "Example: Jun, Sep, May etc."
+    },
+    {
+    "type": "text",
+    "id": "end_timer_day",
+    "label": "Enter day",
+    "info": "It must be in range from 1 to 31"
+    },
+    {
+    "type": "text",
+    "id": "end_timer_year",
+    "label": "Enter year"
+    },
+    {
+    "type": "text",
+    "id": "end_timer_hours",
+    "label": "Enter hours",
+    "info": "In range 00 - 23"
+    },
+    {
+    "type": "text",
+    "id": "end_timer_minutes",
+    "label": "Enter minutes",
+    "info": "In range 00 - 59"
+    },
+    {
+    "type": "checkbox",
+    "id": "show_sec_timer",
+    "label": "Show / hide timer section",
+    "default": true
+    }
+
+    ]
+
+    }
+{% endschema %}
+    {% comment %}
+        ,
+        {
+        "type": "checkbox",
+        "id": "repeat_sec_timer",
+        "label": "Repeatable timer",
+        "default": true
+        }
+    {% endcomment %}

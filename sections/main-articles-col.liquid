@@ -1,0 +1,50 @@
+<div class="main-news">
+    <div class="container">
+        <div class="main-news__inner">
+            <div class="main-news__square"></div>
+            <div class="main-news__title wow fadeInUp" data-wow-delay="0.2s">
+                <h2>{{ section.settings.bp-title }}</h2>
+            </div>
+            <div class="main-news__slider js-main-news-slider">
+                {% for block in section.blocks %}
+                    {% assign article = articles[block.settings.bp-article] %}
+                    {% include 'blog-card-grid', article: article %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% schema %}
+{
+"name": "Blog posts" ,
+"settings": [
+{
+"type": "text" ,
+"id": "bp-title" ,
+"label": "Title" ,
+"default": "Our blog"
+}
+] ,
+"blocks": [
+{
+"type": "bp-item" ,
+"name": "Blog posts item" ,
+
+"settings": [
+{
+"type": "article" ,
+"id": "bp-article" ,
+"label": "Article"
+}
+]
+}
+] ,
+"presets": [
+{
+"name": "Blog posts" ,
+"category": "Blog"
+}
+]
+}
+
+{% endschema %}

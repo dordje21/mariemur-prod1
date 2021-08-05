@@ -1,0 +1,351 @@
+<style>
+    .lp-wrapper .sd_style--color {
+        background: {% if section.settings.lp_subs_bg == 'rgba(0,0,0,0)' %}#3F0606{% else %}{{ section.settings.lp_subs_bg }}{% endif %};
+
+    }
+
+    .lp-wrapper .sd_style--color:before {
+        background-color: inherit;
+    }
+</style>
+
+<div class="shop" id="shop">
+    <div class="container">
+        <div class="shop-list">
+
+            <div class="shop-list__section">
+                <div class="shop-list__img">
+                    <picture class="shop-1__img-1">
+                        <source srcset="{{ section.settings.lp_img_block1_mob | img_url : "408x1452", crop: 'center' }}" media="(max-width: 767px)">
+                        <source src=" {{ section.settings.lp_img_block1 | img_url : "1120x1984", crop: 'center' }}">
+                        <img src=" {{ section.settings.lp_img_block1 | img_url : "1120x1984", crop: 'center' }}" alt="{{ shop.name }}">
+                    </picture>
+
+                    <picture class="shop-1__img-2">
+                        <source srcset="{{ section.settings.lp_img_block2_mob | img_url : "1148x1604", crop: 'center' }}" media="(max-width: 767px)">
+                        <source src="{{ section.settings.lp_img_block2 | img_url : "1872x2620", crop: 'center' }}">
+                        <img src="{{ section.settings.lp_img_block2 | img_url : "1872x2620", crop: 'center' }}" alt="{{ shop.name }}">
+                    </picture>
+
+                    <picture class="shop-1__img-3">
+                        <source srcset="{{ section.settings.lp_img_block3_mob | img_url : "612x836", crop: 'center'}}" media="(max-width: 767px)">
+                        <source src="{{ section.settings.lp_img_block3 | img_url : "1004x1360", crop: 'center'}}">
+                        <img src="{{ section.settings.lp_img_block3 | img_url : "1004x1360", crop: 'center'}}" alt="{{ shop.name }}">
+                    </picture>
+                </div>
+
+                <div class="shop-list__box">
+                    <div class="title">
+                        <h2>{{ section.settings.lp_sec_title_first }}</h2>
+                    </div>
+                    <div class="shop-list__box-text">
+                        <p>{{ section.settings.lp_sec_text_first}}</p>
+                    </div>
+                    <div class="shop-list__box-link">
+                        <a href="{{ section.settings.link_first }}">{{ section.settings.lp_link_first_title }}</a>
+                    </div>
+                </div>
+
+                <div class="shop-list__circle js-waypoint-circle">
+                    <svg viewBox="0 0 802 802" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="401" cy="401" r="400" stroke="#A2A2A2" stroke-opacity="0.3" stroke-width="1" stroke-dashoffset="2600" stroke-dasharray="2600" />
+                    </svg>
+                </div>
+            </div>
+
+            <div class="shop-list__section sd_style--color">
+
+                <div class="shop-list__img">
+
+                    <picture class="shop-2__img-1">
+                        <source srcset="{{ section.settings.lp_img_block1_sec_mob | img_url : "864x556", crop: 'center'}}" media="(max-width: 767px)">
+                        <source src="{{ section.settings.lp_img_block1_sec | img_url : "1804x1488", crop: 'center'}}">
+                        <img src="{{ section.settings.lp_img_block1_sec | img_url : "1804x1488", crop: 'center'}}"  alt="{{ shop.name }}">
+                    </picture>
+
+                    <picture class="shop-2__img-2 ">
+                        <source srcset="{{ section.settings.lp_img_block2_sec | img_url: "476x1072", crop: 'center'}}" media="(max-width: 767px)">
+                        <source src="{{ section.settings.lp_img_block2_sec | img_url: '2620x2180', crop: 'center'}}">
+                        <img src="{{ section.settings.lp_img_block2_sec | img_url:  "1804x1890", crop: 'center'}}" alt="{{ shop.name }}">
+                    </picture>
+
+                </div>
+
+                <div class="shop-list__brand ">{{ section.settings.lp_brand_title }}</div>
+
+                <div class="shop-list__box">
+                    <div class="title">
+                        <h2 class="sd_title">{{ section.settings.lp_sec_title_second }}</h2>
+                    </div>
+
+                    <div class="shop-list__box-text">
+                        <p class="sd_text">{{ section.settings.lp_sec_text_second }}</p>
+                    </div>
+                    <div class="shop-list__box-link">
+                        <a href="{{ section.settings.link_second }}">{{ section.settings.lp_link_second_title }}</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="shop-list__section">
+                <div class="shop-list__img">
+
+                    <picture class="shop-3__img-1">
+                        <source srcset="{{ section.settings.lp_img_block1_third_mob | img_url : "864x924", crop: 'center'}}" media="(max-width: 767px)">
+                        <source src="{{ section.settings.lp_img_block1_third | img_url : "1864x2000", crop: 'center'}}">
+                        <img src="{{ section.settings.lp_img_block1_third | img_url : "1864x2000", crop: 'center'}}" alt="{{ shop.name }}">
+                    </picture>
+
+                    <picture class="shop-3__img-2">
+                        <source srcset="{{ section.settings.lp_img_block2_third_mob | img_url : "604x1116", crop: 'center'}}" media="(max-width: 767px)">
+                        <source src="{{ section.settings.lp_img_block2_third | img_url : "1668x2400", crop: 'center'}}">
+                        <img src="{{ section.settings.lp_img_block2_third | img_url : "1668x2400", crop: 'center'}}" alt="{{ shop.name }}">
+                    </picture>
+
+                    <picture class="shop-3__img-3">
+                        <source srcset="{{ section.settings.lp_img_block3_third_mob | img_url : "452x608", crop: 'center'}}" media="(max-width: 767px)">
+                        <source src="{{ section.settings.lp_img_block3_third | img_url : "972x1304", crop: 'center'}}">
+                        <img src="{{ section.settings.lp_img_block3_third | img_url : "972x1304", crop: 'center'}}" alt="{{ shop.name }}">
+                    </picture>
+
+                    <picture class="shop-3__img-4">
+                        <source srcset="{{ section.settings.lp_img_block4_third_mob | img_url : "376x604", crop: 'center'}}" media="(max-width: 767px)">
+                        <source src="{{ section.settings.lp_img_block4_third | img_url : "632x848", crop: 'center'}}">
+                        <img src="{{ section.settings.lp_img_block4_third | img_url : "632x848", crop: 'center'}}" alt="{{ shop.name }}">
+                    </picture>
+
+                </div>
+
+                <div class="shop-list__brand">{{ section.settings.lp_brand_title }}</div>
+
+                <div class="shop-list__box">
+                    <div class="title">
+                        <h2>{{ section.settings.lp_sec_title_third }}</h2>
+                    </div>
+                    <div class="shop-list__box-text ">
+                        <p> {{ section.settings.lp_sec_text_third }}</p>
+                    </div>
+                    <div class="shop-list__box-link">
+                        <a href="{{ section.settings.link_third}}">{{ section.settings.link_third_title }}</a>
+                    </div>
+                </div>
+
+                <div class="shop-list__circle js-waypoint-circle">
+                    <svg viewBox="0 0 802 802" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="401" cy="401" r="400" stroke="#A2A2A2" stroke-opacity="0.3" stroke-width="1" stroke-dashoffset="2600" stroke-dasharray="2600" />
+                    </svg>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+{% schema %}
+    {
+    "name": "MarieMur: Shop",
+    "settings": [
+        {
+            "type": "text",
+            "id": "lp_brand_title",
+            "label": "Brand title",
+            "default": "brand: marie mur"
+        },
+        {
+            "type": "paragraph",
+            "content": "------ First Section -----"
+        },
+        {
+            "type": "paragraph",
+            "content": "Image block"
+        },
+        {
+            "id": "lp_img_block1",
+            "type": "image_picker",
+            "label": "First image"
+        },
+        {
+            "id": "lp_img_block1_mob",
+            "type": "image_picker",
+            "label": "First image mobile"
+        },
+        {
+            "id": "lp_img_block2",
+            "type": "image_picker",
+            "label": "Second image"
+        },
+        {
+            "id": "lp_img_block2_mob",
+            "type": "image_picker",
+            "label": "Second image mobile"
+        },
+        {
+            "id": "lp_img_block3",
+            "type": "image_picker",
+            "label": "Third image"
+        },
+        {
+            "id": "lp_img_block3_mob",
+            "type": "image_picker",
+            "label": "Third image mobile"
+        },
+        {
+            "type": "paragraph",
+            "content": "Text block"
+        },
+        {
+            "type": "html",
+            "id": "lp_sec_title_first",
+            "label": "Title"
+        },
+        {
+            "type": "textarea",
+            "id": "lp_sec_text_first",
+            "label": "Text"
+        },
+        {
+            "type": "text",
+            "id": "lp_link_first_title",
+            "label": "Link title",
+            "default": "SHOP NOW"
+        },
+        {
+            "type": "url",
+            "id": "link_first",
+            "label": "Link href"
+        },
+        {
+            "type": "paragraph",
+            "content": "------ Second Section -----"
+        },
+        {
+            "type": "paragraph",
+            "content": "Image block"
+        },
+        {
+            "id": "lp_img_block1_sec",
+            "type": "image_picker",
+            "label": "First image"
+        },
+        {
+            "id": "lp_img_block1_sec_mob",
+            "type": "image_picker",
+            "label": "First image mobile"
+        },
+        {
+            "id": "lp_img_block2_sec",
+            "type": "image_picker",
+            "label": "Second image"
+        },
+        {
+            "id": "lp_img_block2_sec_mob",
+            "type": "image_picker",
+            "label": "Second image mobile"
+        },
+        {
+            "type": "paragraph",
+            "content": "Text block"
+        },
+        {
+            "type": "html",
+            "id": "lp_sec_title_second",
+            "label": "Title"
+        },
+        {
+            "type": "textarea",
+            "id": "lp_sec_text_second",
+            "label": "Text"
+        },
+        {
+            "type": "text",
+            "id": "lp_link_second_title",
+            "label": "Link title",
+            "default": "SHOP NOW"
+        },
+        {
+            "type": "url",
+            "id": "link_second",
+            "label": "Link href"
+        },
+        {
+            "type": "paragraph",
+            "content": "------ Third Section -----"
+        },
+        {
+            "type": "paragraph",
+            "content": "Image block"
+        },
+        {
+            "id": "lp_img_block1_third",
+            "type": "image_picker",
+            "label": "First image"
+        },
+        {
+            "id": "lp_img_block1_third_mob",
+            "type": "image_picker",
+            "label": "First image mobile"
+        },
+        {
+            "id": "lp_img_block2_third",
+            "type": "image_picker",
+            "label": "Second image"
+        },
+        {
+            "id": "lp_img_block2_third_mob",
+            "type": "image_picker",
+            "label": "Second image mobile"
+        },
+        {
+            "id": "lp_img_block3_third",
+            "type": "image_picker",
+            "label": "Third image"
+        },
+        {
+            "id": "lp_img_block3_third_mob",
+            "type": "image_picker",
+            "label": "Third image mobile"
+        },
+        {
+            "id": "lp_img_block4_third",
+            "type": "image_picker",
+            "label": "Fourth image"
+        },
+        {
+            "id": "lp_img_block4_third_mob",
+            "type": "image_picker",
+            "label": "Fourth image mobile"
+        },
+        {
+            "type": "paragraph",
+            "content": "Text block"
+        },
+        {
+            "type": "html",
+            "id": "lp_sec_title_third",
+            "label": "Title"
+        },
+        {
+            "type": "textarea",
+            "id": "lp_sec_text_third",
+            "label": "Text"
+        },
+        {
+            "type": "text",
+            "id": "link_third_title",
+            "label": "Link title",
+            "default": "SHOP NOW"
+        },
+        {
+            "type": "url",
+            "id": "link_third",
+            "label": "Link href"
+        },
+        {
+            "type": "color",
+            "id": "lp_subs_bg",
+            "label": "Background Color",
+            "default": "#3F0606"
+        }
+        ]
+    }
+{% endschema %}

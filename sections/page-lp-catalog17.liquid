@@ -1,0 +1,55 @@
+{% assign items = collections[section.settings.lp_coll_select].products %}
+
+<div id="catalog" class="catalog">
+    <div class="container">
+        <div class="title text-center">
+            <h2>{{ section.settings.lp_catalog_title }}</h2>
+        </div>
+
+        <div class="catalog-list {% if items.size >= 4 %} catalog_count--larger {% else %} catalog_count--less {% endif %}">
+            {% for product in collections[section.settings.lp_coll_select].products limit:8 %}
+                <div class="catalog-box">
+                    <div class="catalog-box__head">
+                        <a href="{{ product.url }}" class="catalog-box__img" style="background: url('{{ product | img_url: "master" }}') center/cover">
+                            <div class="catalog-box__link">
+                                <span>{{ section.settings.lp_product_hover_text }}</span>
+                                <div class="catalog-box__link-circle">
+                                    <svg viewBox="0 0 134 134" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <circle cx="67" cy="67" r="66" stroke="#FFFFFF" stroke-opacity="1" stroke-width="1" stroke-dashoffset="500" stroke-dasharray="500" />
+                                    </svg>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                    <div class="catalog-box__title">
+                        <a href="{{ product.url }}">{{ product.title }}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% schema %}
+    {
+        "name": "MarieMur: Catalog",
+        "settings": [
+            {
+                "type": "collection",
+                "id": "lp_coll_select",
+                "label": "Select collection"
+            },
+            {
+                "type": "html",
+                "id": "lp_catalog_title",
+                "label": "Catalog title"
+            },
+            {
+                "type": "text",
+                "id": "lp_product_hover_text",
+                "label": "Text for product hover",
+                "default": "view product"
+            }
+        ]
+    }
+{% endschema %}

@@ -1,0 +1,80 @@
+<div class="lp-feed-wrap">
+    <div class="lp-feed-content">
+        <div class="container">
+            <div class="lp-feed__title">
+                {{ section.settings.lp_feed_title}}
+            </div>
+            <div class="lp-feed">
+                {% for block in section.blocks %}
+                    <div class="lp-feed-item">
+                        <div class="lp-feed__stars">
+                            {% for i in (1..block.settings.stars) %}
+                                <img src="{{ 'star_feed.svg' | asset_url }}" alt="">
+                            {% endfor %}
+                        </div>
+
+                        <div class="lp-feed__text">
+                            {{ block.settings.lp_feed_text }}
+                        </div>
+
+                        <div class="lp-feed-info">
+                            <div class="lp-feed__author">
+                                {{ block.settings.lp_feed_author }}
+                            </div>
+                            <div class="lp-feed__country">
+                                {{ block.settings.lp_feed_country }}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% schema %}
+    {
+        "name": "LP: Feedbacks",
+        "max_blocks": 3,
+        "settings": [
+            {
+                "type": "html",
+                "id": "lp_feed_title",
+                "label": "Enter section title",
+                "default": "<p>Our customers are in love with leather by MARIEMUR</p>"
+            }
+        ],
+        "blocks": [
+            {
+                "name": "LP: Feedback Item",
+                "type": "dropdown",
+                "settings": [
+                    {
+                        "type": "range",
+                        "id": "stars",
+                        "min": 1,
+                        "max": 5,
+                        "step": 1,
+                        "label": "Stars count",
+                        "default": 5
+                    },
+                    {
+                        "type": "richtext",
+                        "id": "lp_feed_text",
+                        "label": "Enter text"
+                    },
+                    {
+                        "type": "text",
+                        "id": "lp_feed_author",
+                        "label": "Enter author name"
+                    },
+                    {
+                        "type": "text",
+                        "id": "lp_feed_country",
+                        "label": "Enter country"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

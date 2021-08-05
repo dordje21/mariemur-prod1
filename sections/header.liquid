@@ -1,0 +1,339 @@
+
+
+<header data-section-id="{{ section.id }}" id="header" data-section-type="header"
+        class="header {% if template == 'collection' %} header-light {% endif %}">
+    <div class="header-top">
+        <div class="container">
+            <div class="header-inner">
+                <div class="logo">
+                    <a href="/">
+                        {% if template contains 'collection' %}
+                            <img src="{{ 'logo.svg' | asset_url }}" alt="some alt"/>
+
+                        {% else %}
+                            <img src="{{ 'logo.svg' | asset_url }}" alt="some alt"/>
+                        {% endif %}
+                    </a>
+                </div>
+                <div class="menu-toggle js-menu-toggle">
+                    <span class="icon icon-i-menu"></span>
+                </div>
+                <div class="header-left">
+                    {%- capture currencies_html -%}
+                        {%- if settings.show_multiple_currencies -%}
+                            {%- assign codes = 'USD,EUR,GBP,CAD,ARS,AUD,BBD,BDT,BSD,BHD,BRL,BOB,BND,BGN,ILS,MMK,KYD,CLP,CNY,COP,CRC,HRK,CZK,DKK,DOP,XCD,EGP,XPF,FJD,GHS,GTQ,GYD,GEL,HKD,HUF,ISK,INR,IDR,NIS,JMD,JPY,JOD,KZT,KES,KWD,LVL,LTL,MXN,MYR,MUR,MDL,MAD,MNT,MZN,ANG,NZD,NGN,NOK,OMR,PKR,PYG,PEN,PHP,PLN,QAR,RON,RUB,SAR,RSD,SCR,SGD,SYP,ZAR,KRW,LKR,SEK,CHF,TWD,THB,TZS,TTD,TRY,UAH,AED,UYU,VEB,VND,ZMK,IQD' | split: ',' -%}
+                            {%- assign supported_codes = settings.supported_currencies | split: ' ' -%}
+                            {%- assign supported_currencies_full_names = settings.supported_currencies_full_names | split: '|' -%}
+                            {%- assign supported_currencies_short_names = settings.supported_currencies_short_names | split: '|' -%}
+                            {%- capture list -%}
+                                {%- if supported_codes.size > 0 -%}
+                                    <div class="header-currency__modal js-currencies-list">
+                                        <ul>
+                                            {%- for code in supported_codes -%}
+                                                {%- if codes contains code -%}
+                                                    {%- assign index = forloop.index | minus: 1 -%}
+                                                    <li data-currency-code="{{ code }}" {% if supported_currencies_short_names[index] %} data-button-name="{{ supported_currencies_short_names[index] }}"{% endif %}>
+                                                        <a href="#{{ code }}">{{ supported_currencies_short_names[index] }}</a>
+                                                    </li>
+                                                    {%- if code == shop.currency -%}
+                                                        {%- assign shop_currency = supported_currencies_short_names[index] -%}
+                                                    {%- endif -%}
+                                                {%- endif -%}
+                                            {%- endfor -%}
+                                        </ul>
+                                    </div>
+                                {%- endif -%}
+                            {%- endcapture -%}
+                            <div class="header-currency js-currency-toggle " data-js-position-name="currencies">
+                                <div class="header-currency__title"
+                                     data-current-currency>{{ shop_currency | default: shop.currency }}</div>
+                                <span class="icon icon-i-drop-down"></span>
+                            </div>
+                            {%- if supported_codes.size > 0 -%}
+                                {{ list }}
+                            {%- endif -%}
+                        {%- endif -%}
+                    {%- endcapture -%}
+                    {{ currencies_html }}
+                    <div class="header-socials">
+                        <a href="{{ section.settings.in-link }}" target="_blank"><span
+                                    class="icon icon-soc-instagram"></span></a>
+                        <a href="{{ section.settings.fb-link }}" target="_blank"><span
+                                    class="icon icon-soc-facebook"></span></a>
+                        <a href="{{ section.settings.pi-link }}" target="_blank"><span
+                                    class="icon icon-soc-pinterest"></span></a>
+                        <a href="{{ section.settings.tw-link }}" target="_blank"><span
+                                    class="icon icon-soc-twitter"></span></a>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="header-search cursor-pointer js-search-toggle d-xxl-none">
+                        <span class="icon icon-i-search"></span>
+                    </div>
+                    <div class="header-cart cursor-pointer js-header-cart">
+                        <span class="icon icon-i-bag"></span>
+                        <div class="count" id="cartIcon">{{ cart.item_count }}</div>
+                    </div>
+                    <div class="header-user">
+                        <div class="header-user__mobile {% if customer %} {% else %}d-xxl-none {% endif %}">
+                            <a href="{% if customer %}/account{% else %}/account/login{% endif %}">
+                                <span class="icon icon-i-profile"></span>
+                            </a>
+                        </div>
+                        <div class="header-user__desktop d-none {% if customer %}d-none{% else %}d-xxl-flex {% endif %}">
+                            <a href="/account/register">REGISTER</a>
+                            <a href="/account/login">sign in</a>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header-bottom">
+        <div class="container">
+            <div class="header-inner">
+                <div class="top-menu__title d-xl-none">Menu</div>
+                <div class="top-menu">
+                    <ul>
+                        {% for block in section.blocks %}
+                            {%- liquid
+                                assign link = false
+                                assign curLink = block.settings.main_link
+                                assign curLinkSize = curLink | size
+                                if curLinkSize > 3
+                                    assign link = block.settings.main_link
+                                endif
+                            %}
+                            <li>
+                                {%- if link -%}
+                                    <a {% if block.settings.discount_attr %}class="is-discount"{% endif %} href="{%- if link -%}{{ link }}{%- else -%}javascript:void(0){%- endif -%}">{{ block.settings.main_link_title }}</a>
+
+                                {%- else -%}
+                                    <span >{{ block.settings.main_link_title }}</span>
+
+                                {%- endif -%}
+                                {% if block.settings.links != empty %}
+                                    <div class="submenu">
+                                        <div class="submenu-list">
+                                            {% for link in linklists[block.settings.links].links %}
+                                                {% if link.links != blank %}
+                                                    <div class="submenu-box">
+                                                        <div class="submenu-box__title">
+                                                            {%- liquid
+                                                                assign link = false
+                                                                assign curLink = link.url
+                                                                assign curLinkSize = link.url | size
+                                                                if curLinkSize > 3
+                                                                    assign link = true
+                                                                endif
+                                                            %}
+                                                            {{ link.title }}
+                                                        </div>
+                                                        <ul>
+                                                            {% for subLink in link.links %}
+                                                                <li>
+                                                                    <a href="{{ subLink.url }}">{{ subLink.title }}</a>
+                                                                </li>
+                                                            {% endfor %}
+                                                        </ul>
+                                                    </div>
+                                                {% endif %}
+                                            {% endfor %}
+                                        </div>
+                                        {% if block.settings.show_bestseller %}
+                                            <div class="submenu-product">
+                                                <div class="submenu-product__box">
+                                                    <div class="submenu-product__box-head">
+                                                        <a href="{{ block.settings.bestsellers_url }}"
+                                                           class="submenu-product__box-img">
+                                                            <picture>
+                                                                <source srcset="{{ block.settings.bestsellers_img | img_url: "260x" }}"
+                                                                        data-srcset="{{ block.settings.bestsellers_img | img_url: "460x" }}">
+                                                                <img src="{{ block.settings.bestsellers_img | img_url: "260x" }}"
+                                                                     data-src="{{ block.settings.bestsellers_img | img_url: "460x" }}"
+                                                                     class="lazyload"
+                                                                     alt="">
+                                                            </picture>
+                                                        </a>
+                                                    </div>
+                                                    <div class="submenu-product__box-body">
+                                                        <div class="submenu-product__box-title">
+                                                            <a href="{{ block.settings.bestsellers_url }}">{{ block.settings.bestsellers_title }}</a>
+                                                        </div>
+                                                        <div class="submenu-product__box-category">{{ block.settings.bestsellers_sub_title }}</div>
+                                                        <div class="submenu-product__box-link">
+                                                            <a href="{{ block.settings.bestsellers_url }}">{{ block.settings.bestsellers_url_title }}</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="header-search cursor-pointer js-search-toggle d-none d-xxl-flex">
+                    <span>search</span>
+                    <span class="icon icon-i-search"></span>
+                </div>
+            </div>
+            <div class="header-close js-menu-toggle"><span class="icon icon-i-close"></span></div>
+        </div>
+    </div>
+    <div class="search-form {% if template == 'search' %} show active {% endif %} ">
+        <div class="container">
+            <div class="search-form__box">
+                <form action="{{ routes.search_url }}" method="get" role="search" class="search-form__box-field">
+                    <input type="hidden" name="options[prefix]" value="last" aria-hidden="true"/>
+                    <input type="hidden" name="type" value="product" />
+                    <input type="text" class="js-search" name="q" value="{{ search.terms | escape }}" placeholder="Search">
+
+                </form>
+                <div class="search-form__box-delete js-search-delete">
+                    <span class="icon icon-i-close"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</header>
+{% include 'header-cart' %}
+
+<script>
+    Loader.requireh({type: "script", name: "header"});
+</script>
+<script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  {% if section.settings.logo %}
+{% assign image_size = section.settings.logo.width | append: 'x' %}
+    "logo": {{ section.settings.logo | img_url: image_size | prepend: "https:" | json }},
+  {% endif %}
+  "sameAs": [
+    {{ settings.social_facebook | json }},
+    {{ settings.social_pinterest | json }},
+    {{ settings.social_instagram | json }}
+  ],
+  "url": {{ shop.url | append: page.url | json }}
+}
+
+
+
+
+
+
+
+</script>
+{% if request.page_type == 'index' %}
+    {% assign potential_action_target = shop.url | append: routes.search_url | append: "?q={search_term_string}" %}
+    <script type="application/ld+json">
+    {
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      "name": {{ shop.name | json }},
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {{ potential_action_target | json }},
+        "query-input": "required name=search_term_string"
+      },
+      "url": {{ shop.url | append: page.url | json }}
+    }
+
+
+
+
+
+
+
+    </script>
+{% endif %}
+
+
+
+{% schema %}
+{
+"name": "Header Menu",
+"settings": [
+{
+"label":"Facebook link",
+"type": "url",
+"id": "fb-link"
+},{
+"label":"Instagram link",
+"type": "url",
+"id": "in-link"
+},{
+"label":"Pinterest link",
+"type": "url",
+"id": "pi-link"
+},{
+"label":"Twitter link",
+"type": "url",
+"id": "tw-link"
+}
+],
+"blocks": [
+{
+"type": "menu_item",
+"name": "Menu item",
+"settings": [
+{
+"id": "main_link",
+"type": "url",
+"label": "Main link"
+},{
+"id": "main_link_title",
+"type": "text",
+"label": "Main link title"
+},
+{
+"id": "discount_attr",
+"type": "checkbox",
+"label": "Discount"
+},
+{
+"id": "links",
+"type": "link_list",
+"label": "Link list"
+},
+{
+"id": "show_bestseller",
+"type": "checkbox",
+"label": "Show bestseller"
+},
+{
+"id": "bestsellers_img",
+"type": "image_picker",
+"label": "Bestsellers image"
+},
+{
+"id": "bestsellers_title",
+"type": "text",
+"label": "Bestsellers title"
+},
+{
+"id": "bestsellers_sub_title",
+"type": "text",
+"label": "Bestsellers sub-title"
+},
+{
+"id": "bestsellers_url",
+"type": "url",
+"label": "Bestsellers link"
+},{
+"id": "bestsellers_url_title",
+"type": "text",
+"label": "Bestsellers url title"
+}
+]
+}
+]
+
+}
+{% endschema %}

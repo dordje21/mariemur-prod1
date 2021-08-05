@@ -1,0 +1,47 @@
+<div class="lp-feature-wrap">
+    <div class="lp-feature-content">
+        <div class="container">
+            <div class="lp-feature__title">{{ section.settings.lp_feat_title }}</div>
+            <div class="lp-feature">
+                {% for block in section.blocks %}
+                    <div class="lp-feature__item">
+                        <img class="lp-feature__img" src="{{ block.settings.lp_feat_img | img_url: "master" }}" alt="{{ block.settings.lp_feat_img_alt }}">
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+{% schema %}
+    {
+        "name": "LP: Feature",
+        "max_blocks": 4,
+        "settings": [
+            {
+                "type": "text",
+                "id": "lp_feat_title",
+                "label": "Enter title",
+                "default": "AS FEATURED IN"
+            }
+        ],
+        "blocks": [
+            {
+                "name": "LP: Feature Item",
+                "type": "item",
+                "settings": [
+                    {
+                        "type": "image_picker",
+                        "id": "lp_feat_img",
+                        "label": "Choose image"
+                    },
+                    {
+                        "type": "text",
+                        "id": "lp_feat_img_alt",
+                        "label": "Enter alt for image",
+                        "default": "Mariemur"
+                    }
+                ]
+            }
+        ]
+    }
+{% endschema %}

@@ -1,0 +1,155 @@
+{%- assign products_pices =  product.metafields.products_set.handles | split: "," -%}
+<style>
+    .hidden_button,
+    .hidden_select{
+        visibility: hidden;
+    }
+    .sticky-add-to-cart {
+        display: none;
+    }
+</style>
+<div class="products_list">
+    <!-- for product in products-->
+    {%- if products_pices -%}
+        {%- for products_pice in products_pices -%}
+            {% assign handle_key = products_pice | strip %}
+            {% assign pice_product = all_products[handle_key] %}
+
+            {% unless pice_product.id.size > 0 %}
+                {% continue %}
+            {% endunless %}
+
+            {% assign product = pice_product %}
+            {% include 'product-res-variables' %}
+
+            <div data-section-id="{{ product.id }}" data-section-type="product-page" data-enable-history-state="false" itemscope itemtype="http://schema.org/Product">
+                <div class="product-page-main"{% include 'product-get-attributes' %} data-js-product-clone-id="footbar" data-set-item="true" >
+                    {%- form "product", product, id: product.id, class: "d-flex flex-column w-100 m-0", data-js-product-form: '' -%}
+                        <input type="hidden" name="variant_id" value="{{ current_variant.id }}" data-js-product-variant-input>
+                        <div data-js-footbar-product-limit>
+
+                            <div class="variant_in_set">
+                                <div class="visual"><img class="set-image" src="{{ product.featured_image.src | product_img_url: 'medium' }} " data-image-id="{{ product.featured_image.id }}"></div>
+                                <div class="info-text">
+                                    <h4>{{ product.title }}</h4>
+
+                                    <div class="one-product-info__price text-right pices_price">
+                                        {% assign show_size_guide_original = show_size_guide %}
+                                        {% if settings.hide_size_guide_types != blank %}
+                                            {% assign hide_for_types = settings.hide_size_guide_types | split: ',' %}
+                                            {% for type in hide_for_types %}
+                                                {% assign type_str = type | strip %}
+                                                {% if product.type == type_str %}
+                                                    {% assign show_size_guide = false %}
+                                                    {% break %}
+                                                {% endif %}
+                                            {% endfor %}
+                                        {% endif %}
+                                        {%- if show_size_guide -%}
+                                            <span class="btn-link mb-0 h6 js-popup-button set-size-guide-link" data-js-popup-button="size-guide-{{ product.id }}">{{ 'products.product.size_guide' | t }}</span>
+                                        {%- endif -%}
+                                        {% assign show_size_guide = show_size_guide_original %}
+                                        {% if settings.site_discount != blank and collection.template_suffix == 'discounted' and product.tags contains 'enable_discount' %}
+                                            {% include 'product-get-price-discount' with min_price: false %}
+                                        {% else %}
+                                            {% include 'product-get-price' with min_price: false %}
+                                        {% endif %}
+                                    </div>
+
+                                    {% if settings.site_discount != blank and collection.template_suffix == 'discounted' and product.tags contains 'enable_discount' %}
+                                        <input type="hidden" name="properties[_with_discount]" value="true">
+                                    {% endif %}
+
+                                    {% include 'product-get-options-set-select' %}
+
+                                    {% comment %}<p class="set-item-soldout" style="display: none">{{ 'products.product.add_to_cart.sold_out' | t }}</p>{% endcomment %}
+                                    <div class="product-page-info__button-add-to-cart mb-10">
+                                        <button id="AddToCart-{{ product.id }}" type="submit" class="btn js_custom_add{{ button_cart_type }} btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %}{% if settings.product_ajax_cart %} js-product-button-add-to-cart{% endif %}" name="add"{% unless is_quick_view %} data-js-trigger-id="add-to-cart" data-js-button-add-to-cart-clone-id="footbar"{% endunless %} data-js-product-button-add-to-cart disabled="disabled" data-button-status="sold-out">
+                                            <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-4">{% include 'icon-theme-109' %}</i><span class="btn__text">{{ 'products.product.add_to_cart.title' | t }}</span></span>
+                                            <span class="d-flex flex-center" data-button-content="added"><i class="mr-5 mb-4">{% include 'icon-theme-110' %}</i>{{ 'products.product.add_to_cart.added' | t }}</span>
+                                            <span class="d-flex flex-center" data-button-content="sold-out">{{ 'products.product.add_to_cart.title' | t }}</span>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="product-page-info__variants mb-15{% if show_options == false or show_custom_options %} d-none{% endif %}">
+                                    {%- capture default_title -%}{{ 'products.product.default_variant_title' | t }}{%- endcapture -%}
+                                    <select name="id" class="m-0 pice_product_{{ product.id }}" data-js-product-variants{% unless show_custom_options %}="control"{% endunless %}>
+                                        <option value="0"></option>
+                                        {%- for variant in product.variants -%}
+                                            <option {% unless variant.available %} disabled="disabled"{% endunless %} value="{{ variant.id }}">{{ variant.title | replace: 'Default Title', default_title }}</option>
+                                        {%- endfor -%}
+                                    </select>
+
+                                </div>
+
+                            </div>
+                        </div>
+                    {%- endform -%}
+                </div>
+            </div>
+
+        {%- endfor -%}
+        {% comment %}
+        <div class="total_set">
+            <p>Set total: <span class="set-total-price price">{{ 0 | money }}</span></p>
+        </div>
+        {% endcomment %}
+        <div class="mb-0">
+            <!-- Placement v1 -->
+            <div class="klarna-container mb-20" style="visibility:hidden; max-height: 1px;">
+                <klarna-placement
+                        data-id="7f56227f-6e77-4ace-915e-0e44e5e4b9b3"
+                        data-purchase_amount="{{ cart.total_price }}"
+                ></klarna-placement>
+            </div>
+            <!-- end Placement -->
+            {% comment %}
+            <button type="submit" class="btn{{ button_cart_type }} set_add_to_cart_button btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %}" disabled="disabled">
+                <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-4">{% include 'icon-theme-109' %}</i><span class="btn__text">{{ 'products.product.add_to_cart.title' | t }}</span></span>
+            </button>
+            {% endcomment %}
+            <a href="/checkout" class="btn{{ button_cart_type }} set_add_to_cart_button btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %}" {% if cart.item_count == 0 %}disabled="disabled"{% endif %}>
+                <span class="d-flex flex-center">
+                    <i class="btn__icon mr-5 mb-4">{% include 'icon-theme-109' %}</i>
+                    <span class="btn__text">{{ 'cart.general.checkout' | t }}
+                        <span class="btn-total"  {% if cart.item_count == 0 %}style="display: none;"{% endif %}>
+                            <span class="btn-total-divider">|</span>
+                            <span class="btn-total-money">{{ cart.total_price | money }}</span>
+                        </span>
+                    </span>
+                </span>
+            </a>
+        </div>
+    {%- endif -%}
+</div>
+
+{% comment %}<button class="show_variants btn btn--secondary" style="display:none;">Select options</button>{% endcomment %}
+{% if section.settings.enable_sticky_add_to_cart %}
+<div class="sticky-add-to-cart disabled">
+    <div class="container">
+        <div class="row  d-flex flex-wrap align-items-center">
+            <div class="col-6 d-none d-md-block">
+                <h3 class="sticky-add-to-cart-title">{{ set_title }}</h3>
+            </div>
+            <div class="col-md-6  d-flex flex-nowrap justify-content-md-end justify-content-between align-items-center">
+                <span class="set-items-selected" style="display: none;"><span class="set-items-num"></span> selected</span>
+                <span class="set-total-price price">{{ 0 | money }}</span>
+                <button type="submit" class="btn{{ button_cart_type }} set_add_to_cart_button btn--full btn--status{% if settings.buttons_animation_icon_enable %} btn--animated{% endif %}" disabled="disabled">
+                    <span class="d-flex flex-center"><i class="btn__icon mr-5 mb-4">{% include 'icon-theme-109' %}</i><span class="btn__text">{{ 'products.product.add_to_cart.title' | t }}</span></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <style>
+        @media screen and (max-width: 1620px) {
+            .zEWidget-launcher {
+                bottom: 80px !important;
+                right: 0 !important;
+                left: auto !important;
+            }
+        }
+    </style>
+{% endif %}

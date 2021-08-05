@@ -1,0 +1,196 @@
+<style>
+    .lp-wrapper .head {
+        background: {% if section.settings.section_bg_color == 'rgba(0,0,0,0)' %}'#3F0606'{% else %}{{ section.settings.section_bg_color }}{% endif %};
+    }
+</style>
+
+<div class="head {% if section.settings.banners_type contains 'video' %}head-video{% else %}cust-head-img{% endif %}" id="home">
+
+    {% if section.settings.banners_type contains 'video' %}
+        <div class="banners banners-video banners_type--video">
+
+            {% if section.settings.show_video_overlay == true %}
+                <div class="banners-video__overlay"></div>
+            {% endif %}
+
+            <video class="banners-video__element"
+                   src="{{ section.settings.video_src }}"
+                   playsinline
+                   {% if section.settings.video_loop == true %}loop{% endif %}
+                    {% if section.settings.video_autoplay == true %}autoplay{% endif %}
+                   muted
+            >
+            </video>
+
+            <div class="head-img__circle">
+                <svg viewBox="0 0 802 802" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="401" cy="401" r="400" stroke="#A2A2A2" stroke-opacity="0.3" stroke-width="1" stroke-dashoffset="2600" stroke-dasharray="2600" />
+                </svg>
+            </div>
+
+            <div class="head-title">
+                <h1 style="color: #ffffff">{{ section.settings.home_title }}</h1>
+            </div>
+
+            <div class="banners-info">
+
+                <a class="btn_styled lp-banners__btn" href="{{ section.settings.banner_btn_link }}">{{ section.settings.banner_btn_text }}</a>
+                <div class="banners__text">{{ section.settings.banner_text }}</div>
+            </div>
+
+        </div>
+    {% else %}
+        <div class="banners banners-img banners_type--img">
+            <div class="container">
+                <div class="head-img">
+                    <div class="head-img__list">
+                        <div class="head-img__list-box js-move-1">
+                            <picture>
+                                <source srcset="{{ section.settings.home_img_first | img_url: "master" }}">
+                                <img src="{{ section.settings.home_img_first | img_url: "master" }}" alt="{{ section.settings.home_img_alt1 }}" loading="lazy">
+                            </picture>
+                        </div>
+                        <div class="head-img__list-box js-move-2">
+                            <picture>
+                                <source srcset="{{ section.settings.home_img_second | img_url: "master" }}">
+                                <img src="{{ section.settings.home_img_second | img_url: "master" }}" alt="{{ section.settings.home_img_alt2 }}" loading="lazy">
+                            </picture>
+                        </div>
+                        <div class="head-img__list-box js-move-3">
+                            <picture>
+                                <source srcset="{{ section.settings.home_img_third| img_url: "master" }}">
+                                <img src="{{ section.settings.home_img_third| img_url: "master" }}" alt="{{ section.settings.home_img_alt3 }}" loading="lazy">
+                            </picture>
+                        </div>
+                    </div>
+                    <div class="head-img__circle">
+                        <svg viewBox="0 0 802 802" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="401" cy="401" r="400" stroke="#A2A2A2" stroke-opacity="0.3" stroke-width="1" stroke-dashoffset="2600" stroke-dasharray="2600" />
+                        </svg>
+                    </div>
+                </div>
+                <div class="head-title">
+                    <h1 style="color: #ffffff">{{ section.settings.home_title }}</h1>
+                </div>
+                <div class="head-text">{{ section.settings.home_text }}</div> <!--Meet the new enticing collection by Marie Mur-->
+                <div class="banners-info">
+                    <a class="btn_styled lp-banners-info__btn lp-banners__btn" href="{{ section.settings.banner_btn_link }}">{{ section.settings.banner_btn_text }}</a>
+                    <div class="banners__text">{{ section.settings.banner_text }}</div>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+
+</div>
+
+<script>
+    Loader.require({type: "script", name: "plugin_jquery"});
+</script>
+
+
+{% schema %}
+    {
+    "name": "MarieMur: Home",
+    "settings": [
+    {
+    "type": "html",
+    "id": "home_title",
+    "label": "Home title"
+    },
+    {
+    "type": "html",
+    "id": "home_text",
+    "label": "Home main text"
+    },
+    {
+    "type": "image_picker",
+    "id": "home_img_first",
+    "label": "Gallery Item First"
+    },
+    {
+    "type": "text",
+    "id": "home_img_alt1",
+    "label": "Image First Alt"
+    },
+    {
+    "type": "image_picker",
+    "id": "home_img_second",
+    "label": "Gallery Item Second"
+    },
+    {
+    "type": "text",
+    "id": "home_img_alt2",
+    "label": "Image Second Alt"
+    },
+    {
+    "type": "image_picker",
+    "id": "home_img_third",
+    "label": "Gallery Item Third"
+    },
+    {
+    "type": "text",
+    "id": "home_img_alt3",
+    "label": "Image Third Alt"
+    },
+    {
+    "type": "color",
+    "id": "section_bg_color",
+    "label": "Select color for section background",
+    "default": "#3F0606"
+    },
+    {
+    "type": "radio",
+    "id": "banners_type",
+    "label": "Choose media type",
+    "options": [
+    { "value": "video", "label": "Video" },
+    { "value": "images", "label": "Images" }
+    ],
+    "default": "video"
+    },
+    {
+    "type": "header",
+    "content": "Video background"
+    },
+    {
+    "type": "url",
+    "id": "video_src",
+    "label": "Enter video src"
+    },
+    {
+    "type": "checkbox",
+    "id": "video_loop",
+    "label": "Set loop for video",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "video_autoplay",
+    "label": "Set autoplay for video",
+    "default": true
+    },
+    {
+    "type": "checkbox",
+    "id": "show_video_overlay",
+    "label": "Show / hide video overlay",
+    "default": true
+    },
+    {
+    "type": "url",
+    "id":  "banner_btn_link",
+    "label": "Enter link for button"
+    },
+    {
+    "type": "text",
+    "id": "banner_btn_text",
+    "label": "Enter text for button",
+    "default": "Upgrade your look"
+    },
+    {
+    "type": "richtext",
+    "id": "banner_text",
+    "label": "Enter text"
+    }
+    ]
+    }
+{% endschema %}

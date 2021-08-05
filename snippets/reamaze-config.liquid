@@ -1,0 +1,76 @@
+<!-- Reamaze Config file - DO NOT REMOVE -->
+<script type="text/javascript">
+  var _support = _support || { 'ui': {}, 'user': {} };
+  _support.account = "marie-mur";
+</script>
+
+<!-- reamaze_embeddable_18349_s -->
+<!-- Embeddable - Marie Mur Chat -->
+<script type="text/javascript">
+  var _support = _support || { 'ui': {}, 'user': {} };
+  _support['account'] = 'marie-mur';
+  _support['ui']['contactMode'] = 'default';
+  _support['ui']['enableKb'] = 'true';
+  _support['ui']['styles'] = {
+    widgetColor: 'rgb(166, 11, 0)',
+  };
+  _support['ui']['shoutboxFacesMode'] = "default";
+  _support['ui']['shoutboxHeaderLogo'] = true;
+  _support['ui']['widget'] = {
+    icon: 'chat',
+    displayOn: 'all',
+    label: {
+      text: 'Let us know if you have any questions!',
+      mode: "prompt-3",
+      delay: 15,
+      duration: 5,
+    },
+    position: 'bottom-right',
+    size: 46,
+    mobilePosition: {
+      bottom: '62px',
+      right: '22px'
+    },
+    mobileSize: 30
+  };
+  _support['apps'] = {
+    recentConversations: {},
+    faq: {"enabled":true},
+    orders: {"enabled":true}
+  };
+</script>
+<!-- reamaze_embeddable_18349_e -->
+
+
+
+
+
+
+<!-- reamaze_cue_14544_s -->
+<!-- Cue - Website Abandonment -->
+<script type="text/javascript">
+  var _support = _support || { 'ui': {}, 'user': {} };
+  _support.outbounds = _support.outbounds || [];
+  _support.outbounds.push({
+    id: "14544",
+    name: "Website Abandonment",
+    message: "Before you leave, would you like to chat with someone on our team?",
+    sound: true,
+    transient: false,
+    botsEnabled: false,
+    disableCueClick: false,
+    enableCustomFields: false,
+    start: "",
+    end: "",
+    user: {
+      type: "team"
+    },
+    rules: [
+      {
+        type: "leavingSite",
+        op: "isTrue",
+      },
+    ],
+  });
+</script>
+<!-- reamaze_cue_14544_e -->

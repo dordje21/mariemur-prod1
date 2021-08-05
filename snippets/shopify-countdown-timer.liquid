@@ -1,0 +1,102 @@
+<div class="container">
+    <div class="counter-wrap">
+        <div class="counter"></div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    const dateTimerFrom = '{{ start_main_timer }}';
+    const dateTimerTo = '{{ end_main_timer }}';
+    const repeatable = '{{ repeatable }}';
+
+    if( moment().unix() >= moment(dateTimerFrom).unix()) {
+
+        $('.counter').addClass('content--border_styled');
+        function initCountdown(fromDate, now) {
+
+            var diffTime = fromDate - now;
+
+            if (repeatable === 'true') {
+                var duration = moment.duration(diffTime , 'milliseconds');
+            } else {
+                var duration = moment.duration(diffTime*1000, 'milliseconds');
+            }
+
+
+            var interval = 1000;
+
+            var counter = setInterval(function() {
+
+                var days = duration.days();
+                var hours = duration.hours();
+                var minutes = duration.minutes();
+                var seconds = duration.seconds();
+
+                days = ( days.toString().length < 2) ? `0${days}` : `${days}`;
+                hours = ( hours.toString().length < 2) ? `0${hours}` : `${hours}`;
+                minutes = ( minutes.toString().length < 2) ? `0${minutes}` : `${minutes}`;
+                seconds = ( seconds.toString().length < 2) ? `0${seconds}` : `${seconds}`;
+
+                duration = moment.duration(duration - interval, 'milliseconds');
+
+                $('.counter').html(`
+                     <div class="counter-block">
+                        <div class="counter-block__value js_timer_days">${days}</div>
+                        <div class="counter-block__unit">Days</div>
+                    </div>
+                    <div class="counter-block">
+                        <div class="counter-block__value js_timer_hours">${hours}</div>
+                        <div class="counter-block__unit">Hours</div>
+                    </div>
+                    <div class="counter-block">
+                        <div class="counter-block__value js_timer_minutes">${minutes}</div>
+                        <div class="counter-block__unit">Minutes</div>
+                    </div>
+                    <div class="counter-block">
+                        <div class="counter-block__value js_timer_seconds">${seconds}</div>
+                        <div class="counter-block__unit">Seconds</div>
+                    </div>
+                `);
+
+                if ( duration <= 0) {
+
+                    $('.counter').html(`
+                         <div class="counter-block">
+                            <div class="counter-block__value js_timer_days">00</div>
+                            <div class="counter-block__unit">Days</div>
+                        </div>
+                        <div class="counter-block">
+                            <div class="counter-block__value js_timer_hours">00</div>
+                            <div class="counter-block__unit">Hours</div>
+                        </div>
+                        <div class="counter-block">
+                            <div class="counter-block__value js_timer_minutes">00</div>
+                            <div class="counter-block__unit">Minutes</div>
+                        </div>
+                        <div class="counter-block">
+                            <div class="counter-block__value js_timer_seconds">00</div>
+                            <div class="counter-block__unit">Seconds</div>
+                        </div>
+                         `);
+
+                    clearInterval(counter);
+
+                    /* Start cycled loop */
+                    if ( repeatable === 'true') {
+                        var cycledStartDate = moment(dateTimerFrom);
+                        var cycledEndDate = moment(dateTimerTo);
+                        var cycledDateDiff = cycledEndDate.diff(cycledStartDate,'milliseconds');
+
+                        initCountdown(moment().unix() + cycledDateDiff, moment().unix());
+                    }
+
+                }
+
+            }, interval);
+
+        }
+
+        initCountdown(moment(dateTimerTo).unix(),moment().unix());
+    }
+
+</script>

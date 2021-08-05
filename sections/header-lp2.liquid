@@ -1,0 +1,90 @@
+<header class="header header_bg_color">
+    <div class="container">
+        <div class="header-inner">
+            <div class="logo">
+                <a href="{{ shop.url }}">
+                    {% if template == "page.lp-template" or template == "page.lp-template2" %}
+                  
+ 						{% if section.settings.lp_footer_logo.size > 0 %}
+                            <img src=" {{ section.settings.lp_footer_logo | img_url: "master" }}" alt="{{ shop.name }}">
+                        {% else %}
+                            <img src="{{ 'lp_logo_white.png'  | asset_url }}" alt="{{ shop.name }}">
+                        {% endif %}
+
+
+                    {% else %}
+
+                    {% endif %}
+                </a>
+            </div>
+
+            <div class="menu-toggle js-menu-toggle">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="top-menu">
+                <ul>
+                    {%- for block in section.blocks -%}
+                        <li>
+                            <a href="{{ block.settings.lp_header_item_href }}" class="js-scroll-to">{{ block.settings.lp_header_item_title }}</a>
+                        </li>
+                    {%- endfor -%}
+                    <li class="d-mobile" >
+                        <a href="#modal-faq" data-fancybox>FAQ</a>
+                    </li>
+                </ul>
+                <div class="top-menu__circle">
+                    <svg viewBox="0 0 582 582" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="291" cy="291" r="290" stroke="#A2A2A2" stroke-opacity="0.3" stroke-width="1" stroke-dashoffset="1800" stroke-dasharray="1800" />
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<style>
+    .lp-wrapper .header_bg_color.fixed {
+        background: {{ section.settings.lp_header_bg }};
+    }
+</style>
+
+
+{% schema %}
+    {
+        "name": "Header LP",
+            "blocks": [
+                {
+                "type": "slide",
+                "name": "Header LP Navigation",
+                "settings": [
+                    {
+                        "type": "text",
+                        "id": "lp_header_item_title",
+                        "label": "Header Item Title"
+                    },
+                    {
+                        "type": "text",
+                        "id": "lp_header_item_href",
+                        "label": "Header Item Href"
+                    }
+                ]
+                }
+            ],
+        "settings": [
+            {
+                "type": "image_picker",
+                "id": "lp_footer_logo",
+                "label": "Header logo"
+            },
+            {
+                "type": "color",
+                "id": "lp_header_bg",
+                "label": "Background Color"
+            }
+        ]
+    }
+{% endschema %}

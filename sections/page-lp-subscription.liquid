@@ -1,0 +1,90 @@
+<style>
+    @media screen and (max-width: 767px) {
+        .lp-wrapper .subscribe {
+            background: {% if section.settings.section_bg_color == 'rgba(0,0,0,0)' %}#3F0606 !important;{% else %}{{ section.settings.section_bg_color }} !important;{% endif %};
+            background-image: none !important;
+        }
+    }
+</style>
+<div id="subscribe" class="subscribe js-waypoint-subscribe js-paroller" style="background: url(' {{ section.settings.lp_subs_img | img_url: "5120x2400" }}') center no-repeat; background-size: auto 110%" data-paroller-factor="0.2" data-paroller-factor-xl="0.125">
+    <div class="container">
+        <div class="subscribe-box js-subscribe">
+            <div class="subscribe-form">
+                <div class="subscribe-form__title cursor-pointer">
+                    <h2>{{ section.settings.lp_subs_title }}</h2>
+                </div>
+<form id="email_signup" action="//manage.kmail-lists.com/subscriptions/subscribe" method="POST">
+  <input type="hidden" name="g" value="X7UVbw">
+             <div class="form-group">
+                            <input type="email" name="EMAIL" id="FooterSubscribe" class="mb-10 mb-lg-20" placeholder="E-mail" required="required">
+                            <div class="help-block">{{ section.settings.lp_help_block }}</div>
+                        </div>
+
+                        <div class="form-button">
+                            <button type="submit"><span class="icon icon-i-arr-longer-right"></span></button>
+                        </div>
+</form> 
+<script type="text/javascript" src="//www.klaviyo.com/media/js/public/klaviyo_subscribe.js"></script> 
+                {%- if settings.subscription_method == 'shopify' -%}
+                    {% form 'customer', novalidate: 'novalidate', class: 'd-flex' %}
+                        {% include 'form-get-check-error-popup' %}
+                        
+                   {% endform %}
+
+
+                    {%- elsif settings.subscription_method == 'mailchimp' -%}
+                    <form action="{{ settings.subscription_mailchimp_form_action }}" method="post" class="d-flex" target="_blank" autocomplete="off" novalidate="novalidate">
+
+                        <div class="form-group">
+                            <input type="email" name="EMAIL" id="FooterSubscribe" class="mb-10 mb-lg-20" placeholder="E-mail" required="required">
+                            <div class="help-block">{{ section.settings.lp_help_block }}</div>
+                        </div>
+
+                        <div class="form-button">
+                            <button type="submit"><span class="icon icon-i-arr-longer-right"></span></button>
+                        </div>
+                    </form>
+                    <div class="subscribe-form__success">
+                        {{ section.settings.lp_subs_thanks }}
+                    </div>
+                {%- endif -%}
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% schema %}
+    {
+    "name": "MarieMur: Subscription",
+    "settings": [
+        {
+            "type": "html",
+            "id": "lp_subs_title",
+            "label": "Title"
+        },
+        {
+            "type": "image_picker",
+            "id": "lp_subs_img",
+            "label": "Image background"
+        },
+        {
+            "type": "textarea",
+            "id": "lp_subs_thanks",
+            "label": "Thanks text"
+        },
+        {
+            "type": "text",
+            "id": "lp_help_block",
+            "label": "Help block to input"
+        },
+        {
+            "type": "color",
+            "id": "section_bg_color",
+            "label": "Select color for section background",
+            "default": "#3F0606"
+        }
+    ]
+    }
+{% endschema %}

@@ -1,0 +1,11 @@
+@font-face {
+    font-family: 'Gallery Modern';
+    src: url('GalleryModernRegular.eot');
+    src: url('GalleryModernRegular.eot?#iefix') format('embedded-opentype'),
+        url('GalleryModernRegular.woff') format('woff'),
+        url('GalleryModernRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+

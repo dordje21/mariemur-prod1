@@ -1,0 +1,24 @@
+<div>
+    <div class="main-news__box wow fadeIn" data-wow-delay="0.2s">
+        <div class="main-news__box-head">
+            <a href="{{ article.url }}" class="main-news__box-img zoom-out">
+                <picture>
+                    <source data-srcset="{{ article.image | img_url:"master" }}" srcset="{{ article.image | img_url:"small" }}" media="(min-width: 1200px)">
+                    <source data-srcset="{{ article.image | img_url:"500x" }}" srcset="{{ article.image | img_url:"small" }}" media="(min-width: 768px)">
+                    <source data-srcset="{{ article.image | img_url:"500x" }}" srcset="{{ article.image | img_url:"small" }}">
+                    <img data-src="{{ article.image | img_url:"500x" }}" src="{{ article.image | img_url:"small" }}" class="lazyload" alt="{{ article.title }}">
+                </picture>
+            </a>
+        </div>
+        <div class="main-news__box-body">
+            <div class="main-news__box-info">
+                <div class="main-news__box-date">{{ article.published_at | date: "%d/%m"}}</div>
+                <div class="main-news__box-type">NEW</div>
+            </div>
+            <div class="main-news__box-title">
+                <a href="{{ article.url }}">{{ article.title }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+

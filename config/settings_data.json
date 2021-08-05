@@ -1,0 +1,1600 @@
+{
+  "current": {
+    "purchase_code": "0bd47808-7c34-4368-89fd-3d0b9348fcbd",
+    "layout_pagination_type": "infinite_scroll",
+    "favicon": "shopify:\/\/shop_images\/favicon-32x32_e4b6c021-b3db-42c0-ba2b-457b2f1c6366.png",
+    "collection_sidebar_position": "dropdown",
+    "social_facebook": "https:\/\/www.facebook.com\/mariemurusa",
+    "social_twitter": "https:\/\/twitter.com\/mariemur_",
+    "social_instagram": "https:\/\/www.instagram.com\/mariemur\/",
+    "social_pinterest": "https:\/\/www.pinterest.com\/marie_mur\/_created\/",
+    "show_multiple_currencies": true,
+    "currency_format": "money_format",
+    "supported_currencies_short_names": "USD $|EUR €|GBP £",
+    "enable_global_upsell": "collection",
+    "site_discount": "20.00",
+    "cart_upsell_collection": "final-sale",
+    "checkout_logo_image": "shopify:\/\/shop_images\/logo_2dfca5dd-8be8-4901-b9f7-9878847dda05.png",
+    "checkout_logo_position": "center",
+    "checkout_logo_size": "small",
+    "checkout_body_background_color": "#efefef",
+    "checkout_input_background_color_mode": "white",
+    "checkout_sidebar_background_color": "#ffffff",
+    "checkout_accent_color": "#000000",
+    "checkout_button_color": "#25A799",
+    "checkout_error_color": "#e32c2b",
+    "sections": {
+      "header": {
+        "type": "header",
+        "blocks": {
+          "b03b207e-7274-4b9c-9988-93d4f84bf80b": {
+            "type": "menu_item",
+            "settings": {
+              "main_link": "shopify:\/\/collections\/sultry-dream",
+              "main_link_title": "new in",
+              "discount_attr": false,
+              "links": "",
+              "show_bestseller": false,
+              "bestsellers_title": "",
+              "bestsellers_sub_title": "",
+              "bestsellers_url": "",
+              "bestsellers_url_title": ""
+            }
+          },
+          "27ae8438-87b2-473c-bf0f-79dfa1d4b251": {
+            "type": "menu_item",
+            "settings": {
+              "main_link": "shopify:\/\/collections\/insta-queen",
+              "main_link_title": "THE LOOKS",
+              "discount_attr": false,
+              "links": "",
+              "show_bestseller": false,
+              "bestsellers_title": "",
+              "bestsellers_sub_title": "",
+              "bestsellers_url": "",
+              "bestsellers_url_title": ""
+            }
+          },
+          "fb397763-fc8b-4f57-ae74-8225c5aea627": {
+            "type": "menu_item",
+            "settings": {
+              "main_link": "shopify:\/\/collections\/lingerie",
+              "main_link_title": "LINGERIE",
+              "discount_attr": false,
+              "links": "menu-d-lingerie",
+              "show_bestseller": false,
+              "bestsellers_title": "",
+              "bestsellers_sub_title": "",
+              "bestsellers_url": "",
+              "bestsellers_url_title": ""
+            }
+          },
+          "2fafab10-154d-45a1-bd7b-f76a499905b5": {
+            "type": "menu_item",
+            "settings": {
+              "main_link": "https:\/\/mariemur.com\/collections\/fullbody-harnesses",
+              "main_link_title": "LEATHER",
+              "discount_attr": false,
+              "links": "menu-d-leather",
+              "show_bestseller": false,
+              "bestsellers_title": "",
+              "bestsellers_sub_title": "",
+              "bestsellers_url": "",
+              "bestsellers_url_title": ""
+            }
+          },
+          "bb8f5e21-ae63-4ce8-99a2-c1e8b56895f8": {
+            "type": "menu_item",
+            "settings": {
+              "main_link": "shopify:\/\/collections",
+              "main_link_title": "Collections",
+              "discount_attr": false,
+              "links": "main-all-products",
+              "show_bestseller": true,
+              "bestsellers_img": "shopify:\/\/shop_images\/Frame-1-sultry-dream.jpg",
+              "bestsellers_title": "Sultry Dream",
+              "bestsellers_sub_title": "New in",
+              "bestsellers_url": "shopify:\/\/collections\/sultry-dream",
+              "bestsellers_url_title": "Shop now"
+            }
+          },
+          "0e0d67d6-93af-4c0c-b799-a79b0c9b9974": {
+            "type": "menu_item",
+            "settings": {
+              "main_link": "shopify:\/\/collections\/all",
+              "main_link_title": "All products",
+              "discount_attr": false,
+              "links": "menu-daniil-test",
+              "show_bestseller": true,
+              "bestsellers_img": "shopify:\/\/shop_images\/IMG_5065_1__Easy-Resize.com.jpg",
+              "bestsellers_title": "Marsala Lingerie Set",
+              "bestsellers_sub_title": "Bestsellers",
+              "bestsellers_url": "shopify:\/\/products\/marsala-lingerie-set",
+              "bestsellers_url_title": "Shop now"
+            }
+          },
+          "49e21c88-cffe-4d62-9546-ce98c7f9eed4": {
+            "type": "menu_item",
+            "settings": {
+              "main_link": "shopify:\/\/collections\/final-sale",
+              "main_link_title": "SALE",
+              "discount_attr": true,
+              "links": "",
+              "show_bestseller": false,
+              "bestsellers_title": "",
+              "bestsellers_sub_title": "",
+              "bestsellers_url": "",
+              "bestsellers_url_title": ""
+            }
+          },
+          "4e7d7b55-76c3-49cd-91fd-c7b45529fdbe": {
+            "type": "menu_item",
+            "settings": {
+              "main_link": "shopify:\/\/pages\/our-brand",
+              "main_link_title": "Brand",
+              "discount_attr": false,
+              "links": "brand-menu",
+              "show_bestseller": false,
+              "bestsellers_img": "shopify:\/\/shop_images\/contact-us-img-tablet-1.jpg",
+              "bestsellers_title": "Ava Collar in Burgundy by AVE",
+              "bestsellers_sub_title": "Bestsellers",
+              "bestsellers_url": "shopify:\/\/products\/ava-collar-in-black-by-ave",
+              "bestsellers_url_title": "Shop now"
+            }
+          },
+          "67b23f68-308e-434c-9964-5b93b61a2e55": {
+            "type": "menu_item",
+            "settings": {
+              "main_link": "shopify:\/\/blogs\/maries-notes",
+              "main_link_title": "blog",
+              "discount_attr": false,
+              "links": "",
+              "show_bestseller": false,
+              "bestsellers_title": "",
+              "bestsellers_sub_title": "",
+              "bestsellers_url": "",
+              "bestsellers_url_title": ""
+            }
+          },
+          "d5ab0e36-d151-4a0e-8d03-c1efc6595f21": {
+            "type": "menu_item",
+            "settings": {
+              "main_link": "shopify:\/\/pages\/contact-us",
+              "main_link_title": "Contact us",
+              "discount_attr": false,
+              "links": "",
+              "show_bestseller": false,
+              "bestsellers_title": "",
+              "bestsellers_sub_title": "",
+              "bestsellers_url": "",
+              "bestsellers_url_title": ""
+            }
+          },
+          "5295917e-fe20-41ed-a86b-4b51e714303c": {
+            "type": "menu_item",
+            "settings": {
+              "main_link": "",
+              "main_link_title": "",
+              "discount_attr": false,
+              "links": "",
+              "show_bestseller": false,
+              "bestsellers_title": "",
+              "bestsellers_sub_title": "",
+              "bestsellers_url": "",
+              "bestsellers_url_title": ""
+            }
+          }
+        },
+        "block_order": [
+          "b03b207e-7274-4b9c-9988-93d4f84bf80b",
+          "27ae8438-87b2-473c-bf0f-79dfa1d4b251",
+          "fb397763-fc8b-4f57-ae74-8225c5aea627",
+          "2fafab10-154d-45a1-bd7b-f76a499905b5",
+          "bb8f5e21-ae63-4ce8-99a2-c1e8b56895f8",
+          "0e0d67d6-93af-4c0c-b799-a79b0c9b9974",
+          "49e21c88-cffe-4d62-9546-ce98c7f9eed4",
+          "4e7d7b55-76c3-49cd-91fd-c7b45529fdbe",
+          "67b23f68-308e-434c-9964-5b93b61a2e55",
+          "d5ab0e36-d151-4a0e-8d03-c1efc6595f21",
+          "5295917e-fe20-41ed-a86b-4b51e714303c"
+        ],
+        "settings": {
+          "fb-link": "https:\/\/www.facebook.com\/mariemurusa",
+          "in-link": "https:\/\/www.instagram.com\/mariemur\/",
+          "pi-link": "https:\/\/www.pinterest.com\/marie_mur\/",
+          "tw-link": "https:\/\/twitter.com\/mariemur_"
+        }
+      },
+      "pages-menu": {
+        "type": "pages-menu",
+        "settings": {
+          "links_links": "pages-menu-redisign"
+        }
+      },
+      "faqs": {
+        "type": "faqs",
+        "blocks": {
+          "28799b60-d12b-4458-9b98-3c74899aaa68": {
+            "type": "faq_block",
+            "settings": {
+              "faq_category": "products",
+              "faq_question": "WHAT KIND OF LEATHER DO YOU USE?",
+              "faq_answer": "<p><br\/>We use only high-quality real Italian leather.<br\/><br\/><\/p>"
+            }
+          },
+          "62cc09a8-6f56-4a25-9f14-d87d3a7e9be9": {
+            "type": "faq_block",
+            "settings": {
+              "faq_category": "",
+              "faq_question": "HOW DO I KNOW WHICH SIZE TO ORDER?",
+              "faq_answer": "<p>MARIEMUR Team works extra hard to help you with size and fit concerns:<\/p><p><br\/>In our <a href=\"https:\/\/mariemur.com\/pages\/size-guide-1\">Size Guides<\/a> article, we give advice on what to look out for when you are searching for the perfect fit.We can personally help you find your size and advise on the fit! You can easily schedule a Personal Fitting Session with our Customer Support Team. Feel free to <a href=\"https:\/\/mariemur.com\/pages\/contact-us\">contact us<\/a> whenever you need our assistance. <br\/><br\/><\/p>"
+            }
+          },
+          "00e89cc6-25fa-4662-9735-e5b6a5c8c320": {
+            "type": "faq_block",
+            "settings": {
+              "faq_category": "SHIPPING",
+              "faq_question": "DO YOU SHIP WORLDWIDE?",
+              "faq_answer": "<p>Absolutely! <\/p><p>However, due to difficulties with shipping services we don’t deliver to some countries. Check our <a href=\"https:\/\/mariemur.com\/pages\/shipping\">Shipping policy<\/a> to find more details, please.<\/p><p><br\/><br\/><\/p>"
+            }
+          },
+          "6f69b0d5-7690-4f42-af6c-e9ff95ca624f": {
+            "type": "faq_block",
+            "settings": {
+              "faq_category": "",
+              "faq_question": "HOW LONG WILL IT TAKE FOR MY ORDER TO ARRIVE?",
+              "faq_answer": "<p>This depends on where you are located. You can find an indication of the shipping times on the <a href=\"https:\/\/mariemur.com\/pages\/shipping\">Shipping Policy<\/a> page.<\/p><p>We are taking action to decrease the shipping times and regularly update this information. You will also receive a link to track the shipment in your delivery confirmation mail.<\/p><p><br\/><br\/><\/p>"
+            }
+          },
+          "4654aa0f-8d4d-41b2-a3c0-acf77f93f50b": {
+            "type": "faq_block",
+            "settings": {
+              "faq_category": "",
+              "faq_question": "WHEN WILL MY ORDER SHIP?",
+              "faq_answer": "<p>We handcraft and carefully check every item we create to make sure the quality is perfect. Usually, we can complete an order within 7 business days. But sometimes it may take a little longer if the item consists of many details. Add this time to the total delivery time to calculate when you will receive your item. You can find an indication of the shipping times on the <a href=\"https:\/\/mariemur.com\/pages\/shipping\">Shipping Policy<\/a> page.<br\/><br\/><\/p>"
+            }
+          },
+          "edfd8335-d24b-4f7d-84c5-f2ec8d148812": {
+            "type": "faq_block",
+            "settings": {
+              "faq_category": "",
+              "faq_question": "HOW DO I TRACK MY ORDER?",
+              "faq_answer": "<p><br\/>If your order has been shipped using a trackable service, you can follow its journey to you. You'll receive a shipping confirmation email once your order is fulfilled. Simply click on your tracking link in the email to view the up to date tracking information. If you're having trouble tracking your parcel, please refer to the <a href=\"https:\/\/track.mariemur.com\/\">following page.<\/a><br\/><br\/>Our experience suggests that shipping to Canada is sometimes impossible to track. This happens due to the issues with the Canadian Postal Services.<\/p><p><br\/><br\/><\/p>"
+            }
+          },
+          "9bf10245-71d1-4a54-9a98-eae50ac32fef": {
+            "type": "faq_block",
+            "settings": {
+              "faq_category": "",
+              "faq_question": "WILL I BE CHARGED CUSTOMS AND IMPORT CHARGES?",
+              "faq_answer": "<p><strong>SHIPPING TO THE UNITED STATES<\/strong><\/p><p>Shipping within the US is free of sales tax. There are no other taxes or import duties applied to the packages that are shipped within the United States. However, some non-customs related local taxes may be levied, and they’re the responsibility of the customer. Marie Mur takes no responsibility for paying or reporting any additional local taxes.<\/p><p><strong><br\/>INTERNATIONAL SHIPPING<\/strong><\/p><p>The customer is fully responsible for any taxes and duties they might need to pay. Should any local taxes or duties apply to the parcel, the customer will need to pay them to release the package from customs. Once the order is shipped, all duties and taxes become non-refundable. And if the customer returns any items, Marie Mur does not refund any associated taxes and duties.<\/p><p><br\/><br\/><br\/><br\/><\/p>"
+            }
+          },
+          "83651538-a76e-42ff-a5a0-eecc391065cd": {
+            "type": "faq_block",
+            "settings": {
+              "faq_category": "PLACING AN ORDER",
+              "faq_question": "HOW DO I USE MY COUPON CODE?",
+              "faq_answer": "<p><br\/>Once you have added the products to your cart, you can proceed to Checkout and easily paste the code to the “Gift card or discount code” field. Then, click the Apply button to redeem your discount. <br\/><br\/><\/p>"
+            }
+          },
+          "4536a4a2-ba05-42c1-970f-6803a211b9af": {
+            "type": "faq_block",
+            "settings": {
+              "faq_category": "",
+              "faq_question": "WHY MY COUPON CODE DOESN’T WORK?",
+              "faq_answer": "<p>If your promotion code does not work, please check the following:<\/p><p><strong>Have you typed the code correctly?<\/strong> Ensure that the code is exactly as displayed, using uppercase, lowercase or numbers.<\/p><p><strong>Has the promotion expired? <\/strong>Check the promotion code terms and conditions to ensure the code has not passed its expiration date.<\/p><p><strong>Are the product(s) you selected valid?<\/strong> Check that the product(s) in your cart are valid for the terms and conditions of the promotional code.<\/p><p>If you are experiencing any other problems, please contact <a href=\"https:\/\/mariemur.com\/pages\/contact-us\">Customer Service.<\/a><br\/><br\/><\/p>"
+            }
+          },
+          "abd7b5cd-d56d-4685-96cf-5c151b1ac2cc": {
+            "type": "faq_block",
+            "settings": {
+              "faq_category": "",
+              "faq_question": "CAN I MODIFY MY ORDER?",
+              "faq_answer": "<p>You can change the shipping address if the order wasn’t shipped yet. Also, Marie Mur will accept modifications related to the color and size of items if you place the request within 24 hours after you’ve placed the order. You can add new items to the existing order within 24 hours after you’ve placed it<br\/><br\/>To request any available modifications, please contact us at care@mariemur.com.<\/p><p><br\/><br\/><\/p>"
+            }
+          },
+          "689ef907-aba1-4717-be41-2dc908066219": {
+            "type": "faq_block",
+            "settings": {
+              "faq_category": "",
+              "faq_question": "CAN I CANCEL MY ORDER?",
+              "faq_answer": "<p>Once you’ve placed your order, we receive it immediately to minimize the manufacturing time. MARIEMUR will cancel the order free of charge if the customer requests the cancellation within 24 hours after they’ve placed the order. To cancel the order, please contact us at care@mariemur.com. <\/p><p>We can’t guarantee a successful free cancellation for orders that are placed on a weekend. If you succeed to cancel the order within 24 hours after its placement, you will not be charged. If the costs were already lifted from your credit card, we will fully refund the purchase price.<\/p><p>MARIEMUR doesn’t accept cancellations requested over a weekend or after the order was shipped. Then you will have to pay the full amount for the order.<\/p><p><br\/><br\/><\/p>"
+            }
+          },
+          "7480b038-74ce-416f-aca5-141258b43ac9": {
+            "type": "faq_block",
+            "settings": {
+              "faq_category": "STATUS OF EXISTING ORDERS",
+              "faq_question": "WILL YOU LET ME KNOW THE STATUS OF MY ORDER?",
+              "faq_answer": "<p><br\/>We always try to keep you updated on the status of your order so we will send you an email, confirming your order has been received, despatched or returned, or if we need to update you on items in your order at all.<br\/><br\/><\/p>"
+            }
+          },
+          "dcc33b45-7f69-47f2-bd9a-bb0cca1772aa": {
+            "type": "faq_block",
+            "settings": {
+              "faq_category": "",
+              "faq_question": "I HAVE NOT RECEIVED EMAIL CONFIRMATION OR TRACKING LINK FOR MY ORDER.",
+              "faq_answer": "<p><br\/>Please check your spam box first, if you still cannot find this please email us at care@mariemur.com and we will give you all the information you need.<br\/><br\/><\/p>"
+            }
+          },
+          "11ec35f8-dd5a-454f-a3f4-be3f86542990": {
+            "type": "faq_block",
+            "settings": {
+              "faq_category": "",
+              "faq_question": "WHAT DO I DO IF MY ORDER DOESN’T ARRIVE?",
+              "faq_answer": "<p>We are pleased to say nearly all our parcels arrive safely and on time, however there are a few occasions where this isn’t the case. If this happens, please don’t worry, simply contact our <a href=\"https:\/\/mariemur.com\/pages\/contact-us\">Customer Service<\/a> team.<br\/><br\/><\/p>"
+            }
+          },
+          "650a9c19-be66-4920-9129-9c054d51543a": {
+            "type": "faq_block",
+            "settings": {
+              "faq_category": "RETURNS & EXCHANGES",
+              "faq_question": "CAN I RETURN THE PIECES THAT I ORDERED?",
+              "faq_answer": "<p>Of course!<\/p><p>Not everything you order turns out to match your expectations or simply does not fit you. This is why we make it as easy as possible for you to return your items:<br\/><br\/>You have 14 days to return an item from the date you received it.<\/p><p>Ensure that panties & garters are tried on over your own lingerie - we will not accept returns on lingerie that has been damaged or worn.<\/p><p>The items must be returned in the original packaging with all the tags intact.                      <\/p><p>Please read our <a href=\"https:\/\/mariemur.com\/pages\/returns\">Return Policy<\/a>here for more information.<\/p><p><br\/><br\/><\/p>"
+            }
+          },
+          "a3ba21f0-e5c4-40be-8989-c0971981e5c7": {
+            "type": "faq_block",
+            "settings": {
+              "faq_category": "",
+              "faq_question": "HOW SOON WILL I GET MY REFUND?",
+              "faq_answer": "<p>Once your returned item is received and inspected, you will be notified via email. You will also be informed about the approval or rejection of your refund request. <br\/><br\/>Please note, if the returned item is:<br\/><br\/><em>-used <\/em><\/p><p><em>-not in resalable condition<\/em><\/p><p><em>-not in the original packaging with all the tags and labels intact<\/em><br\/><\/p><p>If approved, the refund request will be processed within 5 - 7 working days after approval. If you haven’t received a refund yet, please contact us at <a href=\"mailto:care@mariemur.com\">care@mariemur.com<\/a><\/p><p><br\/><br\/><br\/><\/p>"
+            }
+          }
+        },
+        "block_order": [
+          "28799b60-d12b-4458-9b98-3c74899aaa68",
+          "62cc09a8-6f56-4a25-9f14-d87d3a7e9be9",
+          "00e89cc6-25fa-4662-9735-e5b6a5c8c320",
+          "6f69b0d5-7690-4f42-af6c-e9ff95ca624f",
+          "4654aa0f-8d4d-41b2-a3c0-acf77f93f50b",
+          "edfd8335-d24b-4f7d-84c5-f2ec8d148812",
+          "9bf10245-71d1-4a54-9a98-eae50ac32fef",
+          "83651538-a76e-42ff-a5a0-eecc391065cd",
+          "4536a4a2-ba05-42c1-970f-6803a211b9af",
+          "abd7b5cd-d56d-4685-96cf-5c151b1ac2cc",
+          "689ef907-aba1-4717-be41-2dc908066219",
+          "7480b038-74ce-416f-aca5-141258b43ac9",
+          "dcc33b45-7f69-47f2-bd9a-bb0cca1772aa",
+          "11ec35f8-dd5a-454f-a3f4-be3f86542990",
+          "650a9c19-be66-4920-9129-9c054d51543a",
+          "a3ba21f0-e5c4-40be-8989-c0971981e5c7"
+        ],
+        "settings": {}
+      },
+      "footer": {
+        "type": "footer",
+        "blocks": {
+          "7ed5f413-92c6-41f7-89f3-b35879580b39": {
+            "type": "menu_item",
+            "settings": {
+              "main_link_title": "here to help",
+              "show_mob": true,
+              "column": false,
+              "new_tab": false,
+              "links": "menu-2"
+            }
+          },
+          "96cdd1a1-3abc-4199-80ae-8d185403792d": {
+            "type": "menu_item",
+            "settings": {
+              "main_link_title": "Collections",
+              "show_mob": true,
+              "column": false,
+              "new_tab": false,
+              "links": "footer-nav"
+            }
+          },
+          "20ef2949-a167-49fe-a046-cdb9f2f8f38b": {
+            "type": "menu_item",
+            "settings": {
+              "main_link_title": "Marie Mur",
+              "show_mob": false,
+              "column": false,
+              "new_tab": false,
+              "links": "pages-menu-redisign"
+            }
+          },
+          "77f04924-5dac-4b1b-b3ff-ba7f0b68ee25": {
+            "type": "menu_item",
+            "settings": {
+              "main_link_title": "SOCIAL",
+              "show_mob": true,
+              "column": true,
+              "new_tab": true,
+              "links": "footer-soc"
+            }
+          },
+          "6042f5e8-d060-4fe3-ab41-1aa1166a9505": {
+            "type": "menu_item",
+            "settings": {
+              "main_link_title": "MORE",
+              "show_mob": false,
+              "column": false,
+              "new_tab": false,
+              "links": "coll"
+            }
+          }
+        },
+        "block_order": [
+          "7ed5f413-92c6-41f7-89f3-b35879580b39",
+          "96cdd1a1-3abc-4199-80ae-8d185403792d",
+          "20ef2949-a167-49fe-a046-cdb9f2f8f38b",
+          "77f04924-5dac-4b1b-b3ff-ba7f0b68ee25",
+          "6042f5e8-d060-4fe3-ab41-1aa1166a9505"
+        ],
+        "settings": {}
+      },
+      "collections-carousel": {
+        "type": "collections-carousel",
+        "settings": {}
+      },
+      "collection-sidebar": {
+        "type": "collection-sidebar",
+        "blocks": {
+          "306fadb7-adf3-4e86-a31f-b0bc14257eb2": {
+            "type": "collections",
+            "settings": {
+              "title": "COLLECTION",
+              "default_state": "open",
+              "show_border": true,
+              "menu": "main-menu",
+              "type_of_tags_input": "radio"
+            }
+          },
+          "de4892f3-20f6-4359-823b-7d348c1ba76a": {
+            "type": "filter_by_price",
+            "settings": {
+              "title": "PRICE",
+              "default_state": "open",
+              "show_border": true,
+              "min_value": "0",
+              "max_value": "1000",
+              "step": "10"
+            }
+          },
+          "30690711-e083-4841-b032-332512ce6f7a": {
+            "type": "current_filters",
+            "settings": {
+              "title": "CURRENT FILTERS",
+              "default_state": "close"
+            }
+          }
+        },
+        "block_order": [
+          "306fadb7-adf3-4e86-a31f-b0bc14257eb2",
+          "de4892f3-20f6-4359-823b-7d348c1ba76a",
+          "30690711-e083-4841-b032-332512ce6f7a"
+        ],
+        "settings": {
+          "hide_empty_filter_section": false,
+          "show_sort_by": true,
+          "show_view_length": true
+        }
+      },
+      "collection-head": {
+        "type": "collection-head",
+        "settings": {
+          "default_desktop_title": "title_with_description",
+          "default_mobile_title": "title"
+        }
+      },
+      "collection-body": {
+        "type": "collection-body",
+        "settings": {
+          "show_sort_by": true,
+          "show_info": true,
+          "show_view_length": true,
+          "default_view_length": "12",
+          "show_view_grid": true,
+          "default_view_grid_xl": "4",
+          "default_view_grid_lg": "4",
+          "default_view_grid_md": "4",
+          "default_view_grid_sm": "2",
+          "default_view_grid_xs": "2",
+          "enable_grid_tooltip": true
+        }
+      },
+      "carousel-products": {
+        "type": "carousel-products",
+        "settings": {
+          "enable": true,
+          "show_title": true,
+          "show_top_separator": true,
+          "container": "boxed",
+          "margin_top": 0,
+          "margin_top_responsive": "",
+          "margin_bottom": 60,
+          "margin_bottom_responsive": "",
+          "products_pre_row": 4,
+          "max_count": 6,
+          "autoplay": true,
+          "speed": 5,
+          "infinite": true,
+          "arrows": true,
+          "bullets": true,
+          "disable_lazyload": false,
+          "async_ajax_loading": true
+        }
+      },
+      "popup": {
+        "type": "popup",
+        "settings": {
+          "search_enable": true,
+          "search_ajax": true,
+          "cart_enable": true,
+          "cart_show_free_shipping": true,
+          "wishlist_enable": true,
+          "compare_enable": true,
+          "account_enable": true,
+          "account_sign_up_info_page_content": "",
+          "account_sign_up_info": "",
+          "account_show_subscribe": true,
+          "services_enable": true,
+          "subscription_enable": true,
+          "subscription_layout": "1",
+          "subscription_text_line_01": "NEWSLETTER SUBSCRIPTION",
+          "subscription_text_line_02": "Sign up for Shella updates to receive information about new arrivals, future events and special.",
+          "subscription_text_line_03": "Get 10% off by signing up to our newsletter.",
+          "subscription_text_line_04": "I don’t want to see this website.",
+          "subscription_show_form": true,
+          "subscription_text_input_placeholder": "Enter Please Your Email Address",
+          "subscription_text_submit_button_text": "SUBSCRIBE!",
+          "subscription_text_button": "SHOP NOW!",
+          "subscription_text_dont_show_again": "Don't show this popup again",
+          "subscription_text_close": "NO, THANK YOU",
+          "subscription_image_width": 600,
+          "subscription_image_format_pjpg": true,
+          "subscription_link": "",
+          "subscription_show_once": "false",
+          "subscription_delay": 8,
+          "subscription_cookies_life": "1",
+          "subscription_confirmation_enable": true,
+          "subscription_confirmation_success_message": "Thanks for subscribing!",
+          "subscription_confirmation_success_button": "Continue shopping",
+          "size_guide_page_content": "",
+          "size_guide_content": "",
+          "delivery_return_page_content": "",
+          "delivery_return_content": ""
+        }
+      },
+      "contact-template": {
+        "type": "contact-template",
+        "settings": {
+          "cp-img-top": "shopify:\/\/shop_images\/IMG_5048_Easy-Resize.com_3da7cf97-8085-46d7-a95a-2da10604717a.jpg",
+          "cp-img-top-tablet": "shopify:\/\/shop_images\/contact-us-img-tablet-1.jpg",
+          "cp-img-mid": "shopify:\/\/shop_images\/01.jpg",
+          "cp-img-bot": "shopify:\/\/shop_images\/product-img-desktop-1.jpg",
+          "cp-sub-title": "Tell us <br>your thoughts",
+          "cp-mailing-title": "our mailing adress",
+          "cp-mailing-f": "ALTAMAI LLC,",
+          "cp-mailing-s": "30 N Gould St. STE R, Sheridan,",
+          "cp-mailing-t": "Wyoming, 82801, United States",
+          "cp-customers": "Do you have any thoughts on how we can become better? We will be happy to hear from you! Send us an email",
+          "cp-customers-title": "customers",
+          "cp-customers-mail": "care@mariemur.com",
+          "cp-Influencers": "Are you interested in collaborating with us? We’ll gladly discuss the terms! Tell us about you and your audience",
+          "cp-Influencers-title": "influencers",
+          "cp-Influencers-mail": "brand@mariemur.com",
+          "cp-press": "We are pleased you want to tell your audience about us! Drop us a line and we’ll create awesome content together",
+          "cp-press-title": "press",
+          "cp-press-mail": "brand@mariemur.com",
+          "cp-form-title": "DROP US A LINE",
+          "cp-form-desc": "We’re happy to answer any questions you have or provide you with an estimate. Just send us a message in the form below with any questions you may have.",
+          "cp-form-checkbox-terms": "shopify:\/\/pages\/terms-conditions-redisign",
+          "cp-form-checkbox-lic": "shopify:\/\/pages\/privacy"
+        }
+      },
+      "list-collections-template": {
+        "type": "list-collections-template",
+        "settings": {
+          "ac-image": "shopify:\/\/shop_images\/Frame-1-sultry-dream.jpg",
+          "ac-coll-image": "shopify:\/\/shop_images\/KOT06966.jpg",
+          "ac-title": "<i> new <\/i> <b>  collection<\/b> with MarieMur"
+        }
+      },
+      "main-articles": {
+        "type": "main-articles",
+        "blocks": {
+          "dc344758-77a0-43a2-a599-a365b9b96189": {
+            "type": "bp-item",
+            "settings": {
+              "bp-article": "maries-notes\/so-we-had-an-argument-what-is-confidence"
+            }
+          },
+          "2ec0a718-3603-47de-9c58-81876b2e50d9": {
+            "type": "bp-item",
+            "settings": {
+              "bp-article": "maries-notes\/6-things-to-do-to-fall-in-love-with-your-body"
+            }
+          },
+          "04c30c47-a64b-4786-b48f-9191f1864079": {
+            "type": "bp-item",
+            "settings": {
+              "bp-article": "maries-notes\/women-feel-less-confident-than-men-why"
+            }
+          }
+        },
+        "block_order": [
+          "dc344758-77a0-43a2-a599-a365b9b96189",
+          "2ec0a718-3603-47de-9c58-81876b2e50d9",
+          "04c30c47-a64b-4786-b48f-9191f1864079"
+        ],
+        "settings": {
+          "bp-title": "BLOG & NEWS"
+        }
+      },
+      "main-articles-col": {
+        "type": "main-articles-col",
+        "blocks": {
+          "1db082c9-f26d-4a2b-8201-1498b5ac31ad": {
+            "type": "bp-item",
+            "settings": {
+              "bp-article": "maries-notes\/6-things-to-do-to-fall-in-love-with-your-body"
+            }
+          },
+          "a3d0907c-2d98-47e4-a5d0-49c925e18f30": {
+            "type": "bp-item",
+            "settings": {
+              "bp-article": "maries-notes\/so-we-had-an-argument-what-is-confidence"
+            }
+          },
+          "59d8f040-b1ee-41a1-9094-3ecb60e5b25b": {
+            "type": "bp-item",
+            "settings": {
+              "bp-article": "maries-notes\/women-feel-less-confident-than-men-why"
+            }
+          }
+        },
+        "block_order": [
+          "1db082c9-f26d-4a2b-8201-1498b5ac31ad",
+          "a3d0907c-2d98-47e4-a5d0-49c925e18f30",
+          "59d8f040-b1ee-41a1-9094-3ecb60e5b25b"
+        ],
+        "settings": {
+          "bp-title": "BLOG & NEWS"
+        }
+      },
+      "coll-landing": {
+        "type": "coll-landing",
+        "settings": {
+          "first_block_left_image": "shopify:\/\/shop_images\/product-set-img-2.jpg",
+          "first_block_right_image": "shopify:\/\/shop_images\/product-set-img-1_1340590a-fd42-4c3d-8b6e-227bbb5c78b1.jpg",
+          "first_block_desc": "<p>Unveil the unchained wildness of our new collection<\/p>",
+          "second_block_top_image": "shopify:\/\/shop_images\/collection-black-img-desktop.jpg",
+          "second_block_top_desc": "Proclaim the new season the time for liberation",
+          "second_block_right_image_1": "shopify:\/\/shop_images\/collection-black-img-desktop-1.jpg",
+          "second_block_right_image_2": "shopify:\/\/shop_images\/collection-black-img-desktop-2.jpg",
+          "second_block_right_image_3": "shopify:\/\/shop_images\/collection-black-img-desktop-3.jpg",
+          "second_block_right_image_4": "shopify:\/\/shop_images\/collection-black-img-desktop-4.jpg",
+          "second_block_left_desc": "<p>Let the thrilling duet of leather and lingerie of the Spring-Summer 2021 collection by MARIEMUR blur the limits gifting you blissful and bewildering freedom. <\/p>\n\t\t\t\t\t\t\t<p>The new designs are created to expose your lush beauty and bring untamed confidence for the utmost fierce look. \n<\/p>",
+          "second_block_right_desc": "<p>Tap into your feral side with this audacious collection to exude irresistible magnitude.\n<\/p>",
+          "video_link": "https:\/\/cdn.shopify.com\/s\/files\/1\/0118\/9190\/0516\/t\/36\/assets\/product-other-video-1.mp4?v=16738874714514913465",
+          "video_title": "Show off your wild side",
+          "third_block_title": "Created to amplify your lush beauty",
+          "third_block_image_1": "shopify:\/\/shop_images\/06.jpg",
+          "third_block_image_2": "shopify:\/\/shop_images\/collection-desc-img-desktop-1.jpg",
+          "third_block_image_3": "shopify:\/\/shop_images\/collection-desc-img-desktop-2.jpg",
+          "third_block_image_4": "shopify:\/\/shop_images\/collection-gallery-img-desktop-3.jpg",
+          "third_block_image_5": "shopify:\/\/shop_images\/collection-img-desktop-1.jpg",
+          "third_block_image_6": "shopify:\/\/shop_images\/collection-content-img.jpg",
+          "third_block_image_7": "shopify:\/\/shop_images\/collection-gallery-img-desktop-1.jpg",
+          "third_block_image_8": "shopify:\/\/shop_images\/collection-gallery-img-desktop-2.jpg",
+          "third_block_bot_desc": "<p>The powerful mix of a flair of an ancient goddess and the sultry mood of the jungle makes for powerfully alluring designs that came to life in our new collection. They ask for fearless liberation and unchained confidence inherent to a true goddess you are.\n<\/p>\n\t\t\t\t\t\t<p>\nThe Spring-Summer 2021 collection by MARIEMUR calls you to succumb to your wildest desires to usher in this season with an unapologetically passionate attitude. It’s time to unleash your fierce nature and indulge in the luxury of being your authentic self.\n\n<\/p>\n\t\t\t\t\t\t\t\t\t\t\t<p>Reveal our complete collection to get to know each astonishing item we’ve created for your pleasure. Let this magnetic mood become the main theme for your days.\n<\/p>",
+          "third_block_top_desc": "<p>\nInspired by ancient goddesses and the enchanting freedom of tropical forests, our new Spring-Summer 2021 collection is soaked with the liberating spirit.\n<\/p>"
+        }
+      },
+      "product": {
+        "type": "product",
+        "settings": {
+          "layout": "1",
+          "sidebar": "off",
+          "enable_sticky_gallery": true,
+          "enable_sticky_sidebar": true,
+          "show_arrows": true,
+          "show_btn_fullscreen": true,
+          "video_autoplay": false,
+          "enable_zoom": true,
+          "show_label_in_stock": true,
+          "show_label_out_stock": true,
+          "show_label_sale": true,
+          "show_label_new": true,
+          "show_label_hot": true,
+          "show_collections": true,
+          "show_title": true,
+          "show_price": true,
+          "show_sale_price_separator": false,
+          "show_sale_details": true,
+          "show_sku": true,
+          "show_barcode": true,
+          "show_availability": true,
+          "show_type": true,
+          "show_vendor": true,
+          "show_reviews": true,
+          "hide_empty_reviews": true,
+          "hide_reviews_counter": false,
+          "show_countdown": true,
+          "show_stock_countdown": true,
+          "show_stock_countdown_range": true,
+          "show_text_countdown": true,
+          "show_visitors": true,
+          "show_options": true,
+          "show_quantity": true,
+          "show_size_guide": true,
+          "show_delivery_return": true,
+          "show_button_add_to_cart": true,
+          "show_button_add_to_wishlist": true,
+          "show_button_add_to_compare": true,
+          "show_button_dynamic_checkout": true,
+          "show_dynamic_checkout_confirmation": true,
+          "styled_dynamic_checkout": true,
+          "show_free_shipping": true,
+          "show_payments": true,
+          "payments_type": "dark",
+          "show_addthis": true,
+          "show_tabs": true,
+          "show_tab_description": true,
+          "show_tab_reviews": true
+        }
+      },
+      "carousel-related-products": {
+        "type": "carousel-related-products",
+        "settings": {
+          "enable": true,
+          "title": "Related Products"
+        }
+      },
+      "1615252761bd712a9c": {
+        "type": "main-articles-col",
+        "blocks": {
+          "2e56c9f3-bda3-4dcf-8682-1e93c5d46840": {
+            "type": "bp-item",
+            "settings": {
+              "bp-article": "maries-notes\/6-things-to-do-to-fall-in-love-with-your-body"
+            }
+          },
+          "15130b8b-e250-4327-ad76-a7263179b96f": {
+            "type": "bp-item",
+            "settings": {
+              "bp-article": "maries-notes\/women-feel-less-confident-than-men-why"
+            }
+          },
+          "316ef5df-a9e3-40ab-95d8-a2e053f33453": {
+            "type": "bp-item",
+            "settings": {
+              "bp-article": "maries-notes\/so-we-had-an-argument-what-is-confidence"
+            }
+          }
+        },
+        "block_order": [
+          "2e56c9f3-bda3-4dcf-8682-1e93c5d46840",
+          "15130b8b-e250-4327-ad76-a7263179b96f",
+          "316ef5df-a9e3-40ab-95d8-a2e053f33453"
+        ],
+        "settings": {
+          "bp-title": "BLOG & NEWS"
+        }
+      },
+      "16152527783b9030e8": {
+        "type": "main-banner",
+        "settings": {
+          "image_id": "shopify:\/\/shop_images\/001399130006_1__Easy-Resize.com.jpg",
+          "video_id": "https:\/\/cdn.shopify.com\/s\/files\/1\/0118\/9190\/0516\/files\/IMG_9045_1.MOV?v=1621852098",
+          "title": "Liberate yourself with Marie<i>Mur<\/i>",
+          "link_id": "https:\/\/mariemur.com\/collections\/final-sale",
+          "sub_title": "don’t miss out!",
+          "sale_baner_title": "explore our sale collection!",
+          "sale": "20% Off",
+          "desc": "selected items",
+          "btn": "SHOP"
+        }
+      },
+      "1615252849d4ff6871": {
+        "type": "main-new-products",
+        "disabled": true,
+        "blocks": {
+          "d029a894-fcc5-4301-8cd5-662f8eeaf72e": {
+            "type": "bp-item",
+            "settings": {
+              "bp-article": "marilyn-leather-bra-garters-set-1"
+            }
+          },
+          "f413f611-62d5-48c0-9b01-6a89e05b9618": {
+            "type": "bp-item",
+            "settings": {
+              "bp-article": "marsala-lingerie-set-insta"
+            }
+          },
+          "9a313a9a-c8b7-43ab-af2d-cca59aebf871": {
+            "type": "bp-item",
+            "settings": {
+              "bp-article": "cherry-red-bodysuit"
+            }
+          }
+        },
+        "block_order": [
+          "d029a894-fcc5-4301-8cd5-662f8eeaf72e",
+          "f413f611-62d5-48c0-9b01-6a89e05b9618",
+          "9a313a9a-c8b7-43ab-af2d-cca59aebf871"
+        ],
+        "settings": {
+          "bp-title": "NEW <br> PRODUCTS"
+        }
+      },
+      "16152534345c3e5826": {
+        "type": "main-coll-banner",
+        "disabled": true,
+        "settings": {
+          "image_id": "shopify:\/\/shop_images\/13.jpg",
+          "title": "New collection",
+          "link_id": "https:\/\/mariemur.com\/collections\/baed"
+        }
+      },
+      "161525366390251ca4": {
+        "type": "main-video-banner",
+        "disabled": true,
+        "settings": {
+          "video_id": "https:\/\/cdn.shopify.com\/s\/files\/1\/0118\/9190\/0516\/files\/2.mp4?v=1619528018",
+          "desc": "<p>Indulge in the luxury of the utmost unique and tempting designs meticulously crafted of the finest materials to reveal your bewitching sensuality. Exude untamed confidence amplified by thrilling items.\n<\/p>",
+          "link": "shopify:\/\/pages\/our-brand"
+        }
+      },
+      "1615254156bd3c528f": {
+        "type": "main-inst-banner",
+        "settings": {
+          "link_id": "https:\/\/www.instagram.com\/mariemur\/",
+          "title": "instagram <b>@MARIEMUR<\/b>",
+          "desc": "We combine tender lace with high-quality leather and daring designs to help you feel more like, well, you.",
+          "img_1": "shopify:\/\/shop_images\/Screenshot_483.png",
+          "img_2": "shopify:\/\/shop_images\/06.jpg",
+          "img_3": "shopify:\/\/shop_images\/insta-img-desktop-4.jpg",
+          "img_4": "shopify:\/\/shop_images\/insta-img-desktop-3.jpg",
+          "img_5": "shopify:\/\/shop_images\/Screenshot_479.png"
+        }
+      },
+      "161525496084e075b7": {
+        "type": "main-collections",
+        "blocks": {
+          "11c34739-d66e-4232-93e6-e99cf5047ac0": {
+            "type": "mc-item",
+            "settings": {
+              "mc-category": "insta-queen",
+              "mc-image": "shopify:\/\/shop_images\/poppy-leather-legs-garters-in-blue-marie-mur-garter-leather-lingerie-15474691637361_848x_cfa7ada1-374a-45e8-b3a8-4a88da89c072.jpg"
+            }
+          },
+          "9391468c-7959-474f-bf79-248984682e03": {
+            "type": "mc-item",
+            "settings": {
+              "mc-category": "lingerie",
+              "mc-image": "shopify:\/\/shop_images\/marsala-lingerie-set-a-satin-bra-and-panties-with-delicate-lace-marie-mur-lingerieset-leather-lingerie-16520115454065_848x_4636b0f5-af19-40b6-96aa-2ecb52838109.jpg"
+            }
+          },
+          "963e0415-10a0-422f-b573-562dea10d7fb": {
+            "type": "mc-item",
+            "settings": {
+              "mc-category": "womens-bra",
+              "mc-image": "shopify:\/\/shop_images\/bra-leather-lingerie-28432227369073_848x_3645a03c-0e24-4d01-9744-bedecb8d30ab.jpg"
+            }
+          },
+          "1188b532-e8e7-48d6-83d1-8c24e4a3aeb9": {
+            "type": "mc-item",
+            "settings": {
+              "mc-category": "womens-lingerie-panties",
+              "mc-image": "shopify:\/\/shop_images\/panties-leather-lingerie-28436707639409_848x_94b2e5aa-691a-4535-b1b6-125c6ce25193.jpg"
+            }
+          },
+          "0d4a43c6-3a18-4ed2-842a-6d9274617894": {
+            "type": "mc-item",
+            "settings": {
+              "mc-category": "classic-harnesses",
+              "mc-image": "shopify:\/\/shop_images\/Screenshot_762.png"
+            }
+          },
+          "197a1956-0ebe-4a34-a2c8-ef4a0982f347": {
+            "type": "mc-item",
+            "settings": {
+              "mc-category": "legs-garters",
+              "mc-image": "shopify:\/\/shop_images\/poppy-leather-legs-garters-in-blue-marie-mur-garter-leather-lingerie-15474691768433_848x_745e3091-b74b-445b-8d86-0b03e74c03d3.jpg"
+            }
+          },
+          "46e408f1-9d38-433d-849c-c1785071f74d": {
+            "type": "mc-item",
+            "settings": {
+              "mc-category": "accessories",
+              "mc-image": "shopify:\/\/shop_images\/milena-leather-set-in-blue-marie-mur-garter-leather-lingerie-14115853992049_848x_63e35c1c-6bb8-4270-a71d-9ccb21553fd3.jpg"
+            }
+          },
+          "62e05501-ab25-4cdb-ae02-17a37658a17c": {
+            "type": "mc-item",
+            "settings": {
+              "mc-category": "fullbody-harnesses",
+              "mc-image": "shopify:\/\/shop_images\/Screenshot_765.png"
+            }
+          }
+        },
+        "block_order": [
+          "11c34739-d66e-4232-93e6-e99cf5047ac0",
+          "9391468c-7959-474f-bf79-248984682e03",
+          "963e0415-10a0-422f-b573-562dea10d7fb",
+          "1188b532-e8e7-48d6-83d1-8c24e4a3aeb9",
+          "0d4a43c6-3a18-4ed2-842a-6d9274617894",
+          "197a1956-0ebe-4a34-a2c8-ef4a0982f347",
+          "46e408f1-9d38-433d-849c-c1785071f74d",
+          "62e05501-ab25-4cdb-ae02-17a37658a17c"
+        ],
+        "settings": {}
+      },
+      "about_brand-content": {
+        "type": "about_brand-content",
+        "settings": {
+          "h-title": "Explore <i>your<\/i> <b>authenticity<\/b> with MarieMur",
+          "h-m-img": "shopify:\/\/shop_images\/06_1.jpg",
+          "h-s-img": "shopify:\/\/shop_images\/DSC_9224_1.jpg",
+          "f-tb-title": "our <br>story",
+          "f-tb-cont": "<p>MARIEMUR was born out of our desire to emphasize the authenticity of each person and help them fall in love with themselves as deep as possible. Keeping this wish in mind, our team of fervent designers and masterful artisans creates one-of-a-kind items that will frame your body most alluringly and bring out its unique beauty.\n<\/p>",
+          "f-tb-image-1": "shopify:\/\/shop_images\/brand-img-desktop-3.jpg",
+          "f-tb-image-2": "shopify:\/\/shop_images\/brand-img-desktop-2.jpg",
+          "f-tb-image-3": "shopify:\/\/shop_images\/19_6.jpg",
+          "v-link": "https:\/\/cdn.shopify.com\/s\/files\/1\/0118\/9190\/0516\/files\/034a104de8ab91a7b5a91215538390e6.mp4?v=1624009275",
+          "v-title": "MarieMur means celebrating your authentic self",
+          "v-content": "<p>Self-expression through outfits is one of the best things we can do for ourselves. When the way we look matches the way we feel and vice versa, confidence and happiness become our loyal companions. That’s why we create both classic and daring designs — to let you find items that appeal to your authentic self.\n<\/p>",
+          "s-tb-title": "What we believe in",
+          "s-tb-cont": "<p>\nWe believe that true beauty isn’t really about looks. It’s about the way we feel ourselves and the amount of love we have for ourselves. That’s why we create thoughtful designs that frame your body most alluringly giving you no other option than to fall in love with the way you look adorned with lace and leather. When we feel confident and beautiful, the world can’t help but admire us.\n<\/p>\n                    <p>Every person is beautiful in their own way — there is no standard. Uniqueness is what makes each of us interesting, appealing, and enticing. And that’s what we want to make more prominent.\n<\/p>",
+          "s-tb-image-1": "shopify:\/\/shop_images\/18_5.jpg",
+          "s-tb-image-2": "shopify:\/\/shop_images\/collection-list-img-1_b939b630-0924-4412-8d73-444ff4374cfb.jpg",
+          "s-tb-image-3": "shopify:\/\/shop_images\/collection-img-1.jpg"
+        }
+      },
+      "size_chart-content": {
+        "type": "size_chart-content",
+        "settings": {
+          "links": "size_chart_menu"
+        }
+      },
+      "article-template": {
+        "type": "article-template",
+        "settings": {
+          "blog_show_author": true,
+          "blog_show_date": true
+        }
+      },
+      "product-set": {
+        "type": "product-set",
+        "settings": {
+          "layout": "1",
+          "sidebar": "off",
+          "enable_sticky_gallery": true,
+          "enable_sticky_sidebar": true,
+          "enable_sticky_add_to_cart": true,
+          "show_arrows": true,
+          "show_btn_fullscreen": true,
+          "video_autoplay": false,
+          "enable_zoom": true,
+          "show_label_in_stock": true,
+          "show_label_out_stock": true,
+          "show_label_sale": true,
+          "show_label_new": true,
+          "show_label_hot": true,
+          "show_collections": true,
+          "show_title": true,
+          "show_price": true,
+          "show_sale_price_separator": false,
+          "show_sale_details": true,
+          "show_sku": true,
+          "show_barcode": true,
+          "show_availability": true,
+          "show_type": true,
+          "show_vendor": true,
+          "show_reviews": true,
+          "hide_empty_reviews": true,
+          "hide_reviews_counter": false,
+          "show_countdown": true,
+          "show_stock_countdown": true,
+          "show_stock_countdown_range": true,
+          "show_text_countdown": true,
+          "show_visitors": true,
+          "show_options": true,
+          "show_quantity": true,
+          "show_size_guide": true,
+          "show_delivery_return": true,
+          "show_button_add_to_cart": true,
+          "show_button_add_to_wishlist": true,
+          "show_button_add_to_compare": true,
+          "show_button_dynamic_checkout": true,
+          "show_dynamic_checkout_confirmation": true,
+          "styled_dynamic_checkout": true,
+          "show_free_shipping": true,
+          "show_payments": true,
+          "payments_type": "dark",
+          "show_addthis": true,
+          "show_tabs": true,
+          "show_tab_description": true,
+          "show_tab_reviews": true
+        }
+      },
+      "1621850184946abe0c": {
+        "type": "main-new-products",
+        "blocks": {
+          "2bb3ae8a-ed70-4a63-862a-2745d2662df2": {
+            "type": "bp-item",
+            "settings": {
+              "bp-article": "rose-crotchless-bodysuit"
+            }
+          },
+          "8e585dd4-1252-4f92-bf28-528e31ee4b81": {
+            "type": "bp-item",
+            "settings": {
+              "bp-article": "marsala-lingerie-set-insta"
+            }
+          },
+          "94618c4f-8ec9-4f1d-93f3-e89b40717f15": {
+            "type": "bp-item",
+            "settings": {
+              "bp-article": "insta-poppy-bra-garters-set"
+            }
+          }
+        },
+        "block_order": [
+          "2bb3ae8a-ed70-4a63-862a-2745d2662df2",
+          "8e585dd4-1252-4f92-bf28-528e31ee4b81",
+          "94618c4f-8ec9-4f1d-93f3-e89b40717f15"
+        ],
+        "settings": {
+          "bp-title": "SPICE IT UP"
+        }
+      },
+      "blog-template": {
+        "type": "blog-template",
+        "settings": {
+          "blog_show_author": true,
+          "blog_show_date": true,
+          "blog_show_paginate": false
+        }
+      },
+      "16220602581f7a031e": {
+        "type": "main-inst-banner",
+        "disabled": true,
+        "settings": {
+          "link_id": "shopify:\/\/collections\/insta-queen",
+          "title": "<b>New<\/b> collection",
+          "desc": "",
+          "img_1": "shopify:\/\/shop_images\/newdescrop.jpg",
+          "img_2": "shopify:\/\/shop_images\/IMG_5124_1__Easy-Resize.com.jpg",
+          "img_3": "shopify:\/\/shop_images\/IMG_475456789.jpg",
+          "img_4": "shopify:\/\/shop_images\/LEATHER-MOB.jpg",
+          "img_5": "shopify:\/\/shop_images\/Screenshot_482.png"
+        }
+      },
+      "header-lp": {
+        "type": "header-lp",
+        "blocks": {
+          "848e21ad-1da8-4e24-84da-5ea188ab94cf": {
+            "type": "slide",
+            "settings": {
+              "lp_header_item_title": "Collection",
+              "lp_header_item_href": "https:\/\/mariemur.com\/collections\/insta-queen",
+              "lp_header_item_anchor_href": "Catalog",
+              "link_type": "custom"
+            }
+          },
+          "5adce21c-d335-45e1-ab37-b1a671e81d99": {
+            "type": "slide",
+            "settings": {
+              "lp_header_item_title": "About us",
+              "lp_header_item_href": "https:\/\/mariemur.com\/pages\/about-us",
+              "lp_header_item_anchor_href": "About",
+              "link_type": "custom"
+            }
+          },
+          "861302e4-cf5f-458c-b5b2-eb1ca885242a": {
+            "type": "slide",
+            "settings": {
+              "lp_header_item_title": "Contact",
+              "lp_header_item_href": "https:\/\/mariemur.com\/pages\/our-brand",
+              "lp_header_item_anchor_href": "Subscribe",
+              "link_type": "custom"
+            }
+          }
+        },
+        "block_order": [
+          "848e21ad-1da8-4e24-84da-5ea188ab94cf",
+          "5adce21c-d335-45e1-ab37-b1a671e81d99",
+          "861302e4-cf5f-458c-b5b2-eb1ca885242a"
+        ],
+        "settings": {
+          "lp_footer_logo": "shopify:\/\/shop_images\/logolanding_png_cfd37922-ae8b-4bd4-921a-51526d25ee23.png",
+          "lp_header_bg": "#3f0606"
+        }
+      },
+      "page-lp-home": {
+        "type": "page-lp-home",
+        "settings": {
+          "home_title": "Ampl<span>ify<\/span> your lush <span>beauty<\/span> with <span>leather<\/span> accessori<span>es<\/span> by MARIE<span>MUR<\/span>",
+          "home_text": "",
+          "home_img_first": "shopify:\/\/shop_images\/01.jpg",
+          "home_img_alt1": "",
+          "home_img_second": "shopify:\/\/shop_images\/19_6.jpg",
+          "home_img_alt2": "",
+          "home_img_third": "shopify:\/\/shop_images\/06.jpg",
+          "home_img_alt3": "",
+          "section_bg_color": "#3f0606",
+          "banners_type": "video",
+          "video_src": "https:\/\/cdn.shopify.com\/s\/files\/1\/0118\/9190\/0516\/files\/IMG_9045_1.MOV?v=1621852098",
+          "video_loop": true,
+          "video_autoplay": true,
+          "show_video_overlay": true,
+          "banner_btn_link": "shopify:\/\/collections\/summer-collection",
+          "banner_btn_text": "Upgrade your look",
+          "banner_text": "<p>Meet the new enticing collection by Marie Mur<\/p>"
+        }
+      },
+      "page-lp-about": {
+        "type": "page-lp-about",
+        "settings": {
+          "lp_about_title": "<span>Treat<\/span> yours<span>elf<\/span> to pure <span>lux<\/span>ury",
+          "lp_about_text": "Savor the tender touch of leather accessories masterfully handcrafted of genuine Italian leather",
+          "lp_about_img": "shopify:\/\/shop_images\/Rectangle_3.png",
+          "lp_about_img_mob": "shopify:\/\/shop_images\/Rectangle_3_1.jpg",
+          "lp_video_block": "",
+          "lp_video_block_bg": "shopify:\/\/shop_images\/IMG_475456789.jpg",
+          "lp_color_text": "#000000",
+          "section_bg_color": "#3f0606"
+        }
+      },
+      "page-lp-shop": {
+        "type": "page-lp-shop",
+        "settings": {
+          "lp_brand_title": "brand: marie mur",
+          "lp_img_block1": "shopify:\/\/shop_images\/Rectangle_8.png",
+          "lp_img_block1_mob": "shopify:\/\/shop_images\/Rectangle_8_1.png",
+          "lp_img_block2": "shopify:\/\/shop_images\/Rectangle_6.png",
+          "lp_img_block2_mob": "shopify:\/\/shop_images\/Rectangle_6_1.png",
+          "lp_img_block3": "shopify:\/\/shop_images\/Rectangle_7_1.png",
+          "lp_img_block3_mob": "shopify:\/\/shop_images\/Rectangle_7_2.png",
+          "lp_sec_title_first": "Unlo<span>ck<\/span> fearle<span>ss<\/span> confi<span>den<\/span>ce",
+          "lp_sec_text_first": "Reveal unique designs created to make you feel fierce",
+          "lp_link_first_title": "SHOP NOW",
+          "link_first": "shopify:\/\/collections\/summer-collection",
+          "lp_img_block1_sec": "shopify:\/\/shop_images\/Rectangle_7_3.png",
+          "lp_img_block1_sec_mob": "shopify:\/\/shop_images\/Rectangle_7_4.png",
+          "lp_img_block2_sec": "shopify:\/\/shop_images\/Rectangle_8_2.png",
+          "lp_img_block2_sec_mob": "shopify:\/\/shop_images\/Rectangle_8_3.png",
+          "lp_sec_title_second": "<span>Spi<\/span>ce your relation<span>ship<\/span>",
+          "lp_sec_text_second": "Spoil your special one with irresistibly alluring outfits",
+          "lp_link_second_title": "SHOP NOW",
+          "link_second": "shopify:\/\/collections\/summer-collection",
+          "lp_img_block1_third": "shopify:\/\/shop_images\/Rectangle_6_2.png",
+          "lp_img_block1_third_mob": "shopify:\/\/shop_images\/Rectangle_6_3.png",
+          "lp_img_block2_third": "shopify:\/\/shop_images\/Rectangle_9.png",
+          "lp_img_block2_third_mob": "shopify:\/\/shop_images\/Rectangle_9_1.png",
+          "lp_img_block3_third": "shopify:\/\/shop_images\/Rectangle_7_5.png",
+          "lp_img_block3_third_mob": "shopify:\/\/shop_images\/Rectangle_7_6.png",
+          "lp_img_block4_third": "shopify:\/\/shop_images\/Rectangle_8_4.png",
+          "lp_img_block4_third_mob": "shopify:\/\/shop_images\/Rectangle_8_4_36fac771-7cb9-49ce-931c-a45bfb4427a6.png",
+          "lp_sec_title_third": "Show o<span>ff you<\/span>rself",
+          "lp_sec_text_third": "Indulge in looking unapologetically stunning adorned with daring leather",
+          "link_third_title": "SHOP NOW",
+          "link_third": "shopify:\/\/collections\/summer-collection",
+          "lp_subs_bg": "#3f0606"
+        }
+      },
+      "page-lp-catalog": {
+        "type": "page-lp-catalog",
+        "settings": {
+          "lp_coll_select": "summer-collection",
+          "lp_catalog_title": "<span>You<\/span> may also like",
+          "lp_product_hover_text": "view product"
+        }
+      },
+      "page-lp-subscription": {
+        "type": "page-lp-subscription",
+        "settings": {
+          "lp_subs_title": "S<span>ub<span>scr<\/span>ibe to ou<span>r ne<span>ws<\/span><\/span><\/span>",
+          "lp_subs_img": "shopify:\/\/shop_images\/Rectangle_13.png",
+          "lp_subs_thanks": "Thank you for subscribing to our newsletters!",
+          "lp_help_block": "This field is required.",
+          "section_bg_color": "#3f0606"
+        }
+      },
+      "footer-lp": {
+        "type": "footer-lp",
+        "blocks": {
+          "1278ef84-a755-47a7-8341-875a0e078c2e": {
+            "type": "slide",
+            "settings": {
+              "lp_footer_item_title": "Collection",
+              "lp_footer_item_href": "https:\/\/mariemur.com\/collections\/insta-queen",
+              "lp_footer_item_anchor_href": "Catalog",
+              "footer_link_type": "custom"
+            }
+          },
+          "f09be9db-8641-4d45-b40e-f9914c233068": {
+            "type": "slide",
+            "settings": {
+              "lp_footer_item_title": "About us",
+              "lp_footer_item_href": "https:\/\/mariemur.com\/pages\/about-us",
+              "lp_footer_item_anchor_href": "About",
+              "footer_link_type": "anchor"
+            }
+          }
+        },
+        "block_order": [
+          "1278ef84-a755-47a7-8341-875a0e078c2e",
+          "f09be9db-8641-4d45-b40e-f9914c233068"
+        ],
+        "settings": {
+          "lp_foot_logo": "shopify:\/\/shop_images\/logolanding_png_cfd37922-ae8b-4bd4-921a-51526d25ee23.png",
+          "lp_social_inst": "https:\/\/www.instagram.com\/mariemur\/?hl=ru",
+          "lp_social_fb": "https:\/\/www.facebook.com\/mariemurusa",
+          "lp_social_pinter": "https:\/\/www.pinterest.com\/marie_mur\/",
+          "lp_copyright": "Copyright © 2021, MarieMur",
+          "lp_footer_bg": "#ffffff"
+        }
+      },
+      "page-lp-featured": {
+        "type": "page-lp-featured",
+        "blocks": {
+          "4a67906b-d467-497d-a219-1339ce863963": {
+            "type": "item",
+            "settings": {
+              "lp_feat_img": "shopify:\/\/shop_images\/photo5330365525043294915.jpg",
+              "lp_feat_img_alt": "Mariemur"
+            }
+          },
+          "68ee3017-4911-4dc4-9738-bb8bad7f6cf4": {
+            "type": "item",
+            "settings": {
+              "lp_feat_img": "shopify:\/\/shop_images\/photo5330365525043294771__png.jpg",
+              "lp_feat_img_alt": "Mariemur"
+            }
+          },
+          "7240d079-0c96-479e-96bd-75f864ba0de6": {
+            "type": "item",
+            "settings": {
+              "lp_feat_img": "shopify:\/\/shop_images\/photo5330365525043294769__png.jpg",
+              "lp_feat_img_alt": "Mariemur"
+            }
+          },
+          "7d147b06-d35c-4127-aec1-ce88de41a034": {
+            "type": "item",
+            "settings": {
+              "lp_feat_img": "shopify:\/\/shop_images\/photo5330365525043294768__png.jpg",
+              "lp_feat_img_alt": "Mariemur"
+            }
+          }
+        },
+        "block_order": [
+          "4a67906b-d467-497d-a219-1339ce863963",
+          "68ee3017-4911-4dc4-9738-bb8bad7f6cf4",
+          "7240d079-0c96-479e-96bd-75f864ba0de6",
+          "7d147b06-d35c-4127-aec1-ce88de41a034"
+        ],
+        "settings": {
+          "lp_feat_title": "AS FEATURED IN"
+        }
+      },
+      "shop-countdown-timer": {
+        "type": "shop-countdown-timer",
+        "settings": {
+          "start_timer_month": "Jun",
+          "start_timer_day": "7",
+          "start_timer_year": "2021",
+          "start_timer_hours": "10",
+          "start_timer_minutes": "55",
+          "end_timer_month": "Jun",
+          "end_timer_day": "10",
+          "end_timer_year": "2021",
+          "end_timer_hours": "13",
+          "end_timer_minutes": "56",
+          "show_sec_timer": false
+        }
+      },
+      "page-lp-feedbacks": {
+        "type": "page-lp-feedbacks",
+        "blocks": {
+          "428b83e8-001a-4ffc-9980-47441a22eca3": {
+            "type": "dropdown",
+            "settings": {
+              "stars": 5,
+              "lp_feed_text": "<p>I love this set! So cute! I ordered using the size guidelines on the website. I love that the lace is not stretchy, it feels very durable. Easy to was and clean. Would 100% order it again if new colours are available.<br\/><br\/><\/p>",
+              "lp_feed_author": "Marion A.",
+              "lp_feed_country": "Canada"
+            }
+          },
+          "be68cbbb-b6e2-495b-92f2-72d0f9e9c7fa": {
+            "type": "dropdown",
+            "settings": {
+              "stars": 5,
+              "lp_feed_text": "<p>This is my first purchase and couldn’t be happier. The quality and durability as well as it making me look sexy as hell make this one a no brainer<br\/><br\/><\/p>",
+              "lp_feed_author": "Mary G.",
+              "lp_feed_country": "United States"
+            }
+          },
+          "b60f82aa-b704-45c9-9cd2-b8db26938e01": {
+            "type": "dropdown",
+            "settings": {
+              "stars": 5,
+              "lp_feed_text": "<p>Really beautifully made and fit perfectly. <\/p><p>Lovely packaging too!<br\/><br\/><\/p>",
+              "lp_feed_author": "Catherine N.",
+              "lp_feed_country": "United States"
+            }
+          }
+        },
+        "block_order": [
+          "428b83e8-001a-4ffc-9980-47441a22eca3",
+          "be68cbbb-b6e2-495b-92f2-72d0f9e9c7fa",
+          "b60f82aa-b704-45c9-9cd2-b8db26938e01"
+        ],
+        "settings": {
+          "lp_feed_title": "<p>Our <span>cust<\/span>omers are in lo<span>ve<\/span> with leather by MARIE<span>MUR<\/span><\/p>"
+        }
+      },
+      "header-lp10": {
+        "type": "header-lp10",
+        "blocks": {
+          "96bd0aee-d4ad-480a-8da1-baf063f2dddd": {
+            "type": "slide",
+            "settings": {
+              "lp_header_item_title": "New in",
+              "lp_header_item_href": "https:\/\/mariemur.com\/collections\/sultry-dream",
+              "lp_header_item_anchor_href": "https:\/\/mariemur.com\/collections\/sultry-dream",
+              "link_type": "custom"
+            }
+          },
+          "1815a568-c0b6-4073-9bae-d665fc3cb40d": {
+            "type": "slide",
+            "settings": {
+              "lp_header_item_title": "About us",
+              "lp_header_item_href": "https:\/\/mariemur.com\/pages\/our-brand",
+              "lp_header_item_anchor_href": "https:\/\/mariemur.com\/pages\/our-brand",
+              "link_type": "custom"
+            }
+          },
+          "a9223f44-7aa3-4154-8471-e55abc674f11": {
+            "type": "slide",
+            "settings": {
+              "lp_header_item_title": "Conact us",
+              "lp_header_item_href": "https:\/\/mariemur.com\/pages\/contact-us",
+              "lp_header_item_anchor_href": "https:\/\/mariemur.com\/pages\/contact-us",
+              "link_type": "custom"
+            }
+          }
+        },
+        "block_order": [
+          "96bd0aee-d4ad-480a-8da1-baf063f2dddd",
+          "1815a568-c0b6-4073-9bae-d665fc3cb40d",
+          "a9223f44-7aa3-4154-8471-e55abc674f11"
+        ],
+        "settings": {
+          "lp_header_bg": "#3f0606"
+        }
+      },
+      "page-lp-home10": {
+        "type": "page-lp-home10",
+        "settings": {
+          "home_title": "Sa<span>vor the luxury of lingerie created exclusively for you<\/span>",
+          "home_text": "",
+          "home_img_first": "shopify:\/\/shop_images\/4_2.png",
+          "home_img_alt1": "",
+          "home_img_second": "shopify:\/\/shop_images\/10.png",
+          "home_img_alt2": "",
+          "home_img_third": "shopify:\/\/shop_images\/8.png",
+          "home_img_alt3": "",
+          "section_bg_color": "#3f0606",
+          "banners_type": "images",
+          "video_loop": true,
+          "video_autoplay": true,
+          "show_video_overlay": true,
+          "banner_btn_link": "shopify:\/\/collections\/lingerie-guide",
+          "banner_btn_text": "Upgrade your look",
+          "banner_text": "<p><br\/>Treat yourself to the finest materials and impeccable fits of masterfully handcrafted lingerie by MARIEMUR<\/p>"
+        }
+      },
+      "page-lp-about10": {
+        "type": "page-lp-about10",
+        "settings": {
+          "lp_about_title": "<br>\nB<span>e \n<br>t<span>h<span>e<span> tr<\/span>e<span>at<\/span><\/span><\/span><\/span>",
+          "lp_about_text": "<br>\n<br>\n<br>\nCreate a look that will make your special one shiver with desire for you",
+          "lp_custom_coll": "shopify:\/\/collections\/lingerie-guide",
+          "lp_about_img": "shopify:\/\/shop_images\/2_2_7560359a-2b67-48b1-b853-5f1ba30a6d17.png",
+          "lp_about_img_mob": "shopify:\/\/shop_images\/2_2_7560359a-2b67-48b1-b853-5f1ba30a6d17.png",
+          "lp_video_block": "",
+          "lp_color_text": "#000000",
+          "section_bg_color": "#3f0606"
+        }
+      },
+      "page-lp-shop10": {
+        "type": "page-lp-shop10",
+        "settings": {
+          "lp_brand_title": "",
+          "lp_img_block1": "shopify:\/\/shop_images\/5_1.png",
+          "lp_img_block1_mob": "shopify:\/\/shop_images\/5_1.png",
+          "lp_img_block2": "shopify:\/\/shop_images\/4_1.png",
+          "lp_img_block2_mob": "shopify:\/\/shop_images\/4_1.png",
+          "lp_img_block3": "shopify:\/\/shop_images\/3_3.png",
+          "lp_img_block3_mob": "shopify:\/\/shop_images\/3_3.png",
+          "lp_sec_title_first": "I<span>ndulg<span>e in th<\/span>e f<span>in<\/span>e<span>st qua<\/span>li<span>ty\n<\/span><\/span>",
+          "lp_sec_text_first": "Why would you want to wear something that was made for someone else? Treat yourself to lingerie masterfully crafted just for you.",
+          "lp_link_first_title": "SHOP NOW",
+          "link_first": "shopify:\/\/collections\/lingerie-guide",
+          "lp_img_block1_sec": "shopify:\/\/shop_images\/7.png",
+          "lp_img_block1_sec_mob": "shopify:\/\/shop_images\/7.png",
+          "lp_img_block2_sec": "shopify:\/\/shop_images\/6.png",
+          "lp_img_block2_sec_mob": "shopify:\/\/shop_images\/6.png",
+          "lp_sec_title_second": "E<span>ve<span>rything starts with li<\/span>nge<span>rie\n<\/span><\/span>",
+          "lp_sec_text_second": "Unveil designs created to set the right mood",
+          "lp_link_second_title": "SHOP NOW",
+          "link_second": "shopify:\/\/collections\/lingerie-guide",
+          "lp_img_block1_third": "shopify:\/\/shop_images\/8.png",
+          "lp_img_block1_third_mob": "shopify:\/\/shop_images\/8.png",
+          "lp_img_block2_third": "shopify:\/\/shop_images\/10.png",
+          "lp_img_block2_third_mob": "shopify:\/\/shop_images\/10.png",
+          "lp_img_block3_third": "shopify:\/\/shop_images\/9.png",
+          "lp_img_block3_third_mob": "shopify:\/\/shop_images\/9.png",
+          "lp_img_block4_third": "shopify:\/\/shop_images\/11.png",
+          "lp_img_block4_third_mob": "shopify:\/\/shop_images\/11.png",
+          "lp_sec_title_third": "P<span>ur<\/span>e p<span>erfe<\/span>c<span>ti<\/span>o<span>n, e<\/span>v<span>e<\/span>ry t<span>i<\/span>me",
+          "lp_sec_text_third": "Always stay confident and look stunning wearing impeccably fitting lingerie by MARIEMUR",
+          "link_third_title": "SHOP NOW",
+          "link_third": "shopify:\/\/collections\/lingerie-guide",
+          "lp_subs_bg": "#3f0606"
+        }
+      },
+      "page-lp-catalog10": {
+        "type": "page-lp-catalog10",
+        "settings": {
+          "lp_coll_select": "lingerie-guide",
+          "lp_catalog_title": "You may also like",
+          "lp_product_hover_text": "view product"
+        }
+      },
+      "page-lp-subscription10": {
+        "type": "page-lp-subscription10",
+        "settings": {
+          "lp_subs_title": "Subs<span>cribe to our news<\/span>",
+          "lp_subs_img": "shopify:\/\/shop_images\/12.png",
+          "lp_subs_thanks": "Thank you!",
+          "lp_help_block": "",
+          "section_bg_color": "#3f0606"
+        }
+      },
+      "footer-lp10": {
+        "type": "footer-lp10",
+        "settings": {
+          "lp_social_inst": "https:\/\/www.instagram.com\/mariemur\/",
+          "lp_social_fb": "https:\/\/www.facebook.com\/mariemurusa",
+          "lp_social_pinter": "https:\/\/www.pinterest.com\/marie_mur\/_created\/",
+          "lp_copyright": "",
+          "lp_footer_bg": "#ffffff"
+        }
+      },
+      "page-lp-featured10": {
+        "type": "page-lp-featured10",
+        "blocks": {
+          "77a79d70-f5f9-43fe-85e0-43a8f31f0134": {
+            "type": "item",
+            "settings": {
+              "lp_feat_img": "shopify:\/\/shop_images\/photo5330365525043294915.jpg",
+              "lp_feat_img_alt": "Mariemur"
+            }
+          },
+          "dc882e61-dffd-4235-8e3f-b35a527c07b3": {
+            "type": "item",
+            "settings": {
+              "lp_feat_img": "shopify:\/\/shop_images\/photo5330365525043294771__png.jpg",
+              "lp_feat_img_alt": "Mariemur"
+            }
+          },
+          "53ca27e0-eba9-4647-84cf-395508d755ec": {
+            "type": "item",
+            "settings": {
+              "lp_feat_img": "shopify:\/\/shop_images\/photo5330365525043294769__png_66410be7-ba5d-4d8a-ad71-7d21437e09b5.jpg",
+              "lp_feat_img_alt": "Mariemur"
+            }
+          },
+          "68189b9e-0ed4-4f7c-b4d9-6aad46623db0": {
+            "type": "item",
+            "settings": {
+              "lp_feat_img": "shopify:\/\/shop_images\/photo5330365525043294768__png_8b6bbab9-6c48-43e3-b2ea-fa1e255f65be.jpg",
+              "lp_feat_img_alt": "Mariemur"
+            }
+          }
+        },
+        "block_order": [
+          "77a79d70-f5f9-43fe-85e0-43a8f31f0134",
+          "dc882e61-dffd-4235-8e3f-b35a527c07b3",
+          "53ca27e0-eba9-4647-84cf-395508d755ec",
+          "68189b9e-0ed4-4f7c-b4d9-6aad46623db0"
+        ],
+        "settings": {
+          "lp_feat_title": "AS FEATURED IN"
+        }
+      },
+      "header-lp9": {
+        "type": "header-lp9",
+        "settings": {
+          "lp_header_bg": "#3f0606"
+        }
+      },
+      "page-lp-home9": {
+        "type": "page-lp-home9",
+        "settings": {
+          "home_title": "",
+          "home_text": "",
+          "home_img_alt1": "",
+          "home_img_alt2": "",
+          "home_img_alt3": "",
+          "section_bg_color": "#3f0606"
+        }
+      },
+      "page-lp-about9": {
+        "type": "page-lp-about9",
+        "settings": {
+          "lp_about_title": "",
+          "lp_about_text": "",
+          "lp_video_block": "",
+          "lp_color_text": "#000000",
+          "section_bg_color": "#3f0606"
+        }
+      },
+      "page-lp-shop9": {
+        "type": "page-lp-shop9",
+        "settings": {
+          "lp_brand_title": "brand: marie mur",
+          "lp_sec_title_first": "",
+          "lp_sec_text_first": "",
+          "lp_link_first_title": "SHOP NOW",
+          "lp_sec_title_second": "",
+          "lp_sec_text_second": "",
+          "lp_link_second_title": "SHOP NOW",
+          "lp_sec_title_third": "",
+          "lp_sec_text_third": "",
+          "link_third_title": "SHOP NOW",
+          "lp_subs_bg": "#3f0606"
+        }
+      },
+      "page-lp-catalog9": {
+        "type": "page-lp-catalog9",
+        "settings": {
+          "lp_coll_select": "",
+          "lp_catalog_title": "",
+          "lp_product_hover_text": "view product"
+        }
+      },
+      "page-lp-subscription9": {
+        "type": "page-lp-subscription9",
+        "settings": {
+          "lp_subs_title": "",
+          "lp_subs_thanks": "",
+          "lp_help_block": "",
+          "section_bg_color": "#3f0606"
+        }
+      },
+      "footer-lp9": {
+        "type": "footer-lp9",
+        "settings": {
+          "lp_social_inst": "",
+          "lp_social_fb": "",
+          "lp_social_pinter": "",
+          "lp_copyright": "",
+          "lp_footer_bg": "#ffffff"
+        }
+      }
+    },
+    "content_for_index": [
+      "16152527783b9030e8",
+      "161525496084e075b7",
+      "161525366390251ca4",
+      "16220602581f7a031e",
+      "1621850184946abe0c",
+      "1615252849d4ff6871",
+      "16152534345c3e5826",
+      "1615252761bd712a9c",
+      "1615254156bd3c528f"
+    ]
+  },
+  "presets": {
+    "Default": {}
+  }
+}

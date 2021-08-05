@@ -1,0 +1,412 @@
+{% include 'breadcrumbs' %}
+<div class="account mb-60">
+  <div class="container">
+    <h1 class="h3 mt-30 mb-40 text-center">{{ 'customer.account.title' | t }}</h1>
+    <div class="tabs js-tabs" data-type="horizontal">
+      <div class="tabs__head" data-js-tabs-head>
+        <div class="tabs__slider justify-content-lg-center" data-js-tabs-slider>
+          <div class="tabs__btn active" data-js-tabs-btn data-tab-id="1" data-active="true">{{ 'customer.orders.tab' | t }}</div>
+          <div class="tabs__btn" data-js-tabs-btn data-tab-id="2">{{ 'customer.account.details_tab' | t }}</div>
+        </div>
+      </div>
+      <div class="tabs__body">
+        <div data-js-tabs-tab >
+          <div class="tabs__content rte overflow-hidden" data-js-tabs-content data-tab-content-id="1"  style="display: block">
+            <h2 class="h4 mt-20 mb-30 text-center">{{ 'customer.orders.title' | t }}</h2>
+            {% paginate customer.orders by 20 %}
+              {%- if customer.orders.size != 0 -%}
+                <div class="table-wrapper">
+                  <table class="table-account-history responsive-table mb-30">
+                    <thead>
+                    <tr class="responsive-table-row">
+                      <th>{{ 'customer.orders.order_number' | t }}</th>
+                      <th>{{ 'customer.orders.date' | t }}</th>
+                      <th>{{ 'customer.orders.payment_status' | t }}</th>
+                      <th>{{ 'customer.orders.fulfillment_status' | t }}</th>
+                      <th>{{ 'customer.orders.total' | t }}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {%- for order in customer.orders -%}
+                      <tr class="responsive-table-row">
+                        <td data-label="{{ 'customer.orders.order_number' | t }}">{{ order.name | link_to: order.customer_url }}</td>
+                        <td data-label="{{ 'customer.orders.date' | t }}">{{ order.created_at | date: format: 'month_day_year' }}</td>
+                        <td data-label="{{ 'customer.orders.payment_status' | t }}">{{ order.financial_status_label }}</td>
+                        <td data-label="{{ 'customer.orders.fulfillment_status' | t }}">{{ order.fulfillment_status_label }}</td>
+                        <td data-label="{{ 'customer.orders.total' | t }}">{{ order.total_price | money }}</td>
+                      </tr>
+                    {%- endfor -%}
+                    </tbody>
+                  </table>
+                </div>
+              {%- else -%}
+                <p class="text-center">{{ 'customer.orders.none' | t }}</p>
+              {%- endif -%}
+              {%- if paginate.pages > 1 -%}
+                {% include 'pagination' with pagination_type: 'classic' %}
+              {%- endif -%}
+            {% endpaginate %}
+          </div>
+        </div>
+        <div data-js-tabs-tab>
+          <div class="tabs__content rte overflow-hidden" data-tab-content-id="2" data-js-tabs-content>
+            <h2 class="h4 mt-20 mb-30 text-center">{{ 'customer.account.details' | t }}</h2>
+            {%- if customer.default_address != blank -%}
+              <div class="table-wrapper">
+                <table class="table-account-addresses responsive-table mb-30">
+                  {%- if customer.default_address.first_name != blank -%}
+                    <tr>
+                      <td>{{ 'customer.addresses.first_name' | t }}:</td>
+                      <td>{{ customer.default_address.first_name }}</td>
+                    </tr>
+                  {%- endif -%}
+                  {%- if customer.default_address.last_name != blank -%}
+                    <tr>
+                      <td>{{ 'customer.addresses.last_name' | t }}:</td>
+                      <td>{{ customer.default_address.last_name }}</td>
+                    </tr>
+                  {%- endif -%}
+                  {%- if customer.default_address.address1 != blank -%}
+                    <tr>
+                      <td>{{ 'customer.addresses.address1' | t }}:</td>
+                      <td>{{ customer.default_address.address1 }}</td>
+                    </tr>
+                  {%- endif -%}
+                  {%- if customer.default_address.address2 != blank -%}
+                    <tr>
+                      <td>{{ 'customer.addresses.address2' | t }}:</td>
+                      <td>{{ customer.default_address.address2 }}</td>
+                    </tr>
+                  {%- endif -%}
+                  {%- if customer.default_address.company != blank -%}
+                    <tr>
+                      <td>{{ 'customer.addresses.company' | t }}:</td>
+                      <td>{{ customer.default_address.company }}</td>
+                    </tr>
+                  {%- endif -%}
+                  {%- if customer.default_address.city != blank -%}
+                    <tr>
+                      <td>{{ 'customer.addresses.city' | t }}:</td>
+                      <td>{{ customer.default_address.city }}</td>
+                    </tr>
+                  {%- endif -%}
+                  {%- if customer.default_address.province != blank -%}
+                    <tr>
+                      <td>{{ 'customer.addresses.province' | t }}:</td>
+                      <td>{{ customer.default_address.province }}</td>
+                    </tr>
+                  {%- endif -%}
+                  {%- if customer.default_address.province_code != blank -%}
+                    <tr>
+                      <td>{{ 'customer.addresses.province_code' | t }}:</td>
+                      <td>{{ customer.default_address.province_code }}</td>
+                    </tr>
+                  {%- endif -%}
+                  {%- if customer.default_address.zip != blank -%}
+                    <tr>
+                      <td>{{ 'customer.addresses.zip' | t }}:</td>
+                      <td>{{ customer.default_address.zip }}</td>
+                    </tr>
+                  {%- endif -%}
+                  {%- if customer.default_address.country != blank -%}
+                    <tr>
+                      <td>{{ 'customer.addresses.country' | t }}:</td>
+                      <td>{{ customer.default_address.country }}</td>
+                    </tr>
+                  {%- endif -%}
+                  {%- if customer.default_address.phone != blank -%}
+                    <tr>
+                      <td>{{ 'customer.addresses.phone' | t }}:</td>
+                      <td>{{ customer.default_address.phone }}</td>
+                    </tr>
+                  {%- endif -%}
+                </table>
+              </div>
+            {%- endif -%}
+            <p class="text-center">
+              <a href="/account/addresses">{{ 'customer.account.view_addresses' | t }} ({{ customer.addresses_count }})</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      Loader.require({type: "script", name: "tabs"});
+    </script>
+      <a href="/account/logout" class="btn"><span>Logout</span></a>
+  </div>
+</div>
+<style>
+    h1{
+        font-size: 24px;
+        line-height: 31px;
+        letter-spacing: 0em;
+        font-weight: normal;
+        margin-top: 30px ;
+        margin-bottom: 40px ;
+    }
+    a{
+        color: #5E5E5E;
+        font-size: 10px;
+        font-weight: 300;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        transition: color 0.3s ease;
+    }
+    .tabs {
+        overflow: hidden
+    }
+
+    @media (max-width: 540px) {
+        .tabs {
+            margin-left:-10px;
+            margin-right: -10px
+        }
+    }
+
+    .tabs__nav {
+        display: none
+    }
+
+    @media (min-width: 1025px) {
+        .tabs[data-type=horizontal] .tabs__head.tabs__head--slider .tabs__nav {
+            display:flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            width: 20px;
+            height: 100%;
+            top: 0;
+            cursor: pointer;
+            z-index: 2
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .tabs[data-type=horizontal] .tabs__head.tabs__head--slider .tabs__nav.disabled {
+            display:none!important
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .tabs[data-type=horizontal] .tabs__head.tabs__head--slider .tabs__nav--prev {
+            left:-2px
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .tabs[data-type=horizontal] .tabs__head.tabs__head--slider .tabs__nav--next {
+            right:-2px
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .tabs[data-type=horizontal] .tabs__body {
+            overflow-x:auto
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .tabs[data-type=horizontal] .tabs__body {
+            border-top:solid 1px transparent;
+            border-bottom: solid 1px transparent
+        }
+    }
+
+    .tabs[data-type=horizontal] .tabs__body>div {
+        display: block
+    }
+
+    @media (max-width: 1024px) {
+        .tabs[data-type=horizontal] .tabs__body>div:not(:first-child)>span {
+            min-height:33px;
+            border-top: solid 1px transparent
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .tabs[data-type=horizontal] .tabs__body>div>span {
+            display:none
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .tabs[data-type=horizontal] .tabs__body>div>span {
+            position:relative;
+            display: block;
+            padding: 8px 15px;
+            text-transform: uppercase;
+            text-align: center;
+            cursor: pointer;
+            transition-property: transform;
+            will-change: transform
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .tabs[data-type=horizontal] .tabs__body>div>span i {
+            position:absolute;
+            right: 5px;
+            top: 6px
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .tabs[data-type=horizontal] .tabs__body>div.active>span i {
+            transform:rotate(45deg)
+        }
+    }
+
+    .tabs[data-type=horizontal] .tabs__body>div>div {
+        display: none
+    }
+
+    @media (min-width: 1025px) {
+        .tabs[data-type=horizontal] .tabs__content {
+            padding:35px 0
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .tabs[data-type=horizontal] .tabs__content {
+            padding:10px 10px
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .tabs[data-type=horizontal] .tabs__head {
+            position:relative;
+            border-bottom: solid 1px transparent
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .tabs[data-type=horizontal] .tabs__head {
+            display:none
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .tabs[data-type=horizontal] .tabs__slider {
+            display:flex;
+            flex-wrap: wrap;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: -1px
+        }
+    }
+
+    @media (min-width: 1025px) {
+        .tabs[data-type=horizontal] .tabs__btn {
+            padding:6px 20px;
+            outline: 0;
+            cursor: pointer;
+            text-transform: uppercase;
+            border: solid 1px transparent
+        }
+    }
+
+    .tabs[data-type=mobile] .tabs__body {
+        border-top: solid 1px transparent;
+        border-bottom: solid 1px transparent
+    }
+
+    .tabs[data-type=mobile] .tabs__body>div {
+        display: block
+    }
+
+    .tabs[data-type=mobile] .tabs__body>div:not(:first-child)>span {
+        min-height: 33px;
+        border-top: solid 1px transparent
+    }
+
+    .tabs[data-type=mobile] .tabs__body>div>span {
+        position: relative;
+        display: block;
+        text-transform: uppercase;
+        cursor: pointer
+    }
+
+    @media (min-width: 1025px) {
+        .tabs[data-type=mobile] .tabs__body>div>span {
+            padding:8px 0
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .tabs[data-type=mobile] .tabs__body>div>span {
+            padding:8px 15px;
+            text-align: center
+        }
+    }
+
+    .tabs[data-type=mobile] .tabs__body>div>span i {
+        position: absolute;
+        top: 6px;
+        transition-property: transform;
+        will-change: transform
+    }
+
+    @media (min-width: 1025px) {
+        .tabs[data-type=mobile] .tabs__body>div>span i {
+            right:-6px
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .tabs[data-type=mobile] .tabs__body>div>span i {
+            right:5px
+        }
+    }
+
+    .tabs[data-type=mobile] .tabs__body>div.active>span i {
+        transform: rotate(45deg)
+    }
+
+    .tabs[data-type=mobile] .tabs__body>div>div {
+        display: none
+    }
+
+    @media (min-width: 1025px) {
+        .tabs[data-type=mobile] .tabs__content {
+            padding:10px 0
+        }
+    }
+
+    @media (max-width: 1024px) {
+        .tabs[data-type=mobile] .tabs__content {
+            padding:10px 10px
+        }
+    }
+
+    .tabs[data-type=mobile] .tabs__head {
+        display: none
+    }
+    .tabs[data-type="horizontal"] .tabs__btn.active, .tabs[data-type="horizontal"] .tabs__btn:hover{
+        border-top-color: #515151;
+        border-left-color: #515151;
+        border-right-color: #515151;
+    }
+    .tabs[data-type="horizontal"] .tabs__head{
+        border-bottom-color: #515151;
+
+    }
+    .tabs[data-type=horizontal] .tabs__slider{
+        display: flex;
+        flex-wrap: wrap;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: -1px;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+        margin-top: 20px;
+        /* margin-bottom: 20px; */
+        /* padding-bottom: 20px; */
+        margin-left: 0;
+        margin-right: 0;
+    }
+    .ml-auto, .mx-auto{
+        margin-left: auto !important;
+    }
+</style>

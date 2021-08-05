@@ -1,0 +1,131 @@
+<div class="main-categories">
+    <div class="container">
+        <div class="main-categories__inner">
+            <div class="main-categories__title">
+                <h2>CATEGORIES</h2>
+            </div>
+            <div class="main-categories__content">
+                <div class="main-categories__list">
+                    {% assign section_size = section.blocks | size %}
+                    {% for block in section.blocks %}
+                    {%- assign collection = collections[block.settings.mc-category] -%}
+                    {%- assign current_handle = collection.handle -%}
+                    {% if current_handle == prev_coll.handle and section_size != forloop.index %}
+                        <picture>
+                            <source data-srcset="{{ block.settings.mc-image | img_url: '450x' }}"
+                                    srcset="{{ block.settings.mc-image | img_url: '100x' }}">
+                            <img data-src="{{ block.settings.mc-image | img_url: '450x' }}"
+                                 src="{{ block.settings.mc-image | img_url: '100x' }}" class="lazyload" alt="">
+                        </picture>
+                    {% elsif forloop.length == forloop.index and current_handle != prev_coll.handle %}
+                </div>
+                <div class="main-categories__box-title">{{ prev_coll.title }}</div>
+                </a>
+                <a href="{{ collection.url }}" class="main-categories__box wow fadeInUp"
+                   data-wow-delay="0.2s"
+                   style="visibility: visible; animation-delay: 0.2s; animation-name: fadeInUp;">
+                    <div class="main-categories__box-img">
+                        <picture>
+                            <source data-srcset="{{ block.settings.mc-image | img_url: '450x' }}"
+                                    srcset="{{ block.settings.mc-image | img_url: '450x' }}">
+                            <img data-src="{{ block.settings.mc-image | img_url: '450x' }}"
+                                 src="{{ block.settings.mc-image | img_url: '450x' }}" class="lazyload"
+                                 alt="">
+                        </picture>
+                    </div>
+                    <div class="main-categories__box-other">
+                        <picture>
+                            <source data-srcset="{{ block.settings.mc-image | img_url: '450x' }}"
+                                    srcset="{{ block.settings.mc-image | img_url: '450x' }}">
+                            <img data-src="{{ block.settings.mc-image | img_url: '450x' }}"
+                                 src="{{ block.settings.mc-image | img_url: '450x' }}" class=" lazyloaded"
+                                 alt="">
+                        </picture>
+                    </div>
+                    <div class="main-categories__box-title">{{ current_handle }}</div>
+                </a>
+                {% elsif forloop.index == 1 %}
+                <a href="{{ collection.url }}" class="main-categories__box wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="main-categories__box-img">
+                        <picture>
+                            <source data-srcset="{{ block.settings.mc-image | img_url: '450x' }}"
+                                    srcset="{{ block.settings.mc-image | img_url: '100x' }}">
+                            <img data-src="{{ block.settings.mc-image | img_url: '450x' }}"
+                                 src="{{ block.settings.mc-image | img_url: '100x' }}" class="lazyload" alt="">
+                        </picture>
+                    </div>
+                    <div class="main-categories__box-other">
+                        <picture>
+                            <source data-srcset="{{ block.settings.mc-image | img_url: '450x' }}"
+                                    srcset="{{ block.settings.mc-image | img_url: '100x' }}">
+                            <img data-src="{{ block.settings.mc-image | img_url: '450x' }}"
+                                 src="{{ block.settings.mc-image | img_url: '100x' }}" class="lazyload" alt="">
+                        </picture>
+                        {% elsif current_handle != prev_coll.handle and forloop.index > 1 and forloop.rindex != forloop.index %}
+                    </div>
+                    <div class="main-categories__box-title">{{ prev_coll.title }}</div>
+                </a>
+                <a href="{{ collection.url }}" class="main-categories__box wow fadeInUp" data-wow-delay="0.2s">
+                    <div class="main-categories__box-img">
+                        <picture>
+                            <source data-srcset="{{ block.settings.mc-image | img_url: '450x' }}"
+                                    srcset="{{ block.settings.mc-image | img_url: '100x' }}">
+                            <img data-src="{{ block.settings.mc-image | img_url: '450x' }}"
+                                 src="{{ block.settings.mc-image | img_url: '100x' }}" class="lazyload" alt="">
+                        </picture>
+                    </div>
+                    <div class="main-categories__box-other">
+                        <picture>
+                            <source data-srcset="{{ block.settings.mc-image | img_url: '450x' }}"
+                                    srcset="{{ block.settings.mc-image | img_url: '100x' }}">
+                            <img data-src="{{ block.settings.mc-image | img_url: '450x' }}"
+                                 src="{{ block.settings.mc-image | img_url: '100x' }}" class="lazyload" alt="">
+                        </picture>
+                        {% elsif section_size == forloop.index %}
+                        <picture>
+                            <source data-srcset="{{ block.settings.mc-image | img_url: '450x' }}"
+                                    srcset="{{ block.settings.mc-image | img_url: '100x' }}">
+                            <img data-src="{{ block.settings.mc-image | img_url: '450x' }}"
+                                 src="{{ block.settings.mc-image | img_url: '100x' }}" class="lazyload" alt="">
+                        </picture>
+                    </div>
+                    <div class="main-categories__box-title">{{ prev_coll.title }}</div>
+                </a>
+                {% endif %}
+                {%- assign prev_coll = collection -%}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% schema %}
+{
+"name": "Main categories" ,
+"blocks": [
+{
+"type": "mc-item" ,
+"name": "Category with image" ,
+
+"settings": [
+{
+"type": "collection" ,
+"id": "mc-category" ,
+"label": "Category"
+},{
+"type": "image_picker" ,
+"id": "mc-image" ,
+"label": "image"
+}
+]
+}
+] ,
+"presets": [
+{
+"name": "Main categories" ,
+"category": "Main page"
+}
+]
+}
+
+{% endschema %}

@@ -1,0 +1,594 @@
+{% assign colection_array = shop.metafields.global.collection-list | split: ','| sort%}
+{% assign colection_array_last_item = colection_array | last %}
+{% assign colection_array_first_item = colection_array | first %}
+{% assign current_handle = collection.handle %}
+{% assign next_coll = collections[colection_array_first_item] %}
+{% assign prev_handle = '' %}
+
+{% for handel in colection_array %}
+    {% if collections[handel] != blank %}
+    {% if prev_handle ==  current_handle%}
+        {% assign next_coll = collections[handel] %}
+        {% break %}
+    {% endif %}
+    {% if current_handle == collections[colection_array_last_item].handle%}
+        {% assign next_coll = collections[colection_array_first_item] %}
+    {% endif %}
+    {% assign prev_handle = collections[handel].handle %}
+    {% endif %}
+{% endfor %}
+<div class="collection-details">
+    <div class="container">
+        <div class="collection-details__inner">
+            <div class="collection-details__img">
+                <div class="collection-details__img-box wow fadeInUp" data-wow-delay="0.6s">
+                    {% if collection.metafields.landing.first_block_left_image %}
+                        <picture>
+                            <source data-srcset="{{ collection.metafields.landing.first_block_left_image }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ collection.metafields.landing.first_block_left_image }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ collection.metafields.landing.first_block_left_image }}">
+                            <img data-src="{{ collection.metafields.landing.first_block_left_image }}" class="lazyload" alt="">
+                        </picture>
+                    {% else %}
+                        <picture>
+                            <source data-srcset="{{ section.settings.first_block_left_image | img_url:'master' }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ section.settings.first_block_left_image | img_url:'master' }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ section.settings.first_block_left_image | img_url:'master' }}">
+                            <img data-src="{{ section.settings.first_block_left_image | img_url:'master' }}" class="lazyload" alt="">
+                        </picture>
+                    {% endif %}
+                </div>
+                <div class="collection-details__img-box wow fadeInUp" data-wow-delay="0.8s">
+                    {% if collection.metafields.landing.first_block_right_image %}
+                        <picture>
+                            <source data-srcset="{{ collection.metafields.landing.first_block_right_image }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ collection.metafields.landing.first_block_right_image }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ collection.metafields.landing.first_block_right_image }}">
+                            <img data-src="{{ collection.metafields.landing.first_block_right_image }}" class="lazyload" alt="">
+                        </picture>
+                    {% else %}
+                        <picture>
+                            <source data-srcset="{{ section.settings.first_block_right_image | img_url:'master' }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ section.settings.first_block_right_image | img_url:'master' }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ section.settings.first_block_right_image | img_url:'master' }}">
+                            <img data-src="{{ section.settings.first_block_right_image | img_url:'master' }}" class="lazyload" alt="">
+                        </picture>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="collection-details__title wow fadeInUp" data-wow-delay="0.2s">
+                {% if collection.metafields.landing.first_block_title %}
+                    <h1>{{ collection.metafields.landing.first_block_title }}</h1>
+                {% else %}
+                    <h1>{{ collection.title }}</h1>
+                {% endif %}
+            </div>
+            <div class="collection-details__subtitle wow fadeInUp" data-wow-delay="0.4s">
+                {% if collection.metafields.landing.first_block_desc %}
+                    {{ collection.metafields.landing.first_block_desc }}
+                {% else %}
+                    {{ section.settings.first_block_desc  }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="collection-black wow fadeIn" data-wow-delay="0.2s">
+    <div class="container">
+        <div class="collection-black__inner">
+            <div class="collection-black__label wow fadeIn" data-wow-delay="0.6s">
+                <div class="collection-black__label-from">we look forward to</div>
+                <div class="collection-black__label-to">Hearing from you!</div>
+            </div>
+            <div class="collection-black__img wow fadeIn" data-wow-delay="0.4s">
+                {% if collection.metafields.landing.second_block_top_image %}
+                    <picture>
+                        <source data-srcset="{{ collection.metafields.landing.second_block_top_image }}" media="(min-width: 1200px)">
+                        <source data-srcset="{{ collection.metafields.landing.second_block_top_image }}" media="(min-width: 768px)">
+                        <source data-srcset="{{ collection.metafields.landing.second_block_top_image }}">
+                        <img data-src="{{ collection.metafields.landing.second_block_top_image }}" class="lazyload" alt="">
+                    </picture>
+                {% else %}
+                    <picture>
+                        <source data-srcset="{{ section.settings.second_block_top_image | img_url:'master' }}" media="(min-width: 1200px)">
+                        <source data-srcset="{{ section.settings.second_block_top_image | img_url:'master' }}" media="(min-width: 768px)">
+                        <source data-srcset="{{ section.settings.second_block_top_image | img_url:'master' }}">
+                        <img data-src="{{ section.settings.second_block_top_image | img_url:'master' }}" class="lazyload" alt="">
+                    </picture>
+                {% endif %}
+            </div>
+            <div class="collection-black__title wow fadeIn" data-wow-delay="0.2s">
+                {% if collection.metafields.landing.second_block_top_desc %}
+                    {{ collection.metafields.landing.second_block_top_desc }}
+                {% else %}
+                    {{ section.settings.second_block_top_desc  }}
+                {% endif %}
+            </div>
+            <div class="collection-black__gallery">
+                <div class="collection-black__gallery-img wow fadeIn" data-wow-delay="0.2s">
+                    {% if collection.metafields.landing.second_block_right_image_1 %}
+                        <picture>
+                            <source data-srcset="{{ collection.metafields.landing.second_block_right_image_1 }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ collection.metafields.landing.second_block_right_image_1 }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ collection.metafields.landing.second_block_right_image_1 }}">
+                            <img data-src="{{ collection.metafields.landing.second_block_right_image_1 }}" class="lazyload" alt="">
+                        </picture>
+                    {% else %}
+                        <picture>
+                            <source data-srcset="{{ section.settings.second_block_right_image_1 | img_url:'master' }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ section.settings.second_block_right_image_1 | img_url:'master' }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ section.settings.second_block_right_image_1 | img_url:'master' }}">
+                            <img data-src="{{ section.settings.second_block_right_image_1 | img_url:'master' }}" class="lazyload" alt="">
+                        </picture>
+                    {% endif %}
+
+                </div>
+                <div class="collection-black__gallery-img wow fadeIn" data-wow-delay="0.4s">
+                    {% if collection.metafields.landing.second_block_right_image_2 %}
+                        <picture>
+                            <source data-srcset="{{ collection.metafields.landing.second_block_right_image_2 }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ collection.metafields.landing.second_block_right_image_2 }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ collection.metafields.landing.second_block_right_image_2 }}">
+                            <img data-src="{{ collection.metafields.landing.second_block_right_image_2 }}" class="lazyload" alt="">
+                        </picture>
+                    {% else %}
+                        <picture>
+                            <source data-srcset="{{ section.settings.second_block_right_image_2 | img_url:'master' }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ section.settings.second_block_right_image_2 | img_url:'master' }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ section.settings.second_block_right_image_2 | img_url:'master' }}">
+                            <img data-src="{{ section.settings.second_block_right_image_2 | img_url:'master' }}" class="lazyload" alt="">
+                        </picture>
+                    {% endif %}
+
+                </div>
+                <div class="collection-black__gallery-img wow fadeIn" data-wow-delay="0.6s">
+                    {% if collection.metafields.landing.second_block_right_image_3 %}
+                        <picture>
+                            <source data-srcset="{{ collection.metafields.landing.second_block_right_image_3 }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ collection.metafields.landing.second_block_right_image_3}}" media="(min-width: 768px)">
+                            <source data-srcset="{{ collection.metafields.landing.second_block_right_image_3 }}">
+                            <img data-src="{{ collection.metafields.landing.second_block_right_image_3 }}" class="lazyload" alt="">
+                        </picture>
+                    {% else %}
+                        <picture>
+                            <source data-srcset="{{ section.settings.second_block_right_image_3 | img_url:'master' }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ section.settings.second_block_right_image_3 | img_url:'master' }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ section.settings.second_block_right_image_3 | img_url:'master' }}">
+                            <img data-src="{{ section.settings.second_block_right_image_3 | img_url:'master' }}" class="lazyload" alt="">
+                        </picture>
+                    {% endif %}
+
+                </div>
+                <div class="collection-black__gallery-img wow fadeIn" data-wow-delay="0.8s">
+                    {% if collection.metafields.landing.second_block_right_image_4 %}
+                        <picture>
+                            <source data-srcset="{{ collection.metafields.landing.second_block_right_image_4 }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ collection.metafields.landing.second_block_right_image_4 }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ collection.metafields.landing.second_block_right_image_4 }}">
+                            <img data-src="{{ collection.metafields.landing.second_block_right_image_4 }}" class="lazyload" alt="">
+                        </picture>
+                    {% else %}
+                        <picture>
+                            <source data-srcset="{{ section.settings.second_block_right_image_4 | img_url:'master' }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ section.settings.second_block_right_image_4 | img_url:'master' }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ section.settings.second_block_right_image_4 | img_url:'master' }}">
+                            <img data-src="{{ section.settings.second_block_right_image_4 | img_url:'master' }}" class="lazyload" alt="">
+                        </picture>
+                    {% endif %}
+
+                </div>
+                <div class="collection-black__ellipse wow fadeIn" data-wow-delay="0.2s"><svg version="1.1" id="Шар_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                                                                             viewBox="0 0 1455.6 467" style="enable-background:new 0 0 1455.6 467;" xml:space="preserve">
+	<style type="text/css">
+        .line {
+            fill: none;
+            stroke: #FFFFFF;
+            stroke-width: 1;
+        }
+    </style>
+                        <path class="line" d="M1452.9,235.1c0,30.9-20.2,60.5-56.8,87.5c-36.6,27-89.7,51.3-155.4,71.7c-95.7,29.8-146,37.4-236.9,49.2
+			c-35.2,4.5-138,17-275.9,16.9c-129,0.1-225.5-10.7-257.7-14.6c-99.4-11.9-154.6-25.9-255.1-51.5c-49-12.4-100.5-31.3-155.3-71.6
+			C23.1,295.8,3,266.2,3,235.3c0-30.9,20.2-60.5,56.9-87.6c36.6-26.9,89.7-51.3,155.3-71.7C315.9,44.6,369.3,36.7,466,25
+			C576,11.7,659.5,10.5,727.9,9.8c102.8-1.1,175.2-1.9,274.4,11.4c65.9,8.8,123.4,24.2,238.4,54.7c53.8,14.4,102.5,32.8,155.4,71.7
+			C1432.7,174.6,1452.9,204.2,1452.9,235.1z"></path>
+                        <path class="line line-animate">
+                            <animate
+                                    attributeName="d"
+                                    dur="3000ms"
+                                    repeatCount="indefinite"
+                                    values="M1452.9,235.1c0,30.9-20.2,60.5-56.8,87.5c-36.6,27-89.7,51.3-155.4,71.7c-95.7,29.8-146,37.4-236.9,49.2
+			c-35.2,4.5-138,17-275.9,16.9c-129,0.1-225.5-10.7-257.7-14.6c-99.4-11.9-154.6-25.9-255.1-51.5c-49-12.4-100.5-31.3-155.3-71.6
+			C23.1,295.8,3,266.2,3,235.3c0-30.9,20.2-60.5,56.9-87.6c36.6-26.9,89.7-51.3,155.3-71.7C315.9,44.6,369.3,36.7,466,25
+			C576,11.7,659.5,10.5,727.9,9.8c102.8-1.1,175.2-1.9,274.4,11.4c65.9,8.8,123.4,24.2,238.4,54.7c53.8,14.4,102.5,32.8,155.4,71.7
+			C1432.7,174.6,1452.9,204.2,1452.9,235.1z;
+
+			M1452.9,235.1c12.5,28.4-32.5,54.7-56.8,87.5c-27.1,36.6-95.8,37.6-155.4,71.7c-87,49.8-148.2,15.7-236.9,49.2
+			c-92,34.9-134.2-8.7-275.9,16.9c-126.9,23-148.2-28.2-257.7-14.6c-99.3,12.2-130.6-48-255.1-51.5c-83.8-2.2-90.8-51.9-155.3-71.6
+			C16.3,309.4,15.3,267.8,3,235.3c-13.4-35.5,31.1-48.9,56.9-87.6c25.3-37.8,93.2-36,155.4-71.7c91.5-52.6,153.4-17.8,250.9-51
+			C570.9-10.7,654.2,31,728,9.8c98.8-28.5,163.5,32,274.4,11.4c70.7-13.1,115.9,59,238.4,54.7c55.7-2,89.9,48.2,155.4,71.7
+			C1439,163,1441.9,210.3,1452.9,235.1z;
+
+			M1452.9,235.1c0,30.9-20.2,60.5-56.8,87.5c-36.6,27-89.7,51.3-155.4,71.7c-95.7,29.8-146,37.4-236.9,49.2
+			c-35.2,4.5-138,17-275.9,16.9c-129,0.1-225.5-10.7-257.7-14.6c-99.4-11.9-154.6-25.9-255.1-51.5c-49-12.4-100.5-31.3-155.3-71.6
+			C23.1,295.8,3,266.2,3,235.3c0-30.9,20.2-60.5,56.9-87.6c36.6-26.9,89.7-51.3,155.3-71.7C315.9,44.6,369.3,36.7,466,25
+			C576,11.7,659.5,10.5,727.9,9.8c102.8-1.1,175.2-1.9,274.4,11.4c65.9,8.8,123.4,24.2,238.4,54.7c53.8,14.4,102.5,32.8,155.4,71.7
+			C1432.7,174.6,1452.9,204.2,1452.9,235.1z;
+
+			M1452.9,235.1c-8.6,29.7-6.2,65.5-56.8,87.5c-41.7,18.1-86.6,65.4-155.4,71.7c-99.8,9.1-150.5,63.6-236.9,49.2
+			c-70.5-11.7-171.8,39.8-275.9,16.9c-126-27.6-181.4,20.7-257.7-14.6c-90.8-42.1-163.1,8.3-255.1-51.5
+			c-55.9-36.3-113.9-15.3-155.4-71.7c-28-38-67-53.5-56.8-87.4c9-29.7,17.3-71.2,56.8-87.5c42.2-17.4,96.9-71.5,155.4-71.7
+			C320.6,75.5,358.8,9.3,466,25C575.6,41,649.5-16.9,727.9,9.8c97.4,33.1,169-44,274.4,11.4c58.9,30.9,143.5-7.9,238.4,54.7
+			c46.5,30.6,112.5,11.4,155.4,71.7C1422.4,184.7,1464.7,194.3,1452.9,235.1z;
+
+			M1452.9,235.1c0,30.9-20.2,60.5-56.8,87.5c-36.6,27-89.7,51.3-155.4,71.7c-95.7,29.8-146,37.4-236.9,49.2
+			c-35.2,4.5-138,17-275.9,16.9c-129,0.1-225.5-10.7-257.7-14.6c-99.4-11.9-154.6-25.9-255.1-51.5c-49-12.4-100.5-31.3-155.3-71.6
+			C23.1,295.8,3,266.2,3,235.3c0-30.9,20.2-60.5,56.9-87.6c36.6-26.9,89.7-51.3,155.3-71.7C315.9,44.6,369.3,36.7,466,25
+			C576,11.7,659.5,10.5,727.9,9.8c102.8-1.1,175.2-1.9,274.4,11.4c65.9,8.8,123.4,24.2,238.4,54.7c53.8,14.4,102.5,32.8,155.4,71.7
+			C1432.7,174.6,1452.9,204.2,1452.9,235.1z">
+                            </animate>
+                        </path>
+</svg>
+                </div>
+            </div>
+            <div class="collection-black__text">
+                <div class="collection-black__text-big wow fadeIn" data-wow-delay="0.2s">
+                    <a href="" class="collection-black__text-arr wow fadeIn" data-wow-delay="0.4s"><span
+                                class="icon icon-i-arr-up-right"></span></a>
+                    {% if collection.metafields.landing.second_block_left_desc %}
+                        {{ collection.metafields.landing.second_block_left_desc }}
+                    {% else %}
+                        {{ section.settings.second_block_left_desc  }}
+                    {% endif %}
+                </div>
+                <div class="collection-black__text-small wow fadeIn" data-wow-delay="0.2s">
+                    {% if collection.metafields.landing.second_block_right_desc %}
+                        {{ collection.metafields.landing.second_block_right_desc }}
+                    {% else %}
+                        {{ section.settings.second_block_right_desc  }}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="collection-video">
+    <div class="container">
+        <div class="collection-video__box">
+            <div class="collection-video__box-source wow fadeIn" data-wow-delay="0.2s">
+                {% if collection.metafields.landing.video_link %}
+                    <video autoplay playsinline muted loop="loop">
+                        <source src="{{ collection.metafields.landing.video_link }}" type="video/mp4">
+                    </video>
+                {% else %}
+                    <video autoplay playsinline muted loop="loop">
+                        <source src="{{ section.settings.video_link  }}" type="video/mp4">
+                    </video>
+                {% endif %}
+            </div>
+            <div class="collection-video__box-title wow fadeInUp" data-wow-delay="0.4s">
+                {% if collection.metafields.landing.video_title %}
+                    {{ collection.metafields.landing.video_title }}
+                {% else %}
+                    {{ section.settings.video_title  }}
+                {% endif %}
+               </div>
+            {% if collection.metafields.landing.video_link %}
+                <a href="{{ collection.metafields.landing.video_link }}" class="collection-video__box-play wow fadeIn" data-wow-delay="0.8s"
+                   data-width="100vw" data-height="100vh" data-fancybox-video>
+                    <span class="icon icon-i-play"></span>
+                </a>
+            {% else %}
+                <a href="{{ section.settings.video_link  }}" class="collection-video__box-play wow fadeIn" data-wow-delay="0.8s"
+                   data-width="100vw" data-height="100vh" data-fancybox-video>
+                    <svg viewBox="0 0 108 108" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle class="line-first" cx="54" cy="54" r="52" stroke="white" stroke-opacity="0.5" stroke-width="1px" stroke-dashoffset="0" stroke-dasharray="340"/>
+                        <circle class="line-last" cx="54" cy="54" r="52" stroke="white" stroke-opacity="1" stroke-width="1px" stroke-dashoffset="0" stroke-dasharray="340" />
+                        <path d="M49.75 48.0048L61 54.5L49.75 60.9952L49.75 48.0048Z" stroke="white"/>
+                    </svg>
+                </a>
+            {% endif %}
+
+        </div>
+    </div>
+</div>
+<div class="collection-content">
+    <div class="container">
+        <div class="collection-content__heading">
+            <div class="collection-content__heading-title wow fadeIn" data-wow-delay="0.2s">
+                <h2>
+                    {% if collection.metafields.landing.third_block_title %}
+                        {{ collection.metafields.landing.third_block_title }}
+                {% else %}
+                        {{ section.settings.third_block_title  }}
+                    {% endif %}
+                    </h2>
+            </div>
+            <div class="collection-content__heading-img wow fadeInUp" data-wow-delay="0.4s">
+                {% if collection.metafields.landing.third_block_image_1 %}
+                    <picture>
+                        <source data-srcset="{{ collection.metafields.landing.third_block_image_1 }}" media="(min-width: 1200px)">
+                        <source data-srcset="{{ collection.metafields.landing.third_block_image_1 }}" media="(min-width: 768px)">
+                        <source data-srcset="{{ collection.metafields.landing.third_block_image_1 }}">
+                        <img data-src="{{ collection.metafields.landing.third_block_image_1 }}" class="lazyload" alt="">
+                    </picture>
+                {% else %}
+                    <picture>
+                        <source data-srcset="{{ section.settings.third_block_image_1 | img_url:'master' }}" media="(min-width: 1200px)">
+                        <source data-srcset="{{ section.settings.third_block_image_1 | img_url:'master' }}" media="(min-width: 768px)">
+                        <source data-srcset="{{ section.settings.third_block_image_1 | img_url:'master' }}">
+                        <img data-src="{{ section.settings.third_block_image_1 | img_url:'master' }}" class="lazyload" alt="">
+                    </picture>
+                {% endif %}
+            </div>
+        </div>
+        <div class="collection-content__desc">
+            <div class="collection-content__desc-img">
+                <div class="collection-content__desc-img-box wow fadeInUp" data-wow-delay="0.2s">
+                    {% if collection.metafields.landing.third_block_image_2 %}
+                        <picture>
+                            <source data-srcset="{{ collection.metafields.landing.third_block_image_2 }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ collection.metafields.landing.third_block_image_2 }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ collection.metafields.landing.third_block_image_2 }}">
+                            <img data-src="{{ collection.metafields.landing.third_block_image_2 }}" class="lazyload" alt="">
+                        </picture>
+                    {% else %}
+                        <picture>
+                            <source data-srcset="{{ section.settings.third_block_image_2 | img_url:'master' }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ section.settings.third_block_image_2 | img_url:'master' }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ section.settings.third_block_image_2 | img_url:'master' }}">
+                            <img data-src="{{ section.settings.third_block_image_2 | img_url:'master' }}" class="lazyload" alt="">
+                        </picture>
+                    {% endif %}
+                </div>
+                <div class="collection-content__desc-img-box wow fadeInUp" data-wow-delay="0.4s">
+                    {% if collection.metafields.landing.third_block_image_3 %}
+                        <picture>
+                            <source data-srcset="{{ collection.metafields.landing.third_block_image_3 }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ collection.metafields.landing.third_block_image_3 }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ collection.metafields.landing.third_block_image_3}}">
+                            <img data-src="{{ collection.metafields.landing.third_block_image_3 }}" class="lazyload" alt="">
+                        </picture>
+                    {% else %}
+                        <picture>
+                            <source data-srcset="{{ section.settings.third_block_image_3 | img_url:'master' }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ section.settings.third_block_image_3 | img_url:'master' }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ section.settings.third_block_image_3 | img_url:'master' }}">
+                            <img data-src="{{ section.settings.third_block_image_3 | img_url:'master' }}" class="lazyload" alt="">
+                        </picture>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="collection-content__desc-text wow fadeInUp" data-wow-delay="0.6s">
+                <a href="{{ collection.metafields.landing.third_block_top_link }}" class="collection-content__desc-arr"><span class="icon icon-i-arr-up-right"></span></a>
+                {% if collection.metafields.landing.third_block_top_desc %}
+                    {{ collection.metafields.landing.third_block_top_desc }}
+                {% else %}
+                    {{ section.settings.third_block_top_desc  }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="collection-content__img">
+            <div class="collection-content__img-box wow fadeInUp" data-wow-delay="0.2s">
+                {% if collection.metafields.landing.third_block_image_4 %}
+                    <picture>
+                        <source data-srcset="{{ collection.metafields.landing.third_block_image_4 }}" media="(min-width: 1200px)">
+                        <source data-srcset="{{ collection.metafields.landing.third_block_image_4 }}" media="(min-width: 768px)">
+                        <source data-srcset="{{ collection.metafields.landing.third_block_image_4 }}">
+                        <img data-src="{{ collection.metafields.landing.third_block_image_4 }}" class="lazyload" alt="">
+                    </picture>
+                {% else %}
+                    <picture>
+                        <source data-srcset="{{ section.settings.third_block_image_4 | img_url:'master' }}" media="(min-width: 1200px)">
+                        <source data-srcset="{{ section.settings.third_block_image_4 | img_url:'master' }}" media="(min-width: 768px)">
+                        <source data-srcset="{{ section.settings.third_block_image_4 | img_url:'master' }}">
+                        <img data-src="{{ section.settings.third_block_image_4 | img_url:'master' }}" class="lazyload" alt="">
+                    </picture>
+                {% endif %}
+            </div>
+        </div>
+        <div class="collection-content__text">
+            <div class="collection-content__text-img wow fadeInUp" data-wow-delay="0.2s">
+                {% if collection.metafields.landing.third_block_image_5 %}
+                    <picture>
+                        <source data-srcset="{{ collection.metafields.landing.third_block_image_5 }}">
+                        <img data-src="{{ collection.metafields.landing.third_block_image_5 }}" class="lazyload" alt="">
+                    </picture>
+
+                {% else %}
+
+                    <picture>
+                        <source data-srcset="{{ section.settings.third_block_image_5 | img_url:'master' }}">
+                        <img data-src="{{ section.settings.third_block_image_5 | img_url:'master' }}" class="lazyload" alt="">
+                    </picture>
+                {% endif %}
+
+            </div>
+            <div class="collection-content__text-box wow fadeInUp" data-wow-delay="0.4s">
+                {% if collection.metafields.landing.third_block_bot_desc %}
+                    {{ collection.metafields.landing.third_block_bot_desc }}
+                {% else %}
+                    {{ section.settings.third_block_bot_desc  }}
+                {% endif %}
+            </div>
+        </div>
+        <div class="collection-content__gallery">
+            <div class="collection-content__gallery-list">
+                <div class="collection-content__gallery-box wow fadeInUp" data-wow-delay="0.2s">
+                    {% if collection.metafields.landing.third_block_image_6 %}
+
+                        <picture>
+                            <source data-srcset="{{ collection.metafields.landing.third_block_image_6 }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ collection.metafields.landing.third_block_image_6 }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ collection.metafields.landing.third_block_image_6 }}">
+                            <img data-src="{{ collection.metafields.landing.third_block_image_6 }}" class="lazyload" alt="">
+                        </picture>
+
+                    {% else %}
+                        <picture>
+                            <source data-srcset="{{ section.settings.third_block_image_6 | img_url:'master' }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ section.settings.third_block_image_6 | img_url:'master' }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ section.settings.third_block_image_6 | img_url:'master' }}">
+                            <img data-src="{{ section.settings.third_block_image_6 | img_url:'master' }}" class="lazyload" alt="">
+                        </picture>
+                    {% endif %}
+                </div>
+                <div class="collection-content__gallery-box wow fadeInUp" data-wow-delay="0.4s">
+                    {% if collection.metafields.landing.third_block_image_7 %}
+
+                        <picture>
+                            <source data-srcset="{{ collection.metafields.landing.third_block_image_7 }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ collection.metafields.landing.third_block_image_7 }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ collection.metafields.landing.third_block_image_7 }}">
+                            <img data-src="{{ collection.metafields.landing.third_block_image_7 }}" class="lazyload" alt="">
+                        </picture>
+
+                    {% else %}
+                        <picture>
+                            <source data-srcset="{{ section.settings.third_block_image_7 | img_url:'master' }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ section.settings.third_block_image_7 | img_url:'master' }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ section.settings.third_block_image_7 | img_url:'master' }}">
+                            <img data-src="{{ section.settings.third_block_image_7 | img_url:'master' }}" class="lazyload" alt="">
+                        </picture>
+                    {% endif %}
+                </div>
+                <div class="collection-content__gallery-box wow fadeInUp" data-wow-delay="0.6s">
+                    {% if collection.metafields.landing.third_block_image_8 %}
+
+                        <picture>
+                            <source data-srcset="{{ collection.metafields.landing.third_block_image_8 }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ collection.metafields.landing.third_block_image_8 }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ collection.metafields.landing.third_block_image_8}}">
+                            <img data-src="{{ collection.metafields.landing.third_block_image_8 }}" class="lazyload" alt="">
+                        </picture>
+                    {% else %}
+                        <picture>
+                            <source data-srcset="{{ section.settings.third_block_image_8 | img_url:'master' }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ section.settings.third_block_image_8 | img_url:'master' }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ section.settings.third_block_image_8 | img_url:'master' }}">
+                            <img data-src="{{ section.settings.third_block_image_8 | img_url:'master' }}" class="lazyload" alt="">
+                        </picture>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="{{ next_coll.url }}?view=landing" class="collection-next">
+    <div class="container">
+        {% if next_coll.image %}
+            <div class="collection-next__img">
+                <picture>
+                    <source data-srcset="{{ next_coll.image | img_url: 'master'}}">
+                    <img data-src="{{ next_coll.image | img_url: 'master'}}" class="lazyload" alt="" mask="url(#mask)">
+                </picture>
+            </div>
+        {% endif %}
+        <div class="collection-next__title">See next project</div>
+        <div class="collection-next__mask"></div>
+    </div>
+</a>
+{% schema %}
+{
+"name": "Collection landing" ,
+"settings": [
+{
+"type": "image_picker" ,
+"id": "first_block_left_image" ,
+"label": "first block left image"
+},{
+"type": "image_picker" ,
+"id": "first_block_right_image" ,
+"label": "first block right image"
+},{
+"type": "textarea" ,
+"id": "first_block_desc" ,
+"label": "first block description"
+},{
+"type": "image_picker" ,
+"id": "second_block_top_image" ,
+"label": "second block top image"
+},{
+"type": "textarea" ,
+"id": "second_block_top_desc" ,
+"label": "second block top desc"
+},{
+"type": "image_picker" ,
+"id": "second_block_right_image_1" ,
+"label": "second block right image 1"
+},{
+"type": "image_picker" ,
+"id": "second_block_right_image_2" ,
+"label": "second block right image 2"
+},{
+"type": "image_picker" ,
+"id": "second_block_right_image_3" ,
+"label": "second block right image 3"
+},{
+"type": "image_picker" ,
+"id": "second_block_right_image_4" ,
+"label": "second block right image 4"
+},{
+"type": "textarea" ,
+"id": "second_block_left_desc" ,
+"label": "second block left description"
+},{
+"type": "textarea" ,
+"id": "second_block_right_desc" ,
+"label": "second block right description"
+},{
+"type": "url" ,
+"id": "video_link" ,
+"label": "video link"
+},{
+"type": "text" ,
+"id": "video_title" ,
+"label": "video title"
+},{
+"type": "textarea" ,
+"id": "third_block_title" ,
+"label": "third block title"
+},{
+"type": "image_picker" ,
+"id": "third_block_image_1" ,
+"label": "third block image 1"
+},{
+"type": "image_picker" ,
+"id": "third_block_image_2" ,
+"label": "third block image 2"
+},{
+"type": "image_picker" ,
+"id": "third_block_image_3" ,
+"label": "third block image 3"
+},{
+"type": "image_picker" ,
+"id": "third_block_image_4" ,
+"label": "third block image 4"
+},{
+"type": "image_picker" ,
+"id": "third_block_image_5" ,
+"label": "third block image 5"
+},{
+"type": "image_picker" ,
+"id": "third_block_image_6" ,
+"label": "third block image 6"
+},{
+"type": "image_picker" ,
+"id": "third_block_image_7" ,
+"label": "third block image 7"
+},{
+"type": "image_picker" ,
+"id": "third_block_image_8" ,
+"label": "third block image 8"
+},{
+"type": "textarea" ,
+"id": "third_block_bot_desc" ,
+"label": "third block bottom description"
+},{
+"type": "textarea" ,
+"id": "third_block_top_desc" ,
+"label": "third block top description"
+}
+]
+}
+
+{% endschema %}

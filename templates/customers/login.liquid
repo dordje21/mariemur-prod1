@@ -1,0 +1,87 @@
+
+<div class="login">
+    <div class="login-bg" style="background-image: url('{{ 'login-bg.jpg' | asset_img_url: 'master' }}')"></div>
+    <div class="login-content">
+        <div class="container">
+            <div class="login-box" hidden id="LoginForm">
+                {% form 'customer_login', novalidate: 'novalidate' %}
+                    <div class="form-title">Login</div>
+                    <div class="form-group">
+                        <input type="email"
+                               name="customer[email]"
+                               id="CustomerEmail"
+                               autocomplete="email"
+                               autocapitalize="off"
+                               placeholder="email">
+                        <div class="help-block">Please enter a valid email address.</div>
+                    </div>
+                    <div class="form-group {% if form.errors contains 'form' %} has-error{% endif %}">
+                        <input type="password" name="customer[password]" id="CustomerPassword" placeholder="password">
+                        <span class="toggle-pass js-toggle-pass"><span class="icon icon-i-view-on"></span></span>
+                        <div class="help-block">{%- if form.errors -%} {{ form.errors.messages['form'] }} {%- endif -%}</div>
+                    </div>
+                    <div class="form-flex">
+                        <div class="checkbox">
+                            <input type="checkbox" id="savelogin">
+                            <label for="savelogin">Keep me sign in.</label>
+                        </div>
+                        <div class="form-forgot">
+                            <a href="/account/login/#recover">Forgot your password?</a>
+                        </div>
+                    </div>
+                    <div class="form-button">
+                        <button type="submit" class="btn btn-red"><span>Login</span></button>
+                    </div>
+                    <div class="form-link text-center">
+                        <a href="/account/register">New to Mariemur? Register.</a>
+                    </div>
+                {% endform %}
+            </div>
+          <div class="login-success" hidden id="successPasswordReset">
+            <div class="form-title">Check your inbox</div>
+            <div class="form-text">An email has been sent to the provided address  Can't find it? Please check your junk folder.</div>
+            <div class="form-button">
+              <a href="/" class="btn btn-nofill"><span>Continue shopping</span></a>
+            </div>
+          </div>
+          <div class="login-box" hidden id="RecoverPasswordForm">
+                {% form 'recover_customer_password', novalidate:'true' %}
+                    <script>
+                        let successResset = false;
+                    </script>
+                {% if form.posted_successfully? %}
+                    <script>
+                        successResset = true;
+                    </script>
+                {% endif %}
+                    <script>
+                        if(window.location.href.includes('#success')){
+                            successResset = true;
+
+                        }
+                    </script>
+                    <div class="form-title">Forgot <br>password?</div>
+                    <div class="form-group {% if form.errors %} has-error {% endif %}">
+                        <input type="email" name="email" id="RecoverEmail" autocapitalize="off" placeholder="email">
+                        <div class="help-block">{% if form.errors %} {{ form.errors.messages['form'] }} {% else %} Please enter a valid email address. {% endif %}</div>
+                    </div>
+                    <div class="form-button">
+                        <button type="submit" class="btn btn-red"><span>reset password</span></button>
+                        <a href="/account/login" class="btn btn-nofill"><span>Back to login</span></a>
+                    </div>
+                {% endform %}
+
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    if (successResset) {
+        document.getElementById('successPasswordReset').removeAttribute('hidden')
+
+    } else if (window.location.href.includes('#recover')) {
+        document.getElementById('RecoverPasswordForm').removeAttribute('hidden')
+    } else {
+        document.getElementById('LoginForm').removeAttribute('hidden')
+    }
+</script>

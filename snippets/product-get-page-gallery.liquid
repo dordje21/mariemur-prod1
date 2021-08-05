@@ -1,0 +1,434 @@
+{% if false %}
+    {%- assign current_image = image -%}
+    {%- if settings.product_format_pjpg -%}
+        {%- assign image_format = 'pjpg' -%}
+    {%- else -%}
+        {%- assign image_format = null -%}
+    {%- endif -%}
+    {%- case layout -%}
+        {%- when '1' -%}
+            {% capture images_html %}
+                {%- assign id_index = '[' -%}
+                {%- assign zoom_images = '[' -%}
+                {%- for img in product.images -%}
+                    {%- if img.id == current_image.id -%}
+                        {%- assign first_load_image = forloop.index0 -%}
+                    {%- endif -%}
+                    <img src="{{ img.src | product_img_url: '500x', format: image_format, scale: 2 }}"
+                         srcset="{{ img.src | product_img_url: '500x', format: image_format }} 1x, {{ img.src | product_img_url: '500x', format: image_format, scale: 2 }} 2x"
+                         data-full="{{ img.src | product_img_url: '1920x', format: image_format }}"
+                         alt="{{ img.alt | default: title }}">
+                    {% capture id_index %}{{ id_index }}{% unless forloop.first %},{% endunless %}{{ img.id }}{% endcapture %}
+                    {% capture zoom_images %}{{ zoom_images }}{% unless forloop.first %},{% endunless %}"{{ img.src | product_img_url: '1920x', format: image_format }}"{% endcapture %}
+                {%- endfor -%}
+                {%- if metafields.video != blank -%}
+                    <a href="{{ metafields.video.url }}" data-video="true"></a>
+                    {% capture id_index %}{{ id_index }}{% unless forloop.first %},{% endunless %}"video"{% endcapture %}
+                {%- endif -%}
+                {%- assign id_index = id_index | append: ']' -%}
+                {%- assign zoom_images = zoom_images | append: ']' -%}
+            {% endcapture %}
+            <div class="product-page-gallery mx-auto pb-20" data-js-product-gallery data-active-image="{{ first_load_image }}">
+                <div class="d-flex">
+                    {%- if product.images.size > 1 -%}
+                        <div class="product-page-gallery__preview position-relative d-none d-lg-block mr-10">
+                            <div class="h-100 invisible" data-js-product-gallery-preview{% if sidebar != 'off' %} data-slides-to-show="4"{% endif %}>
+                                {%- for img in product.images -%}
+                                    <div class="mb-10 cursor-lg-pointer" data-js-product-gallery-preview-image data-js-product-gallery-image-id="{{ img.id }}">
+                                        {% include 'rimage' with image: img size: '100x' format: image_format alt: img.alt %}
+                                    </div>
+                                {%- endfor -%}
+                            </div>
+                            <div class="product-page-gallery__preview-arrows position-absolute bottom-0 w-100 d-flex flex-center">
+                                <div class="d-flex cursor-lg-pointer" data-js-product-gallery-preview-btn-prev><i>{% include 'icon-theme-229' %}</i></div>
+                                <div class="d-flex cursor-lg-pointer" data-js-product-gallery-preview-btn-next><i>{% include 'icon-theme-230' %}</i></div>
+                            </div>
+                        </div>
+                    {%- endif -%}
+                    <div class="product-page-gallery__main">
+                        <div class="position-relative">
+                            <div class="invisible"
+                                 data-js-product-gallery-main
+                                 data-arrows="{{ show_arrows }}"
+                                 data-fullscreen="{{ show_btn_fullscreen }}"
+                                 data-video-autoplay="{{ video_autoplay }}"
+                                 data-index-id='{{ id_index }}'
+                                    {% if enable_zoom -%}
+                                        data-zoom-images='{{ zoom_images }}'
+                                    {%- endif %}
+                                 data-zoom="{{ enable_zoom }}">
+                                {{ images_html }}
+                            </div>
+                            {%- if enable_zoom -%}
+                                <div class="absolute-stretch d-none d-lg-block" data-js-product-gallery-zoom></div>
+                            {%- endif -%}
+                            {%- if show_arrows -%}
+                                <div class="product-page-gallery__main-arrow position-absolute d-flex flex-center left-0 ml-10 rounded-circle overflow-hidden cursor-pointer" data-js-product-gallery-main-btn-prev><i class="position-relative mr-1">{% include 'icon-theme-006' %}</i></div>
+                                <div class="product-page-gallery__main-arrow position-absolute d-flex flex-center right-0 mr-10 rounded-circle overflow-hidden cursor-pointer" data-js-product-gallery-main-btn-next><i class="position-relative ml-4">{% include 'icon-theme-007' %}</i></div>
+                            {%- endif -%}
+                        </div>
+                    </div>
+                </div>
+                {%- if show_btn_fullscreen or metafields.video != blank -%}
+                    <div class="product-page-gallery__control d-none d-lg-flex justify-content-end align-items-center mt-20">
+                        {%- if show_btn_fullscreen -%}
+                            <div class="d-flex align-items-center cursor-pointer mb-3" data-js-product-gallery-btn-fullscreen><i class="mr-3">{% include 'icon-theme-166' %}</i>{{ 'products.product.button_zoom' | t }}</div>
+                        {%- endif -%}
+                        {%- if metafields.video != blank -%}
+                            <div class="ml-20 cursor-pointer" data-js-product-gallery-btn-video><i>{% include 'icon-theme-211' %}</i></div>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+            </div>
+            <script>
+                Loader.require({type: "style", name: "plugin_fotorama"});
+                Loader.require({type: "style", name: "plugin_slick"});
+                Loader.require({type: 'script', name: 'plugin_fotorama'});
+            </script>
+        {%- when '2' -%}
+            {% capture images_html %}
+                {%- assign id_index = '[' -%}
+                {%- assign zoom_images = '[' -%}
+                {%- for img in product.images -%}
+                    {%- if img.id == current_image.id -%}
+                        {%- assign first_load_image = forloop.index0 -%}
+                    {%- endif -%}
+                    <img src="{{ img.src | product_img_url: '510x', format: image_format, scale: 2 }}"
+                         srcset="{{ img.src | product_img_url: '510x', format: image_format }} 1x, {{ img.src | product_img_url: '510x', format: image_format, scale: 2 }} 2x"
+                         data-full="{{ img.src | product_img_url: '1920x', format: image_format }}"
+                         alt="{{ img.alt | default: title }}">
+                    {% capture id_index %}{{ id_index }}{% unless forloop.first %},{% endunless %}{{ img.id }}{% endcapture %}
+                    {% capture zoom_images %}{{ zoom_images }}{% unless forloop.first %},{% endunless %}"{{ img.src | product_img_url: '1920x', format: image_format }}"{% endcapture %}
+                {%- endfor -%}
+                {%- if metafields.video != blank -%}
+                    <a href="{{ metafields.video.url }}" data-video="true"></a>
+                    {% capture id_index %}{{ id_index }}{% unless forloop.first %},{% endunless %}"video"{% endcapture %}
+                {%- endif -%}
+                {%- assign id_index = id_index | append: ']' -%}
+                {%- assign zoom_images = zoom_images | append: ']' -%}
+            {% endcapture %}
+            <div class="product-page-gallery product-page-gallery--centered mx-auto pb-20 pb-lg-30" data-js-product-gallery data-active-image="{{ first_load_image }}">
+                <div class="product-page-gallery__main product-page-gallery__main--single">
+                    <div class="position-relative">
+                        <div class="invisible"
+                             data-js-product-gallery-main
+                             data-arrows="{{ show_arrows }}"
+                             data-fullscreen="{{ show_btn_fullscreen }}"
+                             data-video-autoplay="{{ video_autoplay }}"
+                             data-index-id='{{ id_index }}'
+                                {% if enable_zoom -%}
+                                    data-zoom-images='{{ zoom_images }}'
+                                {%- endif %}
+                             data-zoom="{{ enable_zoom }}">
+                            {{ images_html }}
+                        </div>
+                        {%- if enable_zoom -%}
+                            <div class="absolute-stretch d-none d-lg-block" data-js-product-gallery-zoom></div>
+                        {%- endif -%}
+                        {%- if show_arrows -%}
+                            <div class="product-page-gallery__main-arrow position-absolute d-flex flex-center left-0 ml-10 rounded-circle overflow-hidden cursor-pointer" data-js-product-gallery-main-btn-prev><i class="position-relative mr-1">{% include 'icon-theme-006' %}</i></div>
+                            <div class="product-page-gallery__main-arrow position-absolute d-flex flex-center right-0 mr-10 rounded-circle overflow-hidden cursor-pointer" data-js-product-gallery-main-btn-next><i class="position-relative ml-4">{% include 'icon-theme-007' %}</i></div>
+                        {%- endif -%}
+                    </div>
+                </div>
+                {%- if product.images.size > 1 -%}
+                    <div class="product-page-gallery__collage row d-none d-lg-flex" data-js-product-gallery-collage>
+                        {%- for img in product.images -%}
+                            <div class="col px-5 mt-10">
+                                <div class="position-relative">
+                                    <div class="mb-10 cursor-lg-pointer" data-js-product-gallery-preview-image data-js-product-gallery-image-id="{{ img.id }}">
+                                        {% include 'rimage' with image: img size: '100x' format: image_format alt: img.alt %}
+                                    </div>
+                                    <div></div>
+                                </div>
+                            </div>
+                        {%- endfor -%}
+                    </div>
+                {%- endif -%}
+                {%- if show_btn_fullscreen or metafields.video != blank -%}
+                    <div class="product-page-gallery__control d-none d-lg-flex align-items-center mt-20">
+                        {%- if show_btn_fullscreen -%}
+                            <div class="d-flex align-items-center cursor-pointer mb-3" data-js-product-gallery-btn-fullscreen><i class="mr-3">{% include 'icon-theme-166' %}</i>{{ 'products.product.button_zoom' | t }}</div>
+                        {%- endif -%}
+                        {%- if metafields.video != blank -%}
+                            <div class="ml-20 cursor-pointer" data-js-product-gallery-btn-video><i>{% include 'icon-theme-211' %}</i></div>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+            </div>
+            <script>
+                Loader.require({type: "style", name: "plugin_fotorama"});
+                Loader.require({type: 'script', name: 'plugin_fotorama'});
+            </script>
+        {%- when '3' -%}
+            {% capture images_html %}
+                {%- assign id_index = '[' -%}
+                {%- assign zoom_images = '[' -%}
+                {%- for img in product.images -%}
+                    {%- if img.id == current_image.id -%}
+                        {%- assign first_load_image = forloop.index0 -%}
+                    {%- endif -%}
+                    <img src="{{ img.src | product_img_url: '500x', format: image_format, scale: 2 }}"
+                         srcset="{{ img.src | product_img_url: '500x', format: image_format }} 1x, {{ img.src | product_img_url: '500x', format: image_format, scale: 2 }} 2x"
+                         data-full="{{ img.src | product_img_url: '1920x', format: image_format }}"
+                         alt="{{ img.alt | default: title }}">
+                    {% capture id_index %}{{ id_index }}{% unless forloop.first %},{% endunless %}{{ img.id }}{% endcapture %}
+                    {% capture zoom_images %}{{ zoom_images }}{% unless forloop.first %},{% endunless %}"{{ img.src | product_img_url: '1920x', format: image_format }}"{% endcapture %}
+                {%- endfor -%}
+                {%- if metafields.video != blank -%}
+                    <a href="{{ metafields.video.url }}" data-video="true"></a>
+                    {% capture id_index %}{{ id_index }}{% unless forloop.first %},{% endunless %}"video"{% endcapture %}
+                {%- endif -%}
+                {%- assign id_index = id_index | append: ']' -%}
+                {%- assign zoom_images = zoom_images | append: ']' -%}
+            {% endcapture %}
+            <div class="product-page-gallery mx-auto pb-20 pb-lg-30" data-js-product-gallery data-active-image="{{ first_load_image }}">
+                <div class="d-flex">
+                    {%- if product.images.size > 1 -%}
+                        <div class="product-page-gallery__preview position-relative d-none d-lg-block mr-10">
+                            <div class="h-100 invisible" data-js-product-gallery-preview{% if sidebar != 'off' %} data-slides-to-show="4"{% endif %}>
+                                {%- for img in product.images -%}
+                                    <div class="mb-10 cursor-lg-pointer" data-js-product-gallery-preview-image data-js-product-gallery-image-id="{{ img.id }}">
+                                        {% include 'rimage' with image: img size: '100x' format: image_format alt: img.alt %}
+                                    </div>
+                                {%- endfor -%}
+                            </div>
+                            <div class="product-page-gallery__preview-arrows position-absolute bottom-0 w-100 d-flex flex-center">
+                                <div class="d-flex cursor-lg-pointer" data-js-product-gallery-preview-btn-prev><i>{% include 'icon-theme-229' %}</i></div>
+                                <div class="d-flex cursor-lg-pointer" data-js-product-gallery-preview-btn-next><i>{% include 'icon-theme-230' %}</i></div>
+                            </div>
+                        </div>
+                    {%- endif -%}
+                    <div class="product-page-gallery__main">
+                        <div class="position-relative">
+                            <div class="invisible"
+                                 data-js-product-gallery-main
+                                 data-arrows="{{ show_arrows }}"
+                                 data-fullscreen="{{ show_btn_fullscreen }}"
+                                 data-video-autoplay="{{ video_autoplay }}"
+                                 data-index-id='{{ id_index }}'
+                                    {% if enable_zoom -%}
+                                        data-zoom-images='{{ zoom_images }}'
+                                    {%- endif %}
+                                 data-zoom="{{ enable_zoom }}">
+                                {{ images_html }}
+                            </div>
+                            {%- if enable_zoom -%}
+                                <div class="absolute-stretch d-none d-lg-block" data-js-product-gallery-zoom></div>
+                            {%- endif -%}
+                            {%- if show_arrows -%}
+                                <div class="product-page-gallery__main-arrow position-absolute d-flex flex-center left-0 ml-10 rounded-circle overflow-hidden cursor-pointer" data-js-product-gallery-main-btn-prev><i class="position-relative mr-1">{% include 'icon-theme-006' %}</i></div>
+                                <div class="product-page-gallery__main-arrow position-absolute d-flex flex-center right-0 mr-10 rounded-circle overflow-hidden cursor-pointer" data-js-product-gallery-main-btn-next><i class="position-relative ml-4">{% include 'icon-theme-007' %}</i></div>
+                            {%- endif -%}
+                        </div>
+                    </div>
+                </div>
+                {%- if show_btn_fullscreen or metafields.video != blank -%}
+                    <div class="product-page-gallery__control d-none d-lg-flex justify-content-end align-items-center mt-20">
+                        {%- if show_btn_fullscreen -%}
+                            <div class="d-flex align-items-center cursor-pointer mb-3" data-js-product-gallery-btn-fullscreen><i class="mr-3">{% include 'icon-theme-166' %}</i>{{ 'products.product.button_zoom' | t }}</div>
+                        {%- endif -%}
+                        {%- if metafields.video != blank -%}
+                            <div class="ml-20 cursor-pointer" data-js-product-gallery-btn-video><i>{% include 'icon-theme-211' %}</i></div>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+            </div>
+            <script>
+                Loader.require({type: "style", name: "plugin_fotorama"});
+                Loader.require({type: "style", name: "plugin_slick"});
+                Loader.require({type: 'script', name: 'plugin_fotorama'});
+            </script>
+        {%- when '4' -%}
+            {% capture images_html %}
+                {%- assign id_index = '[' -%}
+                {%- assign zoom_images = '[' -%}
+                {%- for img in product.images -%}
+                    {%- if img.id == current_image.id -%}
+                        {%- assign first_load_image = forloop.index0 -%}
+                    {%- endif -%}
+                    <img src="{{ img.src | product_img_url: '510x', format: image_format, scale: 2 }}"
+                         srcset="{{ img.src | product_img_url: '510x', format: image_format }} 1x, {{ img.src | product_img_url: '510x', format: image_format, scale: 2 }} 2x"
+                         data-full="{{ img.src | product_img_url: '1920x', format: image_format }}"
+                         alt="{{ img.alt | default: title }}">
+                    {% capture id_index %}{{ id_index }}{% unless forloop.first %},{% endunless %}{{ img.id }}{% endcapture %}
+                    {% capture zoom_images %}{{ zoom_images }}{% unless forloop.first %},{% endunless %}"{{ img.src | product_img_url: '1920x', format: image_format }}"{% endcapture %}
+                {%- endfor -%}
+                {%- if metafields.video != blank -%}
+                    <a href="{{ metafields.video.url }}" data-video="true"></a>
+                    {% capture id_index %}{{ id_index }}{% unless forloop.first %},{% endunless %}"video"{% endcapture %}
+                {%- endif -%}
+                {%- assign id_index = id_index | append: ']' -%}
+                {%- assign zoom_images = zoom_images | append: ']' -%}
+            {% endcapture %}
+            <div class="product-page-gallery mx-auto pb-20 pb-lg-30" data-js-product-gallery data-active-image="{{ first_load_image }}">
+                <div class="product-page-gallery__main product-page-gallery__main--single d-lg-none">
+                    <div class="position-relative">
+                        <div class="invisible"
+                             data-js-product-gallery-main="mobile"
+                             data-arrows="{{ show_arrows }}"
+                             data-fullscreen="{{ show_btn_fullscreen }}"
+                             data-video-autoplay="{{ video_autoplay }}"
+                             data-index-id='{{ id_index }}'
+                                {% if enable_zoom -%}
+                                    data-zoom-images='{{ zoom_images }}'
+                                {%- endif %}
+                             data-zoom="{{ enable_zoom }}">
+                            {{ images_html }}
+                        </div>
+                        {%- if enable_zoom -%}
+                            <div class="absolute-stretch d-none d-lg-block" data-js-product-gallery-zoom></div>
+                        {%- endif -%}
+                        {%- if show_arrows -%}
+                            <div class="product-page-gallery__main-arrow position-absolute d-flex flex-center left-0 ml-10 rounded-circle overflow-hidden cursor-pointer" data-js-product-gallery-main-btn-prev><i class="position-relative mr-1">{% include 'icon-theme-006' %}</i></div>
+                            <div class="product-page-gallery__main-arrow position-absolute d-flex flex-center right-0 mr-10 rounded-circle overflow-hidden cursor-pointer" data-js-product-gallery-main-btn-next><i class="position-relative ml-4">{% include 'icon-theme-007' %}</i></div>
+                        {%- endif -%}
+                    </div>
+                </div>
+                {%- if product.images.size > 0 -%}
+                    <div class="product-page-gallery__sheet d-none d-lg-block">
+                        {%- for img in product.images -%}
+                            <div class="{% if forloop.index0 != 0 %}mt-10{% endif %}" data-js-product-gallery-preview-image data-js-product-gallery-image-id="{{ img.id }}">
+                                {% include 'rimage' with image: img size: '570x' format: image_format %}
+                            </div>
+                        {%- endfor -%}
+                        {%- if metafields.video != blank -%}
+                            <div{% if product.images.size > 0 %} class="mt-10"{% endif %}>
+                                {%- if metafields.video.url contains 'youtube' or metafields.video.url contains 'vimeo' -%}
+                                    <div class="embed-responsive embed-responsive-16by9 mb-10">
+                                        <iframe src="{{ metafields.video.url }}" frameborder="0" allow="autoplay; encrypted-media" webkitallowfullscreen="" mozallowfullscreen="" allowfullscreen="" class="embed-responsive-item"></iframe>
+                                    </div>
+                                {%- else -%}
+                                    <video muted playsinline preload="none" controls preload="auto" class="w-100">
+                                        <source src="{{ metafields.video.url }}" type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+                                {%- endif -%}
+                            </div>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+            </div>
+            <script>
+                Loader.require({type: "style", name: "plugin_fotorama"});
+                Loader.require({type: 'script', name: 'plugin_fotorama'});
+            </script>
+        {%- when '5' -%}
+            {%- for img in product.images -%}
+                {%- if img.variants[0].title != blank -%}
+                    {%- assign has_own_variant = true -%}
+                    {%- break -%}
+                {%- endif -%}
+            {%- endfor -%}
+            {% capture images_html %}
+                {%- assign id_index = '[' -%}
+                {%- assign zoom_images = '[' -%}
+                {%- for img in product.images -%}
+                    {%- if img.id == current_image.id -%}
+                        {%- assign first_load_image = forloop.index0 -%}
+                    {%- endif -%}
+                    <img src="{{ img.src | product_img_url: '510x', format: image_format, scale: 2 }}"
+                         srcset="{{ img.src | product_img_url: '510x', format: image_format }} 1x, {{ img.src | product_img_url: '510x', format: image_format, scale: 2 }} 2x"
+                         data-full="{{ img.src | product_img_url: '1920x', format: image_format }}"
+                         alt="{{ img.alt | default: title }}">
+                    {% capture id_index %}{{ id_index }}{% unless forloop.first %},{% endunless %}{{ img.id }}{% endcapture %}
+                    {% capture zoom_images %}{{ zoom_images }}{% unless forloop.first %},{% endunless %}"{{ img.src | product_img_url: '1920x', format: image_format }}"{% endcapture %}
+                {%- endfor -%}
+                {%- if metafields.video != blank -%}
+                    <a href="{{ metafields.video.url }}" data-video="true"></a>
+                    {% capture id_index %}{{ id_index }}{% unless forloop.first %},{% endunless %}"video"{% endcapture %}
+                {%- endif -%}
+                {%- assign id_index = id_index | append: ']' -%}
+                {%- assign zoom_images = zoom_images | append: ']' -%}
+            {% endcapture %}
+            <div class="product-page-gallery mx-auto pb-20 pb-lg-30" data-js-product-gallery data-active-image="{{ first_load_image }}">
+                <div class="product-page-gallery__main product-page-gallery__main--single invisible-lg position-lg-absolute top-lg-0 left-lg-0 pointer-events-lg-none">
+                    <div class="position-relative">
+                        <div class="invisible"
+                             data-js-product-gallery-main
+                             data-arrows="{{ show_arrows }}"
+                             data-fullscreen="{{ show_btn_fullscreen }}"
+                             data-video-autoplay="{{ video_autoplay }}"
+                             data-index-id='{{ id_index }}'
+                             data-zoom="false">
+                            {{ images_html }}
+                        </div>
+                        {%- if show_arrows -%}
+                            <div class="product-page-gallery__main-arrow position-absolute d-flex flex-center left-0 ml-10 rounded-circle overflow-hidden cursor-pointer" data-js-product-gallery-main-btn-prev><i class="position-relative mr-1">{% include 'icon-theme-006' %}</i></div>
+                            <div class="product-page-gallery__main-arrow position-absolute d-flex flex-center right-0 mr-10 rounded-circle overflow-hidden cursor-pointer" data-js-product-gallery-main-btn-next><i class="position-relative ml-4">{% include 'icon-theme-007' %}</i></div>
+                        {%- endif -%}
+                    </div>
+                </div>
+                {%- if product.images.size > 1 -%}
+                    <div class="product-page-gallery__variable row d-none d-lg-flex position-lg-relative" data-js-product-gallery-variable>
+                        {%- for img in product.images -%}
+                            {%- if has_own_variant -%}
+                                {%- if img.variants[0].title != blank -%}
+                                    {%- assign for_option_split = img.variants[0].title | split: ' / ' -%}
+                                    {%- assign for_option = for_option_split[0] -%}
+                                {%- endif -%}
+                                {%- unless for_option -%}
+                                    {%- continue -%}
+                                {%- endunless -%}
+                            {%- endif -%}
+                            <div class="col-6 px-5 mb-10{% if has_own_variant and current_variant.option1 != for_option %} d-none{% endif %}"{% if has_own_variant %} data-js-for-option="{{ for_option | handleize }}"{% endif %}>
+                                <div class="position-relative">
+                                    <div data-js-product-gallery-preview-image data-js-product-gallery-image-id="{{ img.id }}">
+                                        {% include 'rimage' with image: img size: '100x' format: image_format alt: img.alt %}
+                                    </div>
+                                </div>
+                            </div>
+                            {%- if show_btn_fullscreen -%}
+                                <div class="product-page-gallery__variable_btn_fullscreen d-none d-lg-flex absolute-stretch" data-js-product-gallery-btn-fullscreen></div>
+                            {%- endif -%}
+                        {%- endfor -%}
+                    </div>
+                {%- endif -%}
+                {%- if show_btn_fullscreen or metafields.video != blank -%}
+                    <div class="product-page-gallery__control d-none d-lg-flex align-items-center mt-5">
+                        {%- if metafields.video != blank -%}
+                            <div class="cursor-pointer" data-js-product-gallery-btn-video="open"><i>{% include 'icon-theme-211' %}</i></div>
+                        {%- endif -%}
+                    </div>
+                {%- endif -%}
+            </div>
+            <script>
+                Loader.require({type: "style", name: "plugin_fotorama"});
+                Loader.require({type: 'script', name: 'plugin_fotorama'});
+            </script>
+        {%- when '6' -%}
+            <div class="product-page-gallery mx-auto pb-20 pb-lg-30 overflow-hidden" data-js-product-gallery data-active-image="{{ first_load_image }}">
+                {%- if product.images.size > 1 -%}
+                    <div class="product-page-gallery__panorama position-relative">
+                        <div class="invisible" data-js-product-gallery-preview data-type="panorama">
+                            {%- for img in product.images -%}
+                                <div class="mb-10 cursor-lg-pointer" data-js-product-gallery-preview-image data-js-product-gallery-image-id="{{ img.id }}">
+                                    {% include 'rimage' with image: img size: '400x' format: image_format alt: img.alt %}
+                                </div>
+                            {%- endfor -%}
+                        </div>
+                        <div class="product-page-gallery__main-arrow position-absolute d-flex flex-center left-0 ml-10 rounded-circle overflow-hidden cursor-pointer" data-js-product-gallery-preview-btn-prev><i class="position-relative mr-1">{% include 'icon-theme-006' %}</i></div>
+                        <div class="product-page-gallery__main-arrow position-absolute d-flex flex-center right-0 mr-10 rounded-circle overflow-hidden cursor-pointer" data-js-product-gallery-preview-btn-next><i class="position-relative ml-4">{% include 'icon-theme-007' %}</i></div>
+                    </div>
+                {%- endif -%}
+            </div>
+            <script>
+                Loader.require({type: "style", name: "plugin_slick"});
+            </script>
+    {%- endcase -%}
+{% endif %}
+<div class="product-slider js-product-slider">
+    {%- for img in product.images -%}
+        <div>
+            <a href="{{ img | img_url : 'master' }}" class="product-slider__box" data-fancyzoom="product">
+                <picture>
+                    <source srcset="{{ img | img_url : 'small' }}" data-srcset="{{ img | img_url : '848x' }}" media="(min-width: 1200px)">
+                    <source srcset="{{ img | img_url : 'small' }}" data-srcset="{{ img | img_url : '768x' }}" media="(min-width: 768px)">
+                    <source srcset="{{ img | img_url : 'small' }}" data-srcset="{{ img | img_url : '768x' }}">
+                    <img src="{{ img | img_url : 'small' }}" data-src="{{ img | img_url : '768x' }}" class="lazyload" alt="">
+                </picture>
+            </a>
+        </div>
+    {%- endfor -%}
+</div>
+

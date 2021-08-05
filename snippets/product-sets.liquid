@@ -1,0 +1,149 @@
+{%- assign products_pices = product.metafields.products_set.handles | split: "," -%}
+{%- if products_pices -%}
+    {%- for products_pice in products_pices -%}
+        {% assign handle_key = products_pice | strip %}
+        {% assign pice_product = all_products[handle_key] %}
+
+        {% unless pice_product.id.size > 0 %}
+            {% continue %}
+        {% endunless %}
+
+        {% assign product = pice_product %}
+        {% include 'product-res-variables' %}
+
+        {% assign productCount = 0 %}
+
+        {% for item in cart.items %}
+            {% if item.product.id == product.id %}
+                {% assign productCount = productCount | plus: item.quantity %}
+            {% endif %}
+        {% endfor %}
+            {%- form "product", product, class: 'product-list__box', id: product.id, data-js-product-form: '' -%}
+                <input type="hidden" name="variant_id" value="{{ current_variant.id }}" data-js-product-variant-input>
+                <div class="product-list__box-head">
+                    <a href="{{ product.url }}" class="product-list__box-img">
+                        <picture>
+                            <source data-srcset="{{ product.featured_image.src | product_img_url: 'large' }} "
+                                    data-image-id="{{ product.featured_image.id }}" media="(min-width: 1200px)">
+                            <source data-srcset="{{ product.featured_image.src | product_img_url: 'large' }} "
+                                    data-image-id="{{ product.featured_image.id }}" media="(min-width: 768px)">
+                            <source data-srcset="{{ product.featured_image.src | product_img_url: 'large' }} "
+                                    data-image-id="{{ product.featured_image.id }}">
+                            <img data-src="{{ product.featured_image.src | product_img_url: 'large' }} "
+                                 data-image-id="{{ product.featured_image.id }}" class="lazyload" alt="">
+                        </picture>
+                    </a>
+                </div>
+                <div class="product-list__box-body">
+                    <div class="product-list__box-title">
+                        <a href="{{ product.url }}">{{ product.title }}</a>
+                    </div>
+                    <div class="product-list__box-option">
+                        <div class="product-list__box-group">
+                            <div class="size-box">
+                                <div class="size-box__title js-size">
+                                    <div class="size-box__count">SElect size</div>
+                                    <div class="size-box__button">
+                                        <span class="icon icon-i-drop-right"></span>
+                                    </div>
+                                    <input type="hidden" class="size-count">
+                                </div>
+                                <div class="size-box__modal">
+                                    <div class="size-box__modal-title">SELECT SIZE</div>
+                                    {% comment %}<div class="size-box__modal-text hide">{% endcomment %}
+                                        {% comment %}<p>Different to <b>136$?</b> <a href="">Find out why</a></p>{% endcomment %}
+                                    {% comment %}</div>{% endcomment %}
+                                    <div class="size-box__modal-list js-size-list">
+                                        <ul>
+                                            {%- for variant in product.variants -%}
+                                                    <li data-val="{{ variant.id }}" data-price="{{ variant.price | price }}" {% unless variant.available %} disabled="disabled"{% endunless %}>
+                                                        <div class="size-title">{{ variant.title | replace: 'Default Title', default_title }}</div>
+                                                    </li>
+
+                                            {%- endfor -%}
+                                        </ul>
+                                    </div>
+
+                                    <div class="size-box__modal-link js-size-guide">
+                                        <a href="javascript:void(0)">VIEWSIZE GUIDE<span
+                                                    class="icon icon-i-drop-right"></span></a>
+                                    </div>
+                                    <div class="size-box__modal-button">
+                                        <a href="javascript:void(0)" class="btn
+{% if pice_product.available %}
+btn-red
+{% else %}
+red-button disabled
+{% endif %}
+"
+                                           data-value="1" data-prod-id="{{ product.id }}">
+                                            <span>{% if pice_product.available %}
+                                                    Add to bag
+                                                {% else %}
+                                                    Select
+                                                {% endif %}
+                                                 {% if productCount > 0 %} ({{ productCount }}){% endif %}</span></a>
+                                    </div>
+                                    <div class="size-box__modal-close js-size-close">
+                                        <span class="icon icon-i-close"></span>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="product-list__box-price">
+                        <div class="price-title">Price</div>
+                        {% if settings.enable_global_upsell contains 'all' %}
+                            {% include 'product-get-price-discount' with min_price: false %}
+                        {% else %}
+                            {% if settings.site_discount != blank and collection.url contains settings.cart_upsell_collection and product.tags contains 'enable_discount' %}
+                                {% include 'product-get-price-discount' with min_price: false %}
+                            {% else %}
+                                <span class="price"><span class="money">{{ product.selected_or_first_available_variant.price | money }}</span></span>
+                            {% endif %}
+                        {% endif %}
+                    </div>
+                    <div class="product-list__box-button js-btn-cart">
+                    {% if pice_product.available %}
+                        <a href="javascript:void(0)" class="btn js-add" data-prod-id="{{ product.id }}"
+                           data-value="{% if productCount > 0 %}{{ productCount | plus: 1 }}{% else %}1{% endif %}" onclick="pintrk('track', 'addtocart');"><span>Add to bag {% if productCount > 0 %} ({{ productCount }}){% endif %}</span></a>
+                    {% else %}
+                        <div class="btn btn-grey-nofill "><span>Sold out</span></div>
+                        <div data-wait-id="{{ forloop.index }}" class="btn red-button js-show-waitlist"><span>Join the waitlist </span></div>
+
+                    {% endif %}
+                    </div>
+                </div>
+            {%- endform -%}
+
+    {%- endfor -%}
+{%- endif -%}
+
+<script>
+
+    $(document).ready(function () {
+
+
+        if ($('.product-buttons .js-size-guide.d-none').length) {
+            $('.size-box__modal-link.js-size-guide').css('display', 'none');
+        }
+
+        function updateCount(){
+            let count = 0;
+            $('.btn.js-add[data-value]').each(function (el) {
+                count += parseInt($(this).attr('data-value')) - 1 ;
+            })
+            if (count > 0) {
+                var $btnPieces = $('.cart-info__count');
+                var $btnAddToBag = $('.cart-info__button-add');
+                var $btnGoToCart = $('.cart-info__button-go');
+                $btnPieces.html(`<span data-amount="${count}">( ${count} ) pieces</span>`);
+                $btnAddToBag.hide();
+                $btnGoToCart.css('display', 'flex');
+            }
+        }
+        updateCount();
+
+    })
+</script>

@@ -1,0 +1,4 @@
+{%- assign contentLength = pages[product.metafields.global.sizeguide].content | size -%}
+{%- if contentLength > 5 -%}
+    {{ pages[product.metafields.global.sizeguide].content }}
+{%- endif -%}

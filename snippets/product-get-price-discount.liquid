@@ -1,0 +1,16 @@
+{%- if show_sale_separator != null -%}
+    {%- assign show_sale_separator_status = show_sale_separator -%}
+{%- else -%}
+    {%- assign show_sale_separator_status = settings.price_show_sale_separator -%}
+{%- endif -%}
+
+{% assign discount_value = settings.site_discount | times: 1 %}
+
+    {% assign discount_ammount = product.selected_or_first_available_variant.price | times: discount_value | divided_by: 100.00 %}
+    {% assign compare_at_price = product.selected_or_first_available_variant.price %}
+    {% assign price = price | minus: discount_ammount %}
+
+<span class="price small">{{ compare_at_price | money }}</span>
+<span class="price"><span class="money">  {{ price | money }}</span></span>
+<input type="hidden" name="properties[_with_discount]" value="true">
+<input type="hidden" name="disc_value" value="{{ discount_value }}">

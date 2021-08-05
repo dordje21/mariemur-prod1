@@ -1,0 +1,243 @@
+<script>
+    function isNumberKey(evt){
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+        return true;
+    }
+
+</script>
+<div class="contact-us">
+    <div class="contact-us__top">
+        <picture>
+            <source srcset="{{ section.settings.cp-img-top | img_url:'2000x' }}" media="(min-width: 1900px)">
+            <source srcset="{{ section.settings.cp-img-top | img_url:'1600x' }}" media="(min-width: 1500px)">
+            <source srcset="{{ section.settings.cp-img-top | img_url:'1000x' }}" media="(min-width: 1000px)">
+            <source srcset="{{ section.settings.cp-img-top-tablet | img_url:'1500x' }}" media="(min-width: 768px)">
+            <source srcset="{{ section.settings.cp-img-top | img_url:'1000x' }}">
+            <img src="{{ section.settings.cp-img-top | img_url:'1000x' }}" class="contact-us__top-image" alt="">
+        </picture>
+        <h1 class="contact-us__top-title wow fadeInUp" data-wow-delay="0.6s">{{ page.title }}</h1>
+    </div>
+    <div class="contact-us__content">
+        <h3 class="contact-us__content-title wow fadeIn" data-wow-delay="0.2s">{{ section.settings.cp-sub-title  }}</h3>
+        <div class="contact-us__content-image wow fadeIn" data-wow-delay="0.2s">
+            <picture >
+                <source srcset="{{ section.settings.cp-img-mid | img_url:'500x' }}" media="(min-width: 768px)">
+                <source srcset="{{ section.settings.cp-img-mid | img_url:'450x' }}">
+                <img src="{{ section.settings.cp-img-mid | img_url:'450x' }}" alt="" class="lazyload">
+            </picture>
+            <span class="contact-us__content-image-line"></span>
+        </div>
+        <div class="contact-us__content-card wow fadeIn" data-wow-delay="0.2s">
+            <h4 class="contact-us__content-card-title"> {{ section.settings.cp-mailing-title  }}</h4>
+
+            <p class="contact-us__content-card-text">
+                {{ section.settings.cp-mailing-f  }}
+            </p>
+            <p class="contact-us__content-card-text">
+                {{ section.settings.cp-mailing-s  }}
+            </p>
+            <p class="contact-us__content-card-text">
+                {{ section.settings.cp-mailing-t  }}
+            </p>
+        </div>
+    </div>
+    <div class="contact-us__cards">
+        <div class="contact-us__card wow fadeIn" data-wow-delay="0.2s">
+            <div>
+                <h5 class="contact-us__card-title">{{ section.settings.cp-customers-title  }}</h5>
+                <p class="contact-us__card-text">
+                    {{ section.settings.cp-customers  }}
+                </p>
+            </div>
+            <a href="mailto:{{ section.settings.cp-customers-mail  }}" class="contact-us__card-link">{{ section.settings.cp-customers-mail  }}</a>
+        </div>
+        <div class="contact-us__card wow fadeIn" data-wow-delay="0.2s">
+            <div>
+                <h5 class="contact-us__card-title">{{ section.settings.cp-Influencers-title  }}</h5>
+                <p class="contact-us__card-text">
+                    {{ section.settings.cp-Influencers  }}
+                </p>
+            </div>
+            <a href="mailto:{{ section.settings.cp-Influencers-mail  }}" class="contact-us__card-link">{{ section.settings.cp-Influencers-mail  }}</a>
+        </div>
+        <div class="contact-us__card wow fadeIn" data-wow-delay="0.2s">
+            <div>
+                <h5 class="contact-us__card-title">{{ section.settings.cp-press-title  }}</h5>
+                <p class="contact-us__card-text">
+                    {{ section.settings.cp-press  }}
+                </p>
+            </div>
+            <a href="mailto:{{ section.settings.cp-press-mail  }}" class="contact-us__card-link">{{ section.settings.cp-press-mail  }}</a>
+        </div>
+    </div>
+    <div class="contact-us__bottom">
+        <div class="contact-us__bottom-form" id="formContactSuccess" style="display: none">
+            <h2 class="contact-us__bottom-form-title">Your request has been send</h2>
+
+        </div>
+        <div class="contact-us__bottom-form" id="formContact">
+            <h2 class="contact-us__bottom-form-title">{{ section.settings.cp-form-title  }}</h2>
+            <p class="contact-us__bottom-form-text">
+                {{ section.settings.cp-form-desc  }}
+            </p>
+            {%- assign formId = 'ContactForm' -%}
+            {% form 'contact',id: formId, novalidate:'true' %}
+                {%- if form.posted_successfully? -%}
+                <script>
+                    document.getElementById('formContact').style.display='none';
+                    document.getElementById('formContactSuccess').style.display='block';
+                    document.addEventListener('DOMContentLoaded',function (){
+                        window.scrollTo({
+                            top: document.getElementById('formContactSuccess').offsetTop,
+                            left: 0,
+                            behavior: 'smooth'
+                        });
+                    })
+
+                </script>
+                {% endif %}
+                <div class="form-group">
+                    <input type="text" name="contact[name]"  placeholder="name">
+                </div>
+                <div class="form-group">
+                    <input type="email" name="contact[email]" placeholder="email">
+                    <div class="help-block">Please enter a valid email address.</div>
+                </div>
+                <div class="form-group">
+                    <input type="tel" name="contact[phone]" onkeypress="return isNumberKey(event)"  placeholder="phone number">
+                </div>
+                <div class="form-group">
+                    <textarea name="contact[body]"  placeholder="message"></textarea>
+                </div>
+                <div class="form-check">
+                    <div class="checkbox">
+                        <input type="checkbox"  id="acceptterms" checked>
+                        <label for="acceptterms">I accept the <a href="{{ section.settings.cp-form-checkbox-terms  }}">terms</a> in the <a href="{{ section.settings.cp-form-checkbox-lic  }}">license agreement</a></label>
+                    </div>
+                    <div class="help-block">Set the checkbox.</div>
+                </div>
+                <div class="form-button">
+                    <button type="submit" class="btn btn-red"><span>send</span></button>
+                </div>
+            {% endform %}
+
+        </div>
+        <div class="contact-us__bottom-image d-none d-xl-block">
+            <img src="{{ section.settings.cp-img-bot | img_url:'1000x' }}" alt="">
+        </div>
+    </div>
+</div>
+
+
+
+
+{% schema %}
+{
+"name": "Contact page",
+"settings": [
+{
+"type": "image_picker",
+"id": "cp-img-top",
+"label": "Top image"
+},{
+"type": "image_picker",
+"id": "cp-img-top-tablet",
+"label": "Tablet top image"
+},{
+"type": "image_picker",
+"id": "cp-img-mid",
+"label": "Middle image"
+},{
+"type": "image_picker",
+"id": "cp-img-bot",
+"label": "Bottom image"
+},
+{
+"type": "text",
+"id": "cp-sub-title",
+"label": "Sub tittle"
+},
+{
+"type": "text",
+"id": "cp-mailing-title",
+"label": "Mailing address title"
+},{
+"type": "text",
+"id": "cp-mailing-f",
+"label": "Mailing address text first row"
+},{
+"type": "text",
+"id": "cp-mailing-s",
+"label": "Mailing address text second row"
+},{
+"type": "text",
+"id": "cp-mailing-t",
+"label": "Mailing address text third row"
+},
+{
+"type": "text",
+"id": "cp-customers",
+"label": "Customers text"
+},{
+"type": "text",
+"id": "cp-customers-title",
+"label": "Customers title"
+},
+{
+"type": "text",
+"id": "cp-customers-mail",
+"label": "Customers mail"
+},
+{
+"type": "text",
+"id": "cp-Influencers",
+"label": "Influencers text"
+},{
+"type": "text",
+"id": "cp-Influencers-title",
+"label": "Influencers title"
+},
+{
+"type": "text",
+"id": "cp-Influencers-mail",
+"label": "Influencers mail"
+},
+{
+"type": "text",
+"id": "cp-press",
+"label": "Press text"
+},{
+"type": "text",
+"id": "cp-press-title",
+"label": "Press title"
+},
+{
+"type": "text",
+"id": "cp-press-mail",
+"label": "Press mail"
+},
+{
+"type": "text",
+"id": "cp-form-title",
+"label": "Form title"
+},
+{
+"type": "text",
+"id": "cp-form-desc",
+"label": "Form description"
+},
+{
+"type": "url",
+"id": "cp-form-checkbox-terms",
+"label": "Form checkbox terms link"
+},
+{
+"type": "url",
+"id": "cp-form-checkbox-lic",
+"label": "Form checkbox license agreement link"
+}
+]
+}
+{% endschema %}

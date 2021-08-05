@@ -1,0 +1,102 @@
+<div class="insta">
+    <div class="container">
+        <div class="insta-inner">
+            <div class="insta-list">
+                <picture >
+                    <source data-srcset="{{ section.settings.img_5 | img_url:'master' }}" srcset="{{ section.settings.img_5 | img_url:'small' }}" media="(min-width: 1200px)">
+                    <source data-srcset="{{ section.settings.img_5 | img_url:'master' }}" srcset="{{ section.settings.img_5 | img_url:'small' }}" media="(min-width: 768px)">
+                    <source data-srcset="{{ section.settings.img_5 | img_url:'large' }}" srcset="{{ section.settings.img_5 | img_url:'small' }}">
+                    <img data-src="{{ section.settings.img_5 | img_url:'large' }}" src="{{ section.settings.img_5 | img_url:'small' }}" class="lazyload" alt="">
+                </picture>
+                <picture >
+                    <source data-srcset="{{ section.settings.img_4 | img_url:'master' }}" srcset="{{ section.settings.img_4 | img_url:'small' }}" media="(min-width: 1200px)">
+                    <source data-srcset="{{ section.settings.img_4 | img_url:'master' }}" srcset="{{ section.settings.img_4 | img_url:'small' }}" media="(min-width: 768px)">
+                    <source data-srcset="{{ section.settings.img_4 | img_url:'large' }}" srcset="{{ section.settings.img_4 | img_url:'small' }}">
+                    <img data-src="{{ section.settings.img_4 | img_url:'large' }}" src="{{ section.settings.img_4 | img_url:'small' }}" class="lazyload" alt="">
+                </picture>
+                <picture >
+                    <source data-srcset="{{ section.settings.img_3 | img_url:'master' }}" srcset="{{ section.settings.img_3 | img_url:'small'}}" media="(min-width: 1200px)">
+                    <source data-srcset="{{ section.settings.img_3 | img_url:'master' }}" srcset="{{ section.settings.img_3 | img_url:'small' }}" media="(min-width: 768px)">
+                    <source data-srcset="{{ section.settings.img_3 | img_url:'large' }}" srcset="{{ section.settings.img_3 | img_url:'small' }}">
+                    <img data-src="{{ section.settings.img_3 | img_url:'large' }}" src="{{ section.settings.img_3 | img_url:'small' }}" class="lazyload" alt="">
+                </picture>
+                <picture >
+                    <source data-srcset="{{ section.settings.img_2 | img_url:'master' }}" srcset="{{ section.settings.img_2 | img_url:'small' }}" media="(min-width: 1200px)">
+                    <source data-srcset="{{ section.settings.img_2 | img_url:'master' }}" srcset="{{ section.settings.img_2 | img_url:'small' }}" media="(min-width: 768px)">
+                    <source data-srcset="{{ section.settings.img_2 | img_url:'large' }}" srcset="{{ section.settings.img_2 | img_url:'small' }}">
+                    <img data-src="{{ section.settings.img_2 | img_url:'large' }}" src="{{ section.settings.img_2 | img_url:'small' }}" class="lazyload" alt="">
+                </picture>
+            </div>
+            <div class="insta-title wow fadeInUp" data-wow-delay="0.2s">{{ section.settings.title }}</div>
+            <div class="insta-box" >
+                <div class="insta-box__img">
+                    <picture>
+                        <source data-srcset="{{ section.settings.img_1 | img_url:'master' }}" srcset="{{ section.settings.img_1 | img_url:'small' }}" media="(min-width: 1200px)">
+                        <source data-srcset="{{ section.settings.img_1 | img_url:'master' }}" srcset="{{ section.settings.img_1 | img_url:'small' }}" media="(min-width: 768px)">
+                        <source data-srcset="{{ section.settings.img_1 | img_url:'large' }}" srcset="{{ section.settings.img_1 | img_url:'small' }}">
+                        <img data-src="{{ section.settings.img_1 | img_url:'large' }}" src="{{ section.settings.img_1 | img_url:'small' }}" class="lazyload" alt="">
+                    </picture>
+                </div>
+                <div class="insta-box__text">
+                    {{ section.settings.desc }}
+                </div>
+            </div>
+            <a href="{{ section.settings.link_id }}" class="insta-link" target="_blank"></a>
+        </div>
+    </div>
+</div>
+
+
+{% schema %}
+{
+"name": "Main instagram banner",
+"settings":[
+{
+"type":"url",
+"label":"link",
+"id":"link_id"
+},
+{
+"type":"textarea",
+"label":"title",
+"id":"title"
+},
+{
+"type":"textarea",
+"label":"description",
+"id":"desc"
+},
+{
+"type":"image_picker",
+"label":"image 1",
+"id":"img_1"
+},
+{
+"type":"image_picker",
+"label":"image 2",
+"id":"img_2"
+},
+{
+"type":"image_picker",
+"label":"image 3",
+"id":"img_3"
+},
+{
+"type":"image_picker",
+"label":"image 4",
+"id":"img_4"
+},
+{
+"type":"image_picker",
+"label":"image 5",
+"id":"img_5"
+}
+],
+"presets": [
+{
+"name":"Main instagram banner" ,
+"category": "Main page"
+}
+]
+}
+{% endschema %}

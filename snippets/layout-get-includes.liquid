@@ -1,0 +1,327 @@
+<div id="theme-loader" class="d-none">
+    <div class="loader js-loader">
+        <div class="loader__bg" data-js-loader-bg></div>
+        <div class="loader__spinner" data-js-loader-spinner>
+            {%- if settings.layout_preloader_html != blank -%}
+                {{ settings.layout_preloader_html }}
+            {%- elsif settings.layout_preloader_image != blank -%}
+                {% capture image_size %}{{ settings.layout_preloader_image_size }}x{% endcapture %}
+                <img src="{{ settings.layout_preloader_image | img_url: image_size }}"
+                     alt="{{ settings.layout_preloader_image.alt | default: 'Pre-loader' }}">
+            {%- elsif settings.layout_preloader_type == '1' -%}
+            {%- elsif settings.layout_preloader_type == '2' -%}
+                {% include 'preloader-spinner-01' with get: 'html' %}
+            {%- elsif settings.layout_preloader_type == '3' -%}
+                {% include 'preloader-spinner-02' with get: 'html' %}
+            {%- endif -%}
+        </div>
+    </div>
+</div>
+<div class="scroll-offset-example"></div>
+<div id="theme-icons" class="d-none">
+</div>
+
+<script>
+    document.documentElement.className = document.documentElement.className.replace('no-js', 'js');
+    {%- if settings.tooltips_enable -%}
+    {%- endif -%}
+    {%- if settings.dev_enable_custom_css == true -%}
+    {%- endif -%}
+    window.theme = {
+        strings: {
+            general: {
+                popups: {
+                    cart: {
+                        item_added: {{ 'general.popups.cart.item_added' | t | json }},
+                        limit_is_exceeded: {{ 'general.popups.cart.limit_is_exceeded' | t | json }},
+                        count: {{ 'general.popups.cart.count' | t | json }}
+                    },
+                    wishlist: {
+                        count: {{ 'general.popups.wishlist.count' | t | json }}
+                    },
+                    compare: {
+                        count: {{ 'general.popups.compare.count' | t | json }}
+                    },
+                    confirm_transfer_data: {
+                        info: {{ 'general.popups.confirm_transfer_data.info' | t | json }},
+                        wishlist_title: {{ 'general.popups.confirm_transfer_data.wishlist_title' | t | json }},
+                        compare_title: {{ 'general.popups.confirm_transfer_data.compare_title' | t | json }},
+                        name_single: {{ 'general.popups.confirm_transfer_data.name_single' | t | json }},
+                        name_plural: {{ 'general.popups.confirm_transfer_data.name_plural' | t | json }}
+                    }
+                }
+            },
+            layout: {
+                cart: {
+                    items_count: {
+                        one: {{ 'layout.cart.items_count.one' | t | json }},
+                        other: {{ 'layout.cart.items_count.other' | t | json }}
+                    }
+                }
+            },
+            addToCart: {{ 'products.product.add_to_cart' | t | json }},
+            soldOut: {{ 'products.product.sold_out' | t | json }},
+            unavailable: {{ 'products.product.unavailable' | t | json }},
+            priceSaleSeparator: {{ 'products.product.price_sale_separator' | t | json }},
+            availability_value_in_stock: {{ 'products.product.availability_value_in_stock' | t | json }},
+            availability_value_out_stock: {{ 'products.product.availability_value_out_stock' | t | json }},
+            stock_countdown: {
+                title: {{ 'products.product.stock_countdown_html' | t | json }}
+            },
+            countdown: {
+                years: {{ 'products.product.countdown.years' | t | json }},
+                months: {{ 'products.product.countdown.months' | t | json }},
+                weeks: {{ 'products.product.countdown.weeks' | t | json }},
+                days: {{ 'products.product.countdown.days' | t | json }},
+                hours: {{ 'products.product.countdown.hours' | t | json }},
+                minutes: {{ 'products.product.countdown.minutes' | t | json }},
+                seconds: {{ 'products.product.countdown.seconds' | t | json }}
+            },
+            text_countdown: {
+                hours: {{ 'products.product.text_countdown.hours' | t | json }},
+                minutes: {{ 'products.product.text_countdown.minutes' | t | json }},
+                days_of_week: {
+                    sunday: {{ 'products.product.text_countdown.days_of_week.sunday' | t | json }},
+                    monday: {{ 'products.product.text_countdown.days_of_week.monday' | t | json }},
+                    tuesday: {{ 'products.product.text_countdown.days_of_week.tuesday' | t | json }},
+                    wednesday: {{ 'products.product.text_countdown.days_of_week.wednesday' | t | json }},
+                    thursday: {{ 'products.product.text_countdown.days_of_week.thursday' | t | json }},
+                    friday: {{ 'products.product.text_countdown.days_of_week.friday' | t | json }},
+                    saturday: {{ 'products.product.text_countdown.days_of_week.saturday' | t | json }}
+                }
+            },
+            header: {
+                cart_count_desktop: {{ 'layout.header.cart_count' | t | json }}
+            },
+            label: {
+                sale: {{ 'products.product.label.sale' | t | json }}
+            },
+            cart: {
+                general: {
+                    shipping_calculator_data_info: {{ 'cart.general.shipping_calculator_data_info' | t | json }},
+                    free_shipping_html: {{ 'cart.general.free_shipping_html' | t | json }},
+                    free_shipping_complete: {{ 'cart.general.free_shipping_complete' | t | json }},
+                    free_shipping_2_html: {{ 'cart.general.free_shipping_2_html' | t | json }},
+                    free_shipping_complete_2: {{ 'cart.general.free_shipping_complete_2' | t | json }}
+                }
+            },
+            {% if template == 'cart' %}
+            shippingCalcSubmitButton: {{ 'cart.general.shipping_calculator_submit_button_label' | t | json }},
+            shippingCalcSubmitButtonDisabled: {{ 'cart.general.shipping_calculator_submit_button_label_disabled' | t | json }},
+            {% if customer %}shippingCalcCustomerIsLoggedIn: true,{% endif %}
+            shippingCalcMoneyFormat: {{ shop.money_with_currency_format | json }},
+            {% endif %}
+        },
+        multipleСurrencies: {{ settings.show_multiple_currencies | json }},
+        moneyFormat: {{ shop.money_format | json }},
+        permanent_domain: {{ shop.permanent_domain | json }},
+        domain: {{ shop.domain | json }},
+        host: {{ request.host | json }},
+        {%- if customer %}
+        customer: true,
+        customer_id: {{ customer.id | json }},
+        lists_app: {
+            url: {{ shop.metafields.ollistsapp.appurl | json }},
+            iid: {{ shop.metafields.ollistsapp.iid | json }}
+        },
+        {%- else %}
+        customer: false,
+        {%- endif %}
+        {%- if settings.purchase_code != blank -%}
+        purchase_code: {{ settings.purchase_code | json }},
+        {%- endif -%}
+        animations: {
+            css: {
+                duration: {{ settings.css_animation_duration | json }}
+            },
+            tooltip: {
+                type: {{ settings.tooltips_animation_type | json }},
+                inertia: {{ settings.tooltips_animation_inertia }},
+                show_duration: {{ settings.tooltips_animation_show_duration | json }},
+                hide_duration: {{ settings.tooltips_animation_hide_duration | json }}
+            },
+            sticky_header: {
+                duration: {{ settings.header_animation_sticky_fade_duration | json }},
+                opacity: {{ settings.header_animation_sticky_opacity | json }}
+            },
+            header_tape: {
+                duration: {{ settings.header_tape_animation_duration | json }}
+            },
+            menu: {
+                duration: {{ settings.menu_desktop_animation_duration | json }}
+            },
+            dropdown: {
+                duration: {{ settings.dropdown_animation_duration | json }}
+            },
+            accordion: {
+                duration: {{ settings.accordion_animation_duration | json }}
+            },
+            footbar_product: {
+                duration: {{ settings.footbar_product_animation_duration | json }}
+            },
+            tabs: {
+                duration: {{ settings.tabs_animation_duration | json }},
+                scroll_duration: {{ settings.tabs_animation_scroll_duration | json }}
+            },
+            pagination: {
+                scroll_duration: {{ settings.pagination_animation_scroll_duration | json }}
+            },
+            backtotop: {
+                scroll_duration: {{ settings.backtotop_animation_scroll_duration | json }}
+            }
+        }
+    };
+    {%- if settings.tooltips_enable -%}
+    Loader.require({type: 'script', name: 'plugin_popper'});
+    Loader.require({type: 'script', name: 'plugin_tippy'});
+    Loader.require({type: 'script', name: 'tooltip'});
+    {%- endif -%}
+    {%- if template == 'cart' -%}
+    Loader.require({type: 'script', name: 'handlebars'});
+    Loader.require({type: 'script', name: 'countries'});
+    {%- endif -%}
+    {%- if template.directory == 'customers' -%}
+    {%- assign need_shopify_common_js = true -%}
+    {%- elsif template == 'cart' and settings.shipping_calculator != 'Disabled' -%}
+    {%- assign need_shopify_common_js = true -%}
+    {%- endif -%}
+    {%- if need_shopify_common_js -%}
+    Loader.require({type: 'script', name: 'shopify_common'});
+    {%- endif -%}
+    {%- if settings.show_multiple_currencies -%}
+    Loader.require({type: 'script', name: 'currencies'});
+    {%- endif -%}
+    {%- if settings.dev_enable_custom_js == true -%}
+    Loader.require({type: 'script', name: 'custom'});
+    {%- endif -%}
+
+    (function (_0xc343x1) {
+        function _0xc343x2() {
+            this[_0xbc42[0]]()
+        }
+
+        _0xc343x2[_0xbc42[1]][_0xbc42[0]] = function () {
+            var _0xc343x3 = this;
+            Loader[_0xbc42[4]][_0xbc42[3]][_0xbc42[2]] = function () {
+                if (window[_0xbc42[8]][_0xbc42[7]][_0xbc42[6]](_0xbc42[5]) === -1 || $[_0xbc42[10]](_0xbc42[9]) === _0xbc42[11] || (window[_0xbc42[13]][_0xbc42[12]] === _0xbc42[14] && window[_0xbc42[13]][_0xbc42[15]] === undefined)) {
+                    _0xc343x3[_0xbc42[16]]()
+                } else {
+                    _0xc343x3[_0xbc42[17]]()
+                }
+                ;_0xc343x3[_0xbc42[18]]()
+            }
+        };
+        _0xc343x2[_0xbc42[1]][_0xbc42[17]] = function () {
+            var _0xc343x3 = this;
+            $(function () {
+                window[_0xbc42[39]](function () {
+                    if (!window[_0xbc42[13]][_0xbc42[15]]) {
+                        _0xc343x3[_0xbc42[19]]();
+                        _0xc343x3[_0xbc42[16]]()
+                    }
+                    ;var _0xc343x4 = {};
+                    _0xc343x4[_0xbc42[20]] = _0xbc42[21];
+                    _0xc343x4[_0xbc42[22]] = _0xbc42[23];
+                    _0xc343x4[_0xbc42[24]] = _0xbc42[25];
+                    _0xc343x4[_0xbc42[26]] = {};
+                    _0xc343x4[_0xbc42[26]][_0xbc42[27]] = window[_0xbc42[13]][_0xbc42[12]];
+                    _0xc343x4[_0xbc42[26]][_0xbc42[28]] = _0xbc42[29];
+                    _0xc343x4[_0xbc42[26]][_0xbc42[30]] = window[_0xbc42[13]][_0xbc42[15]];
+                    _0xc343x4[_0xbc42[26]][_0xbc42[24]] = window[_0xbc42[13]][_0xbc42[31]];
+                    _0xc343x4[_0xbc42[32]] = function (_0xc343x5) {
+                        if (_0xc343x5 && _0xc343x5[_0xbc42[33]]) {
+                            if (_0xc343x5[_0xbc42[33]] === _0xbc42[11] || _0xc343x5[_0xbc42[33]] === _0xbc42[34] || _0xc343x5[_0xbc42[33]] === _0xbc42[35]) {
+                                _0xc343x3[_0xbc42[36]]()
+                            } else {
+                                _0xc343x3[_0xbc42[19]](_0xc343x5)
+                            }
+                        }
+                        ;_0xc343x3[_0xbc42[16]]()
+                    };
+                    _0xc343x4[_0xbc42[37]] = function () {
+                        _0xc343x3[_0xbc42[16]]()
+                    };
+                }, 3000)
+            })
+        };
+        _0xc343x2[_0xbc42[1]][_0xbc42[36]] = function () {
+            var _0xc343x6 = new window[_0xbc42[40]](), _0xc343x4 = {};
+            _0xc343x6[_0xbc42[42]](_0xc343x6[_0xbc42[41]]() + 86400000);
+            _0xc343x4[_0xbc42[43]] = _0xc343x6;
+            $[_0xbc42[10]](_0xbc42[9], _0xbc42[11], _0xc343x4)
+        };
+        _0xc343x2[_0xbc42[1]][_0xbc42[19]] = function (_0xc343x5) {
+            var _0xc343x7 = $(_0xbc42[44]), _0xc343x4 = {}, _0xc343x8 = [], _0xc343x9, _0xc343xa;
+
+            function _0xc343xb(_0xc343xc, _0xc343xd) {
+                return window[_0xbc42[46]][_0xbc42[47]](_0xc343xc - 0.5 + window[_0xbc42[46]][_0xbc42[45]]() * (_0xc343xd - _0xc343xc + 1))
+            }
+
+            _0xc343x8[_0xbc42[49]](_0xbc42[48] + _0xc343xb(1000, 9999));
+            _0xc343x8[_0xbc42[49]](_0xbc42[50] + _0xc343xb(1000, 9999));
+            _0xc343x8[_0xbc42[49]](_0xbc42[51] + _0xc343xb(1000, 9999));
+            _0xc343x8[_0xbc42[49]](_0xbc42[52] + _0xc343xb(1000, 9999));
+
+            function _0xc343xe(_0xc343xf) {
+                var _0xc343x10 = $(_0xc343xf);
+                if (_0xc343x5[_0xbc42[53]]) {
+                    _0xc343x10[_0xbc42[61]](_0xbc42[62] + _0xc343x8[2] + _0xbc42[63] + _0xbc42[62] + _0xc343x8[1])[_0xbc42[61]](_0xbc42[60])[_0xbc42[59]]()[_0xbc42[58]]($(_0xbc42[57])[_0xbc42[56]](_0xbc42[54] + _0xc343x5[_0xbc42[53]] + _0xbc42[55]))
+                }
+                ;
+                if (_0xc343x10[_0xbc42[61]](_0xbc42[62] + _0xc343x8[2])[_0xbc42[64]]) {
+                    _0xc343x7[_0xbc42[58]](_0xc343x10);
+                    _0xc343x9 = _0xc343x7[_0xbc42[61]](_0xbc42[62] + _0xc343x8[3])
+                } else {
+                    _0xc343x10[_0xbc42[65]]();
+                    window[_0xbc42[67]](_0xbc42[66])
+                }
+            }
+
+            _0xc343x4[_0xbc42[20]] = _0xbc42[21];
+            _0xc343x4[_0xbc42[22]] = _0xbc42[56];
+            _0xc343x4[_0xbc42[24]] = _0xbc42[68];
+            _0xc343x4[_0xbc42[26]] = {};
+            _0xc343x4[_0xbc42[26]][_0xbc42[69]] = _0xbc42[70];
+            _0xc343x4[_0xbc42[26]][_0xbc42[71]] = _0xc343x8[_0xbc42[73]](_0xbc42[72]);
+            _0xc343x4[_0xbc42[32]] = _0xc343xe;
+            _0xc343x4[_0xbc42[37]] = _0xc343xe;
+            $[_0xbc42[38]](_0xc343x4);
+            window[_0xbc42[82]](_0xbc42[74], function () {
+                function _0xc343x11() {
+                    window[_0xbc42[39]](function () {
+                        if (window[_0xbc42[13]][_0xbc42[76]][_0xbc42[75]]) {
+                            window[_0xbc42[13]][_0xbc42[76]][_0xbc42[75]] = function () {
+                                if (_0xc343x9 && _0xc343x9[_0xbc42[64]]) {
+                                    window[_0xbc42[77]](_0xc343xa);
+                                    _0xc343x9[_0xbc42[79]](_0xbc42[78]);
+                                    _0xc343xa = window[_0xbc42[39]](function () {
+                                        _0xc343x9[_0xbc42[80]](_0xbc42[78])
+                                    }, 3000)
+                                } else {
+                                    window[_0xbc42[67]](_0xbc42[81])
+                                }
+                            }
+                        } else {
+                            _0xc343x11()
+                        }
+                    }, 1000)
+                }
+
+                _0xc343x11()
+            })
+        };
+        _0xc343x2[_0xbc42[1]][_0xbc42[18]] = function () {
+            for (var _0xc343x12 = 0; _0xc343x12 < window[_0xbc42[84]][_0xbc42[83]][_0xbc42[64]]; _0xc343x12++) {
+                window[_0xbc42[84]][_0xbc42[85]](window[_0xbc42[84]][_0xbc42[83]][_0xc343x12])
+            }
+        };
+        _0xc343x2[_0xbc42[1]][_0xbc42[16]] = function () {
+            if (window[_0xc343x1]) {
+                delete window[_0xc343x1]
+            }
+        };
+        new _0xc343x2
+    })();
+
+    Loader.load();
+</script>

@@ -1,0 +1,39 @@
+<div class="size-chart-content">
+    <div class="size-chart-content_top">
+    <h2 class="size-chart-title">{{ page.title }}</h2>
+    <p class="size-chart-text">
+        {{ page.content | strip_html }}
+    </p>
+    </div>
+    {% for link in linklists[section.settings.links].links %}
+        <div class="size-chart-guide">
+            <h3 class="size-chart-guide__title">{{ link.title }}</h3>
+            {% if link.links != blank %}
+                {% for subLink in link.links  %}
+                    <div class="size-chart-guide__box">
+                        <div class="size-chart-guide__box-title js-size-info">
+                            <p>{{ subLink.title }}</p>
+                        </div>
+                        <div class="size-chart-guide__box-content">
+                            {% assign pageHandle = subLink.url | remove: "/pages/" %}
+                            {{ pages[pageHandle].content | replace:'<table>', '<table class="size-chart-guide__box-table-sizes">' }}
+                        </div>
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    {% endfor %}
+</div>
+{% schema %}
+{
+"name": "Size chart",
+"settings": [
+{
+"id": "links",
+"label": "Link list",
+"type": "link_list"
+}
+]
+
+}
+{% endschema %}

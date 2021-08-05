@@ -1,0 +1,68 @@
+{% assign metafield_tabs = '' %}
+{% for tag in product.tags %}
+    {% if tag contains 'tab_' %}
+        {% assign tab_metafield_key = tag | split: ':' | last %}
+        {% if shop.metafields.product_tabs[tab_metafield_key] contains '#' %}
+            {% assign metafield_tabs = metafield_tabs | append: shop.metafields.product_tabs[tab_metafield_key] | append: '||' %}
+        {% endif %}
+    {% endif %}
+{% endfor %}
+{% assign metafield_tabs = metafield_tabs | split: '||' %}
+
+<div class="product-info">
+    {%- if product.description != blank -%}
+        <div class="product-info__box">
+            <div class="product-info__box-title js-product-info">PRODUCT INFORMATION</div>
+            <div class="product-info__box-text">
+                {{ product.description }}
+            </div>
+        </div>
+    {%- endif -%}
+    {%- if metafields.tab.title and metafields.tab.content -%}
+        <div class="product-info__box">
+            <div class="product-info__box-title js-product-info">{{ metafields.tab.title }}</div>
+            <div class="product-info__box-text">
+                {% include 'content-load-template' content: metafields.tab.content %}
+            </div>
+        </div>
+    {%- endif -%}
+    {%- if metafields.tab1.title and metafields.tab1.content -%}
+        <div class="product-info__box">
+            <div class="product-info__box-title js-product-info">{{ metafields.tab1.title }}</div>
+            <div class="product-info__box-text">
+                {% include 'content-load-template' content: metafields.tab1.content %}
+            </div>
+        </div>
+    {%- endif -%}
+    {%- if metafields.tab2.title and metafields.tab2.content -%}
+        <div class="product-info__box">
+            <div class="product-info__box-title js-product-info">{{ metafields.tab2.title }}</div>
+            <div class="product-info__box-text">
+                {% include 'content-load-template' content: metafields.tab2.content %}
+            </div>
+        </div>
+    {%- endif -%}
+    {%- if metafields.tab3.title and metafields.tab3.content -%}
+        <div class="product-info__box">
+            <div class="product-info__box-title js-product-info">{{ metafields.tab3.title }}</div>
+            <div class="product-info__box-text">
+                {% include 'content-load-template' content: metafields.tab3.content %}
+            </div>
+        </div>
+    {%- endif -%}
+    {% for tab in metafield_tabs %}
+        {% assign tab_title = tab | split: '#' | first | remove: '<p>' %}
+        {% assign tab_content = tab | split: '#' | last | remove_first: '</p>' %}
+        <div class="product-info__box">
+            <div class="product-info__box-title js-product-info">{{ tab_title }}</div>
+            <div class="product-info__box-text">
+        {{ tab_content }}
+            </div>
+        </div>
+    {% endfor %}
+
+
+</div>
+
+
+

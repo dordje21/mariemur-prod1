@@ -1,0 +1,76 @@
+{% assign active_pieces = 0 %}
+{% if product.metafields.products_set.handles %}
+    {%- assign products_pices_wish_list = product.metafields.products_set.handles | split: "," -%}
+    {%- if products_pices_wish_list -%}
+        {%- for products_pice in products_pices_wish_list -%}
+            {% assign handle_key = products_pice | strip %}
+            {% assign pice_product = all_products[handle_key] %}
+            {% if pice_product.available %}
+                {% assign active_pieces = true %}
+            {% endif %}
+            {% unless pice_product.id.size > 0 %}
+                {% continue %}
+            {% endunless %}
+
+            {% assign product = pice_product %}
+            {% assign productCount = 0 %}
+
+            {% for item in cart.items %}
+                {% if item.product.id == product.id %}
+                    {% assign productCount = productCount | plus: item.quantity %}
+                {% endif %}
+            {% endfor %}
+        {%- endfor -%}
+    {% else %}
+        {% assign active_pieces = true %}
+    {%- endif -%}
+{% else %}
+    {% if product.available %}
+        {% assign active_pieces = true %}
+    {% endif %}
+{% endif %}
+
+<div class="catalog-box">
+    <div class="catalog-box__head">
+        {% if active_pieces == 0 %}
+            <div class="btn btn-grey-nofill red"><span>Sold out</span></div>
+        {% endif %}
+        <a href="{{ product.url | within: collection }}" class="catalog-box__img">
+            <picture>
+                <source data-srcset="{{ product | img_url: '848x' }}" srcset="{{ product | img_url: 'small' }}"
+                        media="(min-width: 1200px)">
+                <source data-srcset="{{ product | img_url: '768x' }}" srcset="{{ product | img_url: 'small' }}"
+                        media="(min-width: 768px)">
+                <source data-srcset="{{ product | img_url: '768x' }}" srcset="{{ product | img_url: 'small' }}">
+                <img data-src="{{ product | img_url: '768x' }}" src="{{ product | img_url: 'small' }}" class="lazyload"
+                     alt="">
+            </picture>
+            {% for media in product.media %}
+                {% case media.media_type %}
+                    {% when 'video' %}
+                        <video autoplay playsinline muted loop="loop">
+                            <source src="{{ media.sources[1].url }}" type="video/mp4">
+                        </video>
+                        <span class="icon icon-i-play"></span>
+                {% endcase %}
+            {% endfor %}
+        </a>
+    </div>
+    <div class="catalog-box__body">
+        <div class="catalog-box__title">
+            <a href="{{ product.url | within: collection }}">{{ product.title }}<span
+                        class="icon icon-i-arr-right"></span></a>
+        </div>
+        <div class="catalog-box__price">
+            <div class="price">$214.00</div>
+        </div>
+        <div class="catalog-box__text">
+            <p>{{ product.description | strip_html }}</p>
+        </div>
+        <div class="catalog-box__button">
+            <a href="{{ product.url | within: collection }}" class="btn"><span>Go to card</span></a>
+        </div>
+    </div>
+</div>
+
+

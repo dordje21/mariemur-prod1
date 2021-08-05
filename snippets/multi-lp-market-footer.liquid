@@ -1,0 +1,183 @@
+{% comment %} Footer {% endcomment %}
+
+<footer class="footer">
+    <div class="container">
+        <div class="footer-inner">
+            <div class="logo">
+                <a href="{{ shop.url }}">
+                    <img src="{{ 'multi-market-logo.svg' | asset_url }}" alt="{{ shop.name }}">
+                </a>
+            </div>
+            <div class="footer-menu">
+                <div class="footer-menu__box">
+                    {% assign nav_block_title = page.metafields.market.mf_footer_nav_title %}
+                    {% assign nav_block_url = page.metafields.market.mf_footer_nav_url%}
+
+                    {% assign nav_first_link_title = page.metafields.market.mf_nav_first_title %}
+                    {% assign nav_first_link_url = page.metafields.market.mf_nav_first_url %}
+
+                    {% assign nav_second_link_title = page.metafields.market.mf_nav_second_title %}
+                    {% assign nav_second_link_url = page.metafields.market.mf_nav_second_url %}
+
+                    {% assign nav_third_link_title = page.metafields.market.mf_nav_third_title %}
+                    {% assign nav_third_link_url = page.metafields.market.mf_nav_third_url %}
+
+                    {% assign nav_fourth_link_title = page.metafields.market.mf_nav_fourth_title %}
+                    {% assign nav_fourth_link_url = page.metafields.market.mf_nav_fourth_url %}
+
+                    {% assign nav_fifth_link_title = page.metafields.market.mf_nav_fifth_title %}
+                    {% assign nav_fifth_link_url = page.metafields.market.mf_nav_fifth_url %}
+                    {% if nav_block_url == blank %}
+                        <div class="footer-menu__box-title">
+                            {{ nav_block_title }}
+                        </div>
+                    {% else %}
+                        <a class="footer-menu__box-title" href="{{ nav_block_url }}">
+                            {{ nav_block_title }}
+                        </a>
+                    {% endif %}
+                    <div class="footer-menu__box-list">
+                        <ul>
+                            <li><a href="{{ nav_first_link_url }}">{{ nav_first_link_title }}</a></li>
+                            <li><a href="{{ nav_second_link_url }}">{{ nav_second_link_title }}</a></li>
+                            <li><a href="{{ nav_third_link_url }}">{{ nav_third_link_title }}</a></li>
+                            <li><a href="{{ nav_fourth_link_url }}">{{ nav_fourth_link_title }}</a></li>
+                            <li><a href="{{ nav_fifth_link_url }}">{{ nav_fifth_link_title }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-menu__box">
+                    {% assign foot_info_title = page.metafields.market.mf_footer_info_title %}
+                    {% assign foot_info_url = page.metafields.market.mf_footer_info_url %}
+
+                    {% assign info_first_title = page.metafields.market.mf_info_first_title %}
+                    {% assign info_first_url = page.metafields.market.mf_info_first_url %}
+
+                    {% assign info_second_title = page.metafields.market.mf_info_second_title%}
+                    {% assign info_second_url = page.metafields.market.mf_info_second_url%}
+
+                    {% assign info_third_title = page.metafields.market.mf_info_third_title %}
+                    {% assign info_third_url = page.metafields.market.mf_info_third_url %}
+
+                    {% if foot_info_url == blank %}
+                        <div class="footer-menu__box-title">
+                            {{ foot_info_title }}
+                        </div>
+                    {% else %}
+                        <a class="footer-menu__box-title" href="{{ foot_info_url }}">
+                            {{ foot_info_title }}
+                        </a>
+                    {% endif %}
+
+                    <div class="footer-menu__box-list">
+                        <ul>
+                            <li><a href="{{ info_first_url }}">{{ info_first_title }}</a></li>
+                            <li><a href="{{ info_second_url }}">{{ info_second_title }}</a></li>
+                            <li><a href="{{ info_third_url }}">{{ info_third_title }}</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-menu__box">
+                    {% assign foot_soc_title = page.metafields.market.mf_footer_social_title %}
+                    {% assign foot_soc_url = page.metafields.market.mf_footer_social_url %}
+
+                    {% assign foot_fb_title = page.metafields.market.mf_social_fb_title %}
+                    {% assign foot_fb_url = page.metafields.market.mf_social_fb_url %}
+
+                    {% assign foot_inst_title = page.metafields.market.mf_social_inst_title %}
+                    {% assign foot_inst_url = page.metafields.market.mf_social_inst_url %}
+
+                    {% assign foot_twitter_title = page.metafields.market.mf_social_twitter_title %}
+                    {% assign foot_twitter_url = page.metafields.market.mf_social_twitter_url %}
+
+                    {% assign foot_pinter_title = page.metafields.market.mf_social_pinter_title %}
+                    {% assign foot_pinter_url = page.metafields.market.mf_social_pinter_url %}
+
+                    {% if foot_soc_url == blank %}
+                        <div class="footer-menu__box-title">
+                            {{ foot_soc_title }}
+                        </div>
+                    {% else %}
+                        <a class="footer-menu__box-title" href="{{ foot_soc_url }}">
+                            {{ foot_soc_title }}
+                        </a>
+                    {% endif %}
+
+                    <div class="footer-menu__box-list">
+                        <ul>
+                            <li><a href="{{ foot_fb_url }}" target="_blank">{{ foot_fb_title }}<b> +</b></a></li>
+                            <li><a href="{{ foot_inst_url }}" target="_blank">{{ foot_inst_title }}<b> +</b></a></li>
+                            <li><a href="{{ foot_twitter_url }}" target="_blank">{{ foot_twitter_title }}<b> +</b></a></li>
+                            <li><a href="{{ foot_pinter_url }}" target="_blank">{{ foot_pinter_title }}<b> +</b></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="overlay"></div>
+<div id="cursor">
+    <svg viewBox="0 0 40 40">
+        <circle cx="20" cy="20" r="18" stroke-width="1" stroke="currentColor"></circle>
+    </svg>
+</div>
+<script>
+    const JQuery = document.querySelector.bind( document ),
+        $on = document.addEventListener.bind( document );
+    let xmouse, ymouse;
+    $on( 'mousemove', function (e) {
+        xmouse = e.clientX || e.pageX;
+        ymouse = e.clientY || e.pageY;
+    });
+    const cursor = JQuery( '#cursor' ),
+        link = document.querySelectorAll( 'a:not([data-fancybox]), button, .checkbox, .cursor-pointer, input, textarea' ),
+        linkZoom = document.querySelectorAll( '[data-fancybox]' );
+    link.forEach(function (item) {
+        item.addEventListener( 'mouseenter', function (e) {
+            cursor.classList.add( 'is-link' );
+        });
+        item.addEventListener( 'mouseleave', function (e) {
+            cursor.classList.remove( 'is-link' );
+        });
+    });
+    linkZoom.forEach(function (item) {
+        item.addEventListener( 'mouseenter', function (e) {
+            cursor.classList.add( 'is-zoom' );
+        });
+        item.addEventListener( 'mouseleave', function (e) {
+            cursor.classList.remove( 'is-zoom' );
+        });
+    });
+    let x  = void 0,
+        y = void 0,
+        dx = void 0,
+        dy = void 0,
+        tx = 0,
+        ty = 0,
+        key = -1,
+        scX = 1,
+        scY = 1;
+    const followMouse = function followMouse() {
+        key = requestAnimationFrame( followMouse );
+        if ( !x || !y) {
+            x = xmouse;
+            y = ymouse;
+        } else {
+            dx = ( xmouse - x ) * 0.125;
+            dy = ( ymouse - y ) * 0.125;
+            if ( Math.abs( dx ) + Math.abs( dy ) < 0.1 ) {
+                x = xmouse;
+                y = ymouse;
+            } else {
+                x += dx;
+                y += dy;
+                scX = Math.abs(1 - Math.abs( dx ) / 50);
+                scY = Math.abs(1 - Math.abs( dy ) / 50);
+                cursor.style.transform = 'scale(' + scX + ', ' + scY + ')';
+            }
+        }
+        cursor.style.left = x + 'px';
+        cursor.style.top = y + 'px';
+    };
+</script>

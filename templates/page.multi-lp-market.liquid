@@ -1,0 +1,318 @@
+{% comment %} Banner {% endcomment %}
+{% assign banner_img_full = page.metafields.market.mf_home_img_full %}
+{% assign banner_img_desk = page.metafields.market.mf_home_img_desk %}
+{% assign banner_img_notebook = page.metafields.market.mf_home_img_notebook %}
+{% assign banner_img_tablet = page.metafields.market.mf_home_img_tablet %}
+{% assign banner_img_small = page.metafields.market.mf_home_img_small %}
+{% assign banner_video = page.metafields.market.mf_home_video_url %}
+{% assign banner_title = page.metafields.market.mf_home_title %}
+{% assign banner_text = page.metafields.market.mf_home_text %}
+{% assign banner_btn = page.metafields.market.mf_home_btn %}
+{% assign banner_choice = page.metafields.market.mf_banner_choice %}
+{% assign banner_link = page.metafields.market.mf_banner_link %}
+{% assign banner_text_circle = page.metafields.market.mf_home_btn_circle %}
+
+<style>
+    .head-button button {
+        padding: 0;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+    }
+</style>
+    <div class="head">
+            <div class="head-img">
+                <picture>
+                    <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ banner_img_full }}" media="(min-width: 1680px)">
+                    <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ banner_img_desk }}" media="(min-width: 1200px)">
+                    <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ banner_img_notebook }}" media="(min-width: 992px)">
+                    <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ banner_img_tablet }}" media="(min-width: 768px)">
+                    <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ banner_img_small }}">
+                    <img src="{{ 'pic.jpg' | asset_url }}" data-src="{{ banner_img_small }}" class="lazyload" alt="{{ banner_title }}">
+                </picture>
+            </div>
+            <div class="head-box">
+                <div class="head-title">
+                    <div class="box-translate">
+                        <h1>{{ banner_title }}</h1>
+                    </div>
+                </div>
+                <div class="head-text">
+                    <div class="box-translate">
+                        {{ banner_text }}
+                    </div>
+                </div>
+                <div class="head-button">
+                    {% if banner_choice == 'Link' %}
+                            <a href="{{ banner_link }}" data-choice="Link">
+                                <svg class="svg-text-circle" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <circle cx="25" cy="25" r="25" fill="#fff" />
+                                    <path d="M25,25 m-18,0 a18,18 0 1,1 36,0 a18,18 0 1,1 -36,0" id="textcircle"></path>
+                                    <text fill="#000">
+                                        <textPath xlink:href="#textcircle">{{ banner_text_circle }}</textPath>
+                                    </text>
+                                </svg>
+                                <svg class="svg-text-center" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M25,25 m-18,0 a18,18 0 1,1 36,0 a18,18 0 1,1 -36,0" id="textcircle"></path>
+                                    <text fill="url(#textcenter)" x="25" y="25" text-anchor="middle" dominant-baseline="central">{{ banner_btn }}</text>
+                                </svg>
+                        </a>
+                        {% elsif banner_choice == 'Popup' %}
+                        <button>
+                            <svg class="svg-text-circle" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="25" cy="25" r="25" fill="#fff" />
+                                <path d="M25,25 m-18,0 a18,18 0 1,1 36,0 a18,18 0 1,1 -36,0" id="textcircle"></path>
+                                <text fill="#000">
+                                    <textPath xlink:href="#textcircle">{{ banner_text_circle }}</textPath>
+                                </text>
+                            </svg>
+                            <svg class="svg-text-center" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M25,25 m-18,0 a18,18 0 1,1 36,0 a18,18 0 1,1 -36,0" id="textcircle"></path>
+                                <text fill="url(#textcenter)" x="25" y="25" text-anchor="middle" dominant-baseline="central">{{ banner_btn }}</text>
+                            </svg>
+                        </button>
+                    {% endif %}
+                </div>
+                <div class="head-video">
+                    <video autoplay playsinline muted loop="loop">
+                        <source src="{{ banner_video }}" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+
+
+{% comment %} About {% endcomment %}
+{% assign about_title = page.metafields.market.mf_about_title %}
+{% assign about_text = page.metafields.market.mf_about_text %}
+
+    <div class="about">
+    <div class="container">
+        <div class="about-inner">
+            <div class="title">
+                <div class="box-translate">
+                    <h2>{{ about_title }}</h2>
+                </div>
+            </div>
+            <div class="about-text">
+                <div class="box-translate">
+                    {{ about_text }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% comment %} Category {% endcomment %}
+
+{% assign cat_title = page.metafields.market.mf_categories_title %}
+{% assign cat_list = page.metafields.market.mf_categories %}
+{% assign cat_quantity = page.metafields.market.mf_categories_quntity %}
+{% assign array_pr_handle = cat_list | split: "|" %}
+
+    <div class="category">
+    <div class="container">
+        <div class="title text-center">
+            <div class="box-translate">
+                <h2>{{ cat_title }}</h2>
+            </div>
+        </div>
+
+        <div class="category-list">
+            {% for handle in array_pr_handle limit:cat_quantity %}
+                {% assign col_item = collections[handle] %}
+
+                <a href="{{ col_item.url }}" class="category-box">
+                    <div class="category-box__img">
+                        <picture>
+                            <source srcset="{{ col_item.image | img_url: 'grande' }}" data-srcset="{{ col_item.image | img_url: 'grande' }}">
+                            <img src="{{ col_item.image | img_url: 'grande' }}" data-src="{{ col_item.image | img_url: 'grande' }}" class="lazyload" alt="{{ col_item.title }}">
+                        </picture>
+                    </div>
+                    <div class="category-box__title">
+                        <span>{{ col_item.title }}</span>
+                    </div>
+                </a>
+
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% comment %} Luxury Collection Section {% endcomment %}
+{% assign lux_sec_title = page.metafields.market.mf_luxury_title %}
+{% assign lux_prod = page.metafields.market.mf_luxury_products %}
+{% assign lux_prod_quantity = page.metafields.market.mf_luxury_prod_range %}
+{% assign lux_pr_handle = lux_prod | split: "|" %}
+
+    <div class="catalog">
+            <div class="container">
+                <div class="title text-center">
+                    <div class="box-translate">
+                        <h2>{{ lux_sec_title }}</h2>
+                    </div>
+                </div>
+                <div class="catalog-list">
+                    {% for handle in lux_pr_handle limit:lux_prod_quantity %}
+                        {% assign prod_item = all_products[handle] %}
+
+                        <a href="{{ prod_item.url }}" class="catalog-box">
+                            <div class="catalog-box__img">
+                                <picture>
+                                    <img class="lazyload" data-src="{{ prod_item.featured_image  | img_url: "grande" }}" src="{{ prod_item.featured_image  | img_url: "grande" }}" alt="{{ prod_item }}">
+                                </picture>
+                            </div>
+                            <div class="catalog-box__title">{{ prod_item.title }}</div>
+                            <div class="catalog-box__price">{{ prod_item.first_available_variant.price | money }}</div>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+{% comment %} Video Section {% endcomment %}
+{% assign video_sec_title = page.metafields.market.mf_video_title %}
+{% assign video_sec_bg = page.metafields.market.mf_video_bg_video %}
+{% assign video_sec_main = page.metafields.market.mf_video_main_url %}
+
+
+    <div class="video">
+    <div class="video-img">
+        <video autoplay playsinline muted loop="loop">
+            <source src="{{ video_sec_bg }}" type="video/mp4">
+        </video>
+    </div>
+    <div class="title text-center">
+        <div class="box-translate">
+            <h2>{{video_sec_title }}</h2>
+        </div>
+    </div>
+    <a href="{{ video_sec_main }}" class="video-play" data-width="100vw" data-height="100vh" data-fancybox-video>
+        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle class="line-first" cx="22" cy="22" r="20" stroke="white" stroke-width="1px" stroke-dashoffset="0" stroke-dasharray="234"></circle>
+            <circle class="line-last" cx="22" cy="22" r="20" stroke="white" stroke-width="1px" stroke-dashoffset="0" stroke-dasharray="234"></circle>
+            <path class="play" d="M25.9552 22.7671L18.9559 26.8283C18.3619 27.1726 17.5996 26.7557 17.5996 26.0616V17.9392C17.5996 17.2462 18.3608 16.8282 18.9559 17.1736L25.9552 21.2348C26.0903 21.312 26.2026 21.4235 26.2808 21.558C26.3589 21.6926 26.4 21.8454 26.4 22.001C26.4 22.1566 26.3589 22.3094 26.2808 22.4439C26.2026 22.5785 26.0903 22.69 25.9552 22.7671Z" fill="white" ></path>
+        </svg>
+    </a>
+</div>
+
+{% comment %} Top Collection Section {% endcomment %}
+{% assign top_sec_title = page.metafields.market.mf_coll_top_title %}
+{% assign top_prod = page.metafields.market.mf_coll_top_products %}
+{% assign top_prod_quantity = page.metafields.market.mf_top_prod_range %}
+{% assign top_pr_handle = top_prod | split: "|" %}
+
+    <div class="catalog">
+    <div class="container">
+        <div class="title text-center">
+            <div class="box-translate">
+               <h2>{{ top_sec_title }}</h2>
+            </div>
+        </div>
+        <div class="catalog-list">
+            {% for handle in top_pr_handle limit:top_prod_quantity %}
+                {% assign prod_item = all_products[handle] %}
+                <a href="{{ prod_item.url }}" class="catalog-box">
+                    <div class="catalog-box__img">
+                        <picture>
+                            <img src="{{ prod_item.featured_image  | img_url: "grande" }}" data-src="{{ prod_item.featured_image  | img_url: "grande" }}" class="lazyload" alt="{{ prod_item.title }}">
+                        </picture>
+                    </div>
+                    <div class="catalog-box__title">{{ prod_item.title }}</div>
+                    <div class="catalog-box__price">{{ prod_item.first_available_variant.price | money }}</div>
+                </a>
+            {% endfor %}
+
+        </div>
+    </div>
+</div>
+
+{% comment %} Subscribe {% endcomment %}
+{% assign subs_title = page.metafields.market.mf_subs_title %}
+{% assign subs_subtitle = page.metafields.market.mf_subs_subtitle %}
+
+{% assign subs_img_full = page.metafields.market.mf_subs_img_full %}
+{% assign subs_img_desk = page.metafields.market.mf_subs_img_desk %}
+{% assign subs_img_notebook = page.metafields.market.mf_subs_img_notebook %}
+{% assign subs_img_tablet = page.metafields.market.mf_subs_img_tablet %}
+{% assign subs_img_small = page.metafields.market.mf_subs_img_small %}
+{% assign mf_subs_success = page.metafields.market.mf_subs_success %}
+{% assign mf_subs_help = page.metafields.market.mf_subs_help %}
+
+<style>
+    #market-subscribe-form.has-success .subscribe-inner {
+        display: none;
+    }
+    #market-subscribe-form .subscribe-success {
+        display: none;
+    }
+    #market-subscribe-form.has-success .subscribe-success {
+        display: block;
+    }
+</style>
+
+    <div id="market-subscribe-form" class="subscribe">
+            <div class="container">
+                <div class="subscribe-img">
+                    <picture>
+                        <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ subs_img_full }}" media="(min-width: 1680px)">
+                        <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ subs_img_desk }}" media="(min-width: 1200px)">
+                        <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ subs_img_notebook }}" media="(min-width: 992px)">
+                        <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ subs_img_tablet }}" media="(min-width: 768px)">
+                        <source srcset="{{ 'pic.jpg' | asset_url }}" data-srcset="{{ subs_img_small }}">
+                        <img src="{{ 'pic.jpg' | asset_url }}" data-src="{{ subs_img_small }}" class="lazyload" alt="{{ subs_title }}">
+                    </picture>
+                </div>
+                <div class="subscribe-inner">
+                    <div class="subscribe-heading">
+                        <div class="box-translate">
+                            <p>{{ subs_title }}</p>
+                        </div>
+                    </div>
+                    <div class="subscribe-title">
+                        <div class="box-translate">
+                            <p>{{ subs_subtitle }}</p>
+                        </div>
+                    </div>
+                    <div class="subscribe-form">
+                        {% form 'customer', novalidate:'true'  %}
+                            <input id="contact_tags" name="contact[tags]" type="hidden" value="prospect,newsletter" />
+
+                            <div class="form-group" id="subscription_mail">
+                                <input type="email"  name="contact[email]" placeholder="E-mail">
+                                <div class="help-block" id="errorBlock">{{page.metafields.market.mf_subs_help}}</div>
+                            </div>
+                            {% if form.posted_successfully? %}
+                            <script>
+                                history.scrollRestoration = "manual"
+                                $(document).ready(function () {
+                                    document.getElementById('market-subscribe-form').classList.add('has-success');
+                                    window.location.hash = "#subscribe-form"
+                                })
+                            </script>
+                            {% else %}
+                            <script>
+                                history.scrollRestoration = "manual"
+                                $(document).ready(function () {
+
+                                    if (window.location.href.includes('contact%5Btags%5D=prospect%2Cnewsletter')){
+                                        document.getElementById('subscription_mail').classList.add('has-error')
+                                        document.getElementById('errorBlock').innerText="This e-mail is already subscribed!"
+                                        window.location.hash = "#subscribe-form"
+                                    }
+                                })
+                            </script>
+                            {% endif %}
+                            <div class="form-button">
+                                <button type="submit"><span class="icon icon-i-arr-long-right"></span></button>
+                            </div>
+                        {% endform %}
+                    </div>
+                </div>
+                <div class="subscribe-success">
+                    <div class="subscribe-title">
+                        <p>{{ mf_subs_success }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>

@@ -1,0 +1,70 @@
+{% assign footer_logo = page.metafields.general.footer_logo %}
+{% assign footer_copyright = page.metafields.general.footer_copyright %}
+
+{% assign footer_soc_inst_title = page.metafields.general.footer_soc_inst_title %}
+{% assign footer_soc_inst_url = page.metafields.general.footer_soc_inst_url %}
+
+{% assign footer_soc_fb_title = page.metafields.general.footer_soc_fb_title %}
+{% assign footer_soc_fb_url = page.metafields.general.footer_soc_fb_url %}
+
+{% assign footer_soc_pint_title = page.metafields.general.footer_soc_pint_title %}
+{% assign footer_soc_pint_url = page.metafields.general.footer_soc_pint_url %}
+
+{% assign ft_left_first_title = page.metafields.general.ft_left_first_title %}
+{% assign ft_left_first_url = page.metafields.general.ft_left_first_url %}
+{% assign ft_left_second_title = page.metafields.general.ft_left_second_title %}
+{% assign ft_left_second_url = page.metafields.general.ft_left_second_url %}
+{% assign ft_left_third_title = page.metafields.general.ft_left_third_title %}
+{% assign ft_left_third_url = page.metafields.general.ft_left_third_url %}
+
+{% assign ft_right_first_title = page.metafields.general.ft_right_first_title %}
+{% assign ft_right_first_url = page.metafields.general.ft_right_first_url %}
+{% assign ft_right_second_title = page.metafields.general.ft_right_second_title %}
+{% assign ft_right_second_url = page.metafields.general.ft_right_second_url %}
+{% assign ft_right_third_title = page.metafields.general.ft_right_third_title %}
+{% assign ft_right_third_url = page.metafields.general.ft_right_third_url %}
+
+<footer class="footer">
+    <div class="footer-top">
+        <div class="container">
+            <div class="footer-inner">
+                <div class="logo">
+                    <a href="{{ shop.url }}">
+                        <img src="{{ 'multi-lp-logo.svg' | asset_url }}" alt="{{ shop.name }}">
+                    </a>
+                </div>
+                <div class="footer-menu">
+                    <ul>
+                        <li><a href="{{ ft_left_first_url }}">{{ ft_left_first_title }}</a></li>
+                        <li><a href="{{ ft_left_second_url }}">{{ ft_left_second_title }}</a></li>
+                        <li><a href="{{ ft_left_third_url }}">{{ ft_left_third_title }}</a></li>
+                    </ul>
+                    <ul>
+                        <li><a href="{{ ft_right_first_url }}">{{ ft_right_first_title }}</a></li>
+                        <li><a href="{{ ft_right_second_url }}">{{ ft_right_second_title }}</a></li>
+                        <li><a href="{{ ft_right_third_url }}">{{ ft_right_third_title }}</a></li>
+                    </ul>
+                </div>
+                <div class="footer-socials">
+                    <ul>
+                        <li><a href="{{ footer_soc_inst_url }}" target="_blank">{{ footer_soc_inst_title }}</a></li>
+                        <li><a href="{{ footer_soc_fb_url }}" target="_blank">{{ footer_soc_fb_title }}</a></li>
+                        <li><a href="{{ footer_soc_pint_url }}" target="_blank">{{ footer_soc_pint_title }}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-bottom">
+        <div class="container">
+            <div class="copyright">{{ footer_copyright }}</div>
+        </div>
+    </div>
+</footer>
+
+{% schema %}
+    {
+        "name": "LP: Footer",
+        "settings": []
+    }
+{% endschema %}

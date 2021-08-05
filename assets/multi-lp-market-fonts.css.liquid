@@ -1,0 +1,218 @@
+@font-face {
+    font-family: 'Gallery Modern';
+    src: url('GalleryModernRegular.eot');
+    src: url('GalleryModernRegular.eot?#iefix') format('embedded-opentype'),
+    url('GalleryModernRegular.woff') format('woff'),
+    url('GalleryModernRegular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Zephyr';
+    src: url("{{ 'ZephyrRegular.woff2' | asset_url }}") format('woff2'),
+    url("{{ 'ZephyrRegular.woff' | asset_url }}" ) format('woff'),
+    url("{{ 'ZephyrRegular.ttf' | asset_url }}" ) format('truetype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bigilla';
+    src: url("{{ 'BigillaRegular.woff' | asset_url }} ");
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Bigilla';
+    src: url("{{ 'BigillaBold.woff' | asset_url }} ");
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "svgfont";
+    src: url("{{'svgfont.woff' | asset_url }}") format("woff");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url("{{ 'HelveticaNeueCyr-Medium.eot' | asset_url }}");
+    src: local('HelveticaNeueCyr-Medium'),
+    url("{{  'HelveticaNeueCyr-Medium.eot?#iefix'| asset_url}}") format('embedded-opentype'),
+    url("{{  'HelveticaNeueCyr-Medium.woff'| asset_url}}" ) format('woff'),
+    url("{{  'HelveticaNeueCyr-Medium.ttf'| asset_url}}" ) format('truetype');
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url("{{ 'HelveticaNeueCyr-Heavy.eot' | asset_url }}");
+    src: local('HelveticaNeueCyr-Heavy'),
+    url("{{ 'HelveticaNeueCyr-Heavy.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+    url("{{ 'HelveticaNeueCyr-Heavy.woff' | asset_url }}") format('woff'),
+    url("{{ 'HelveticaNeueCyr-Heavy.ttf' | asset_url }}") format('truetype');
+    font-weight: 800;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url("{{ 'HelveticaNeueCyr-HeavyItalic.eot' | asset_url }}");
+    src: local('HelveticaNeueCyr-HeavyItalic'),
+    url("{{ 'HelveticaNeueCyr-HeavyItalic.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+    url("{{ 'HelveticaNeueCyr-HeavyItalic.woff' | asset_url }}") format('woff'),
+    url("{{ 'HelveticaNeueCyr-HeavyItalic.ttf'| asset_url }}") format('truetype');
+    font-weight: 800;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url("{{ 'HelveticaNeueCyr-Black.eot' | asset_url }}");
+    src: local('HelveticaNeueCyr-Black'),
+    url("{{ 'HelveticaNeueCyr-Black.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+    url("{{ 'HelveticaNeueCyr-Black.woff'| asset_url }}") format('woff'),
+    url("{{ 'HelveticaNeueCyr-Black.ttf' | asset_url }}") format('truetype');
+    font-weight: 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url("{{ 'HelveticaNeueCyr-UltraLightItalic.eot' | asset_url }}");
+    src: local('HelveticaNeueCyr-UltraLightItalic'),
+    url("{{ 'HelveticaNeueCyr-UltraLightItalic.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+    url("{{ 'HelveticaNeueCyr-UltraLightItalic.woff' | asset_url }}") format('woff'),
+    url("{{ 'HelveticaNeueCyr-UltraLightItalic.ttf' | asset_url }}") format('truetype');
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url("{{ 'HelveticaNeueCyr-BlackItalic.eot' | asset_url }}");
+    src: local('HelveticaNeueCyr-BlackItalic'),
+    url("{{ 'HelveticaNeueCyr-BlackItalic.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+    url("{{ 'HelveticaNeueCyr-BlackItalic.woff' | asset_url }}") format('woff'),
+    url("{{ 'HelveticaNeueCyr-BlackItalic.ttf' | asset_url }}") format('truetype');
+    font-weight: 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url("{{ 'HelveticaNeueCyr-ThinItalic.eot' | asset_url }}");
+    src: local('HelveticaNeueCyr-ThinItalic'),
+    url("{{ 'HelveticaNeueCyr-ThinItalic.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+    url("{{ 'HelveticaNeueCyr-ThinItalic.woff' | asset_url }}") format('woff'),
+    url("{{ 'HelveticaNeueCyr-ThinItalic.ttf' | asset_url }}") format('truetype');
+    font-weight: 100;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url("{{ 'HelveticaNeueCyr-MediumItalic.eot' | asset_url }}");
+    src: local('HelveticaNeueCyr-MediumItalic'),
+    url("{{ 'HelveticaNeueCyr-MediumItalic.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+    url("{{ 'HelveticaNeueCyr-MediumItalic.woff' | asset_url }}") format('woff'),
+    url("{{ 'HelveticaNeueCyr-MediumItalic.ttf' | asset_url }}") format('truetype');
+    font-weight: 500;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url("{{ 'HelveticaNeueCyr-LightItalic.eot' | asset_url }}");
+    src: local('HelveticaNeueCyr-LightItalic'),
+    url("{{ 'HelveticaNeueCyr-LightItalic.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+    url("{{ 'HelveticaNeueCyr-LightItalic.woff' | asset_url }}") format('woff'),
+    url("{{ 'HelveticaNeueCyr-LightItalic.ttf' | asset_url }}") format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url("{{ 'HelveticaNeueCyr-UltraLight.eot' | asset_url }}");
+    src: local('HelveticaNeueCyr-UltraLight'),
+    url("{{ 'HelveticaNeueCyr-UltraLight.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+    url("{{ 'HelveticaNeueCyr-UltraLight.woff' | asset_url }}") format('woff'),
+    url("{{ 'HelveticaNeueCyr-UltraLight.ttf' | asset_url }}") format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url("{{ 'HelveticaNeueCyr-BoldItalic.eot' | asset_url }}");
+    src: local('HelveticaNeueCyr-BoldItalic'),
+    url("{{ 'HelveticaNeueCyr-BoldItalic.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+    url("{{ 'HelveticaNeueCyr-BoldItalic.woff' | asset_url }}") format('woff'),
+    url("{{ 'HelveticaNeueCyr-BoldItalic.ttf' | asset_url }}") format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url("{{ 'HelveticaNeueCyr-Italic.eot' | asset_url }}");
+    src: local('HelveticaNeueCyr-Italic'),
+    url("{{ 'HelveticaNeueCyr-Italic.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+    url("{{ 'HelveticaNeueCyr-Italic.woff' | asset_url }}") format('woff'),
+    url("{{ 'HelveticaNeueCyr-Italic.ttf' | asset_url }}") format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url("{{ 'HelveticaNeueCyr-Roman.eot' | asset_url }}");
+    src: local('HelveticaNeueCyr-Roman'),
+    url("{{ 'HelveticaNeueCyr-Roman.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+    url("{{ 'HelveticaNeueCyr-Roman.woff' | asset_url }}") format('woff'),
+    url("{{ 'HelveticaNeueCyr-Roman.ttf' | asset_url }}") format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url("{{ 'HelveticaNeueCyr-Bold.eot' | asset_url }}");
+    src: local('HelveticaNeueCyr-Bold'),
+    url("{{ 'HelveticaNeueCyr-Bold.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+    url("{{ 'HelveticaNeueCyr-Bold.woff' | asset_url }}") format('woff'),
+    url("{{ 'HelveticaNeueCyr-Bold.ttf' | asset_url }}") format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url("{{ 'HelveticaNeueCyr-Light.eot' | asset_url }}");
+    src: local('HelveticaNeueCyr-Light'),
+    url("{{ 'HelveticaNeueCyr-Light.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+    url("{{ 'HelveticaNeueCyr-Light.woff' | asset_url }}") format('woff'),
+    url("{{ 'HelveticaNeueCyr-Light.ttf' | asset_url }}") format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'HelveticaNeueCyr';
+    src: url("{{ 'HelveticaNeueCyr-Thin.eot' | asset_url }}");
+    src: local('HelveticaNeueCyr-Thin'),
+    url("{{ 'HelveticaNeueCyr-Thin.eot?#iefix' | asset_url }}") format('embedded-opentype'),
+    url("{{ 'HelveticaNeueCyr-Thin.woff' | asset_url }}") format('woff'),
+    url("{{ 'HelveticaNeueCyr-Thin.ttf' | asset_url }}") format('truetype');
+    font-weight: 100;
+    font-style: normal;
+}

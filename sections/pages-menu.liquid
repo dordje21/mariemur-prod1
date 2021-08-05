@@ -1,0 +1,21 @@
+<nav class="nav">
+    <ul class="nav__list">
+        {% for link in linklists[section.settings.links_links].links %}
+            <li class="nav__item">
+                <a href="{{ link.url }}" class="nav__link {% if link.url contains page.handle %}nav__link_active{% endif %}">{{ link.title }}</a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>
+{% schema %}
+{
+"name": "Menu",
+"settings": [
+{
+"type": "link_list",
+"id": "links_links",
+"label": "Link list"
+}
+]
+}
+{% endschema %}

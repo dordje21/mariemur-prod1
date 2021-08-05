@@ -1,0 +1,38 @@
+<div class="popup-size-guide position-relative py-30 px-15" data-popup-content>
+
+    <div class="popup-size-guide__content mx-auto">
+        <div class="rte">
+            {%- if product.metafields.sizeguide.html -%}
+                {{ product.metafields.sizeguide.html }}
+            {%- elsif product.type == 'bra' or for_option == 'bra' -%}
+                {% include 'content-load-template' content: pages['international-size-converter'].content %}
+            {%- elsif product.type == 'panties' or product.type == 'garterbelt' or for_option == 'panties' or for_option == 'skirt' -%}
+                {% include 'content-load-template' content: pages['panties-sizechart'].content %}
+            {%- elsif product.type == 'harness' -%}
+                {% include 'content-load-template' content: pages['sizechart-harness'].content %}
+            {%- elsif product.type == 'garter' -%}
+                {% include 'content-load-template' content: pages['sizechart-garters'].content %}
+            {%- elsif product.type == 'cuffs' -%}
+                {% include 'content-load-template' content: pages['sizechart-cuffs'].content %}
+            {%- elsif product.type == 'acuffs' -%}
+                {% include 'content-load-template' content: pages['sizechart-cuffs-leg'].content %}
+            {%- elsif product.type == 'choker' -%}
+                {% include 'content-load-template' content: pages['sizechart-collar'].content %}
+            {%- elsif product.type == 'belt' -%}
+                {% include 'content-load-template' content: pages['sizechart-belts'].content %}
+            {%- elsif product.type == 'lbelt' -%}
+                {% include 'content-load-template' content: pages['sizechart-leg-belts'].content %}
+            {%- elsif product.type == 'gown' or product.type == 'bodysuit' or product.type == 'bolero' -%}
+                {% include 'content-load-template' content: pages['sizechart-bodysuits'].content %}
+            {%- elsif product.type == 'fullbody' -%}
+                {% include 'content-load-template' content: pages['sizechart-fullbody-1'].content %}
+            {%- else -%}
+                {%- if section.settings.size_guide_page_content != blank -%}
+                    {% include 'content-load-template' content: pages[section.settings.size_guide_page_content].content %}
+                {%- else -%}
+                    {% include 'content-load-template' content: section.settings.size_guide_content %}
+                {%- endif -%}
+            {%- endif -%}
+        </div>
+    </div>
+</div>

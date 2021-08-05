@@ -1,0 +1,53 @@
+{% assign header_logo = page.metafields.general.header_logo %}
+{% assign header_menu_title = page.metafields.general.header_menu_title %}
+
+{% assign head_menu_title = page.metafields.general.head_menu_title %}
+{% assign head_menu_url = page.metafields.general.head_menu_url %}
+
+{% assign header_soc_inst_title = page.metafields.general.header_soc_inst_title %}
+{% assign header_soc_inst_url = page.metafields.general.header_soc_inst_url %}
+
+{% assign header_soc_fb_title = page.metafields.general.header_soc_fb_title %}
+{% assign header_soc_fb_url = page.metafields.general.header_soc_fb_url %}
+
+{% assign header_soc_pint_title = page.metafields.general.header_soc_pint_title %}
+{% assign header_soc_pint_url = page.metafields.general.header_soc_pint_url %}
+
+<header class="header">
+    <div class="container">
+        <div class="header-inner">
+            <div class="logo">
+                <a href="{{ shop.url }}">
+                    <img src="{{ 'multi-lp-logo.svg' | asset_url }}" alt="{{ shop.name }}">
+                </a>
+            </div>
+            <div class="menu-toggle js-menu-open">{{ header_menu_title }}</div>
+            <div class="top-menu">
+                <ul>
+                    {% for item in head_menu_title %}
+                        {% assign index = forloop.index | minus: 1 %}
+                        <li>
+                            <a href="{{ head_menu_url[index] }}" class="js-scroll-to">{{ item }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <div class="header-socials">
+                    <ul>
+                        <li><a href="{{ header_soc_inst_url }}" target="_blank">{{ header_soc_inst_title }}</a></li>
+                        <li><a href="{{ header_soc_fb_url }}" target="_blank">{{ header_soc_fb_title }}</a></li>
+                        <li><a href="{{ header_soc_pint_url }}" target="_blank">{{ header_soc_pint_title }}</a></li>
+                    </ul>
+                </div>
+                <div class="header-close js-menu-close"><span class="icon icon-i-close"></span></div>
+            </div>
+            <div class="header-overlay"></div>
+        </div>
+    </div>
+</header>
+
+{% schema %}
+    {
+        "name": "LP: Header",
+        "settings": []
+    }
+{% endschema %}

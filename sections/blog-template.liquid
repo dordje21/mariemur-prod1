@@ -1,0 +1,151 @@
+
+{% if section.settings.blog_show_paginate %}
+  {% assign pagination = 10 %}
+{% else %}
+  {% assign pagination = none %}
+{% endif %}
+
+{% paginate blog.articles by pagination  %}
+
+  <div class="blog__conteiner">
+    <div class="blog__list">
+       {% for article in blog.articles %}
+      <div class="blog__item">
+        <a href="{{ article.url }}"><h2 class="blog__item__title">{{ article.title }}</h2></a>
+        <div class="blog__item__date"> {% if section.settings.blog_show_date %} {{ article.published_at | time_tag: format: 'date' }} {% endif %}{% if section.settings.blog_show_author %} Posted by <span class="blog__item__autor">{{ article.author }}</span> {% endif %}</div>
+        <p class="blog__item__short-description">{{ article.content | strip_html | truncate: 450 }}</p>
+        <a href="{{ article.url }}" class="blog__item__link"> {{ 'blogs.article.read_more' | t }}</a>
+      </div>
+     {% endfor %}
+    </div>
+
+    {%- if paginate.pages > 1 -%}
+      <div class="catalog-more">
+        {% unless paginate.next.is_link %}
+          <div class="catalog-more__box ">
+            <svg viewBox="0 0 226 226" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle class="line-first" cx="113" cy="113" r="112" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-dashoffset="0" stroke-dasharray="710" />
+              <circle class="line-last" cx="113" cy="113" r="112" stroke="#A60B00" stroke-opacity="1" stroke-width="1" stroke-dashoffset="710" stroke-dasharray="710" />
+            </svg>
+
+            <div class="catalog-more__box-title">NO MORE ARTICLES </div>
+          </div>
+        {% else %}
+          <a href="{{ paginate.next.url }}" class="catalog-more__box js-load-more">
+            <svg viewBox="0 0 226 226" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle class="line-first" cx="113" cy="113" r="112" stroke="#000000" stroke-opacity="1" stroke-width="1" stroke-dashoffset="0" stroke-dasharray="710" />
+              <circle class="line-last" cx="113" cy="113" r="112" stroke="#A60B00" stroke-opacity="1" stroke-width="1" stroke-dashoffset="710" stroke-dasharray="710" />
+            </svg>
+            <div class="catalog-more__box-title">MORE ARTICLES </div>
+            <div class="catalog-more__box-loading">loading...</div>
+            <div class="catalog-more__box-loaded"><span class="icon icon-i-check"></span></div>
+            <div class="catalog-more__box-disable">NO ARTICLES </div>
+          </a>
+        {% endunless %}
+      </div>
+
+    {%- endif -%}
+  </div>
+
+
+
+
+
+
+
+{% endpaginate %}
+
+
+{% schema %}
+{
+  "name": {
+    "cs": "Stránky blogu",
+    "da": "Blogsider",
+    "de": "Blogseiten",
+    "en": "Blog pages",
+    "es": "Páginas del blog",
+    "fi": "Blogisivut",
+    "fr": "Pages du blog",
+    "it": "Pagine del blog",
+    "ja": "ブログページ",
+    "ko": "블로그 페이지",
+    "nb": "Bloggsider",
+    "nl": "Blogpagina's",
+    "pl": "Strony blogu",
+    "pt-BR": "Páginas do blog",
+    "pt-PT": "Páginas do blogue",
+    "sv": "Bloggsidor",
+    "th": "หน้าบล็อก",
+    "tr": "Blog sayfaları",
+    "vi": "Trang blog",
+    "zh-CN": "博客页面",
+    "zh-TW": "部落格頁面"
+  },
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "blog_show_author",
+      "label": {
+        "cs": "Zobrazit autora",
+        "da": "Vis forfatter",
+        "de": "Autor anzeigen",
+        "en": "Show author",
+        "es": "Mostrar autor",
+        "fi": "Näytä tekijä",
+        "fr": "Afficher l'auteur",
+        "it": "Mostra autore",
+        "ja": "執筆者を表示する",
+        "ko": "작성자 표시",
+        "nb": "Vis forfatter",
+        "nl": "Auteur weergeven",
+        "pl": "Pokaż autora",
+        "pt-BR": "Exibir autor",
+        "pt-PT": "Mostrar autor",
+        "sv": "Visa författare",
+        "th": "แสดงผู้เขียน",
+        "tr": "Yazarı göster",
+        "vi": "Hiển thị tác giả",
+        "zh-CN": "显示作者",
+        "zh-TW": "顯示作者"
+      },
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_date",
+      "label": {
+        "cs": "Zobrazit datum",
+        "da": "Vis dato",
+        "de": "Datum anzeigen",
+        "en": "Show date",
+        "es": "Mostrar fecha",
+        "fi": "Näytä päivämäärä",
+        "fr": "Afficher la date",
+        "it": "Mostra data",
+        "ja": "日付を表示する",
+        "ko": "날짜 표시",
+        "nb": "Vis dato",
+        "nl": "Datum weergeven",
+        "pl": "Pokaż datę",
+        "pt-BR": "Exibir data",
+        "pt-PT": "Mostrar data",
+        "sv": "Visa datum",
+        "th": "แสดงวันที่",
+        "tr": "Tarihi göster",
+        "vi": "Hiển thị ngày",
+        "zh-CN": "显示日期",
+        "zh-TW": "顯示日期"
+      },
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_show_paginate",
+      "label": {
+      "en": "Show paginate"
+      },
+      "default": false
+    }
+  ]
+}
+{% endschema %}
