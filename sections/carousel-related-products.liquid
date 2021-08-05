@@ -124,20 +124,47 @@
     {%- if found_a_collection -%}
         {%- assign counter = 1 -%}
         {%- assign current_product = product -%}
-        {%- assign limit = 4 -%}
+        {%- assign limit = 8 -%}
         {% capture section_html %}
             <div class="product-other">
-                <div class="product-other__title">
+                <div class="product-other__title rel-h2 why-mariemur-h2">
                     <h2>{{ section.settings.title }}</h2>
                 </div>
-                <div class="product-other__content">
+                <div class="product-other__content" style="overflow: hidden">
                     <div class="product-other__list">
+                        <div class="main-news__slider js-related-slider-new">
                         {%- for product in collection.products -%}
                             {%- unless product.handle == current_product.handle -%}
                                 {%- unless same_vendor and current_product.vendor != product.vendor -%}
                                     {%- unless same_type and current_product.type != product.type -%}
+
+
+
                                         {%- if  forloop.index0 < limit -%}
-                                            {% include 'product-collection' %}
+                                        <div>
+                                            <a href="{{ product.url }}" class="product-box wow fadeInUp" data-wow-delay="0.2s">
+                                                <div class="product-box__img">
+                                                    <picture>
+                                                        <source data-srcset="{{ product | img_url : '848x' }}" srcset="{{ product | img_url : 'small' }}" media="(min-width: 1200px)">
+                                                        <source data-srcset="{{ product | img_url : '768x' }}" srcset="{{ product | img_url : 'small' }}" media="(min-width: 768px)">
+                                                        <source data-srcset="{{ product | img_url : '768x' }}" srcset="{{ product | img_url : 'small' }}">
+                                                        <img data-src="{{ product | img_url : '768x' }}" src="{{ product | img_url : 'small' }}" class="lazyload" alt="">
+                                                    </picture>
+                                                    {% for media in product.mediacatalog-more__box  %}
+                                                        {% case media.media_type %}
+                                                            {% when 'video' %}
+                                                                <video autoplay playsinline muted loop="loop">
+                                                                    <source src="{{ media.sources[1].url }}" type="video/mp4">
+                                                                </video>
+                                                                <span class="icon icon-i-play"></span>
+                                                        {% endcase %}
+                                                    {% endfor %}
+
+                                                </div>
+                                                <div class="product-box__title">{{ product.title }}</div>
+                                            </a>
+                                        </div>
+
                                         {%- endif -%}
                                         {%- assign counter = counter | plus: 1 -%}
                                         {%- if counter >= limit -%}
@@ -147,6 +174,7 @@
                                 {%- endunless -%}
                             {%- endunless -%}
                         {%- endfor -%}
+                        </div>
                     </div>
                 </div>
             </div>

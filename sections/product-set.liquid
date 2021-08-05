@@ -1,8 +1,14 @@
 {% include 'product-res-variables' %}
 
 <div class="product-content" data-section-type="product-page">
+    <div id="size-chart-set-block"></div>
     {% include 'product-get-page-gallery' %}
     <div id="product-sidebar" class="product-sidebar">
+
+        <div class="new-to-sale" style="display: none">
+            NEW TO SALE
+        </div>
+        <div class="row-title-price">
         <div class="product-title">
             <h1>{{ product.title }}</h1>
         </div>
@@ -94,13 +100,45 @@
                 {% endif %}
             {% endif %}
         </div>
+        </div>
+        <div class="reviews-prod-title reviews-prod-title-desc">
+        </div>
+
+        <div class="block-color-and-share share--product-mob">
+            <div class="color-option-product">
+               {% include 'color-option-product' %}
+            </div>
+            <div class="share--product">
+                <div class="reviews-prod-title reviews-prod-title-mob">
+                </div>
+                {% comment %}<button>SHARE<img src="{{ 'share-product.svg' | asset_url }}" alt="share-product"></button>{% endcomment %}
+                {% include 'share-icons' %}
+            </div>
+        </div>
+
+        <div class="klarna-set-container klarna-container mb-20" style="visibility:hidden; max-height: 1px;margin: 0 0 28px 0;">
+            <klarna-placement data-key="credit-promotion-small" data-purchase-amount="{{ price }}" data-preloaded="true" data-locale="en-US"></klarna-placement>
+        </div>
 
         <div class="product-desc">
-            {% if product.metafields.global.short-desc %}
-                {{ product.metafields.global.short-desc }}
+            {% if product.metafields.product.short-desc %}
+                {{ product.metafields.product.short-desc }}
             {% endif %}
         </div>
-        <div class="product-buttons">
+
+        <div class="block-color-and-share share--product-descTop">
+            <div class="color-option-product">
+                {% include 'color-option-product' %}
+            </div>
+            <div class="share--product">
+                <div class="reviews-prod-title reviews-prod-title-mob">
+                </div>
+                {% comment %}<button>SHARE<img src="{{ 'share-product.svg' | asset_url }}" alt="share-product"></button>{% endcomment %}
+                {% include 'share-icons' %}
+            </div>
+        </div>
+
+        <div class="product-buttons" style="display: none">
             {% assign models = product.media | where: "media_type", "model" %}
             {% assign modelsSize = models | size %}
             {% assign active_pieces = 0 %}
@@ -115,6 +153,7 @@
                 {%- endfor -%}
             {%- endif -%}
             <button class="btn btn-nofill js-size-guide {% if product_size_guide ==empty %}d-none{% endif %}"><span>Size guide<span class="icon icon-i-plus"></span></span></button>
+            <button class="btn navigable btn-red" onclick="sizesChecker()"><span>Add to bag set</span></button>
             {% if active_pieces == 0 %}
                 <button class="btn red-button js-show-waitlist " data-wait-id="main"><span>Join the waitlist</span></button>
             {% endif %}
@@ -122,7 +161,11 @@
             {% if modelsSize > 0 %}
                 <button class="btn btn-red-nofill d-lg-none d-none js-model"><span>View in 3D<span class="icon icon-i-3D"></span></span></button>
             {% endif %}
+            <div class="product-buttons-errors" style="">
+                Please select a size for each product!
+            </div>
         </div>
+
 <div class="d-lg-none" style="position: absolute; z-index: -1" >
         {% for model in models %}
             <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
@@ -147,11 +190,9 @@
             </script>
         {% endfor %}
 </div>
-        <div class="klarna-set-container klarna-container mb-20" style="visibility:hidden; max-height: 1px;margin: 0 0 28px 0;">
-            <klarna-placement data-key="credit-promotion-small" data-purchase-amount="{{ price }}" data-preloaded="true" data-locale="en-US"></klarna-placement>
-        </div>
-        <div class="product-list">
-            <div class="product-list__title">Customise your set</div>
+
+        <div class="product-list why-mariemur-h4 product-list-m">
+            <div class="product-list__title"><h4>Customise your set</h4></div>
             <div class="product-list__content">
                 {% assign pieces = 0 %}
                 {% include 'product-sets',pieces:pieces %}
@@ -227,7 +268,7 @@
                                     </picture>
                                 </a>
                             </div>
-                            <div class="product-list__box-body" {% include 'product-get-attributes' %}>
+                            <div class="product-list__box-body">
                                 <div class="product-list__box-title">
                                     <a href="{{ product.url }}">{{ product.title }}</a>
                                 </div>
@@ -273,13 +314,13 @@
                                 </div>
                                 <div class="product-list__box-price">
                                     <div class="price-title">Price</div>
-                                    <span class="price"><span class="money">  {{ product.price | money }}</span></span>
+                                    <span class="price"><span class="money">  {{ product.price | money }} </span></span>
                                 </div>
                             </div>
                         </div>
                         <div class="waitlist-modal__form">
                             <div class="form-group ">
-                                <input type="email" name="customer[email]" id="email" placeholder="Email">
+                                <input type="email" name="customer[email]" placeholder="Email">
                                 <div class="help-block">Please enter a valid email address.</div>
                             </div>
                             <div class="form-check">
@@ -299,42 +340,8 @@
             </div>
         </div>
     {%- endfor -%}
-    <style>
-        .klaviyo_modal.hide{
-            z-index: -5;
-        }
-    </style>
-    <div class="klaviyo_modal hide" id="product_waitlist" style="display:none;">
-        <div class="klaviyo_inner">
-            <a href="#" class="klaviyo_close_modal klaviyo_header_close">×</a>
-            <form action="//manage.kmail-lists.com/subscriptions/subscribe" method="POST" novalidate="novalidate" class="klaviyo_subscription_form">
-                <input type="hidden" name="g" value="XqPC8J">
-                <div class="klaviyo_fieldset">
-                    <p class="klaviyo_header">Interested in our Newsletter?</p>
-                    <p class="klaviyo_subheader">Stay in the know with news and promotions.</p>
-                </div>
-                <div class="klaviyo_fieldset">
-                    <div class="klaviyo_field_group">
-                        <label for="k_id_modal_$email">Email Address</label>
-                        <input type="email" id="k_id_modal_$email" name="email" class="klav_email">
-                    </div>
-                </div>
-                <div class="klaviyo_fine_print"></div>
-                <div class="klaviyo_form_actions">
-                    <button type="submit" class="klaviyo_submit_button">
-                        <span>Subscribe</span>
-                    </button>
-                </div>
-                <div class="klaviyo_below_submit" ></div>
-            </form>
-            <div class="error_message" ></div>
-            <div class="success_message" ></div>
-        </div>
-    </div>
-
-    <script type="text/javascript" src="//www.klaviyo.com/media/js/public/klaviyo_subscribe.js"></script>
 {%- endif -%}
-{% if active_pieces == 0 %}
+{% if  active_pieces == 0 %}
     {%- if products_pices_wish_list -%}
         <div class="waitlist-modal waitlist-modal-set" data-wait="main">
             <div class="waitlist-modal__inner">
@@ -367,7 +374,7 @@
                 {% endif %}
             {% endfor %}
 
-                            <div class="product-list__box {% include 'product-get-attributes' %}">
+                            <div class="product-list__box">
                                 <div class="product-list__box-head">
                                     <a href="{{ product.url }}" class="product-list__box-img">
                                         <picture>
@@ -436,7 +443,7 @@
         {%- endfor -%}
         <div class="waitlist-modal__form">
             <div class="form-group ">
-                <input type="email" name="customer[email]" id="email" placeholder="Email">
+                <input type="email" name="customer[email]" placeholder="Email">
                 <div class="help-block">Please enter a valid email address.</div>
             </div>
             <div class="form-check">
@@ -456,103 +463,6 @@
         </div>
         </div>
     {%- endif -%}
-<script>
-    let products=[];
-    $('[data-wait="main"] .js-size-list li ').on('click',function (){
-        let json_str=$(this).closest('.data-js-product').attr('data-json-product');
-        let json=JSON.parse(json_str);
-        let _this=$(this);
-        let  product_obj;
-        setTimeout(function (){
-            let size=_this.find($('.size-title'))[0].innerHTML;
-            console.log(size);
-            if( products.length !=0 ){
-                product_obj=products.find(product=> product.name === json.handle);
-            }
-            if(product_obj == undefined){
-                $.each(json.variants, function () {
-                    if (this.option1 === size) {
-                        products.push({name: json.handle,option:this.option1, product_id: this.id})
-
-                    }
-                });
-            }
-            else {
-                $.each(json.variants, function () {
-                    if (this.option1 === size) {
-                        product_obj.product_id=this.id;
-                        product_obj.option=this.option1;
-
-                    }
-                });
-            }
-            console.log(products);
-            console.log(json.variants);
-        },200)
-        console.log($('[data-wait="main"]  .product-list__box ').length)
-    });
-
-    setTimeout(function (){
-
-        $('#waitlistForm-main').submit(function (){
-
-            var product_list_lenght = $(this).find('.product-list__box').length,
-                arr_lenght = products.length;
-            if ($(this).find($('[name="addEmail"]')).prop('checked') && product_list_lenght==arr_lenght ) {
-                let email = $(this).find($('.form-group #email')).val();
-                console.log(email)
-                var count = 0;
-                var timer = setInterval(function(){
-                    if(count != arr_lenght){
-                        BackInStock(products[count]);
-                        count++;
-                    }
-                    else{
-                        clearInterval(timer);
-                    }
-                }, 1000);
-                function BackInStock(product){
-                    $.ajax({
-                        type: 'POST',
-                        url: 'https://a.klaviyo.com/onsite/components/back-in-stock/subscribe',
-                        data: {
-                            a: 'PAgcrr',
-                            email: email,
-                            variant: product.product_id,
-                            platform: 'shopify'
-                        },
-                        success: function (response) {
-                            console.log(response)
-                        }
-
-                    })
-                }
-
-
-                KlaviyoSubscribe.attachToModalForm('#product_waitlist',
-                    {
-                        hide_form_on_success: false,
-                        ignore_cookie: true,
-                        success_message: false,
-
-                    });
-
-                $(".klav_email").val(email);
-                setTimeout(function () {
-                    $('.klaviyo_subscription_form').trigger('submit')
-                    setTimeout(function () {
-                        $('.klaviyo_subscription_form').trigger('reset')
-                    }, 500)
-                }, 500)
-
-
-
-            }
-        })
-
-    },200)
-
-</script>
 {% endif %}
 <script>
     $( document ).on( 'click', '.js-show-waitlist', function() {
@@ -573,80 +483,16 @@
         e.stopPropagation();
     });
 
-    let id=0;
-
-    $(".waitlist-modal-set .js-size-list li").on('click',function (){
-
-        if($(this).closest('.waitlist-modal-set').attr('data-wait') != "main") {
-            let json_str = $(this).closest('[data-js-product]').attr('data-json-product');
-            let json = JSON.parse(json_str);
-            let _this = $(this);
-            setTimeout(function () {
-                let size = _this.find($('.size-title'))[0].innerHTML;
-                console.log(size);
-                $.each(json.variants, function () {
-                    if (this.option1 === size) {
-                        id = this.id;
-                    }
-
-                });
-                console.log(id)
-
-            }, 200)
+        function newtosale() {
+        if(document.getElementById("disc_value-id").value > 0){
+            document.getElementsByClassName("new-to-sale")[0].style.display = "block"
+        } else {
+            document.getElementsByClassName("new-to-sale")[0].style.display = "none"
         }
-    });
+        }
 
-    setTimeout(function (){
-
-            $('[data-id="waitlistForm"]').submit(function (){
-                if($(this).closest('.waitlist-modal-set').attr('data-wait') != "main") {
-                    var $parent = $(this).find('.product-list__box'),
-                        $sizeCount = $parent.find('.size-box__count')[0].innerText;
-                    if ($(this).find($('[name="addEmail"]')).prop('checked') && !($sizeCount === 'SELECT SIZE' || $sizeCount === '')) {
-                        let email = $(this).find($('.form-group #email')).val();
-                        console.log(email)
-                        $.ajax({
-                            type: 'POST',
-                            url: 'https://a.klaviyo.com/onsite/components/back-in-stock/subscribe',
-                            data: {
-                                a: 'PAgcrr',
-                                email: email,
-                                variant: id,
-                                platform: 'shopify'
-                            },
-                            success: function (response) {
-                                console.log(response)
-                            }
-
-                        })
-                        KlaviyoSubscribe.attachToModalForm('#product_waitlist',
-                            {
-                                hide_form_on_success: false,
-                                ignore_cookie: true,
-                                success_message: false,
-
-                            });
-
-                        $(".klav_email").val(email);
-                        setTimeout(function () {
-                            $('.klaviyo_subscription_form').trigger('submit')
-                            setTimeout(function () {
-                                $('.klaviyo_subscription_form').trigger('reset')
-                            }, 500)
-                        }, 500)
-
-
-                    }
-                }
-            })
-
-        },200)
-
-
-
-
+        newtosale();
 </script>
-
 {% schema %}
     {
     "name": "Product page set",

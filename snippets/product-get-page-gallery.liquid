@@ -417,7 +417,8 @@
             </script>
     {%- endcase -%}
 {% endif %}
-<div class="product-slider js-product-slider">
+<div class="product-slider slider-with-mini-images">
+    <div class="js-product-slider">
     {%- for img in product.images -%}
         <div>
             <a href="{{ img | img_url : 'master' }}" class="product-slider__box" data-fancyzoom="product">
@@ -430,5 +431,9 @@
             </a>
         </div>
     {%- endfor -%}
+    </div>
+    <div class="slider-mini-images">
+
+    </div>
 </div>
 

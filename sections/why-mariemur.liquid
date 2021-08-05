@@ -1,0 +1,70 @@
+<div class="why-mariemur-section">
+    <div class="why-mariemur-h4">
+        <h4>{{ section.settings.title-block }}</h4>
+    </div>
+
+    <div class="why-mariemur-row">
+        {% for block in section.blocks %}
+
+            <div class="why-mariemur-block">
+                <div class="why-mariemur-block-ico">
+                    <img src="{{ block.settings.image | img_url: 'master' }}" width="17">
+                </div>
+                <div class="why-mariemur-block-h5">
+                    {{ block.settings.title }}
+                </div>
+                <div class="why-mariemur-block-p">
+                    {{ block.settings.text }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+</div>
+
+
+{% schema %}
+{
+"name": "Why-Mariemur?",
+"settings": [
+{
+"type": "text",
+"id": "title-block",
+"label": "WHY mariemur?",
+"default": "WHY mariemur?"
+}
+],
+"blocks": [
+{
+"name": "Block",
+"type": "block-info",
+"settings": [
+{
+"type": "image_picker",
+"id": "image",
+"label": "Image Icon"
+},
+{
+"type": "text",
+"id": "title",
+"label": "Title",
+"default": "THE ONE THAT YOU WANT? WE'VE GOT IT."
+},
+{
+"type": "text",
+"id": "text",
+"label": "Text",
+"default": "For recommendations, comments, or inquiry, feel free to contact us and we will get back to you as soon as we can."
+}
+]
+}
+],
+"presets": [
+{
+"category": "Content",
+"name":"Why-Mariemur?"
+}
+]
+}
+{% endschema %}

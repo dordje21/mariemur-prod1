@@ -17,11 +17,11 @@
     "checkout_logo_image": "shopify:\/\/shop_images\/logo_2dfca5dd-8be8-4901-b9f7-9878847dda05.png",
     "checkout_logo_position": "center",
     "checkout_logo_size": "small",
-    "checkout_body_background_color": "#efefef",
-    "checkout_input_background_color_mode": "white",
+    "checkout_body_background_color": "#ffffff",
+    "checkout_input_background_color_mode": "transparent",
     "checkout_sidebar_background_color": "#ffffff",
-    "checkout_accent_color": "#000000",
-    "checkout_button_color": "#25A799",
+    "checkout_accent_color": "#e32c2b",
+    "checkout_button_color": "#e32c2b",
     "checkout_error_color": "#e32c2b",
     "sections": {
       "header": {
@@ -1016,12 +1016,6 @@
       "1621850184946abe0c": {
         "type": "main-new-products",
         "blocks": {
-          "2bb3ae8a-ed70-4a63-862a-2745d2662df2": {
-            "type": "bp-item",
-            "settings": {
-              "bp-article": "rose-crotchless-bodysuit"
-            }
-          },
           "8e585dd4-1252-4f92-bf28-528e31ee4b81": {
             "type": "bp-item",
             "settings": {
@@ -1031,14 +1025,20 @@
           "94618c4f-8ec9-4f1d-93f3-e89b40717f15": {
             "type": "bp-item",
             "settings": {
-              "bp-article": "insta-poppy-bra-garters-set"
+              "bp-article": "athena-bodysuit-lilac"
+            }
+          },
+          "2bb3ae8a-ed70-4a63-862a-2745d2662df2": {
+            "type": "bp-item",
+            "settings": {
+              "bp-article": "bryony-lingerie-set-insta"
             }
           }
         },
         "block_order": [
-          "2bb3ae8a-ed70-4a63-862a-2745d2662df2",
           "8e585dd4-1252-4f92-bf28-528e31ee4b81",
-          "94618c4f-8ec9-4f1d-93f3-e89b40717f15"
+          "94618c4f-8ec9-4f1d-93f3-e89b40717f15",
+          "2bb3ae8a-ed70-4a63-862a-2745d2662df2"
         ],
         "settings": {
           "bp-title": "SPICE IT UP"

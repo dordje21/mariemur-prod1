@@ -2,8 +2,69 @@
 <div class="product">
     <div class="container">
         {% section 'product-set' %}
-        {% section 'carousel-related-products' %}
     </div>
+    {% assign blockqueue = product.metafields.product.blockqueue | split: "," %}
+    {% if product.metafields.product.blockqueue %}
+    {% if blockqueue[0] == 'carousel-related-products' %}
+        {% section 'carousel-related-products' %}
+    {% endif %}
+    {% if blockqueue[0] == 'reviews-products' %}
+        {% section 'reviews-products' %}
+    {% endif %}
+    {% if blockqueue[0] == 'why-mariemur' %}
+        {% section 'why-mariemur' %}
+    {% endif %}
+    {% if blockqueue[0] == 'complete-the-look' %}
+        <div class="container"> {% section 'complete-the-look' %} </div>
+    {% endif %}
+
+    {% if blockqueue[1] == 'carousel-related-products' %}
+        {% section 'carousel-related-products' %}
+    {% endif %}
+    {% if blockqueue[1] == 'reviews-products' %}
+        {% section 'reviews-products' %}
+    {% endif %}
+    {% if blockqueue[1] == 'why-mariemur' %}
+        {% section 'why-mariemur' %}
+    {% endif %}
+    {% if blockqueue[1] == 'complete-the-look' %}
+    <div class="container"> {% section 'complete-the-look' %}</div>
+    {% endif %}
+
+    {% if blockqueue[2] == 'carousel-related-products' %}
+        {% section 'carousel-related-products' %}
+    {% endif %}
+    {% if blockqueue[2] == 'reviews-products' %}
+        {% section 'reviews-products' %}
+    {% endif %}
+    {% if blockqueue[2] == 'why-mariemur' %}
+        {% section 'why-mariemur' %}
+    {% endif %}
+    {% if blockqueue[2] == 'complete-the-look' %}
+        <div class="container"> {% section 'complete-the-look' %}</div>
+    {% endif %}
+
+    {% if blockqueue[3] == 'carousel-related-products' %}
+        {% section 'carousel-related-products' %}
+    {% endif %}
+    {% if blockqueue[3] == 'reviews-products' %}
+        {% section 'reviews-products' %}
+    {% endif %}
+    {% if blockqueue[3] == 'why-mariemur' %}
+        {% section 'why-mariemur' %}
+    {% endif %}
+    {% if blockqueue[3] == 'complete-the-look' %}
+            <div class="container">  {% section 'complete-the-look' %}</div>
+    {% endif %}
+
+    {% else %}
+
+    {% section 'carousel-related-products' %}
+    {% section 'reviews-products' %}
+    {% section 'why-mariemur' %}
+                <div class="container">  {% section 'complete-the-look' %}</div>
+
+    {% endif %}
 </div>
 <script text="text/javascript">
     var _learnq = _learnq || [];

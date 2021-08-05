@@ -10,7 +10,10 @@
     {% assign compare_at_price = product.selected_or_first_available_variant.price %}
     {% assign price = price | minus: discount_ammount %}
 
-<span class="price small">{{ compare_at_price | money }}</span>
+<span class="price small-price">{{ compare_at_price | money }} <span class="discount-val"> {{ discount_value | round: 0 }}% OFF</span></span>
 <span class="price"><span class="money">  {{ price | money }}</span></span>
 <input type="hidden" name="properties[_with_discount]" value="true">
-<input type="hidden" name="disc_value" value="{{ discount_value }}">
+<input id="disc_value-id" type="hidden" name="disc_value" value="{{ discount_value }}">
+
+
+
